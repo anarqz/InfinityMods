@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "id": "discord-rpc",
+  "version": "1.1.0-infinity.1",
+  "kind": "mod",
+  "name": {
+    "en": "Discord RPC · Infinity",
+    "pt-BR": "Discord RPC · Infinity"
+  },
+  "author": "Bullet4fun; Infinity edition by anarqz",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://github.com/anarqz/InfinityMods",
+  "description": {
+    "en": "Shows \"Playing Forza Horizon 2\" and the play time on your Discord profile. Talks only to the Discord app on your PC.",
+    "pt-BR": "Mostra \"Jogando Forza Horizon 2\" e o tempo de jogo no seu perfil do Discord. Conversa só com o app do Discord no seu PC."
+  },
+  "runtime": "infinity-native",
+  "review": {
+    "status": "draft",
+    "blockers": [
+      "Native check on WINDOWS pending (owner)",
+      "InfinityMods repository and release not published"
+    ]
+  },
+  "compatibility": {
+    "azimuthVersions": [
+      "0.9.10"
+    ],
+    "gameBuilds": [],
+    "verification": "unverified"
+  },
+  "package": {
+    "url": "",
+    "sha256": "",
+    "bytes": 0,
+    "format": "zip"
+  },
+  "dependencies": [
+    {
+      "id": "extraoptions",
+      "versions": [
+        "0.2.98"
+      ],
+      "enabled": true,
+      "settings": [
+        {
+          "optionId": "global-enabled",
+          "value": true
+        }
+      ]
+    }
+  ],
+  "conflicts": [],
+  "files": {
+    "game": [],
+    "azimuth": [
+      {
+        "source": "FH2_DiscordRPC.dll",
+        "destination": "infinity-mods/DiscordRPC/FH2_DiscordRPC.dll",
+        "role": "binary",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "LICENSE.txt",
+        "destination": "infinity-mods/DiscordRPC/LICENSE.txt",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "LICENSE-Infinity.txt",
+        "destination": "infinity-mods/DiscordRPC/LICENSE-Infinity.txt",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "NOTICE.md",
+        "destination": "infinity-mods/DiscordRPC/NOTICE.md",
+        "role": "license",
+        "mode": "add-or-replace"
+      }
+    ]
+  },
+  "config": {
+    "root": "azimuth",
+    "path": "infinity-mods/DiscordRPC/FH2_DiscordRPC.ini",
+    "format": "ini",
+    "create": "defaults",
+    "preserveOnDisable": true,
+    "options": [
+      {
+        "id": "enabled",
+        "section": "Infinity",
+        "key": "Enabled",
+        "label": {
+          "en": "Show on Discord",
+          "pt-BR": "Mostrar no Discord"
+        },
+        "description": {
+          "en": "Applied on the next game launch.",
+          "pt-BR": "Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": true,
+        "encoding": "0/1"
+      }
+    ]
+  },
+  "runtimeOutputs": [],
+  "excludedArchiveEntries": [],
+  "databaseMigrations": [],
+  "nativeHost": {
+    "abi": 1,
+    "runtime": "infinity_mod.dll",
+    "entryPoint": "InfinityModInitializeV1",
+    "binary": "infinity-mods/DiscordRPC/FH2_DiscordRPC.dll"
+  },
+  "source": {
+    "repository": "https://github.com/anarqz/InfinityMods",
+    "commit": ""
+  },
+  "multiplayer": {
+    "schemaVersion": 1,
+    "impact": "cosmetic",
+    "compatibilityId": "infinity-discord-rpc",
+    "revision": 1,
+    "match": "exact",
+    "settings": []
+  },
+  "incompatibleFiles": [
+    {
+      "root": "azimuth",
+      "path": "data/bin/mods/FH2_DiscordRPC.dll"
+    }
+  ]
+}
