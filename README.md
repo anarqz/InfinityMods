@@ -8,6 +8,7 @@ connects the mod's original loader API to Infinity's.
 | Mod | Original | Adapter | Licence |
 |---|---|---|---|
 | [Discord RPC](mods/discord-rpc) | [Bullet4fun/FH2_ModsCollection](https://github.com/Bullet4fun/FH2_ModsCollection) `discord-rpc/` | [FH2_ModLoader](adapters/fh2-modloader) | GPL-3.0-or-later |
+| [Nitro System](mods/nitrosystem) | [qiangqiang101/NitroSystem](https://github.com/qiangqiang101/NitroSystem) | [FH2 Mod Platform](adapters/fh2-mod-platform) | MIT |
 
 Install them from the Infinity launcher's Mods page. They do not need the loaders they were
 written for (FH2_ModLoader, FH2 Mod Platform); do not install both.
@@ -16,6 +17,7 @@ written for (FH2_ModLoader, FH2 Mod Platform); do not install both.
 
 ```text
 upstream/<name>/          original repositories, Git submodules pinned to an exact commit (never edited here)
+tests/adapter_harness.cpp loads a built mod with a fake runtime: READY, misplaced settings, startup SQL
 adapters/<loader>/        one adapter per original loader API (MIT)
 sdk/infinity_mod.h        Infinity mod SDK, ABI 1 (MIT, sdk/LICENSE-SDK.txt)
 mods/<id>/mod.json        build recipe: which upstream sources, which adapter, DLL name, version
@@ -26,13 +28,19 @@ tools/infmods.py          build, verify, release (Python 3.10+, standard library
 
 ## Build
 
-[Zig 0.15.2](https://ziglang.org/download/) (the official archive, any OS) and Python 3.10+:
+Python 3.10+, and per recipe `toolchain`: [Zig 0.15.2](https://ziglang.org/download/) (the official
+archive, any OS) or MSVC (Windows, Visual Studio C++ x64 tools).
 
 ```sh
-git submodule update --init
+git submodule update --init --recursive
 python3 -I tools/infmods.py build  discord-rpc --zig /path/to/zig   # build/FH2_DiscordRPC.dll
 python3 -I tools/infmods.py verify discord-rpc --zig /path/to/zig   # two builds, same bytes; exports/imports
+python3 -I tools/infmods.py build  nitrosystem                      # Windows (MSVC)
+python3 -I tools/infmods.py selftest nitrosystem                    # Windows: tests/adapter_harness.cpp, fake runtime
 ```
+
+The game files a mod needs (HUD, particles, shaders, sounds) are never in this repository or in its
+packages: the manifest downloads them from the original author's release and checks each by SHA-256.
 
 ## Release
 

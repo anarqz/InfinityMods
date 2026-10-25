@@ -1,0 +1,66 @@
+{
+  "id": "nitrosystem",
+  "version": "1.1.0-infinity.2",
+  "folder": "NitroSystem",
+  "dll": "FnFNitro.dll",
+  "adapter": "fh2-mod-platform",
+  "toolchain": "msvc",
+  "upstream": {
+    "submodule": "upstream/nitrosystem",
+    "repository": "https://github.com/qiangqiang101/NitroSystem",
+    "version": "1.1.0",
+    "sources": [
+      "src/nitro_mod.cpp"
+    ],
+    "includes": [
+      "platform/include"
+    ],
+    "libraries": [
+      "user32.lib",
+      "gdi32.lib",
+      "xinput.lib",
+      "winmm.lib"
+    ]
+  },
+  "adapterConfig": {
+    "settingsRelative": "fh2-mods\\FnFNitro.ini",
+    "platformVersion": "2.7.1",
+    "readyTimeoutMs": 75000,
+    "requiredHooks": [
+      "CCarDynamics::UpdateDynamics",
+      "CarPresentation11::UpdateBackfire",
+      "GameLogic::FrameStep",
+      "CWorldCollObjMan::Update",
+      "CarPresentation11::BackfirePrep",
+      "HUDStatusSpeedometer::UpdateGauges"
+    ],
+    "startupSql": [
+      {
+        "section": "Settings",
+        "key": "BackfireOnAllCars",
+        "default": 1,
+        "sql": "UPDATE BackfireLevels SET BackfireLevel = 3;"
+      }
+    ]
+  },
+  "allowedImports": [
+    "KERNEL32.dll",
+    "USER32.dll",
+    "GDI32.dll",
+    "XINPUT1_4.dll",
+    "WINMM.dll"
+  ],
+  "package": {
+    "FnFNitro.dll": "$dll",
+    "LICENSE.txt": "upstream/nitrosystem/LICENSE",
+    "LICENSE-FH2-Mod-Platform.txt": "upstream/nitrosystem/platform/LICENSE",
+    "LICENSE-Infinity.txt": "adapters/fh2-mod-platform/LICENSE",
+    "NOTICE.md": "mods/nitrosystem/NOTICE.md"
+  },
+  "versionInfo": {
+    "description": "Fast & Furious nitro for Forza Horizon 2 (Infinity mod)",
+    "company": "qiangqiang101; Infinity edition by anarqz",
+    "product": "Infinity Mods",
+    "license": "MIT"
+  }
+}
