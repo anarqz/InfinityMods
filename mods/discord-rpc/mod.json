@@ -4,13 +4,35 @@
   "folder": "DiscordRPC",
   "dll": "FH2_DiscordRPC.dll",
   "adapter": "fh2-modloader",
+  "toolchain": "zig",
   "upstream": {
     "submodule": "upstream/fh2-mods-collection",
     "repository": "https://github.com/Bullet4fun/FH2_ModsCollection",
     "version": "1.1.0",
-    "sources": ["discord-rpc/discord_mod.c", "discord-rpc/discord_rpc.c", "common/support.c"],
-    "includes": ["common", "sdk", "discord-rpc"],
-    "importDefinitions": ["common/kernel32.def", "common/ntdll.def"]
+    "sources": [
+      "discord-rpc/discord_mod.c",
+      "discord-rpc/discord_rpc.c",
+      "common/support.c"
+    ],
+    "includes": [
+      "common",
+      "sdk",
+      "discord-rpc"
+    ],
+    "importDefinitions": [
+      "common/kernel32.def",
+      "common/ntdll.def"
+    ]
+  },
+  "allowedImports": [
+    "KERNEL32.dll",
+    "ntdll.dll"
+  ],
+  "package": {
+    "FH2_DiscordRPC.dll": "$dll",
+    "LICENSE-Infinity.txt": "adapters/fh2-modloader/LICENSE",
+    "LICENSE.txt": "mods/discord-rpc/LICENSE",
+    "NOTICE.md": "mods/discord-rpc/NOTICE.md"
   },
   "versionInfo": {
     "description": "Discord Rich Presence for Forza Horizon 2 (Infinity mod)",
