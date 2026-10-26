@@ -16,11 +16,8 @@
   },
   "runtime": "infinity-native",
   "review": {
-    "status": "draft",
-    "blockers": [
-      "Native check on WINDOWS pending (owner)",
-      "InfinityMods repository and release not published"
-    ]
+    "status": "reviewed",
+    "blockers": []
   },
   "compatibility": {
     "azimuthVersions": [
