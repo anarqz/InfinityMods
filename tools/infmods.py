@@ -172,6 +172,7 @@ def build_msvc(recipe, out):
                  "/DWIN32_LEAN_AND_MEAN /DNOMINMAX " + " ".join(f'/I"{i}"' for i in includes))
         dll = recipe["dll"]
         (work / "build.cmd").write_text(f"""@echo off
+set "PATH=%ProgramFiles(x86)%\\Microsoft Visual Studio\\Installer;%PATH%"
 call "{environment}" >nul || exit /b 1
 rc /nologo /fo version.res {script.name} || exit /b 1
 cl {flags} /LD {" ".join(f'"{s}"' for s in sources)} /Fe:{dll} /link /Brepro /OPT:REF /OPT:ICF version.res {" ".join(recipe["upstream"]["libraries"])} || exit /b 1
@@ -276,6 +277,7 @@ def selftest(name, zig):
         work = Path(temporary)
         dll = build(name, zig, work / "mod")
         (work / "harness.cmd").write_text(f"""@echo off
+set "PATH=%ProgramFiles(x86)%\\Microsoft Visual Studio\\Installer;%PATH%"
 call "{vcvars()}" >nul || exit /b 1
 cl /nologo /std:c++20 /EHsc /MT /O2 /W4 /DUNICODE /D_UNICODE /I"{ROOT / 'sdk'}" "{ROOT / 'tests/adapter_harness.cpp'}" /Fe:harness.exe || exit /b 1
 """, encoding="ascii")
