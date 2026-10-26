@@ -176,7 +176,7 @@ call "{environment}" >nul || exit /b 1
 rc /nologo /fo version.res {script.name} || exit /b 1
 cl {flags} /LD {" ".join(f'"{s}"' for s in sources)} /Fe:{dll} /link /Brepro /OPT:REF /OPT:ICF version.res {" ".join(recipe["upstream"]["libraries"])} || exit /b 1
 """, encoding="ascii")
-        subprocess.run(["cmd", "/c", "build.cmd"], check=True, cwd=work)
+        subprocess.run(["cmd", "/c", str(work / "build.cmd")], check=True, cwd=work)
         shutil.copyfile(work / dll, out / dll)
     return out / dll
 
@@ -279,7 +279,7 @@ def selftest(name, zig):
 call "{vcvars()}" >nul || exit /b 1
 cl /nologo /std:c++20 /EHsc /MT /O2 /W4 /DUNICODE /D_UNICODE /I"{ROOT / 'sdk'}" "{ROOT / 'tests/adapter_harness.cpp'}" /Fe:harness.exe || exit /b 1
 """, encoding="ascii")
-        subprocess.run(["cmd", "/c", "harness.cmd"], check=True, cwd=work)
+        subprocess.run(["cmd", "/c", str(work / "harness.cmd")], check=True, cwd=work)
         failed = 0
         for mode in modes:
             print(f"== {name} {mode}")
@@ -289,8 +289,9 @@ cl /nologo /std:c++20 /EHsc /MT /O2 /W4 /DUNICODE /D_UNICODE /I"{ROOT / 'sdk'}" 
 
 
 def package(recipe, dll, out):
-    """Deterministic ZIP of the recipe's `package` map ("$dll" is the build): fixed time, sorted names."""
-    entries = {name: dll.read_bytes() if source == "$dll" else (ROOT / source).read_bytes()
+    """Deterministic ZIP of the recipe's `package` map ("$dll" is the build): fixed time, sorted names.
+    Text entries are stored with LF endings, so a Windows checkout (core.autocrlf) packs the same bytes."""
+    entries = {name: dll.read_bytes() if source == "$dll" else (ROOT / source).read_bytes().replace(b"\r\n", b"\n")
                for name, source in recipe["package"].items()}
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, "w") as archive:
@@ -337,7 +338,9 @@ def catalog_entry(manifest):
 
 
 def git(*args):
-    return subprocess.run(["git", "-C", str(ROOT), *args], check=True, capture_output=True, text=True).stdout.strip()
+    # shutil.which finds a git.cmd shim too, which CreateProcess would not resolve by the bare name.
+    executable = shutil.which("git") or sys.exit("git not found")
+    return subprocess.run([executable, "-C", str(ROOT), *args], check=True, capture_output=True, text=True).stdout.strip()
 
 
 def release(names, zig, tag, catalog_path, out, allow_dirty):
