@@ -371,15 +371,15 @@ def release(names, zig, tag, catalog_path, out, allow_dirty):
         url = f"{RELEASE['repository']}/releases/download/{tag}/{zip_path.name}"
         filled = fill_manifest(manifest, recipe, zip_path, contents, url, commit)
         (out / "manifests" / f"{recipe['id']}-{recipe['version']}.json").write_text(
-            json.dumps(filled, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            json.dumps(filled, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         entry = catalog_entry(filled)
         if existing:
             catalog["mods"][catalog["mods"].index(existing)] = entry
         else:
             catalog["mods"].append(entry)
         report.append(f"{recipe['id']}: {'updated' if existing else 'new'} {recipe['version']} at {url}")
-    (out / "catalog.json").write_text(json.dumps(catalog, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    (out / "RELEASE.txt").write_text(f"tag {tag}\ncommit {commit}\n" + "\n".join(report) + "\n", encoding="utf-8")
+    (out / "catalog.json").write_text(json.dumps(catalog, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    (out / "RELEASE.txt").write_text(f"tag {tag}\ncommit {commit}\n" + "\n".join(report) + "\n", encoding="utf-8", newline="\n")
     print("\n".join(report))
     return 0
 
