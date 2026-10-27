@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "nitrosystem",
-  "version": "1.1.0-infinity.2",
+  "version": "1.1.0-infinity.3",
   "kind": "mod",
   "name": {
     "en": "Nitro System · Infinity",
@@ -11,17 +11,17 @@
   "license": "MIT",
   "homepage": "https://github.com/anarqz/InfinityMods",
   "description": {
-    "en": "qiangqiang101's NitroSystem, built unchanged and started by the Infinity mod runtime through an FH2 Mod Platform adapter. Its game files come from the original release.",
-    "pt-BR": "O NitroSystem de qiangqiang101, compilado sem alterações e iniciado pelo runtime de mods do Infinity por um adaptador da FH2 Mod Platform. Os arquivos do jogo vêm da release original."
+    "en": "qiangqiang101's NitroSystem, built unchanged and loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter. Its game files come from the original release.",
+    "pt-BR": "O NitroSystem de qiangqiang101, compilado sem alterações e carregado pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform. Os arquivos do jogo vêm da release original."
   },
-  "runtime": "infinity-native",
+  "runtime": "standalone",
   "review": {
     "status": "reviewed",
     "blockers": []
   },
   "compatibility": {
     "azimuthVersions": [
-      "0.9.10"
+      "1.0.2"
     ],
     "gameBuilds": [],
     "verification": "unverified"
@@ -32,31 +32,14 @@
     "bytes": 0,
     "format": "zip"
   },
-  "dependencies": [
-    {
-      "id": "extraoptions",
-      "versions": [
-        "0.2.98"
-      ],
-      "enabled": true,
-      "settings": [
-        {
-          "optionId": "global-enabled",
-          "value": true
-        },
-        {
-          "optionId": "files-enablemediaoverrides",
-          "value": true
-        }
-      ]
-    }
-  ],
+  "dependencies": [],
   "conflicts": [],
   "files": {
-    "game": [
+    "game": [],
+    "azimuth": [
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/backfire.materialbin",
-        "destination": "mediaoverride/Particles/Materials/backfire.materialbin",
+        "destination": "mods/nitrosystem/media/Particles/Materials/backfire.materialbin",
         "sha256": "217cbed2e44ec2797dd4e454c18383f6a4b090424cd4b0d20c33a675b76c72cb",
         "bytes": 352,
         "role": "asset",
@@ -65,7 +48,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/backfire_blue.materialbin",
-        "destination": "mediaoverride/Particles/Materials/backfire_blue.materialbin",
+        "destination": "mods/nitrosystem/media/Particles/Materials/backfire_blue.materialbin",
         "sha256": "c9c6309ec1a07a0da4f7ddb6a0c62619a87152a214b28eb7e37b8846e5aac22a",
         "bytes": 352,
         "role": "asset",
@@ -74,7 +57,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/backfire_purple.materialbin",
-        "destination": "mediaoverride/Particles/Materials/backfire_purple.materialbin",
+        "destination": "mods/nitrosystem/media/Particles/Materials/backfire_purple.materialbin",
         "sha256": "e79795726feea5367bba5bd8b5581803780a2fbc89aeab64b402a1467c60efb1",
         "bytes": 352,
         "role": "asset",
@@ -83,7 +66,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Systems/Backfire.xml",
-        "destination": "mediaoverride/Particles/Systems/Backfire.xml",
+        "destination": "mods/nitrosystem/media/Particles/Systems/Backfire.xml",
         "sha256": "2ac70254d35dbac5509fe793b3c236c013924a74c39f581ae6bc240ec2088f4a",
         "bytes": 1705,
         "role": "asset",
@@ -92,7 +75,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/Controls/HUDSpeedometerControl.xaml",
-        "destination": "mediaoverride/ui/Controls/HUDSpeedometerControl.xaml",
+        "destination": "mods/nitrosystem/media/ui/Controls/HUDSpeedometerControl.xaml",
         "sha256": "e53ad86d730591727c355ee0b380ddce4d0fc9f5a17df88c99c9e9972776a40d",
         "bytes": 75116,
         "role": "asset",
@@ -101,7 +84,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/Fire/backfire_blue.materialbin",
-        "destination": "mediaoverride/Particles/Materials/Fire/backfire_blue.materialbin",
+        "destination": "mods/nitrosystem/media/Particles/Materials/Fire/backfire_blue.materialbin",
         "sha256": "c9c6309ec1a07a0da4f7ddb6a0c62619a87152a214b28eb7e37b8846e5aac22a",
         "bytes": 352,
         "role": "asset",
@@ -110,7 +93,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/Fire/carBackfire.materialbin",
-        "destination": "mediaoverride/Particles/Materials/Fire/carBackfire.materialbin",
+        "destination": "mods/nitrosystem/media/Particles/Materials/Fire/carBackfire.materialbin",
         "sha256": "c9c6309ec1a07a0da4f7ddb6a0c62619a87152a214b28eb7e37b8846e5aac22a",
         "bytes": 352,
         "role": "asset",
@@ -119,7 +102,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/Backfire.shaderbin",
-        "destination": "mediaoverride/Particles/Shaders/backfire/Backfire.shaderbin",
+        "destination": "mods/nitrosystem/media/Particles/Shaders/backfire/Backfire.shaderbin",
         "sha256": "be571492903df723f38ca05f8a8f9bf4bfc489d22e16f56b57c2b422a06ec341",
         "bytes": 788,
         "role": "asset",
@@ -128,7 +111,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.durango.pso",
-        "destination": "mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.durango.pso",
+        "destination": "mods/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLightScenario.durango.pso",
         "sha256": "f35e386274aef1247c2c42d02aa135bfac6b765b3e948e68a1065e7543cf800f",
         "bytes": 10548,
         "role": "asset",
@@ -137,7 +120,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.durango.vso",
-        "destination": "mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.durango.vso",
+        "destination": "mods/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLightScenario.durango.vso",
         "sha256": "fd8ec27ba38ac727ccdaf186314963125ea9f719f21312f078411db2506f95cb",
         "bytes": 28452,
         "role": "asset",
@@ -146,7 +129,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.pc.pso",
-        "destination": "mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.pc.pso",
+        "destination": "mods/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLightScenario.pc.pso",
         "sha256": "96ffcc3eb70cd6772f5535e78c9991df7efc5d3ef6d05296c16f61d1e00ad277",
         "bytes": 11020,
         "role": "asset",
@@ -155,7 +138,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.pc.vso",
-        "destination": "mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.pc.vso",
+        "destination": "mods/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLightScenario.pc.vso",
         "sha256": "b79f5e7e01f114e69eb7a656d5ac6222c8c799a1be91f66a3311035ef8af0fe6",
         "bytes": 31580,
         "role": "asset",
@@ -164,7 +147,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.pso",
-        "destination": "mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.pso",
+        "destination": "mods/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.pso",
         "sha256": "229bb0dc5b3cd40992f47c3d7b56dddfb4f886f74549dab48a6c8c184ccf22a8",
         "bytes": 11316,
         "role": "asset",
@@ -173,7 +156,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.vso",
-        "destination": "mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.vso",
+        "destination": "mods/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.vso",
         "sha256": "567cc06f8a5bbfee521380d60e99403864048f06a1515ede1b5572b974d7fc00",
         "bytes": 28460,
         "role": "asset",
@@ -182,7 +165,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.pso",
-        "destination": "mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.pso",
+        "destination": "mods/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.pso",
         "sha256": "f9ed0f4cf7010c15a609a47f4492d8ab6996755e8de4601ccabcc0725467ff03",
         "bytes": 11692,
         "role": "asset",
@@ -191,7 +174,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.vso",
-        "destination": "mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.vso",
+        "destination": "mods/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.vso",
         "sha256": "b79f5e7e01f114e69eb7a656d5ac6222c8c799a1be91f66a3311035ef8af0fe6",
         "bytes": 31580,
         "role": "asset",
@@ -200,7 +183,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/HUD_XPBar_TipGlow.swatchbin",
-        "destination": "mediaoverride/ui/textures/Anthem/HUD/HUD_XPBar_TipGlow.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/Anthem/HUD/HUD_XPBar_TipGlow.swatchbin",
         "sha256": "e74b50445a7e51bc516444f8032c26edfddbf4dece1a2b4bf076e18e7472cc5a",
         "bytes": 1107,
         "role": "asset",
@@ -209,7 +192,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/SkillBarTipGlow.swatchbin",
-        "destination": "mediaoverride/ui/textures/Anthem/HUD/SkillBarTipGlow.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/Anthem/HUD/SkillBarTipGlow.swatchbin",
         "sha256": "cdf53b7a951f8b5d7b79948d246b141238bd2e4a195004926a9bafab74398e98",
         "bytes": 4179,
         "role": "asset",
@@ -218,7 +201,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/SkillsLargeGlow.swatchbin",
-        "destination": "mediaoverride/ui/textures/Anthem/HUD/SkillsLargeGlow.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/Anthem/HUD/SkillsLargeGlow.swatchbin",
         "sha256": "c90784e0646e563cdf9e25f173586d59b55adb925da1a99b08bedeb00edcd8a1",
         "bytes": 65619,
         "role": "asset",
@@ -227,7 +210,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_Off.swatchbin",
-        "destination": "mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_Off.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_Off.swatchbin",
         "sha256": "be681511ebe073868b95c40449d4249a48adc5369f6b1396d86d2d15a9ad5b62",
         "bytes": 32851,
         "role": "asset",
@@ -236,7 +219,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_On.swatchbin",
-        "destination": "mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_On.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_On.swatchbin",
         "sha256": "5697ca24c536055c650cd9267c009858f399877969d530db99cc7724f1c20b75",
         "bytes": 32851,
         "role": "asset",
@@ -245,7 +228,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_Off.swatchbin",
-        "destination": "mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_Off.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_Off.swatchbin",
         "sha256": "14506b5176dfdb7e6965a979ecdae7a81c7e2546b2e7df0a4c35ccb8b145ff19",
         "bytes": 32851,
         "role": "asset",
@@ -254,7 +237,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_On.swatchbin",
-        "destination": "mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_On.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_On.swatchbin",
         "sha256": "24769047b89d0bc5981d54663c8889176c49ecd27d500d018ffdba502dd4b860",
         "bytes": 32851,
         "role": "asset",
@@ -263,7 +246,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Digital_Bar.swatchbin",
-        "destination": "mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Digital_Bar.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Digital_Bar.swatchbin",
         "sha256": "86d4111220ffa5158a535e3e6cff6a43ce3ca629378b497f9aa3ddae2eff7e82",
         "bytes": 9299,
         "role": "asset",
@@ -272,7 +255,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Radial_Bar.swatchbin",
-        "destination": "mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Radial_Bar.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Radial_Bar.swatchbin",
         "sha256": "c8002c716093e5d7863cec786ebc7ff929933bb997eb72d7e9389aa85035b4bd",
         "bytes": 65619,
         "role": "asset",
@@ -281,7 +264,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_1.swatchbin",
-        "destination": "mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_1.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_1.swatchbin",
         "sha256": "883bbee3c0c58af6659abb136205d37ecb983a359b85a6086c37bc64a5bebfe9",
         "bytes": 32851,
         "role": "asset",
@@ -290,7 +273,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_2.swatchbin",
-        "destination": "mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_2.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_2.swatchbin",
         "sha256": "e478ef350020246a14c2942a933089513739b50b74c5586580cf309f11c21b34",
         "bytes": 32851,
         "role": "asset",
@@ -299,7 +282,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_3.swatchbin",
-        "destination": "mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_3.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_3.swatchbin",
         "sha256": "225ef688a3e856edc811836b601a6a4e0873d13c407f16d0f61ada239fb4f62f",
         "bytes": 32851,
         "role": "asset",
@@ -308,7 +291,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_4.swatchbin",
-        "destination": "mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_4.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_4.swatchbin",
         "sha256": "1653b7d09123c956d91fd8f7fb011f0f8efa286145ef2d403c57a12a665d70b3",
         "bytes": 32851,
         "role": "asset",
@@ -317,7 +300,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_5.swatchbin",
-        "destination": "mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_5.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_5.swatchbin",
         "sha256": "02020c4e460aefd1ffe2d48249796c0321ae600b122009112f89daf9b1de44c9",
         "bytes": 32851,
         "role": "asset",
@@ -326,7 +309,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_6.swatchbin",
-        "destination": "mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_6.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_6.swatchbin",
         "sha256": "cda525a446b5c23e45e9c113a9d93c2fd0368089e5fa4b5400e633b0afda70a7",
         "bytes": 32851,
         "role": "asset",
@@ -335,7 +318,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_7.swatchbin",
-        "destination": "mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_7.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_7.swatchbin",
         "sha256": "033c5d18bc03fe18df1d640de27bdcd2b9fd0bc9c4ec83167045b6001d6469ce",
         "bytes": 32851,
         "role": "asset",
@@ -344,18 +327,16 @@
       },
       {
         "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_8.swatchbin",
-        "destination": "mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_8.swatchbin",
+        "destination": "mods/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_8.swatchbin",
         "sha256": "a6d4bc22f9817a5c6e30a5435bf896659b576b30ce929b267743ecc0258198a2",
         "bytes": 32851,
         "role": "asset",
         "mode": "add-or-replace",
         "package": "upstream-assets"
-      }
-    ],
-    "azimuth": [
+      },
       {
         "source": "FnFNitro-1.1.0/azimuth-windows/FnFNitro/nos_boost.wav",
-        "destination": "infinity-mods/NitroSystem/FnFNitro/nos_boost.wav",
+        "destination": "mods/nitrosystem/FnFNitro/nos_boost.wav",
         "sha256": "8eaf24cc2714bda855a2f8596b6a69a88cd10b5318276075ff7a65c61d0cb3df",
         "bytes": 1440102,
         "role": "asset",
@@ -364,7 +345,7 @@
       },
       {
         "source": "FnFNitro-1.1.0/azimuth-windows/FnFNitro/nos_stop.wav",
-        "destination": "infinity-mods/NitroSystem/FnFNitro/nos_stop.wav",
+        "destination": "mods/nitrosystem/FnFNitro/nos_stop.wav",
         "sha256": "332f3b7ff32be6d5b8ff34cc9b6848be42c38977f81ea7e0eaf3b6d172169df0",
         "bytes": 264270,
         "role": "asset",
@@ -373,31 +354,49 @@
       },
       {
         "source": "FnFNitro.dll",
-        "destination": "infinity-mods/NitroSystem/FnFNitro.dll",
+        "destination": "mods/nitrosystem/plugins/FnFNitro.dll",
         "role": "binary",
         "mode": "add-or-replace"
       },
       {
         "source": "LICENSE.txt",
-        "destination": "infinity-mods/NitroSystem/LICENSE.txt",
+        "destination": "mods/nitrosystem/LICENSE.txt",
         "role": "license",
         "mode": "add-or-replace"
       },
       {
         "source": "LICENSE-FH2-Mod-Platform.txt",
-        "destination": "infinity-mods/NitroSystem/LICENSE-FH2-Mod-Platform.txt",
+        "destination": "mods/nitrosystem/LICENSE-FH2-Mod-Platform.txt",
         "role": "license",
         "mode": "add-or-replace"
       },
       {
         "source": "LICENSE-Infinity.txt",
-        "destination": "infinity-mods/NitroSystem/LICENSE-Infinity.txt",
+        "destination": "mods/nitrosystem/LICENSE-Infinity.txt",
         "role": "license",
         "mode": "add-or-replace"
       },
       {
         "source": "NOTICE.md",
-        "destination": "infinity-mods/NitroSystem/NOTICE.md",
+        "destination": "mods/nitrosystem/NOTICE.md",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "mod.json",
+        "destination": "mods/nitrosystem/mod.json",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "database.json",
+        "destination": "mods/nitrosystem/database.json",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "LICENSE-MinHook.txt",
+        "destination": "mods/nitrosystem/LICENSE-MinHook.txt",
         "role": "license",
         "mode": "add-or-replace"
       }
@@ -405,7 +404,7 @@
   },
   "config": {
     "root": "azimuth",
-    "path": "infinity-mods/NitroSystem/fh2-mods/FnFNitro.ini",
+    "path": "mods/nitrosystem/fh2-mods/FnFNitro.ini",
     "format": "ini",
     "create": "defaults",
     "preserveOnDisable": true,
@@ -695,12 +694,6 @@
     "FnFNitro-1.1.0/azimuth-windows/fh2-mods/FnFNitro.dll"
   ],
   "databaseMigrations": [],
-  "nativeHost": {
-    "abi": 1,
-    "runtime": "infinity_mod.dll",
-    "entryPoint": "InfinityModInitializeV1",
-    "binary": "infinity-mods/NitroSystem/FnFNitro.dll"
-  },
   "source": {
     "repository": "https://github.com/anarqz/InfinityMods",
     "commit": ""
@@ -728,16 +721,6 @@
       "backfireonallcars"
     ]
   },
-  "database": {
-    "root": "game",
-    "path": "mediaoverride/stripped/gamedbRC.slt",
-    "seedFrom": "media/stripped/gamedbRC.slt",
-    "access": "startup",
-    "revision": 1,
-    "tables": [
-      "BackfireLevels"
-    ]
-  },
   "incompatibleFiles": [
     {
       "root": "azimuth",
@@ -746,6 +729,10 @@
     {
       "root": "azimuth",
       "path": "fh2-mods/FnFNitro.dll"
+    },
+    {
+      "root": "azimuth",
+      "path": "infinity-mods/NitroSystem/FnFNitro.dll"
     }
   ]
 }
