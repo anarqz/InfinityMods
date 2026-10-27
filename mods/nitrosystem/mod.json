@@ -1,46 +1,30 @@
 {
   "id": "nitrosystem",
-  "version": "1.1.0-infinity.2",
-  "folder": "NitroSystem",
+  "version": "1.1.0-infinity.3",
+  "folder": "nitrosystem",
   "dll": "FnFNitro.dll",
-  "adapter": "fh2-mod-platform",
+  "adapter": "fh2-mod-platform-eo",
   "toolchain": "msvc",
   "upstream": {
     "submodule": "upstream/nitrosystem",
     "repository": "https://github.com/qiangqiang101/NitroSystem",
     "version": "1.1.0",
     "sources": [
-      "src/nitro_mod.cpp"
+      "src/nitro_mod.cpp",
+      "platform/third_party/minhook/src/hook.c",
+      "platform/third_party/minhook/src/buffer.c",
+      "platform/third_party/minhook/src/trampoline.c",
+      "platform/third_party/minhook/src/hde/hde64.c"
     ],
     "includes": [
-      "platform/include"
+      "platform/include",
+      "platform/third_party/minhook/include"
     ],
     "libraries": [
       "user32.lib",
       "gdi32.lib",
       "xinput.lib",
       "winmm.lib"
-    ]
-  },
-  "adapterConfig": {
-    "settingsRelative": "fh2-mods\\FnFNitro.ini",
-    "platformVersion": "2.7.1",
-    "readyTimeoutMs": 75000,
-    "requiredHooks": [
-      "CCarDynamics::UpdateDynamics",
-      "CarPresentation11::UpdateBackfire",
-      "GameLogic::FrameStep",
-      "CWorldCollObjMan::Update",
-      "CarPresentation11::BackfirePrep",
-      "HUDStatusSpeedometer::UpdateGauges"
-    ],
-    "startupSql": [
-      {
-        "section": "Settings",
-        "key": "BackfireOnAllCars",
-        "default": 1,
-        "sql": "UPDATE BackfireLevels SET BackfireLevel = 3;"
-      }
     ]
   },
   "allowedImports": [
@@ -52,13 +36,16 @@
   ],
   "package": {
     "FnFNitro.dll": "$dll",
+    "mod.json": "mods/nitrosystem/extraoptions/mod.json",
+    "database.json": "mods/nitrosystem/extraoptions/database.json",
     "LICENSE.txt": "upstream/nitrosystem/LICENSE",
     "LICENSE-FH2-Mod-Platform.txt": "upstream/nitrosystem/platform/LICENSE",
-    "LICENSE-Infinity.txt": "adapters/fh2-mod-platform/LICENSE",
+    "LICENSE-MinHook.txt": "upstream/nitrosystem/platform/third_party/minhook/LICENSE.txt",
+    "LICENSE-Infinity.txt": "adapters/fh2-mod-platform-eo/LICENSE",
     "NOTICE.md": "mods/nitrosystem/NOTICE.md"
   },
   "versionInfo": {
-    "description": "Fast & Furious nitro for Forza Horizon 2 (Infinity mod)",
+    "description": "Fast & Furious nitro for Forza Horizon 2 (ExtraOptions mod, Infinity edition)",
     "company": "qiangqiang101; Infinity edition by anarqz",
     "product": "Infinity Mods",
     "license": "MIT"

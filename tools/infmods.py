@@ -231,12 +231,20 @@ def verify(name, zig):
         problems.append("two builds differ (not reproducible)")
     if machine != 0x8664:
         problems.append("not x64")
-    if "InfinityModInitializeV1" not in exports:
-        problems.append("InfinityModInitializeV1 not exported")
-    entry = {"fh2-modloader": "FH2ModLoad", "fh2-mod-platform": "fh2mod_init"}.get(recipe["adapter"])
+    extraoptions = recipe["adapter"].endswith("-eo")  # OD-126: loaded by ExtraOptions' plugin loader
+    start = "FH2PluginInitialize" if extraoptions else "InfinityModInitializeV1"
+    if start not in exports:
+        problems.append(f"{start} not exported")
+    entry = {"fh2-modloader": "FH2ModLoad", "fh2-mod-platform": "fh2mod_init",
+             "fh2-mod-platform-eo": "fh2mod_init"}.get(recipe["adapter"])
     if entry and entry not in exports:
         problems.append(f"{entry} missing: the adapter has nothing to start")
-    if ("database" in manifest) != ("InfinityModRegisterDatabaseV1" in exports):
+    if extraoptions:
+        if "InfinityModInitializeV1" in exports or "InfinityModRegisterDatabaseV1" in exports:
+            problems.append("an ExtraOptions mod exports the Infinity runtime's entry points")
+        if ("database.json" in recipe["package"]) != ("FH2PluginDatabaseUpdate" in exports):
+            problems.append("FH2PluginDatabaseUpdate export and the package's database.json disagree")
+    elif ("database" in manifest) != ("InfinityModRegisterDatabaseV1" in exports):
         problems.append("InfinityModRegisterDatabaseV1 export and the manifest's database section disagree")
     allowed = {d.lower() for d in recipe["allowedImports"]}
     unexpected = [d for d in imports if d.lower() not in allowed]

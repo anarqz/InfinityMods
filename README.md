@@ -8,7 +8,7 @@ connects the mod's original loader API to Infinity's.
 | Mod | Original | Adapter | Licence |
 |---|---|---|---|
 | [Discord RPC](mods/discord-rpc) | [Bullet4fun/FH2_ModsCollection](https://github.com/Bullet4fun/FH2_ModsCollection) `discord-rpc/` | [FH2_ModLoader](adapters/fh2-modloader) | GPL-3.0-or-later |
-| [Nitro System](mods/nitrosystem) | [qiangqiang101/NitroSystem](https://github.com/qiangqiang101/NitroSystem) | [FH2 Mod Platform](adapters/fh2-mod-platform) | MIT |
+| [Nitro System](mods/nitrosystem) | [qiangqiang101/NitroSystem](https://github.com/qiangqiang101/NitroSystem) | [FH2 Mod Platform for ExtraOptions](adapters/fh2-mod-platform-eo) | MIT |
 
 Install them from the Infinity launcher's Mods page. They do not need the loaders they were
 written for (FH2_ModLoader, FH2 Mod Platform); do not install both.
