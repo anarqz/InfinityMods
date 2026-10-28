@@ -1,8 +1,9 @@
 # FH2 Mod Platform adapter for ExtraOptions
 
 Runs a mod written for [FH2 Mod Platform](https://github.com/Trinculo54/fh2-mod-platform) (API 8,
-`include/fh2mod.h`) as a plugin of ExtraOptions' mod loader (ExtraOptions 0.3.2, built into Infinity as
-ExtraOptions.Infinity, OD-126), without changing the mod and without the Infinity mod runtime.
+`include/fh2mod.h`) as a plugin of ExtraOptions' mod loader (ExtraOptions 0.3.9 on Azimuth 1.0.3, built
+into Infinity as ExtraOptions.Infinity, OD-126/OD-127; the plugin ABI, its 64-byte context and the
+database frame are unchanged since 0.3.2), without changing the mod and without the Infinity mod runtime.
 `fh2_mod_platform_eo_adapter.cpp` and MinHook (the copy in the mod's `platform/third_party/minhook`) are
 compiled into the mod's DLL. It exports `FH2PluginInitialize` and `FH2PluginDatabaseUpdate` (ExtraOptions'
 plugin ABI 1, `tools/PLUGIN_API.md`) and calls the mod's own `fh2mod_init` with an `FH2ModApi` table it
