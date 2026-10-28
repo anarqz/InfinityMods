@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "discord-rpc",
-  "version": "1.1.0-infinity.1",
+  "version": "1.1.0-infinity.2",
   "kind": "mod",
   "name": {
     "en": "Discord RPC · Infinity",
@@ -14,14 +14,14 @@
     "en": "Shows \"Playing Forza Horizon 2\" and the play time on your Discord profile. Talks only to the Discord app on your PC.",
     "pt-BR": "Mostra \"Jogando Forza Horizon 2\" e o tempo de jogo no seu perfil do Discord. Conversa só com o app do Discord no seu PC."
   },
-  "runtime": "infinity-native",
+  "runtime": "standalone",
   "review": {
     "status": "reviewed",
     "blockers": []
   },
   "compatibility": {
     "azimuthVersions": [
-      "0.9.10"
+      "1.0.3"
     ],
     "gameBuilds": [],
     "verification": "unverified"
@@ -32,46 +32,38 @@
     "bytes": 0,
     "format": "zip"
   },
-  "dependencies": [
-    {
-      "id": "extraoptions",
-      "versions": [
-        "0.2.98"
-      ],
-      "enabled": true,
-      "settings": [
-        {
-          "optionId": "global-enabled",
-          "value": true
-        }
-      ]
-    }
-  ],
+  "dependencies": [],
   "conflicts": [],
   "files": {
     "game": [],
     "azimuth": [
       {
         "source": "FH2_DiscordRPC.dll",
-        "destination": "infinity-mods/DiscordRPC/FH2_DiscordRPC.dll",
+        "destination": "mods/discord-rpc/plugins/FH2_DiscordRPC.dll",
         "role": "binary",
         "mode": "add-or-replace"
       },
       {
+        "source": "mod.json",
+        "destination": "mods/discord-rpc/mod.json",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
         "source": "LICENSE.txt",
-        "destination": "infinity-mods/DiscordRPC/LICENSE.txt",
+        "destination": "mods/discord-rpc/LICENSE.txt",
         "role": "license",
         "mode": "add-or-replace"
       },
       {
         "source": "LICENSE-Infinity.txt",
-        "destination": "infinity-mods/DiscordRPC/LICENSE-Infinity.txt",
+        "destination": "mods/discord-rpc/LICENSE-Infinity.txt",
         "role": "license",
         "mode": "add-or-replace"
       },
       {
         "source": "NOTICE.md",
-        "destination": "infinity-mods/DiscordRPC/NOTICE.md",
+        "destination": "mods/discord-rpc/NOTICE.md",
         "role": "license",
         "mode": "add-or-replace"
       }
@@ -79,7 +71,7 @@
   },
   "config": {
     "root": "azimuth",
-    "path": "infinity-mods/DiscordRPC/FH2_DiscordRPC.ini",
+    "path": "mods/discord-rpc/FH2_DiscordRPC.ini",
     "format": "ini",
     "create": "defaults",
     "preserveOnDisable": true,
@@ -107,12 +99,6 @@
   "runtimeOutputs": [],
   "excludedArchiveEntries": [],
   "databaseMigrations": [],
-  "nativeHost": {
-    "abi": 1,
-    "runtime": "infinity_mod.dll",
-    "entryPoint": "InfinityModInitializeV1",
-    "binary": "infinity-mods/DiscordRPC/FH2_DiscordRPC.dll"
-  },
   "source": {
     "repository": "https://github.com/anarqz/InfinityMods",
     "commit": ""
@@ -129,6 +115,10 @@
     {
       "root": "azimuth",
       "path": "data/bin/mods/FH2_DiscordRPC.dll"
+    },
+    {
+      "root": "azimuth",
+      "path": "infinity-mods/DiscordRPC/FH2_DiscordRPC.dll"
     }
   ]
 }
