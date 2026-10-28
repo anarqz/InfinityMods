@@ -2,7 +2,7 @@ MIT License
 
 Copyright (c) 2026 Alexandre Moraes and contributors
 
-Covers the Infinity mod SDK (infinity_mod.h) and the FH2_ModLoader adapter.
+Covers the FH2_ModLoader ExtraOptions adapter.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
