@@ -1,6 +1,3 @@
-[submodule "upstream/fh2-mods-collection"]
-	path = upstream/fh2-mods-collection
-	url = https://github.com/Bullet4fun/FH2_ModsCollection.git
 [submodule "upstream/nitrosystem"]
 	path = upstream/nitrosystem
 	url = https://github.com/qiangqiang101/NitroSystem.git

@@ -10,7 +10,6 @@ The Infinity mod runtime (`infinity_mod.dll`) is retired: no mod here needs it.
 
 | Mod | Original | Adapter | Licence |
 |---|---|---|---|
-| [Discord RPC](mods/discord-rpc) | [Bullet4fun/FH2_ModsCollection](https://github.com/Bullet4fun/FH2_ModsCollection) `discord-rpc/` | [FH2_ModLoader for ExtraOptions](adapters/fh2-modloader-eo) | GPL-3.0-or-later |
 | [Nitro System](mods/nitrosystem) | [qiangqiang101/NitroSystem](https://github.com/qiangqiang101/NitroSystem) | [FH2 Mod Platform for ExtraOptions](adapters/fh2-mod-platform-eo) | MIT |
 
 Install them from the Infinity launcher's Mods page. They do not need the loaders they were
@@ -35,8 +34,6 @@ archive, any OS) or MSVC (Windows, Visual Studio C++ x64 tools).
 
 ```sh
 git submodule update --init --recursive
-python3 -I tools/infmods.py build  discord-rpc --zig /path/to/zig   # build/FH2_DiscordRPC.dll
-python3 -I tools/infmods.py verify discord-rpc --zig /path/to/zig   # two builds, same bytes; exports/imports; package layout
 python3 -I tools/infmods.py build  nitrosystem                      # Windows (MSVC)
 python3 -I tools/infmods.py verify nitrosystem                      # Windows (MSVC)
 ```
