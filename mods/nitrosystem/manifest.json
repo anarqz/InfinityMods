@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "nitrosystem",
-  "version": "1.1.0-infinity.3",
+  "version": "1.1.0-infinity.4",
   "kind": "mod",
   "name": {
     "en": "Nitro System · Infinity",
@@ -21,7 +21,7 @@
   },
   "compatibility": {
     "azimuthVersions": [
-      "1.0.2"
+      "1.0.3"
     ],
     "gameBuilds": [],
     "verification": "unverified"
