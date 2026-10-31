@@ -280,16 +280,16 @@ extern "C" __declspec(dllexport) BOOL WINAPI FH2PluginDatabaseUpdate(const Datab
     if (!frame || frame->size < sizeof *frame || !frame->database || !frame->prepare || !frame->step || !frame->finalize) return FALSE;
     const unsigned count = sql_count.load();
     if (!count) return TRUE;
-    if (!exec(frame, "SAVEPOINT fh2mp_adapter;")) return FALSE;
+    if (!exec(frame, "SAVEPOINT infmods_adapter;")) return FALSE;
     for (unsigned i = 0; i < count; ++i) {
         if (!exec(frame, sql[i])) {
-            exec(frame, "ROLLBACK TO fh2mp_adapter;");
-            exec(frame, "RELEASE fh2mp_adapter;");
+            exec(frame, "ROLLBACK TO infmods_adapter;");
+            exec(frame, "RELEASE infmods_adapter;");
             adapter_log("the mod's SQL failed; the database is unchanged.");
             return FALSE;
         }
     }
-    if (!exec(frame, "RELEASE fh2mp_adapter;")) return FALSE;
+    if (!exec(frame, "RELEASE infmods_adapter;")) return FALSE;
     adapter_log("the mod's SQL is applied to the merged database.");
     return TRUE;
 }
