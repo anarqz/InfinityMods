@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/anarqz/InfinityMods/main/schemas/catalog.schema.json",
+  "title": "Infinity mod catalog (schema 2)",
+  "description": "The official mod catalog the Infinity launcher reads. Each entry's install body is the mod's Infinity manifest without the fields the entry carries; the launcher rebuilds and checks the manifest itself. tools/infmods.py check also refuses duplicate ids.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "mods"],
+  "properties": {
+    "schemaVersion": { "const": 2 },
+    "mods": {
+      "type": "array",
+      "maxItems": 512,
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "name", "description", "author", "install"],
+      "oneOf": [
+        { "required": ["download"], "not": { "required": ["externalSources"] } },
+        {
+          "required": ["externalSources"],
+          "not": { "anyOf": [{ "required": ["download"] }, { "required": ["additionalDownloads"] }] }
+        }
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "version": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "name": { "$ref": "#/$defs/text" },
+        "description": { "$ref": "#/$defs/text" },
+        "author": { "type": "string", "minLength": 1 },
+        "download": { "$ref": "#/$defs/download" },
+        "additionalDownloads": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/download" }
+        },
+        "externalSources": { "type": "array", "minItems": 1 },
+        "requires": {
+          "type": "array",
+          "items": { "const": "infinity-mod-runtime" }
+        },
+        "install": {
+          "type": "object",
+          "not": {
+            "anyOf": [
+              { "required": ["id"] }, { "required": ["version"] }, { "required": ["name"] },
+              { "required": ["description"] }, { "required": ["author"] }, { "required": ["package"] },
+              { "required": ["additionalPackages"] }, { "required": ["payload"] }, { "required": ["externalSources"] },
+              { "required": ["required"] }, { "required": ["availability"] }
+            ]
+          }
+        }
+      }
+    },
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,63}$" },
+    "text": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["en", "pt-BR"],
+      "properties": {
+        "en": { "type": "string", "minLength": 1 },
+        "pt-BR": { "type": "string", "minLength": 1 }
+      }
+    },
+    "download": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "sha256", "bytes"],
+      "properties": {
+        "url": { "type": "string", "pattern": "^https://[^/?#@:]+/[^#]*$" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "bytes": { "type": "integer", "minimum": 1, "maximum": 67108864 }
+      }
+    }
+  }
+}

@@ -24,8 +24,35 @@ mods/<id>/mod.json        build recipe: which upstream sources, which adapter, D
 mods/<id>/manifest.json   Infinity manifest (runtime standalone, files under mods/<id>/); the release fills hashes and the commit
 mods/<id>/extraoptions/   the package's own ExtraOptions mod.json (format_version 1; same id and version), database.json if any
 mods/<id>/LICENSE, NOTICE.md   the original licence and the attribution shipped in the package
-tools/infmods.py          build, verify, release (Python 3.10+, standard library only)
+catalog.json              the official mod catalog the Infinity launcher reads from main
+parity-non-required.json  mods left out of the lobby's mod set (parity exemptions), read from main
+schemas/                  JSON Schemas of catalog.json and parity-non-required.json
+tools/infmods.py          build, verify, release, check (Python 3.10+, standard library only)
 ```
+
+## Catalog and parity exemptions
+
+The Infinity launcher reads `catalog.json` and `parity-non-required.json` straight from this
+repository's `main` branch (raw.githubusercontent.com), keeps a cached copy and falls back to a
+copy built into the launcher when offline. A change merged to `main` reaches every player at once,
+so only the owner (@anarqz, `.github/CODEOWNERS`) approves changes to either file or to `schemas/`.
+
+```sh
+python3 -I tools/infmods.py check      # both files: schemas, no duplicate ids, no exempt catalog mod
+```
+
+Online lobbies admit only players who load exactly the same mods. A mod listed in
+`parity-non-required.json` is left out of that comparison, in every mode (Hardcore included), when
+the id ExtraOptions' loader gives it equals an entry's `id`: the `id` in the mod's `mod.json` (or,
+without a `mod.json`, its folder name under `mods\`). Its files and version do not matter. Catalog
+mods are never listed here: their manifest's multiplayer impact already decides.
+
+### Proposing a parity exemption
+
+Open a pull request that adds an entry to `parity-non-required.json`: `id` (exactly the `id` in the
+mod's `mod.json`, which may differ from its folder or repository name), `name`, and `description`
+(what the mod does). Explain in the pull request why the mod does not affect gameplay: nothing other
+players see, hear or race against. Only the owner approves.
 
 ## Build
 
@@ -46,10 +73,11 @@ packages: the manifest downloads them from the original author's release and che
 One GitHub release per drop, one ZIP per mod (`<id>-<version>.zip`, deterministic).
 
 ```sh
-python3 -I tools/infmods.py release --zig /path/to/zig --tag <tag> --catalog <current catalog.json>
+python3 -I tools/infmods.py release --zig /path/to/zig --tag <tag> --catalog catalog.json
 ```
 
 writes `dist/assets/*.zip`, `dist/manifests/*.json`, `dist/catalog.json` and `dist/RELEASE.txt`.
+After the release's assets are uploaded, `dist/catalog.json` replaces `catalog.json` in a pull request.
 No entry requires `infinity-mod-runtime`; the release drops that retired entry from the catalog it writes.
 A mod whose ZIP is byte-identical to the one its catalog entry already points to keeps that entry
 unchanged (old URL), so players get no update; its ZIP may still be attached to the new release.

@@ -4,6 +4,7 @@
   build   <mod> [--zig ZIG] [--out DIR]     compile the mod and its adapter
   verify  <mod> [--zig ZIG]                 build twice in separate folders: same bytes, sane PE, plugin exports
   release [--zig ZIG] --tag TAG --catalog CURRENT.json [--out DIR] [--allow-dirty] [MOD ...]
+  check   [--catalog FILE] [--parity FILE]   validate catalog.json and parity-non-required.json (schemas/ + rules below)
 
 A recipe's `toolchain` is `zig` (Zig 0.15.2, any host; --zig) or `msvc` (Windows with Visual Studio
 C++ x64 tools, for sources that need MSVC, such as `__try`).
@@ -16,6 +17,14 @@ There is no Infinity mod runtime: no entry needs `infinity-mod-runtime`, and `re
 catalog. A mod whose ZIP has the same SHA-256 as its current catalog entry keeps that entry
 unchanged (URL, version and source commit), so players see no update; a changed ZIP needs a new
 version. Nothing is uploaded or published.
+
+`check` validates the two files the launcher reads from this repository's main branch: each against its schema
+in schemas/ (the subset of JSON Schema those files use), with no BOM, no duplicate JSON keys and the launcher's
+size limits, then catalog.json's ids are unique, and parity-non-required.json's ids are unique and none names a
+catalog.json mod. An exempt id leaves the lobby's mod set whatever the mod's files, so it must never be a catalog
+mod's id: a catalog mod is judged by its manifest's multiplayer impact (a cosmetic one is already left out), and
+listing one here would drop a mod whose manifest says "gameplay". The exemption list is for ExtraOptions mods
+installed outside the catalog.
 """
 import argparse
 import copy
@@ -23,6 +32,7 @@ import os
 import hashlib
 import io
 import json
+import re
 import shutil
 import struct
 import subprocess
@@ -388,6 +398,119 @@ def release(names, zig, tag, catalog_path, out, allow_dirty):
     return 0
 
 
+CATALOG_MAX_BYTES = 1024 * 1024  # Infinity.Core OfficialModCatalog.MaxCatalogBytes
+PARITY_MAX_BYTES = 256 * 1024  # Infinity.Core ParityExemptions.MaxBytes
+
+
+def schema_errors(value, schema, root, where="$"):
+    """The JSON Schema keywords schemas/ uses (type, const, enum, pattern, length and item bounds, required,
+    properties, additionalProperties, items, uniqueItems, minimum/maximum, not, anyOf, oneOf, local $ref)."""
+    if "$ref" in schema:
+        target = root
+        for part in schema["$ref"].removeprefix("#/").split("/"):
+            target = target[part]
+        return schema_errors(value, target, root, where)
+    errors = []
+    kinds = {"object": dict, "array": list, "string": str, "boolean": bool}
+    kind = schema.get("type")
+    if kind == "integer":
+        if isinstance(value, bool) or not isinstance(value, int):
+            return [f"{where}: not an integer"]
+    elif kind and not isinstance(value, kinds[kind]):
+        return [f"{where}: not {'an' if kind[0] in 'ao' else 'a'} {kind}"]
+    if "const" in schema and (value != schema["const"] or type(value) is not type(schema["const"])):
+        errors.append(f"{where}: must be {json.dumps(schema['const'])}")
+    if "enum" in schema and value not in schema["enum"]:
+        errors.append(f"{where}: not one of {schema['enum']}")
+    if isinstance(value, str):
+        # ECMA-262 "$" never matches before a final newline; Python's does, so the anchor becomes \Z
+        if "pattern" in schema and not re.search(schema["pattern"].replace("$", r"\Z"), value):
+            errors.append(f"{where}: {value!r} does not match {schema['pattern']}")
+        if len(value) < schema.get("minLength", 0) or len(value) > schema.get("maxLength", len(value)):
+            errors.append(f"{where}: length out of bounds")
+    if isinstance(value, int) and not isinstance(value, bool):
+        if value < schema.get("minimum", value) or value > schema.get("maximum", value):
+            errors.append(f"{where}: {value} out of bounds")
+    if isinstance(value, list):
+        if len(value) < schema.get("minItems", 0) or len(value) > schema.get("maxItems", len(value)):
+            errors.append(f"{where}: {len(value)} items, out of bounds")
+        if schema.get("uniqueItems") and len({json.dumps(v, sort_keys=True) for v in value}) != len(value):
+            errors.append(f"{where}: repeated items")
+        if "items" in schema:
+            for index, item in enumerate(value):
+                errors += schema_errors(item, schema["items"], root, f"{where}[{index}]")
+    if isinstance(value, dict):
+        errors += [f"{where}: missing {key}" for key in schema.get("required", []) if key not in value]
+        properties = schema.get("properties", {})
+        extra = schema.get("additionalProperties", True)
+        for key, item in value.items():
+            if key in properties:
+                errors += schema_errors(item, properties[key], root, f"{where}.{key}")
+            elif extra is False:
+                errors.append(f"{where}: unknown field {key}")
+            elif isinstance(extra, dict):
+                errors += schema_errors(item, extra, root, f"{where}.{key}")
+    if "not" in schema and not schema_errors(value, schema["not"], root, where):
+        errors.append(f"{where}: matches a form it must not have")
+    if "anyOf" in schema and all(schema_errors(value, s, root, where) for s in schema["anyOf"]):
+        errors.append(f"{where}: matches none of the allowed forms")
+    if "oneOf" in schema and sum(not schema_errors(value, s, root, where) for s in schema["oneOf"]) != 1:
+        errors.append(f"{where}: must match exactly one of the allowed forms")
+    return errors
+
+
+def read_strict(path, limit):
+    """The launcher's reading rules: UTF-8 without BOM, at most `limit` bytes, no repeated key in any object."""
+    raw = Path(path).read_bytes()
+    if raw.startswith(b"\xef\xbb\xbf"):
+        raise ValueError("starts with a BOM")
+    if not 0 < len(raw) <= limit:
+        raise ValueError(f"{len(raw)} bytes (limit {limit})")
+
+    def pairs(items):
+        keys = [k for k, _ in items]
+        if len(keys) != len(set(keys)):
+            raise ValueError(f"repeated key in an object: {sorted({k for k in keys if keys.count(k) > 1})}")
+        return dict(items)
+
+    return json.loads(raw.decode("utf-8"), object_pairs_hook=pairs)
+
+
+def check(catalog_path, parity_path):
+    problems = []
+    documents = {}
+    for name, path, limit in (("catalog.json", catalog_path, CATALOG_MAX_BYTES),
+                              ("parity-non-required.json", parity_path, PARITY_MAX_BYTES)):
+        schema = json.loads((ROOT / "schemas" / name.replace(".json", ".schema.json")).read_text(encoding="utf-8"))
+        try:
+            document = read_strict(path, limit)
+        except (OSError, ValueError) as error:
+            problems.append(f"{name}: {error}")
+            continue
+        errors = schema_errors(document, schema, schema)
+        problems += [f"{name}: {e}" for e in errors]
+        if not errors:
+            documents[name] = document
+    catalog, parity = documents.get("catalog.json"), documents.get("parity-non-required.json")
+    catalog_ids = set()
+    if catalog is not None:
+        ids = [m["id"] for m in catalog["mods"]]
+        catalog_ids = set(ids)
+        problems += [f"catalog.json: id {i} listed more than once" for i in sorted(catalog_ids) if ids.count(i) > 1]
+    if parity is not None:
+        ids = [m["id"] for m in parity["mods"]]
+        problems += [f"parity-non-required.json: id {i} listed more than once" for i in sorted(set(ids)) if ids.count(i) > 1]
+        if catalog is not None:
+            problems += [f"parity-non-required.json: {i} is a catalog.json mod (its manifest's multiplayer impact decides)"
+                         for i in sorted(set(ids) & catalog_ids)]
+    for p in problems:
+        print("FAIL", p)
+    if not problems:
+        print(f"ok: catalog.json {len(catalog['mods'])} mods; parity-non-required.json {len(parity['mods'])} exempt "
+              f"({', '.join(m['id'] for m in parity['mods']) or 'none'})")
+    return 1 if problems else 0
+
+
 def main():
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -404,7 +527,12 @@ def main():
     r.add_argument("--catalog", required=True, help="the current official catalog.json (read only)")
     r.add_argument("--out", type=Path, default=ROOT / "dist")
     r.add_argument("--allow-dirty", action="store_true", help="development only: the commit pinned is HEAD, not the tree")
+    c = sub.add_parser("check")
+    c.add_argument("--catalog", type=Path, default=ROOT / "catalog.json")
+    c.add_argument("--parity", type=Path, default=ROOT / "parity-non-required.json")
     args = parser.parse_args()
+    if args.cmd == "check":
+        return check(args.catalog, args.parity)
     zig = args.zig.resolve() if args.zig else None
     if zig:
         zig_check(zig)
