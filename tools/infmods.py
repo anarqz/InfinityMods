@@ -5,6 +5,7 @@
   verify  <mod> [--zig ZIG]                 build twice in separate folders: same bytes, sane PE, plugin exports
   release [--zig ZIG] --tag TAG --catalog CURRENT.json [--out DIR] [--allow-dirty] [MOD ...]
   check   [--catalog FILE] [--parity FILE]   validate catalog.json and parity-non-required.json (schemas/ + rules below)
+  external-packs <set folder>... --cars fh2-packs.json --out FILE   ZephyrSkies pack entries (OD-232), read from the ZIPs
 
 A recipe's `toolchain` is `zig` (Zig 0.15.2, any host; --zig) or `msvc` (Windows with Visual Studio
 C++ x64 tools, for sources that need MSVC, such as `__try`).
@@ -511,6 +512,155 @@ def check(catalog_path, parity_path):
     return 1 if problems else 0
 
 
+PACK_SETS = {
+    # set folder name (the external source's hint, the launcher's group key) -> source game
+    "ZS FM5 Addon Packs": "5",
+    "ZS FM6 Addon Packs": "6",
+}
+PACK_FILES = re.compile(r"^(mod\.json|database\.json|strings\.json|media/.+)$")
+PACK_LEFTOVERS = re.compile(r"^database\.json\..+$")  # the author's backups (before_fh3overlay, before_racefix, ...)
+PACK_MAKES = {"POR": "Porsche", "Mc Laren": "McLaren"}
+
+
+def pack_cars(cars_path):
+    """Car names per pack id from the server's fh2-packs.json (OD-231)."""
+    cars = {}
+    for car in json.loads(Path(cars_path).read_text(encoding="utf-8"))["cars"]:
+        make = PACK_MAKES.get(car["make"], car["make"])
+        name = f"{car['year']} {make} {car['model']}"
+        cars.setdefault(car["pack"]["id"], []).append((car["pack"]["version"], name))
+    return cars
+
+
+def read_pack(zip_path):
+    """One pack ZIP: its top folder, ExtraOptions mod.json and every file it maps, hashed."""
+    with zipfile.ZipFile(zip_path) as archive:
+        names = [i for i in archive.infolist() if not i.is_dir()]
+        tops = {i.filename.split("/", 1)[0] for i in names}
+        if len(tops) != 1 or any("/" not in i.filename for i in names):
+            sys.exit(f"{zip_path.name}: not one top folder")
+        top = tops.pop()
+        manifest = json.loads(archive.read(f"{top}/mod.json").decode("utf-8"))
+        if manifest.get("format_version") != 1 or not re.fullmatch(r"[a-z][a-z0-9-]{0,63}", manifest.get("id", "")):
+            sys.exit(f"{zip_path.name}: mod.json is not an ExtraOptions format 1 manifest")
+        files, skipped = [], []
+        for info in names:
+            relative = info.filename[len(top) + 1:]
+            if PACK_LEFTOVERS.match(relative):
+                skipped.append(relative)
+                continue
+            if not PACK_FILES.match(relative) or ".." in relative.split("/"):
+                sys.exit(f"{zip_path.name}: unexpected file {info.filename}")
+            digest = hashlib.sha256()
+            with archive.open(info) as stream:
+                for block in iter(lambda: stream.read(1 << 20), b""):
+                    digest.update(block)
+            files.append((relative, digest.hexdigest(), info.file_size))
+    return top, manifest, sorted(files), skipped
+
+
+def pack_entry(set_name, game, top, manifest, files, versions, cars, azimuth_versions, first):
+    mod_id, version = manifest["id"], manifest["version"]
+    common = next((d for d in manifest.get("dependencies", [])), None)
+    if first:
+        description = {
+            "en": f"What every ZS FM{game} pack needs: shared database rows, manufacturer logos{', engine sounds' if game == '6' else ''} "
+                  f"and its changes to FH2's own cars. Infinity keeps it first in the load order, before every other mod.",
+            "pt-BR": f"O que todo pacote ZS FM{game} precisa: linhas compartilhadas do banco de dados, logotipos das marcas"
+                     f"{', sons de motor' if game == '6' else ''} e as mudanças dele nos carros do próprio FH2. O Infinity o mantém "
+                     f"primeiro na ordem de carregamento, antes de qualquer outro mod.",
+        }
+    else:
+        names = sorted(name for pinned, name in cars.get(mod_id, []) if pinned == version)
+        if not names:
+            sys.exit(f"{mod_id} {version}: no cars in fh2-packs.json for this version")
+        listed = "; ".join(names)
+        description = {
+            "en": f"{len(names)} car{'s' if len(names) > 1 else ''} from Forza Motorsport {game}, converted by ZephyrSkies: {listed}. "
+                  f"Needs ZS FM{game} Common. Online, everyone in a lobby needs the same packs.",
+            "pt-BR": f"{len(names)} carro{'s' if len(names) > 1 else ''} do Forza Motorsport {game}, convertidos por ZephyrSkies: {listed}. "
+                     f"Precisa do ZS FM{game} Common. Online, todos no lobby precisam dos mesmos pacotes.",
+        }
+    install = {
+        "schemaVersion": 1,
+        "kind": "mod",
+        "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+        "runtime": "standalone",
+        "review": {"status": "reviewed", "blockers": []},
+        "compatibility": {"azimuthVersions": azimuth_versions, "gameBuilds": [], "verification": "unverified"},
+        "dependencies": [{"id": d, "versions": [versions[d]]} for d in manifest.get("dependencies", [])],
+        "conflicts": [],
+        "files": {
+            "game": [],
+            "azimuth": [{"source": f"pack:{top}/{relative}", "destination": f"mods/{mod_id}/{relative}",
+                         "sha256": digest, "bytes": size, "role": "asset", "mode": "add-or-replace"}
+                        for relative, digest, size in files],
+        },
+        "config": None,
+        "runtimeOutputs": [],
+        "excludedArchiveEntries": [],
+        "databaseMigrations": [],
+        "multiplayer": {"schemaVersion": 1, "impact": "gameplay", "compatibilityId": mod_id, "revision": 1,
+                        "match": "exact", "settings": []},
+    }
+    if first:
+        install["loadOrder"] = "first"  # OD-232: the set's Common sits at the top of loadorder.txt
+    if common and common not in versions:
+        sys.exit(f"{mod_id}: depends on {common}, which is not in {set_name}")
+    return {
+        "id": mod_id,
+        "version": version,
+        "name": {"en": manifest["name"], "pt-BR": manifest["name"]},
+        "description": description,
+        "author": manifest.get("author") or "ZephyrSkies",
+        "externalSources": [{
+            "id": "pack",
+            "kind": "either",
+            "label": {"en": manifest["name"], "pt-BR": manifest["name"]},
+            "help": {
+                "en": f"Choose the folder with your {set_name} ZIPs (or any folder above it), or this pack's own ZIP or folder. "
+                      f"Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+                "pt-BR": f"Escolha a pasta com os ZIPs de {set_name} (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta "
+                         f"deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes.",
+            },
+            "hint": set_name,  # the same on every pack of the set: one pick serves the whole set
+        }],
+        "install": install,
+    }
+
+
+def external_packs(set_dirs, cars_path, catalog_path, out):
+    """OD-231/OD-232: catalog entries for the ZephyrSkies pack sets, from the player-side ZIPs (read only)."""
+    catalog = json.loads(Path(catalog_path).read_text(encoding="utf-8"))
+    nitro = next((m for m in catalog["mods"] if m["id"] == "nitrosystem"), None)
+    azimuth_versions = nitro["install"]["compatibility"]["azimuthVersions"] if nitro else ["1.0.4"]
+    cars = pack_cars(cars_path)
+    entries, report = [], []
+    for set_dir in set_dirs:
+        set_dir = Path(set_dir)
+        game = PACK_SETS.get(set_dir.name) or sys.exit(f"{set_dir.name}: not a known pack set {sorted(PACK_SETS)}")
+        packs = [read_pack(z) for z in sorted(set_dir.glob("*.zip"))]
+        versions = {m["id"]: m["version"] for _, m, _, _ in packs}
+        if len(versions) != len(packs):
+            sys.exit(f"{set_dir.name}: repeated mod ids")
+        bases = {d for _, m, _, _ in packs for d in m.get("dependencies", [])}
+        ordered = sorted(packs, key=lambda p: (p[1]["id"] not in bases, p[1]["name"].lower()))
+        for top, manifest, files, skipped in ordered:
+            first = manifest["id"] in bases
+            if first and manifest.get("dependencies"):
+                sys.exit(f"{manifest['id']}: a Common with dependencies of its own")
+            entries.append(pack_entry(set_dir.name, game, top, manifest, files, versions, cars, azimuth_versions, first))
+            report.append(f"{manifest['id']} {manifest['version']}: {len(files)} files"
+                          + (", load order first" if first else "") + (f", left out {', '.join(skipped)}" if skipped else ""))
+    ids = {e["id"] for e in entries}
+    catalog["mods"] = [m for m in catalog["mods"] if m["id"] not in ids] + entries
+    text = json.dumps(catalog, indent=2, ensure_ascii=False) + "\n"
+    Path(out).write_text(text, encoding="utf-8", newline="\n")
+    print("\n".join(report))
+    print(f"{len(entries)} entries; catalog {len(text.encode('utf-8'))} bytes of {CATALOG_MAX_BYTES} -> {out}")
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -530,9 +680,16 @@ def main():
     c = sub.add_parser("check")
     c.add_argument("--catalog", type=Path, default=ROOT / "catalog.json")
     c.add_argument("--parity", type=Path, default=ROOT / "parity-non-required.json")
+    e = sub.add_parser("external-packs", help="catalog entries for the ZephyrSkies pack sets from their ZIPs (read only)")
+    e.add_argument("sets", nargs="+", type=Path, help="a set folder of pack ZIPs, named as in PACK_SETS")
+    e.add_argument("--cars", type=Path, required=True, help="the monorepo's crates/fi-gamedb/data/fh2-packs.json (OD-231)")
+    e.add_argument("--catalog", type=Path, default=ROOT / "catalog.json")
+    e.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     if args.cmd == "check":
         return check(args.catalog, args.parity)
+    if args.cmd == "external-packs":
+        return external_packs(args.sets, args.cars, args.catalog, args.out)
     zig = args.zig.resolve() if args.zig else None
     if zig:
         zig_check(zig)
