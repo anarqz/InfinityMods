@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "id": "extraoptions-garagerevving",
+  "version": "1.0.3-infinity.1",
+  "kind": "mod",
+  "name": {
+    "en": "Garage Revving",
+    "pt-BR": "Ronco na Garagem"
+  },
+  "author": "Arthur (RokkuDayo); Infinity build by anarqz",
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/anarqz/InfinityMods",
+  "description": {
+    "en": "Hold RT in the garage to hear the car's engine rev. From Extra Options by Arthur (RokkuDayo), built from its source. Garage only: nothing other players see, hear or race against, so it plays in every mode.",
+    "pt-BR": "Segure RT na garagem para ouvir o motor do carro roncar. Do Extra Options, de Arthur (RokkuDayo), compilado a partir do código-fonte. Só na garagem: nada que outros jogadores vejam, ouçam ou enfrentem numa corrida, então funciona em todos os modos."
+  },
+  "runtime": "standalone",
+  "review": {
+    "status": "reviewed",
+    "blockers": []
+  },
+  "compatibility": {
+    "azimuthVersions": [
+      "1.0.4"
+    ],
+    "gameBuilds": [],
+    "verification": "unverified"
+  },
+  "package": {
+    "url": "",
+    "sha256": "",
+    "bytes": 0,
+    "format": "zip"
+  },
+  "dependencies": [],
+  "conflicts": [],
+  "files": {
+    "game": [],
+    "azimuth": [
+      {
+        "source": "EO_GarageEngineRev.dll",
+        "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/plugins/EO_GarageEngineRev.dll",
+        "role": "binary",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_GarageEngineRev.ini",
+        "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/plugins/EO_GarageEngineRev.ini",
+        "role": "config",
+        "mode": "seed"
+      },
+      {
+        "source": "mod.json",
+        "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/mod.json",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "LICENSE.txt",
+        "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/LICENSE.txt",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "NOTICE.md",
+        "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/NOTICE.md",
+        "role": "license",
+        "mode": "add-or-replace"
+      }
+    ]
+  },
+  "config": {
+    "root": "azimuth",
+    "path": "mods/Forza Horizon 2/extraoptions-garagerevving/plugins/EO_GarageEngineRev.ini",
+    "format": "ini",
+    "preserveOnDisable": true,
+    "options": [
+      {
+        "id": "logging-enabled",
+        "section": "Logging",
+        "key": "Enabled",
+        "label": {
+          "en": "Write a log",
+          "pt-BR": "Gravar um log"
+        },
+        "description": {
+          "en": "Writes EO_GarageEngineRev.log beside its settings file. Applied on the next game launch.",
+          "pt-BR": "Grava o EO_GarageEngineRev.log ao lado do arquivo de configuração. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": true,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": false,
+        "encoding": "0/1"
+      }
+    ]
+  },
+  "runtimeOutputs": [],
+  "excludedArchiveEntries": [],
+  "databaseMigrations": [],
+  "source": {
+    "repository": "https://github.com/anarqz/InfinityMods",
+    "commit": ""
+  },
+  "multiplayer": {
+    "schemaVersion": 1,
+    "impact": "cosmetic",
+    "compatibilityId": "extraoptions-garagerevving",
+    "revision": 1,
+    "match": "exact",
+    "settings": []
+  }
+}

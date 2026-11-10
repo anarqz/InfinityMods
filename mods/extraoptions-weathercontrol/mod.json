@@ -1,0 +1,70 @@
+{
+  "id": "extraoptions-weathercontrol",
+  "version": "1.0.4-infinity.1",
+  "folder": "extraoptions-weathercontrol",
+  "dll": "EO_WeatherControl.dll",
+  "adapter": null,
+  "toolchain": "zig",
+  "generate": "weather-control-pages",
+  "upstream": {
+    "submodule": "upstream/extraoptions",
+    "repository": "https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions",
+    "version": "1.0.4 (fh2/plugins/weather-control; ExtraOptions 0.6.0 ships 1.1.0 as a separate mod without its source, so this is the last upstream commit that carries it)",
+    "sources": [
+      "fh2/plugins/weather-control/weather_control.c",
+      "fh2/plugins/weather-control/config.c",
+      "fh2/plugins/weather-control/clock_hold.c",
+      "fh2/plugins/weather-control/weather_hold.c",
+      "fh2/plugins/weather-control/settings_page.c",
+      "fh2/plugins/weather-control/entry_hook.c",
+      "fh2/plugins/weather-control/compat.c"
+    ],
+    "includes": [
+      "fh2/plugins/weather-control"
+    ],
+    "systemImports": [
+      "kernel32",
+      "user32",
+      "msvcrt"
+    ],
+    "extraFlags": [
+      "-D__USE_MINGW_ANSI_STDIO=0",
+      "-Wno-missing-field-initializers"
+    ],
+    "forceInclude": "fh2/plugins/weather-control/compat.h"
+  },
+  "allowedImports": [
+    "KERNEL32.dll",
+    "USER32.dll",
+    "msvcrt.dll"
+  ],
+  "package": {
+    "EO_WeatherControl.dll": "$dll",
+    "mod.json": "mods/extraoptions-weathercontrol/extraoptions/mod.json",
+    "LICENSE.txt": "upstream/extraoptions/LICENSE",
+    "CREDITS.md": "upstream/extraoptions/fh2/plugins/weather-control/CREDITS.md",
+    "NOTICE.md": "mods/extraoptions-weathercontrol/NOTICE.md",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_EN.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_BR.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_DE.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_FR.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_ES.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_IT.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_JP.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_KO.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_CHT.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_CZ.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_HU.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_PL.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_RU.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_NL.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_GB.xaml": "$generated",
+    "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_MX.xaml": "$generated"
+  },
+  "versionInfo": {
+    "description": "Pause-menu time and weather control for Forza Horizon 2 (ExtraOptions mod, Infinity build)",
+    "company": "BlackPanthaa, from Set Time & Weather FH2 by Pantsedit; Extra Options integration by Arthur (RokkuDayo); Infinity build by anarqz",
+    "product": "Infinity Mods",
+    "license": "GPL-3.0"
+  }
+}

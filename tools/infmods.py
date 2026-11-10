@@ -4,28 +4,27 @@
   build   <mod> [--zig ZIG] [--out DIR]     compile the mod and its adapter
   verify  <mod> [--zig ZIG]                 build twice in separate folders: same bytes, sane PE, plugin exports
   release [--zig ZIG] --tag TAG --catalog CURRENT.json [--out DIR] [--allow-dirty] [MOD ...]
-  check   [--catalog FILE] [--parity FILE]   validate catalog.json and parity-non-required.json (schemas/ + rules below)
+  check   [--catalog FILE]                  validate catalog.json (schemas/ + rules below)
   external-packs <set folder>... --cars fh2-packs.json --out FILE   ZephyrSkies pack entries (OD-232), read from the ZIPs
 
 A recipe's `toolchain` is `zig` (Zig 0.15.2, any host; --zig) or `msvc` (Windows with Visual Studio
 C++ x64 tools, for sources that need MSVC, such as `__try`).
 
-Every mod is an ExtraOptions plugin (OD-126/OD-127): its DLL goes to <Azimuth>/mods/<id>/plugins/ and
-exports FH2PluginInitialize, its adapter (adapters/<loader>-eo) starting the original loader's entry point.
-There is no Infinity mod runtime: no entry needs `infinity-mod-runtime`, and `release` drops that entry.
+Every mod is an ExtraOptions plugin (OD-126/OD-127): its DLL goes to <Azimuth>/mods/<game folder>/<id>/plugins/
+(ExtraOptions 0.6.0's per-game mods folders, OD-233: mods/Forza Horizon 2/ or mods/Forza Motorsport 5/, chosen by
+the manifest's `games`, FH2 when it declares none) and exports FH2PluginInitialize: its adapter (adapters/<loader>-eo)
+starts the original loader's entry point, or, for an ExtraOptions plugin itself (`adapter` null), the upstream source
+exports it. There is no Infinity mod runtime: no entry needs `infinity-mod-runtime`, and `release` drops that entry.
 
 `release` writes one ZIP per mod (<id>-<version>.zip), each mod's filled manifest and the merged
 catalog. A mod whose ZIP has the same SHA-256 as its current catalog entry keeps that entry
 unchanged (URL, version and source commit), so players see no update; a changed ZIP needs a new
 version. Nothing is uploaded or published.
 
-`check` validates the two files the launcher reads from this repository's main branch: each against its schema
-in schemas/ (the subset of JSON Schema those files use), with no BOM, no duplicate JSON keys and the launcher's
-size limits, then catalog.json's ids are unique, and parity-non-required.json's ids are unique and none names a
-catalog.json mod. An exempt id leaves the lobby's mod set whatever the mod's files, so it must never be a catalog
-mod's id: a catalog mod is judged by its manifest's multiplayer impact (a cosmetic one is already left out), and
-listing one here would drop a mod whose manifest says "gameplay". The exemption list is for ExtraOptions mods
-installed outside the catalog.
+`check` validates the file the launcher reads from this repository's main branch: catalog.json against its schema
+in schemas/ (the subset of JSON Schema it uses), with no BOM, no duplicate JSON keys and the launcher's size limit,
+then its ids are unique and every installed file is in its game's mods folder. OD-233 retired the parity exemptions
+(parity-non-required.json): a mod is either both modes (its multiplayer impact cosmetic) or Noob only.
 """
 import argparse
 import copy
@@ -48,6 +47,16 @@ ZIP_TIME = (2026, 1, 1, 0, 0, 0)
 CATALOG_FIELDS = ("id", "version", "name", "description", "author", "package", "additionalPackages")
 RUNTIME_ID = "infinity-mod-runtime"  # retired (OD-127): never required, dropped from the catalog
 RELEASE = json.loads((ROOT / "release.json").read_text(encoding="utf-8"))
+# OD-233: ExtraOptions 0.6.0's per-game mods folders (shared/addon_layout.h), by the server's game id
+GAME_FOLDERS = {"fh2": "Forza Horizon 2", "fm5": "Forza Motorsport 5"}
+
+
+def mod_folder(manifest):
+    """The mod's own folder, Azimuth-relative: mods/<game folder>/<id>/ (its one game; FH2 when it declares none)."""
+    games = manifest.get("games", ["fh2"])
+    if len(games) != 1 or games[0] not in GAME_FOLDERS:
+        sys.exit(f"{manifest['id']}: a mod here is for exactly one of {sorted(GAME_FOLDERS)}, found {games}")
+    return f"mods/{GAME_FOLDERS[games[0]]}/{manifest['id']}/"
 
 
 def load_mod(name):
@@ -113,29 +122,42 @@ def build(name, zig, out):
     if zig is None:
         sys.exit(f"{name}: the zig toolchain needs --zig")
     upstream = ROOT / recipe["upstream"]["submodule"]
-    adapter = ROOT / "adapters" / recipe["adapter"]
+    # An ExtraOptions plugin itself (`adapter` null) exports FH2PluginInitialize from its own source.
+    adapter = ROOT / "adapters" / recipe["adapter"] if recipe.get("adapter") else None
     out.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="infmods-") as temporary:
         work = Path(temporary)
-        includes = [adapter, *(upstream / folder for folder in recipe["upstream"]["includes"])]
-        # Upstream's own flags (build.py), so its sources compile exactly as they do there.
+        includes = [*([adapter] if adapter else []), *(upstream / folder for folder in recipe["upstream"]["includes"])]
+        # Upstream's own flags (build.py), so its sources compile exactly as they do there; a recipe adds what its build.py adds.
         flags = [str(zig), "clang", "-target", "x86_64-w64-windows-gnu", "-c", "-ffreestanding", "-fno-builtin",
                  "-fno-stack-protector", "-fms-extensions", "-funwind-tables", "-O2", "-Wall", "-Wextra", "-Werror",
+                 *recipe["upstream"].get("extraFlags", []),
                  *(a for folder in includes for a in ("-I", str(folder))),
                  "-isystem", str(zig.parent / "lib/include"),
                  "-isystem", str(zig.parent / "lib/libc/include/any-windows-any")]
-        sources = [upstream / s for s in recipe["upstream"]["sources"]] + sorted(adapter.glob("*.c"))
+        if recipe["upstream"].get("forceInclude"):
+            flags += ["-include", str(upstream / recipe["upstream"]["forceInclude"])]
+        sources = [upstream / s for s in recipe["upstream"]["sources"]] + (sorted(adapter.glob("*.c")) if adapter else [])
         objects = []
         for index, source in enumerate(sources):
             obj = f"{index:02d}-{source.stem}.obj"  # relative: the PDB records these names, not the temp folder
             subprocess.run([*flags, str(source), "-o", obj], check=True, cwd=work)
             objects.append(obj)
         libraries = []
-        for definition in recipe["upstream"]["importDefinitions"]:
+        for definition in recipe["upstream"].get("importDefinitions", []):
             library = Path(definition).stem + ".lib"
             subprocess.run([str(zig), "dlltool", "-m", "i386:x86-64", "-d", str(upstream / definition), "-l", library],
                            check=True, cwd=work)
             libraries.append(library)
+        for name in recipe["upstream"].get("systemImports", []):
+            # Upstream's own way (weather-control/build.py): an import library of the Windows DLL's export table, so no
+            # second C runtime is linked into a game plugin. Windows hosts only (WINDOWS builds the releases).
+            if os.name != "nt":
+                sys.exit(f"{recipe['id']}: systemImports read %WINDIR%\\System32 (Windows only)")
+            _, exports, _ = pe_report(Path(os.environ["WINDIR"]) / "System32" / (name + ".dll"))
+            (work / (name + ".def")).write_text(f"LIBRARY {name}.dll\nEXPORTS\n" + "\n".join(exports) + "\n", encoding="ascii")
+            subprocess.run([str(zig), "dlltool", "-m", "i386:x86-64", "-d", name + ".def", "-l", name + ".lib"], check=True, cwd=work)
+            libraries.append(name + ".lib")
         dll = out / recipe["dll"]
         subprocess.run([str(zig), "lld-link", "/dll", "/entry:DllMain", "/machine:x64", "/nodefaultlib", "/dynamicbase",
                         "/nxcompat", "/Brepro", "/out:" + dll.name, "/implib:mod.lib", *objects, *libraries,
@@ -210,14 +232,15 @@ def pe_report(path):
 
 def layout_problems(recipe, manifest):
     """The launcher's rules for an ExtraOptions mod (Infinity.Core ExtraOptionsMods.CheckPackage, ManagedModFiles):
-    every file in <Azimuth>/mods/<id>/, the DLL in plugins/, nothing of ExtraOptions.Infinity's own (winmm.dll,
-    FH2_ExtraOptions.ini), and the package's mod.json agreeing with the manifest on id, version and dependencies."""
-    problems, folder = [], f"mods/{manifest['id']}/"
+    every file in <Azimuth>/mods/<game folder>/<id>/ (OD-233), the DLL in plugins/, nothing of ExtraOptions.Infinity's
+    own (winmm.dll, FH2_ExtraOptions.ini), and the package's mod.json agreeing with the manifest on id, version and
+    dependencies."""
+    problems, folder = [], mod_folder(manifest)
     files = manifest["files"]
     if files["game"]:
         problems.append("an ExtraOptions mod installs only into its own mods folder (game files listed)")
     reserved = {"winmm.dll", "fh2_extraoptions.ini"}
-    for path in [f["destination"] for f in files["azimuth"]] + [manifest.get("config", {}).get("path", folder)]:
+    for path in [f["destination"] for f in files["azimuth"]] + [(manifest.get("config") or {}).get("path", folder)]:
         path = path.replace("\\", "/")
         if not path.startswith(folder) or ".." in path.split("/"):
             problems.append(f"{path} is outside {folder}")
@@ -254,7 +277,7 @@ def verify(name, zig):
         problems.append("two builds differ (not reproducible)")
     if machine != 0x8664:
         problems.append("not x64")
-    if not recipe["adapter"].endswith("-eo"):
+    if recipe.get("adapter") is not None and not recipe["adapter"].endswith("-eo"):
         problems.append(f"adapter {recipe['adapter']} is not an ExtraOptions adapter")
     if "FH2PluginInitialize" not in exports:
         problems.append("FH2PluginInitialize not exported")
@@ -298,7 +321,9 @@ def vcvars():
 def package(recipe, dll, out):
     """Deterministic ZIP of the recipe's `package` map ("$dll" is the build): fixed time, sorted names.
     Text entries are stored with LF endings, so a Windows checkout (core.autocrlf) packs the same bytes."""
-    entries = {name: dll.read_bytes() if source == "$dll" else (ROOT / source).read_bytes().replace(b"\r\n", b"\n")
+    generated = GENERATORS[recipe["generate"]](recipe) if recipe.get("generate") else {}
+    entries = {name: dll.read_bytes() if source == "$dll" else generated[name] if source == "$generated"
+               else (ROOT / source).read_bytes().replace(b"\r\n", b"\n")
                for name, source in recipe["package"].items()}
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, "w") as archive:
@@ -311,6 +336,26 @@ def package(recipe, dll, out):
     path = out / f"{recipe['id']}-{recipe['version']}.zip"
     path.write_bytes(buffer.getvalue())
     return path, {n: (hashlib.sha256(b).hexdigest(), len(b)) for n, b in entries.items()}
+
+
+def weather_control_pages(recipe):
+    """Upstream's weather-control/build.py page step, unchanged: one native page per EO language from its template and
+    translations.json (the XAML its plugin loads from plugins/EO_WeatherControl/Media), UTF-8 with a BOM and CRLF as it writes them on Windows."""
+    from xml.sax.saxutils import escape
+    source = ROOT / recipe["upstream"]["submodule"] / recipe["upstream"]["includes"][0]
+    catalog = json.loads((source / "translations.json").read_text(encoding="utf8"))
+    keys = ["TITLE", "LOCK", "HOUR", "WEATHER", "LOCK_DESC", "HOUR_DESC", "WEATHER_DESC"]
+    template = (source / "weather_page.template.xaml").read_text(encoding="utf8").replace("\r\n", "\n")
+    pages = {}
+    for code, values in catalog.items():
+        text = template
+        for key, value in zip(keys, values):
+            text = text.replace("@" + key + "@", escape(value, {'"': "&quot;"}))
+        pages[f"EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_{code}.xaml"] = b"\xef\xbb\xbf" + text.replace("\n", "\r\n").encode("utf-8")
+    return pages
+
+
+GENERATORS = {"weather-control-pages": weather_control_pages}
 
 
 def fill_manifest(manifest, recipe, zip_path, contents, url, commit):
@@ -400,7 +445,6 @@ def release(names, zig, tag, catalog_path, out, allow_dirty):
 
 
 CATALOG_MAX_BYTES = 1024 * 1024  # Infinity.Core OfficialModCatalog.MaxCatalogBytes
-PARITY_MAX_BYTES = 256 * 1024  # Infinity.Core ParityExemptions.MaxBytes
 
 
 def schema_errors(value, schema, root, where="$"):
@@ -477,40 +521,33 @@ def read_strict(path, limit):
     return json.loads(raw.decode("utf-8"), object_pairs_hook=pairs)
 
 
-def check(catalog_path, parity_path):
+def check(catalog_path):
     problems = []
-    documents = {}
-    for name, path, limit in (("catalog.json", catalog_path, CATALOG_MAX_BYTES),
-                              ("parity-non-required.json", parity_path, PARITY_MAX_BYTES)):
-        schema = json.loads((ROOT / "schemas" / name.replace(".json", ".schema.json")).read_text(encoding="utf-8"))
-        try:
-            document = read_strict(path, limit)
-        except (OSError, ValueError) as error:
-            problems.append(f"{name}: {error}")
-            continue
+    schema = json.loads((ROOT / "schemas" / "catalog.schema.json").read_text(encoding="utf-8"))
+    catalog = None
+    try:
+        document = read_strict(catalog_path, CATALOG_MAX_BYTES)
         errors = schema_errors(document, schema, schema)
-        problems += [f"{name}: {e}" for e in errors]
+        problems += [f"catalog.json: {e}" for e in errors]
         if not errors:
-            documents[name] = document
-    catalog, parity = documents.get("catalog.json"), documents.get("parity-non-required.json")
-    catalog_ids = set()
+            catalog = document
+    except (OSError, ValueError) as error:
+        problems.append(f"catalog.json: {error}")
     if catalog is not None:
         ids = [m["id"] for m in catalog["mods"]]
-        catalog_ids = set(ids)
-        problems += [f"catalog.json: id {i} listed more than once" for i in sorted(catalog_ids) if ids.count(i) > 1]
-    if parity is not None:
-        ids = [m["id"] for m in parity["mods"]]
-        problems += [f"parity-non-required.json: id {i} listed more than once" for i in sorted(set(ids)) if ids.count(i) > 1]
-        if catalog is not None:
-            problems += [f"parity-non-required.json: {i} is a catalog.json mod (its manifest's multiplayer impact decides)"
-                         for i in sorted(set(ids) & catalog_ids)]
+        problems += [f"catalog.json: id {i} listed more than once" for i in sorted(set(ids)) if ids.count(i) > 1]
+        for m in catalog["mods"]:
+            # OD-233: every file in its game's mods folder (the launcher still reads the old mods/<id>/ form, as its game's)
+            folder = mod_folder({"id": m["id"], **({"games": m["install"]["games"]} if "games" in m["install"] else {})})
+            for f in m["install"].get("files", {}).get("azimuth", []):
+                if not f["destination"].startswith(folder):
+                    problems.append(f"catalog.json: {m['id']}: {f['destination']} is outside {folder}")
+                    break
     for p in problems:
         print("FAIL", p)
     if not problems:
-        print(f"ok: catalog.json {len(catalog['mods'])} mods; parity-non-required.json {len(parity['mods'])} exempt "
-              f"({', '.join(m['id'] for m in parity['mods']) or 'none'})")
+        print(f"ok: catalog.json {len(catalog['mods'])} mods")
     return 1 if problems else 0
-
 
 PACK_SETS = {
     # set folder name (the external source's hint, the launcher's group key) -> source game
@@ -592,7 +629,7 @@ def pack_entry(set_name, game, top, manifest, files, versions, cars, azimuth_ver
         "conflicts": [],
         "files": {
             "game": [],
-            "azimuth": [{"source": f"pack:{top}/{relative}", "destination": f"mods/{mod_id}/{relative}",
+            "azimuth": [{"source": f"pack:{top}/{relative}", "destination": f"{mod_folder(manifest)}{relative}",
                          "sha256": digest, "bytes": size, "role": "asset", "mode": "add-or-replace"}
                         for relative, digest, size in files],
         },
@@ -679,7 +716,6 @@ def main():
     r.add_argument("--allow-dirty", action="store_true", help="development only: the commit pinned is HEAD, not the tree")
     c = sub.add_parser("check")
     c.add_argument("--catalog", type=Path, default=ROOT / "catalog.json")
-    c.add_argument("--parity", type=Path, default=ROOT / "parity-non-required.json")
     e = sub.add_parser("external-packs", help="catalog entries for the ZephyrSkies pack sets from their ZIPs (read only)")
     e.add_argument("sets", nargs="+", type=Path, help="a set folder of pack ZIPs, named as in PACK_SETS")
     e.add_argument("--cars", type=Path, required=True, help="the monorepo's crates/fi-gamedb/data/fh2-packs.json (OD-231)")
@@ -687,7 +723,7 @@ def main():
     e.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     if args.cmd == "check":
-        return check(args.catalog, args.parity)
+        return check(args.catalog)
     if args.cmd == "external-packs":
         return external_packs(args.sets, args.cars, args.catalog, args.out)
     zig = args.zig.resolve() if args.zig else None

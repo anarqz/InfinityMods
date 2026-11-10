@@ -9,8 +9,8 @@ compiled into the mod's DLL. It exports `FH2PluginInitialize` and `FH2PluginData
 plugin ABI 1, `tools/PLUGIN_API.md`) and calls the mod's own `fh2mod_init` with an `FH2ModApi` table it
 implements itself.
 
-The DLL is `<Azimuth>\mods\<id>\plugins\<dll>`; ExtraOptions loads it when the folder is enabled in
-`mods\loadorder.txt`.
+The DLL is `<Azimuth>\mods\Forza Horizon 2\<id>\plugins\<dll>` (ExtraOptions 0.6.0's per-game mods folder); ExtraOptions loads it when the folder is enabled in
+`mods\Forza Horizon 2\loadorder.txt`.
 
 | FH2 Mod Platform | Under ExtraOptions |
 |---|---|
@@ -19,7 +19,7 @@ The DLL is `<Azimuth>\mods\<id>\plugins\<dll>`; ExtraOptions loads it when the f
 | `enable_hooks`, `disable_hooks` | one hook, or every hook with `nullptr`; 1 when all succeeded |
 | `hook_pointer`, `patch_bytes`, `hook_instruction` | not supported: logged, `nullptr` (a mod that needs them is not adapted yet) |
 | `wait_for_code`, `wait_for_game`, `game_base` | the context's `game_image` (the mapped FH2 image; ExtraOptions calls the initializer after the game's first file lookup) |
-| `azimuth_dir` | the mod's own folder (`<Azimuth>\mods\<id>`, the parent of `plugins\`): its INI and sounds stay there |
+| `azimuth_dir` | the mod's own folder (`<Azimuth>\mods\Forza Horizon 2\<id>`, the parent of `plugins\`, however deep it is): its INI and sounds stay there |
 | `game_dir` | empty |
 | `register_mod`, `log` | one mod per DLL; ExtraOptions' log (`FH2_ExtraOptions.log`) |
 | `add_sql` | queued (16 statements, 4 KiB each) and run by `FH2PluginDatabaseUpdate` on ExtraOptions' merged in-memory database inside a savepoint; the folder ships an empty `database.json` so ExtraOptions builds that merge |
