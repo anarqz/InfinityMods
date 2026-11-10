@@ -16,6 +16,7 @@ game): `<Azimuth>\mods\Forza Horizon 2\<id>\` (or `…\Forza Motorsport 5\<id>\`
 | [Garage Revving](mods/extraoptions-garagerevving) | [Extra Options](https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions) `fh2/plugins/garage-engine-rev` | none (an ExtraOptions plugin) | GPL-3.0 | both |
 | [Weather Control](mods/extraoptions-weathercontrol) | [Extra Options](https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions) `fh2/plugins/weather-control` | none (an ExtraOptions plugin) | GPL-3.0 | Noob |
 | [Spotify Radio](mods/spotifyradio) | [Bullet4fun/FH_ModsCollection](https://github.com/Bullet4fun/FH_ModsCollection) `spotify-radio` (an Azimuth Mod Loader mod) | none: a fork whose `INFINITY_EO` build is an ExtraOptions plugin (`upstream/fh-mods-collection/infinity/README.md`) | GPL-3.0-or-later | both |
+| [Camera Mods](mods/camera-mods) | [Deuquan/FH2-CameraMods](https://github.com/Deuquan/FH2-CameraMods) `plugin/` | none (an ExtraOptions plugin) | GPL-3.0 | Noob |
 
 Install them from the Infinity launcher's Mods page. They do not need the loaders they were
 written for (FH2_ModLoader, FH2 Mod Platform), nor a separate ExtraOptions; do not install both.
