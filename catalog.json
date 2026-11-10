@@ -15027,6 +15027,357 @@
           "settings": []
         }
       }
+    },
+    {
+      "id": "extraoptions-garagerevving",
+      "version": "1.0.3-infinity.1",
+      "name": {
+        "en": "Garage Revving",
+        "pt-BR": "Ronco na Garagem"
+      },
+      "description": {
+        "en": "Hold RT in the garage to hear the car's engine rev. From Extra Options by Arthur (RokkuDayo), built from its source. Garage only: nothing other players see, hear or race against, so it plays in every mode.",
+        "pt-BR": "Segure RT na garagem para ouvir o motor do carro roncar. Do Extra Options, de Arthur (RokkuDayo), compilado a partir do código-fonte. Só na garagem: nada que outros jogadores vejam, ouçam ou enfrentem numa corrida, então funciona em todos os modos."
+      },
+      "author": "Arthur (RokkuDayo); Infinity build by anarqz",
+      "download": {
+        "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.11.09/extraoptions-garagerevving-1.0.3-infinity.1.zip",
+        "sha256": "463aadd251782b33ddedbbe1dae81a4f16005d15b41be54577b817a38f80c02d",
+        "bytes": 19934
+      },
+      "install": {
+        "schemaVersion": 1,
+        "kind": "mod",
+        "license": "GPL-3.0",
+        "homepage": "https://github.com/anarqz/InfinityMods",
+        "runtime": "standalone",
+        "review": {
+          "status": "reviewed",
+          "blockers": []
+        },
+        "compatibility": {
+          "azimuthVersions": [
+            "1.0.4"
+          ],
+          "gameBuilds": [],
+          "verification": "unverified"
+        },
+        "dependencies": [],
+        "conflicts": [],
+        "files": {
+          "game": [],
+          "azimuth": [
+            {
+              "source": "EO_GarageEngineRev.dll",
+              "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/plugins/EO_GarageEngineRev.dll",
+              "role": "binary",
+              "mode": "add-or-replace",
+              "sha256": "d269ece513a799f3473e3dd49d7f93e518c1347710fef76fa0d9cc269fa3b43f",
+              "bytes": 14336
+            },
+            {
+              "source": "EO_GarageEngineRev.ini",
+              "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/plugins/EO_GarageEngineRev.ini",
+              "role": "config",
+              "mode": "seed",
+              "sha256": "e32b0e6d3b1ba10dec83c89eddf940d0c9db2df9c5ea29a6951397d15acb1bc5",
+              "bytes": 187
+            },
+            {
+              "source": "mod.json",
+              "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/mod.json",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "bd8cecd26076095a90e795235bf319c8514744ddf613fb6e4e0b23c1e5707722",
+              "bytes": 274
+            },
+            {
+              "source": "LICENSE.txt",
+              "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/LICENSE.txt",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+              "bytes": 35149
+            },
+            {
+              "source": "NOTICE.md",
+              "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/NOTICE.md",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "4e3cb084010aefc2a4581dbea6496fb919d0be8982f9c363b96a23c405ec1ea8",
+              "bytes": 843
+            }
+          ]
+        },
+        "config": {
+          "root": "azimuth",
+          "path": "mods/Forza Horizon 2/extraoptions-garagerevving/plugins/EO_GarageEngineRev.ini",
+          "format": "ini",
+          "preserveOnDisable": true,
+          "options": [
+            {
+              "id": "logging-enabled",
+              "section": "Logging",
+              "key": "Enabled",
+              "label": {
+                "en": "Write a log",
+                "pt-BR": "Gravar um log"
+              },
+              "description": {
+                "en": "Writes EO_GarageEngineRev.log beside its settings file. Applied on the next game launch.",
+                "pt-BR": "Grava o EO_GarageEngineRev.log ao lado do arquivo de configuração. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": true,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": false,
+              "encoding": "0/1"
+            }
+          ]
+        },
+        "runtimeOutputs": [],
+        "excludedArchiveEntries": [],
+        "databaseMigrations": [],
+        "source": {
+          "repository": "https://github.com/anarqz/InfinityMods",
+          "commit": "0a0eb196fa6f0e97754c78d8fc1f03a70bfbf048"
+        },
+        "multiplayer": {
+          "schemaVersion": 1,
+          "impact": "cosmetic",
+          "compatibilityId": "extraoptions-garagerevving",
+          "revision": 1,
+          "match": "exact",
+          "settings": []
+        }
+      }
+    },
+    {
+      "id": "extraoptions-weathercontrol",
+      "version": "1.0.4-infinity.1",
+      "name": {
+        "en": "Weather Control",
+        "pt-BR": "Controle do Clima"
+      },
+      "description": {
+        "en": "Time and weather in the free-roam pause menu: press Y to lock the hour and pick sunny, wet, rain or storm. From Extra Options, built from its source. It changes the world you race in, so it plays in Noob only.",
+        "pt-BR": "Hora e clima no menu de pausa do free roam: aperte Y para travar a hora e escolher sol, pista molhada, chuva ou tempestade. Do Extra Options, compilado a partir do código-fonte. Muda o mundo em que você corre, então funciona só no Noob."
+      },
+      "author": "BlackPanthaa (from Pantsedit's Set Time & Weather FH2), Extra Options integration by Arthur (RokkuDayo); Infinity build by anarqz",
+      "download": {
+        "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.11.09/extraoptions-weathercontrol-1.0.4-infinity.1.zip",
+        "sha256": "b5a3c63a4b3668e9d72cbac3080e9687484db2afccfc543ec64b00739e727e42",
+        "bytes": 66262
+      },
+      "install": {
+        "schemaVersion": 1,
+        "kind": "mod",
+        "license": "GPL-3.0",
+        "homepage": "https://github.com/anarqz/InfinityMods",
+        "runtime": "standalone",
+        "review": {
+          "status": "reviewed",
+          "blockers": []
+        },
+        "compatibility": {
+          "azimuthVersions": [
+            "1.0.4"
+          ],
+          "gameBuilds": [],
+          "verification": "unverified"
+        },
+        "dependencies": [],
+        "conflicts": [],
+        "files": {
+          "game": [],
+          "azimuth": [
+            {
+              "source": "EO_WeatherControl.dll",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl.dll",
+              "role": "binary",
+              "mode": "add-or-replace",
+              "sha256": "c3dbcbf3182e05c47891c092a41abf497d1d971ed270799e7f50ea4f9e98a470",
+              "bytes": 38400
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_EN.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_EN.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "314aa157f18f42f9ec36ae4c38cd2a78da627608770363db275afd86a7a36102",
+              "bytes": 6984
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_BR.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_BR.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "b123f1706f8838c2d49b27bb8c995c2ec18c2cb1d04a44bff1f44e6a3d8cc4bc",
+              "bytes": 7002
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_DE.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_DE.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "512198de83cd0440d5b68a8fc8dc3b74ed3674f5c949d73a55a170e9e3b5923a",
+              "bytes": 7027
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_FR.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_FR.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "4b182ff6f60cfc672bb406c48813bd37978c3b56cd20c87816b81f12c386d5e1",
+              "bytes": 7023
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_ES.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_ES.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "000a5e4ff23899eee5e2d77e8d378ddbfad4f0e6349ed8c550c8369f3fc18115",
+              "bytes": 6998
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_IT.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_IT.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "b881efda0d35b8eb49dafcf6fdb25e1f75a40e36d8e0163b6e74f2ca77398abe",
+              "bytes": 6989
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_JP.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_JP.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "596cc2b192369c076bea72eccf9ab318fbffc3fd71b679d6eff643804ea44bf1",
+              "bytes": 7062
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_KO.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_KO.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "59fef45cea1fc0276c05bbbfc2e03478cce51f73c2e92b65c17746b713223bf0",
+              "bytes": 7039
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_CHT.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_CHT.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "b4b9d1dbe708c01f408aac94ee3ae74145a6cef219e76900a05b552e4a4c5c0b",
+              "bytes": 6972
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_CZ.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_CZ.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "f360b02218c19748b18e7e06c232d6cd026d3213a099f5cd6d0dec8cce0b249f",
+              "bytes": 6991
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_HU.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_HU.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "608c91827e84445ba0ae1f56884a9abfd302a77debe87821b1cf3605c743665b",
+              "bytes": 7058
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_PL.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_PL.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "5f9b9b0f76ba658547c55c15f7a320ce325655d8f3426bd51ec019b416138557",
+              "bytes": 6985
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_RU.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_RU.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "7481aca0221de0f62b15030ebc0073d7cb0d6d36f673883b59203b76bf182923",
+              "bytes": 7199
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_NL.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_NL.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "6acbb97480ff59800f9017d83ac72ef96034376880faf63ab5e5d7efde233499",
+              "bytes": 6988
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_GB.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_GB.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "314aa157f18f42f9ec36ae4c38cd2a78da627608770363db275afd86a7a36102",
+              "bytes": 6984
+            },
+            {
+              "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_MX.xaml",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_MX.xaml",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "000a5e4ff23899eee5e2d77e8d378ddbfad4f0e6349ed8c550c8369f3fc18115",
+              "bytes": 6998
+            },
+            {
+              "source": "mod.json",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/mod.json",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "38de591fb9c673c6c2d9a1655ad308eb0266f2a6889f278e28aa1026dadb9538",
+              "bytes": 369
+            },
+            {
+              "source": "LICENSE.txt",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/LICENSE.txt",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+              "bytes": 35149
+            },
+            {
+              "source": "CREDITS.md",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/CREDITS.md",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "c79d65fd1c0bf875591987a657eeea92e50f402629471e37e29a88c3d39d4c43",
+              "bytes": 2629
+            },
+            {
+              "source": "NOTICE.md",
+              "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/NOTICE.md",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "8c1de57e167f2c09fd341c5f3ebf7c9bc5212a9f80b37026a6b1031653fb7160",
+              "bytes": 1033
+            }
+          ]
+        },
+        "config": null,
+        "runtimeOutputs": [],
+        "excludedArchiveEntries": [],
+        "databaseMigrations": [],
+        "source": {
+          "repository": "https://github.com/anarqz/InfinityMods",
+          "commit": "0a0eb196fa6f0e97754c78d8fc1f03a70bfbf048"
+        },
+        "multiplayer": {
+          "schemaVersion": 1,
+          "impact": "gameplay",
+          "compatibilityId": "extraoptions-weathercontrol",
+          "revision": 1,
+          "match": "exact",
+          "settings": []
+        }
+      }
     }
   ]
 }
