@@ -1,0 +1,45 @@
+{
+  "id": "camera-mods",
+  "version": "1.3.0-infinity.1",
+  "folder": "camera-mods",
+  "dll": "CameraMods.dll",
+  "adapter": null,
+  "toolchain": "zig",
+  "upstream": {
+    "submodule": "upstream/fh2-cameramods",
+    "repository": "https://github.com/Deuquan/FH2-CameraMods",
+    "version": "1.3.0 (the Extra Options plugin of build_plugin.py; its FH2 Mod Platform key page, CameraModsMenu.dll, is left out)",
+    "sources": [
+      "plugin/plugin_main.c",
+      "features/drone_probe.c",
+      "features/overlay_window.c"
+    ],
+    "includes": [
+      "plugin/shim",
+      "."
+    ],
+    "extraFlags": [
+      "-Wno-error"
+    ],
+    "importDefinitions": [
+      "kernel32.def",
+      "ntdll.def"
+    ]
+  },
+  "allowedImports": [
+    "KERNEL32.dll",
+    "ntdll.dll"
+  ],
+  "package": {
+    "CameraMods.dll": "$dll",
+    "mod.json": "mods/camera-mods/extraoptions/mod.json",
+    "LICENSE.txt": "upstream/fh2-cameramods/LICENSE",
+    "NOTICE.md": "mods/camera-mods/NOTICE.md"
+  },
+  "versionInfo": {
+    "description": "Extra cameras for Forza Horizon 2 (ExtraOptions mod, Infinity build)",
+    "company": "Deuquan; Infinity build by anarqz",
+    "product": "Infinity Mods",
+    "license": "GPL-3.0"
+  }
+}

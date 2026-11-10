@@ -8,3 +8,6 @@
 	path = upstream/fh-mods-collection
 	url = https://github.com/anarqz/FH_ModsCollection.git
 	branch = infinity
+[submodule "upstream/fh2-cameramods"]
+	path = upstream/fh2-cameramods
+	url = https://github.com/Deuquan/FH2-CameraMods.git
