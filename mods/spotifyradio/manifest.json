@@ -16,11 +16,8 @@
   },
   "runtime": "standalone",
   "review": {
-    "status": "draft",
-    "blockers": [
-      "Native check on WINDOWS (owner's authorization): the station shows, plays and survives a race with the plugin started after the game's first file lookup",
-      "Publication of the fork (the upstream/fh-mods-collection submodule commit) before the catalog lists it"
-    ]
+    "status": "reviewed",
+    "blockers": []
   },
   "compatibility": {
     "azimuthVersions": [
