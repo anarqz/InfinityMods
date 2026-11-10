@@ -15,6 +15,7 @@ game): `<Azimuth>\mods\Forza Horizon 2\<id>\` (or `…\Forza Motorsport 5\<id>\`
 | [Nitro System](mods/nitrosystem) | [qiangqiang101/NitroSystem](https://github.com/qiangqiang101/NitroSystem) | [FH2 Mod Platform for ExtraOptions](adapters/fh2-mod-platform-eo) | MIT | Noob |
 | [Garage Revving](mods/extraoptions-garagerevving) | [Extra Options](https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions) `fh2/plugins/garage-engine-rev` | none (an ExtraOptions plugin) | GPL-3.0 | both |
 | [Weather Control](mods/extraoptions-weathercontrol) | [Extra Options](https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions) `fh2/plugins/weather-control` | none (an ExtraOptions plugin) | GPL-3.0 | Noob |
+| [Spotify Radio](mods/spotifyradio) | [Bullet4fun/FH_ModsCollection](https://github.com/Bullet4fun/FH_ModsCollection) `spotify-radio` (an Azimuth Mod Loader mod) | none: a fork whose `INFINITY_EO` build is an ExtraOptions plugin (`upstream/fh-mods-collection/infinity/README.md`) | GPL-3.0-or-later | both |
 
 Install them from the Infinity launcher's Mods page. They do not need the loaders they were
 written for (FH2_ModLoader, FH2 Mod Platform), nor a separate ExtraOptions; do not install both.
@@ -23,7 +24,7 @@ Upstream's own Model Fixes and FM5 Cut Rims Restored mods are game files and are
 ## Layout
 
 ```text
-upstream/<name>/          original repositories, Git submodules pinned to an exact commit (never edited here)
+upstream/<name>/          original repositories, Git submodules pinned to an exact commit (never edited here; a fork when a mod needs reviewed changes)
 adapters/<loader>-eo/     one ExtraOptions plugin adapter per original loader API (MIT)
 mods/<id>/mod.json        build recipe: which upstream sources, which adapter (null: an ExtraOptions plugin), DLL name, version
 mods/<id>/manifest.json   Infinity manifest (runtime standalone, files under mods/<game folder>/<id>/); the release fills hashes and the commit

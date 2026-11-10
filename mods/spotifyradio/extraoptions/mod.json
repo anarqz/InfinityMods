@@ -1,0 +1,12 @@
+{
+  "format_version": 1,
+  "id": "spotifyradio",
+  "name": "Spotify Radio",
+  "author": "Bullet4fun",
+  "version": "1.5.0-infinity.1",
+  "description": "Spotify (Premium, Spotify Connect) as the game's own Xbox Music station, built from Bullet4fun's source.",
+  "dependencies": [],
+  "database": null,
+  "media": "media",
+  "strings": null
+}
