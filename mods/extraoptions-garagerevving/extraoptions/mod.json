@@ -1,0 +1,9 @@
+{
+  "format_version": 1,
+  "id": "extraoptions-garagerevving",
+  "name": "Extra Options - Garage Revving",
+  "author": "Arthur (RokkuDayo)",
+  "version": "1.0.3-infinity.1",
+  "description": "Garage engine revving, built from Extra Options' source.",
+  "dependencies": []
+}

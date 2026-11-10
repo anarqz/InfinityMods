@@ -1,0 +1,40 @@
+{
+  "id": "extraoptions-garagerevving",
+  "version": "1.0.3-infinity.1",
+  "folder": "extraoptions-garagerevving",
+  "dll": "EO_GarageEngineRev.dll",
+  "adapter": null,
+  "toolchain": "zig",
+  "upstream": {
+    "submodule": "upstream/extraoptions",
+    "repository": "https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions",
+    "version": "1.0.3 (fh2/plugins/garage-engine-rev; ExtraOptions 0.6.0 ships it as a separate mod and no longer carries its source, so this is the last upstream commit that does)",
+    "sources": [
+      "fh2/plugins/garage-engine-rev/EO_GarageEngineRev.c"
+    ],
+    "includes": [
+      "fh2/plugins/garage-engine-rev/sdk"
+    ],
+    "importDefinitions": [
+      "fh2/plugins/garage-engine-rev/sdk/kernel32.def",
+      "fh2/plugins/garage-engine-rev/sdk/user32.def"
+    ]
+  },
+  "allowedImports": [
+    "KERNEL32.dll",
+    "USER32.dll"
+  ],
+  "package": {
+    "EO_GarageEngineRev.dll": "$dll",
+    "EO_GarageEngineRev.ini": "upstream/extraoptions/fh2/plugins/garage-engine-rev/EO_GarageEngineRev.ini",
+    "mod.json": "mods/extraoptions-garagerevving/extraoptions/mod.json",
+    "LICENSE.txt": "upstream/extraoptions/LICENSE",
+    "NOTICE.md": "mods/extraoptions-garagerevving/NOTICE.md"
+  },
+  "versionInfo": {
+    "description": "Garage engine revving for Forza Horizon 2 (ExtraOptions mod, Infinity build)",
+    "company": "Arthur (RokkuDayo); Infinity build by anarqz",
+    "product": "Infinity Mods",
+    "license": "GPL-3.0"
+  }
+}

@@ -221,7 +221,8 @@ int focus_page_element(FH2Mod*, const char*, const char*) { return 0; }
 int set_page_tile_text(FH2Mod*, const char*, const char*) { return 0; }
 int set_page_tile_colors(FH2Mod*, const char*, uint32_t, uint32_t) { return 0; }
 
-// azimuth_dir is the mod's own folder (<Azimuth>\mods\<mod>, the parent of plugins\): the paths the mod
+// azimuth_dir is the mod's own folder (<Azimuth>\mods\<game folder>\<mod> since ExtraOptions 0.6.0, the parent of plugins\,
+// derived from the plugins path itself, so the depth does not matter): the paths the mod
 // builds from it (its INI, its sounds) stay inside that folder.
 bool derive_mod_dir(const wchar_t* plugins) {
     size_t length = plugins ? std::wcslen(plugins) : 0;

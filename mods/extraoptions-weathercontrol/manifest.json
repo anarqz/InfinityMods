@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "id": "extraoptions-weathercontrol",
+  "version": "1.0.4-infinity.1",
+  "kind": "mod",
+  "name": {
+    "en": "Weather Control",
+    "pt-BR": "Controle do Clima"
+  },
+  "author": "BlackPanthaa (from Pantsedit's Set Time & Weather FH2), Extra Options integration by Arthur (RokkuDayo); Infinity build by anarqz",
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/anarqz/InfinityMods",
+  "description": {
+    "en": "Time and weather in the free-roam pause menu: press Y to lock the hour and pick sunny, wet, rain or storm. From Extra Options, built from its source. It changes the world you race in, so it plays in Noob only.",
+    "pt-BR": "Hora e clima no menu de pausa do free roam: aperte Y para travar a hora e escolher sol, pista molhada, chuva ou tempestade. Do Extra Options, compilado a partir do código-fonte. Muda o mundo em que você corre, então funciona só no Noob."
+  },
+  "runtime": "standalone",
+  "review": {
+    "status": "reviewed",
+    "blockers": []
+  },
+  "compatibility": {
+    "azimuthVersions": [
+      "1.0.4"
+    ],
+    "gameBuilds": [],
+    "verification": "unverified"
+  },
+  "package": {
+    "url": "",
+    "sha256": "",
+    "bytes": 0,
+    "format": "zip"
+  },
+  "dependencies": [],
+  "conflicts": [],
+  "files": {
+    "game": [],
+    "azimuth": [
+      {
+        "source": "EO_WeatherControl.dll",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl.dll",
+        "role": "binary",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_EN.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_EN.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_BR.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_BR.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_DE.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_DE.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_FR.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_FR.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_ES.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_ES.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_IT.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_IT.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_JP.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_JP.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_KO.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_KO.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_CHT.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_CHT.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_CZ.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_CZ.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_HU.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_HU.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_PL.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_PL.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_RU.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_RU.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_NL.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_NL.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_GB.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_GB.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_MX.xaml",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl/Media/UI/Scenes/Anthem/EO_WeatherControl_MX.xaml",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "mod.json",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/mod.json",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "LICENSE.txt",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/LICENSE.txt",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "CREDITS.md",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/CREDITS.md",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "NOTICE.md",
+        "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/NOTICE.md",
+        "role": "license",
+        "mode": "add-or-replace"
+      }
+    ]
+  },
+  "config": null,
+  "runtimeOutputs": [],
+  "excludedArchiveEntries": [],
+  "databaseMigrations": [],
+  "source": {
+    "repository": "https://github.com/anarqz/InfinityMods",
+    "commit": ""
+  },
+  "multiplayer": {
+    "schemaVersion": 1,
+    "impact": "gameplay",
+    "compatibilityId": "extraoptions-weathercontrol",
+    "revision": 1,
+    "match": "exact",
+    "settings": []
+  }
+}

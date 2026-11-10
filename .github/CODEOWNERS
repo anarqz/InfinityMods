@@ -1,5 +1,4 @@
-# The two files every Infinity launcher reads from main: only the owner approves a change to them.
+# The file every Infinity launcher reads from main: only the owner approves a change to it.
 /catalog.json @anarqz
-/parity-non-required.json @anarqz
 /schemas/ @anarqz
 /.github/CODEOWNERS @anarqz
