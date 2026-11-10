@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "id": "spotifyradio",
+  "version": "1.5.0-infinity.1",
+  "kind": "mod",
+  "name": {
+    "en": "Spotify Radio",
+    "pt-BR": "Rádio Spotify"
+  },
+  "author": "Bullet4fun; Infinity build by anarqz",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://github.com/anarqz/InfinityMods",
+  "description": {
+    "en": "Plays Spotify on the game's own Xbox Music station, in the car, at car meets and from the festival speakers, with the song on the radio HUD. Needs Spotify Premium: in Spotify, pick the speaker \"Forza Horizon Radio\". The first start opens Spotify's sign-in page in your browser. Left stick or F6 skips, F5 goes back, F7 pauses. By Bullet4fun, built from its source as an ExtraOptions mod. Only you hear it: it plays in every mode.",
+    "pt-BR": "Toca o Spotify na própria estação Xbox Music do jogo, no carro, nos encontros de carros e nos alto-falantes do festival, com a música no HUD do rádio. Precisa do Spotify Premium: no Spotify, escolha o alto-falante \"Forza Horizon Radio\". Na primeira vez, a página de login do Spotify abre no navegador. Analógico esquerdo ou F6 pula, F5 volta, F7 pausa. De Bullet4fun, compilado a partir do código-fonte como mod do ExtraOptions. Só você ouve: funciona em todos os modos."
+  },
+  "runtime": "standalone",
+  "review": {
+    "status": "draft",
+    "blockers": [
+      "Native check on WINDOWS (owner's authorization): the station shows, plays and survives a race with the plugin started after the game's first file lookup",
+      "Publication of the fork (the upstream/fh-mods-collection submodule commit) before the catalog lists it"
+    ]
+  },
+  "compatibility": {
+    "azimuthVersions": [
+      "1.0.4"
+    ],
+    "gameBuilds": [],
+    "verification": "unverified"
+  },
+  "package": {
+    "url": "",
+    "sha256": "",
+    "bytes": 0,
+    "format": "zip"
+  },
+  "dependencies": [],
+  "conflicts": [],
+  "files": {
+    "game": [],
+    "azimuth": [
+      {
+        "source": "FH_SpotifyRadio.dll",
+        "destination": "mods/Forza Horizon 2/spotifyradio/plugins/FH_SpotifyRadio.dll",
+        "role": "binary",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "mods/FH_SpotifyRadio/librespot.exe",
+        "destination": "mods/Forza Horizon 2/spotifyradio/librespot.exe",
+        "sha256": "2b9c13902603eb3c869c438674108e1ac572a06517be6817984025e4f480b8a8",
+        "bytes": 15012352,
+        "role": "asset",
+        "mode": "add-or-replace",
+        "package": "upstream-assets"
+      },
+      {
+        "source": "mods/FH_SpotifyRadio/onevent.cmd",
+        "destination": "mods/Forza Horizon 2/spotifyradio/onevent.cmd",
+        "sha256": "8c69a3483d20f7b0a27810b3009cf8294399bacc432b1d1b902409dcf5ad0362",
+        "bytes": 469,
+        "role": "asset",
+        "mode": "add-or-replace",
+        "package": "upstream-assets"
+      },
+      {
+        "source": "mods/FH_SpotifyRadio/HUD_RadioIcon_Spotify.swatchbin",
+        "destination": "mods/Forza Horizon 2/spotifyradio/media/ui/textures/Anthem/HUD/HUD_RadioIcon_Xbox_Music.swatchbin",
+        "sha256": "9f2c2e41fac5dbcca9f235317c0888b66550d562a875a162ce99a77df0be0d4e",
+        "bytes": 32851,
+        "role": "asset",
+        "mode": "add-or-replace",
+        "package": "upstream-assets"
+      },
+      {
+        "source": "mod.json",
+        "destination": "mods/Forza Horizon 2/spotifyradio/mod.json",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "LICENSE.txt",
+        "destination": "mods/Forza Horizon 2/spotifyradio/LICENSE.txt",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "LICENSE-librespot.txt",
+        "destination": "mods/Forza Horizon 2/spotifyradio/LICENSE-librespot.txt",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "NOTICE.md",
+        "destination": "mods/Forza Horizon 2/spotifyradio/NOTICE.md",
+        "role": "license",
+        "mode": "add-or-replace"
+      }
+    ]
+  },
+  "config": null,
+  "runtimeOutputs": [],
+  "excludedArchiveEntries": [
+    "mods/FH_SpotifyRadio.dll",
+    "mods/FH_SpotifyRadio/HUD_RadioLogo_Spotify_FH3.swatchbin"
+  ],
+  "databaseMigrations": [],
+  "source": {
+    "repository": "https://github.com/anarqz/InfinityMods",
+    "commit": ""
+  },
+  "additionalPackages": {
+    "upstream-assets": {
+      "url": "https://github.com/Bullet4fun/FH_ModsCollection/releases/download/v2.3.0/FH_SpotifyRadio.zip",
+      "sha256": "1228fe12e8287645d2932b4addefafefd51d3fc82bb5f7db97efc58d0b06248f",
+      "bytes": 6146185,
+      "format": "zip"
+    }
+  },
+  "multiplayer": {
+    "schemaVersion": 1,
+    "impact": "cosmetic",
+    "compatibilityId": "spotifyradio",
+    "revision": 1,
+    "match": "exact",
+    "settings": []
+  },
+  "incompatibleFiles": [
+    {
+      "root": "azimuth",
+      "path": "mods/FH_SpotifyRadio.dll"
+    },
+    {
+      "root": "azimuth",
+      "path": "mods/FH_LineInRadio.dll"
+    },
+    {
+      "root": "azimuth",
+      "path": "mods/FH2_SpotifyRadio.dll"
+    },
+    {
+      "root": "azimuth",
+      "path": "mods/FH2_LineInRadio.dll"
+    }
+  ]
+}

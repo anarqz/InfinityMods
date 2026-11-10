@@ -1,0 +1,66 @@
+{
+  "id": "spotifyradio",
+  "version": "1.5.0-infinity.1",
+  "folder": "spotifyradio",
+  "dll": "FH_SpotifyRadio.dll",
+  "adapter": null,
+  "toolchain": "zig",
+  "upstream": {
+    "submodule": "upstream/fh-mods-collection",
+    "repository": "https://github.com/Bullet4fun/FH_ModsCollection",
+    "version": "2.3.0 (Spotify Radio 1.5.0, 5445c69) with Infinity's commits on branch infinity: an ExtraOptions plugin entry, INFINITY_EO (infinity/README.md)",
+    "sources": [
+      "spotify-radio/spotify_mod.c",
+      "common/mod_log.c",
+      "spotify-radio/spotify_bridge.c",
+      "spotify-radio/track_controls.c",
+      "spotify-radio/pinyin_table.c",
+      "spotify-radio/unidecode_table.c",
+      "common/support.c",
+      "infinity/eo_plugin.c"
+    ],
+    "includes": [
+      "common",
+      "sdk",
+      "extra-options",
+      "spotify-radio",
+      "discord-rpc",
+      "infinity"
+    ],
+    "extraFlags": [
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DINFINITY_EO=1",
+      "-DSPOTIFY_VERSION=\"1.5.0-infinity.1\""
+    ],
+    "linkFlags": [
+      "/opt:ref"
+    ],
+    "importDefinitions": [
+      "common/kernel32.def",
+      "common/ntdll.def",
+      "common/user32.def",
+      "common/ws2_32.def",
+      "common/xinput1_4.def",
+      "infinity/kernel32_threads.def"
+    ]
+  },
+  "allowedImports": [
+    "KERNEL32.dll",
+    "user32.dll",
+    "xinput1_4.dll"
+  ],
+  "package": {
+    "FH_SpotifyRadio.dll": "$dll",
+    "mod.json": "mods/spotifyradio/extraoptions/mod.json",
+    "LICENSE.txt": "upstream/fh-mods-collection/LICENSE",
+    "LICENSE-librespot.txt": "mods/spotifyradio/LICENSE-librespot.txt",
+    "NOTICE.md": "mods/spotifyradio/NOTICE.md"
+  },
+  "versionInfo": {
+    "description": "Spotify radio for Forza Horizon 2 (ExtraOptions mod, Infinity build)",
+    "company": "Bullet4fun; Infinity build by anarqz",
+    "product": "Infinity Mods",
+    "license": "GPL-3.0-or-later"
+  }
+}

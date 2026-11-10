@@ -162,7 +162,9 @@ def build(name, zig, out):
         subprocess.run([str(zig), "lld-link", "/dll", "/entry:DllMain", "/machine:x64", "/nodefaultlib", "/dynamicbase",
                         "/nxcompat", "/Brepro", "/out:" + dll.name, "/implib:mod.lib", *objects, *libraries,
                         version_resource(zig, work, recipe).name, "/release", "/debug", "/pdb:" + dll.stem + ".pdb",
-                        "/pdbaltpath:%_PDB%", "/pdbsourcepath:C:\\infinity-mods"], check=True, cwd=work)
+                        "/pdbaltpath:%_PDB%", "/pdbsourcepath:C:\\infinity-mods",
+                        # what upstream's build.py adds at link time (e.g. /opt:ref with -ffunction-sections)
+                        *recipe["upstream"].get("linkFlags", [])], check=True, cwd=work)
         shutil.copyfile(work / dll.name, dll)
     return dll
 

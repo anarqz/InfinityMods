@@ -4,3 +4,7 @@
 [submodule "upstream/extraoptions"]
 	path = upstream/extraoptions
 	url = https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions.git
+[submodule "upstream/fh-mods-collection"]
+	path = upstream/fh-mods-collection
+	url = https://github.com/anarqz/FH_ModsCollection.git
+	branch = infinity
