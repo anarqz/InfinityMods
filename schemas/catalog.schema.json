@@ -44,6 +44,12 @@
         },
         "install": {
           "type": "object",
+          "properties": {
+            "countsAsModded": {
+              "description": "OD-236: false = the mod never makes a session modded and is the only kind Hardcore keeps on (spotify-radio, garage-revving, the ZS car packs). Absent = true. A JSON boolean only.",
+              "type": "boolean"
+            }
+          },
           "not": {
             "anyOf": [
               { "required": ["id"] }, { "required": ["version"] }, { "required": ["name"] },

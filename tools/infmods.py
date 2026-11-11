@@ -641,6 +641,7 @@ def pack_entry(set_name, game, top, manifest, files, versions, cars, azimuth_ver
         "databaseMigrations": [],
         "multiplayer": {"schemaVersion": 1, "impact": "gameplay", "compatibilityId": mod_id, "revision": 1,
                         "match": "exact", "settings": []},
+        "countsAsModded": False,  # OD-236: the car packs never make a session modded; Hardcore keeps them
     }
     if first:
         install["loadOrder"] = "first"  # OD-232: the set's Common sits at the top of loadorder.txt
