@@ -10,9 +10,19 @@ game): `<Azimuth>\mods\Forza Horizon 2\<id>\` (or `…\Forza Motorsport 5\<id>\`
 `games` is `["fm5"]`): its `mod.json`, the DLL in `plugins\`, its licences. The Infinity mod runtime
 (`infinity_mod.dll`) is retired: no mod here needs it.
 
+FH2 Mod Platform mods are the exception to "built unchanged": their DLLs embed game-derived files, so they are
+never built or shipped here. The package holds only the [adapter](adapters/fh2-mod-platform-eo); Infinity downloads
+the author's own release ZIP, checks it by SHA-256 and installs the author's DLL next to it, and the adapter loads it.
+Their authors release often: `tools/infmods.py sync` and the skill in `.claude/skills/upstream-sync/` re-pin them.
+Underglow is the one exception (owner, 2026-11-12): its DLL is built here from the pinned source with
+`mods/underglow/patches/` applied, so it coexists with the Infinity hook, and shipped in its package with the
+author's camera_presets.h compiled in (his edited copy of the game's garage camera shots; nothing else game-derived).
+
 | Mod | Original | Adapter | Licence | Modes |
 |---|---|---|---|---|
-| [Nitro System](mods/nitrosystem) | [qiangqiang101/NitroSystem](https://github.com/qiangqiang101/NitroSystem) | [FH2 Mod Platform for ExtraOptions](adapters/fh2-mod-platform-eo) | MIT | Noob |
+| [Nitro System](mods/nitrosystem) | [qiangqiang101/FH2-NitroSystem](https://github.com/qiangqiang101/FH2-NitroSystem) (its release DLL) | [FH2 Mod Platform for ExtraOptions](adapters/fh2-mod-platform-eo) | MIT | Noob |
+| [FH2 ANNA](mods/fh2-anna) | [qiangqiang101/FH2-ANNA](https://github.com/qiangqiang101/FH2-ANNA) (its release DLL) | [FH2 Mod Platform for ExtraOptions](adapters/fh2-mod-platform-eo) | MIT | Noob |
+| [Underglow](mods/underglow) | [qiangqiang101/FH2-Underglow](https://github.com/qiangqiang101/FH2-Underglow) (built from its source, patched to coexist with the Infinity hook) | [FH2 Mod Platform for ExtraOptions](adapters/fh2-mod-platform-eo) | MIT | Noob |
 | [Garage Revving](mods/extraoptions-garagerevving) | [Extra Options](https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions) `fh2/plugins/garage-engine-rev` | none (an ExtraOptions plugin) | GPL-3.0 | both |
 | [Weather Control](mods/extraoptions-weathercontrol) | [Extra Options](https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions) `fh2/plugins/weather-control` | none (an ExtraOptions plugin) | GPL-3.0 | Noob |
 | [Spotify Radio](mods/spotifyradio) | [Bullet4fun/FH_ModsCollection](https://github.com/Bullet4fun/FH_ModsCollection) `spotify-radio` (an Azimuth Mod Loader mod) | none: a fork whose `INFINITY_EO` build is an ExtraOptions plugin (`upstream/fh-mods-collection/infinity/README.md`) | GPL-3.0-or-later | both |
@@ -61,6 +71,9 @@ archive, any OS) or MSVC (Windows, Visual Studio C++ x64 tools).
 git submodule update --init --recursive
 python3 -I tools/infmods.py build  nitrosystem                      # Windows (MSVC)
 python3 -I tools/infmods.py verify nitrosystem                      # Windows (MSVC)
+python3 -I tools/infmods.py verify underglow                        # Windows (MSVC)
+python3 -I tools/infmods.py verify fh2-anna                         # Windows (MSVC)
+python3 -I tools/infmods.py sync   underglow                        # any OS: report a newer upstream release (--write to re-pin)
 python3 -I tools/infmods.py verify extraoptions-garagerevving --zig /path/to/zig
 python3 -I tools/infmods.py verify extraoptions-weathercontrol --zig /path/to/zig   # Windows (its systemImports)
 ```
