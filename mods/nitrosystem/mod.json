@@ -1,6 +1,6 @@
 {
   "id": "nitrosystem",
-  "version": "2.0.0-infinity.2",
+  "version": "2.0.0-infinity.3",
   "folder": "nitrosystem",
   "dll": "NitroSystem.Infinity.dll",
   "adapter": "fh2-mod-platform-eo",
