@@ -22,9 +22,10 @@ release was built from) are compiled with MSVC (`toolchain: msvc`) against the m
 
 | FH2 Mod Platform | Under ExtraOptions |
 |---|---|
-| `hook_function`, `hook_call` | one hook broker per process, shared by every adapter DLL (the first to start publishes it in a per-process named mapping; only its MinHook patches), chained like the platform's `hooks.cpp`: a patched place's entry stub jumps to the newest enabled hook's detour, each hook's `*original` is a stub of its own pointing at the next older one, the oldest at the real code (MinHook's trampoline, or the `E8` call's old target). So NitroSystem and Underglow can both hook `ForzaCar::Update`. Created disabled |
-| `enable_hooks`, `disable_hooks` | one of this mod's hooks, or all of them with `nullptr`; a place is patched while any hook on it is enabled and restored when none is; 1 when all succeeded |
-| `hook_pointer`, `patch_bytes`, `hook_instruction` | not supported: logged, `nullptr` (a mod that needs them is not adapted yet) |
+| `hook_function`, `hook_call` | one hook broker per process, shared by every adapter DLL (the first to start publishes it in a per-process named mapping; only its MinHook patches), chained like the platform's `hooks.cpp`: a patched place's entry stub jumps to the newest enabled hook's detour, each hook's `*original` is a stub of its own pointing at the next older one, the oldest at the real code (MinHook's trampoline, or the `E8` call's old target). So NitroSystem and Underglow can both hook `ForzaCar::Update`. Created disabled. Nothing is patched until every adapter has started its mod (the broker's gate opens 3 s after the last `fh2mod_init` returns; a place already patched changes at once): a mod that checks stock bytes before hooking (Underglow on `ForzaCar::Update`) never sees another mod's jump there |
+| `enable_hooks`, `disable_hooks` | one of this mod's hooks, or all of them with `nullptr`; a place is patched while any hook on it is enabled (from the gate on) and restored when none is; 1 when all succeeded (a patch that fails when the gate opens is logged) |
+| `hook_pointer` | a function pointer (a vtable slot) in the same chain: its value when hooked is the chain's end; patched by swapping the slot (compare-and-swap, the page's protection kept), as the platform does |
+| `patch_bytes`, `hook_instruction` | not supported: logged, `nullptr` (a mod that needs them is not adapted yet) |
 | `wait_for_code`, `wait_for_game`, `game_base` | the context's `game_image` (the mapped FH2 image; ExtraOptions calls the initializer after the game's first file lookup) |
 | `azimuth_dir` | the mod's own folder (`<Azimuth>\mods\Forza Horizon 2\<id>`, the parent of `plugins\`): its INI (`fh2-mods\<mod>.ini`) and its per-car files (`data\titles\1A96545B\<mod>\player-1\`) stay there. It never sees the real saves, so every player profile shares `player-1`, and uninstalling the mod deletes those files with its folder. The adapter refuses a mod folder longer than 160 characters (the mods build `MAX_PATH` paths below it) |
 | `game_dir` | empty (a mod's cleanup of old `mediaoverride` files does nothing) |
@@ -32,15 +33,13 @@ release was built from) are compiled with MSVC (`toolchain: msvc`) against the m
 | `add_sql` | queued (64 calls, 1 MiB each, several statements per call) and run, statement by statement, by `FH2PluginDatabaseUpdate` on ExtraOptions' merged in-memory database inside one savepoint; the folder ships an empty `database.json` so ExtraOptions builds that merge |
 | `register_mod`, `log` | one mod per DLL; ExtraOptions' log (`FH2_ExtraOptions.log`) |
 | `add_setting`, sliders, `set_setting` | accepted, never shown: the launcher's form owns the INI, so `on_change` never runs; `get_setting` is -1 |
-| `publish_interface`, `get_interface`, `wait_for_mods` | no other mods' interfaces: `get_interface` is `nullptr` (FH2 ANNA menus and similar links are off), `wait_for_mods` returns at once |
+| `publish_interface`, `get_interface`, `wait_for_mods` | the broker keeps the interfaces every adapter's mod publishes (64; a name already taken is refused), so FH2 ANNA's menu and NitroSystem's control work between the mods' folders; `get_interface` gives one whose version is at least the one asked for. `wait_for_mods` waits for the gate (every mod started), up to its timeout; from inside `fh2mod_init` it returns 0 at once. ExtraOptions starts the mods in load order, so a mod that looks an interface up in its `fh2mod_init` finds it when the publisher loads first (a manifest dependency: Underglow on `fh2-anna`) |
 | string tables, notices, Mods pages, title entries, hotkeys, commands, session logs, save snapshots, dump ranges | not provided: each reports "not added" (0 / `nullptr`) |
 | `playing_online` | 0 (Infinity decides where a mod may run: a mod whose impact is not cosmetic is Noob only) |
 
 `FH2PluginInitialize` returns FALSE (ExtraOptions logs it and keeps the DLL loaded without callbacks) when the context
 is not ABI 1 for Azimuth, the DLL is not in `plugins\`, MinHook cannot start, the mod's DLL is missing or has no
-`fh2mod_init`, or `fh2mod_init` fails (its hooks are then switched off and its files removed). Upstream's own race
-stays as it is under the platform: Underglow checks `ForzaCar::Update`'s stock bytes before hooking it, so when
-NitroSystem has already patched it, Underglow logs that it does not know the build and stays off for that start. A mod built against another platform API than 9 does not compile here
+`fh2mod_init`, or `fh2mod_init` fails (its hooks are then switched off and its files removed). The broker's gate also settles a race the platform leaves to start order: Underglow checks `ForzaCar::Update`'s stock bytes before hooking it, which NitroSystem's hook would otherwise already have replaced (Underglow then logged that it does not know the build and stayed off). A mod built against another platform API than 9 does not compile here
 (`static_assert`): `tools/infmods.py sync` reports it, and the table must be updated for the new header first.
 
 ExtraOptions activates a mod's private media only when its ordinary `media` folder exists at startup, so every package

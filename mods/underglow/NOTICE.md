@@ -18,6 +18,8 @@ folder (shared by every player profile, and deleted with the folder when the mod
 uninstalled).
 
 Buying an Underglow Kit goes through the game's own shop, so the save records the part (part type 48); that entry
-stays in the save if the mod is removed. Not required: FH2 Mod Platform (`DWrite.dll`) or the Infinity mod runtime.
-Do not also place Underglow.dll in `<Azimuth>\fh2-mods\`. Without the platform there is no in-game Mods page, no
-`fh2mod` commands and no FH2 ANNA menus: the settings are in the Infinity launcher.
+stays in the save if the mod is removed. Requires FH2 ANNA (the `fh2-anna` mod, loaded first): Underglow adds Car >
+Lights > Underglow and Car > Underglow (colors, effects and parts of each car) to ANNA's menu through ANNA's interface,
+which the adapters share between the two folders. Not required: FH2 Mod Platform (`DWrite.dll`) or the Infinity mod
+runtime. Do not also place Underglow.dll in `<Azimuth>\fh2-mods\`. Without the platform there is no in-game Mods page
+and no `fh2mod` commands: the settings are in the Infinity launcher.

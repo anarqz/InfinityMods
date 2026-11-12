@@ -14,3 +14,6 @@
 [submodule "upstream/underglow"]
 	path = upstream/underglow
 	url = https://github.com/qiangqiang101/FH2-Underglow.git
+[submodule "upstream/anna"]
+	path = upstream/anna
+	url = https://github.com/qiangqiang101/FH2-ANNA.git

@@ -1,0 +1,9 @@
+{
+  "format_version": 1,
+  "id": "fh2-anna",
+  "name": "FH2 ANNA",
+  "version": "1.2.0-infinity.1",
+  "database": "database.json",
+  "media": "media",
+  "strings": null
+}

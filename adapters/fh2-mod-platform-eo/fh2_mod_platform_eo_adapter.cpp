@@ -11,6 +11,7 @@
 #include <windows.h>
 #include <atomic>
 #include <cstdint>
+#include <cstdio>
 #include <cstring>
 #include <cwchar>
 
@@ -82,13 +83,25 @@ void* heap_copy(const void* data, size_t size) {
 // enabled hook's detour; each hook's `original` is a stub of its own pointing at the next older enabled hook's
 // detour, the oldest at the real code (MinHook's trampoline or the call's old target). Only 8-byte slots change,
 // atomically, and nothing a running thread may be in is ever freed (DLLs stay resident under ExtraOptions).
+// Patching waits for every adapter to start (the gate below): a mod that checks a function's stock bytes before
+// hooking it (Underglow and ForzaCar::Update) must not see another mod's jump there. The broker also holds the
+// interfaces mods publish for each other (FH2 ANNA's menu, NitroSystem's control) and answers wait_for_mods.
 struct HookBroker {
     uint32_t size, version;
-    void* (*create)(int kind, void* at, void* detour, void** original, const char* name);   // kind 0 function, 1 call
+    void* (*create)(int kind, void* at, void* detour, void** original, const char* name);   // kind 0 function, 1 call, 2 pointer
     int (*set)(void* hook, int on);
+    // ---- version 2 ----
+    void (*init_begin)();                // an adapter is about to run its mod's fh2mod_init
+    void (*init_end)();                  // ... and it has returned
+    int (*publish)(const char* name, uint32_t version, const void* iface);
+    const void* (*get)(const char* name, uint32_t min_version);
+    int (*wait_mods)(uint32_t timeout_ms);
 };
-constexpr uint32_t kBrokerVersion = 1;
-enum { kFunction = 0, kCall = 1 };
+constexpr uint32_t kBrokerVersion = 2;
+enum { kFunction = 0, kCall = 1, kPointer = 2 };
+// The game's code is patched once no adapter has started a mod for this long (ExtraOptions starts the plugins one
+// after another on its loader thread, so the gaps between them are far shorter).
+constexpr ULONGLONG kGateQuietMs = 3000, kGateLimitMs = 30000;
 
 struct alignas(16) Stub {
     uint8_t code[8];          // FF 25 02 00 00 00 CC CC: jmp [rip+2], the slot below
@@ -147,13 +160,19 @@ void set_slot(Stub* stub, void* target) {
     InterlockedExchangePointer(&stub->slot, target);
 }
 
-struct Site { int kind; uint8_t* at; Stub* entry; void* base; int32_t old_rel; bool installed; };
+struct Site { int kind; uint8_t* at; Stub* entry; void* base; int32_t old_rel; bool installed; char name[64]; };
 struct BrokerHook { Site* site; void* detour; Stub* original; bool enabled; };
 Site sites[128];
 unsigned site_count = 0;
 BrokerHook broker_hooks[512];
 unsigned broker_hook_count = 0;
 SRWLOCK broker_lock = SRWLOCK_INIT;
+CONDITION_VARIABLE mods_settled = CONDITION_VARIABLE_INIT;
+// The gate (broker lock): closed until no adapter has been inside fh2mod_init for kGateQuietMs.
+bool gate_open = false, gate_thread = false;
+unsigned inits_running = 0;
+DWORD init_thread = 0;                 // the thread running an fh2mod_init (ExtraOptions' loader worker)
+ULONGLONG last_init_end = 0, first_init_begin = 0;
 
 bool write_rel(uint8_t* site, int32_t rel) {
     DWORD old = 0;
@@ -164,8 +183,49 @@ bool write_rel(uint8_t* site, int32_t rel) {
     return true;
 }
 
-// Rebuilds a site's chain from its enabled hooks, newest first; patches the game when the first one comes and
-// restores it when the last one goes. Broker lock held.
+// As the platform's hooks.cpp: swaps an 8-byte function pointer only if it still holds `expect`, keeping the page's
+// protection (executable if it was).
+bool write_pointer(void** slot, void* expect, void* value) {
+    MEMORY_BASIC_INFORMATION mbi{};
+    if (!VirtualQuery(slot, &mbi, sizeof mbi) || mbi.State != MEM_COMMIT) return false;
+    const DWORD now = mbi.Protect & 0xFF;
+    const bool writable = now == PAGE_READWRITE || now == PAGE_EXECUTE_READWRITE;
+    const bool exec = now == PAGE_EXECUTE_READ || now == PAGE_EXECUTE_READWRITE || now == PAGE_EXECUTE_WRITECOPY || now == PAGE_EXECUTE;
+    DWORD old = 0;
+    if (!writable && !VirtualProtect(slot, sizeof(void*), exec ? PAGE_EXECUTE_READWRITE : PAGE_READWRITE, &old)) return false;
+    const bool ok = InterlockedCompareExchangePointer(slot, value, expect) == expect;
+    DWORD ignored = 0;
+    if (!writable) VirtualProtect(slot, sizeof(void*), old, &ignored);
+    if (exec) FlushInstructionCache(GetCurrentProcess(), slot, sizeof(void*));
+    return ok;
+}
+
+bool install(Site& site) {
+    void** slot = reinterpret_cast<void**>(site.at);
+    switch (site.kind) {
+    case kFunction: return MH_EnableHook(site.at) == MH_OK;
+    case kCall: return write_rel(site.at, static_cast<int32_t>(reinterpret_cast<uint8_t*>(site.entry) - (site.at + 5)));
+    default: return write_pointer(slot, site.base, site.entry);
+    }
+}
+
+bool uninstall(Site& site) {
+    void** slot = reinterpret_cast<void**>(site.at);
+    switch (site.kind) {
+    case kFunction: return MH_DisableHook(site.at) == MH_OK;
+    case kCall: return write_rel(site.at, site.old_rel);
+    default: return write_pointer(slot, site.entry, site.base);
+    }
+}
+
+void broker_log(const char* what, const char* name) {
+    log_text("FH2 Mod Platform adapter (hooks): ", what);
+    if (name) log_text("  ", name);
+}
+
+// Rebuilds a site's chain from its enabled hooks, newest first; patches the game when the first one comes (once the
+// gate is open; until then the place stays stock and the chain is only prepared) and restores it when the last one
+// goes. Broker lock held.
 bool relink(Site& site) {
     BrokerHook* active[512];
     unsigned n = 0;
@@ -174,27 +234,122 @@ bool relink(Site& site) {
     for (unsigned i = 0; i < n; ++i) set_slot(active[i]->original, i + 1 < n ? active[i + 1]->detour : site.base);
     set_slot(site.entry, n ? active[0]->detour : site.base);
     if (n && !site.installed) {
-        site.installed = site.kind == kFunction
-            ? MH_EnableHook(site.at) == MH_OK
-            : write_rel(site.at, static_cast<int32_t>(reinterpret_cast<uint8_t*>(site.entry) - (site.at + 5)));
+        if (!gate_open) return true;
+        site.installed = install(site);
+        if (!site.installed) broker_log("could not patch:", site.name);
         return site.installed;
     }
     if (!n && site.installed) {
-        const bool restored = site.kind == kFunction ? MH_DisableHook(site.at) == MH_OK : write_rel(site.at, site.old_rel);
+        const bool restored = uninstall(site);
         if (restored) site.installed = false;
         return restored;
     }
     return true;
 }
 
-void broker_log(const char* what, const char* name) {
-    log_text("FH2 Mod Platform adapter (hooks): ", what);
-    if (name) log_text("  ", name);
+// Opens the gate once every adapter has started its mod and none has for kGateQuietMs: patches every place an
+// enabled hook waits for, then wakes wait_for_mods.
+DWORD WINAPI gate_worker(void*) {
+    for (;;) {
+        Sleep(100);
+        AcquireSRWLockExclusive(&broker_lock);
+        const ULONGLONG now = GetTickCount64();
+        // At the latest kGateLimitMs after the first mod started: a mod whose fh2mod_init never returns holds no one back.
+        const bool open = (!inits_running && last_init_end && now - last_init_end >= kGateQuietMs) || now - first_init_begin >= kGateLimitMs;
+        unsigned patched = 0, failed = 0;
+        if (open) {
+            gate_open = true;
+            for (unsigned i = 0; i < site_count; ++i) {
+                if (sites[i].installed) continue;
+                bool wanted = false;
+                for (unsigned h = 0; h < broker_hook_count && !wanted; ++h) wanted = broker_hooks[h].site == &sites[i] && broker_hooks[h].enabled;
+                if (!wanted) continue;
+                if (relink(sites[i])) ++patched; else ++failed;
+            }
+        }
+        ReleaseSRWLockExclusive(&broker_lock);
+        if (open) {
+            char line[96];
+            std::snprintf(line, sizeof line, "every mod has started: %u places patched, %u failed.", patched, failed);
+            broker_log(line, nullptr);
+            WakeAllConditionVariable(&mods_settled);
+            return 0;
+        }
+    }
+}
+
+void broker_init_begin() {
+    AcquireSRWLockExclusive(&broker_lock);
+    ++inits_running;
+    init_thread = GetCurrentThreadId();
+    if (!first_init_begin) first_init_begin = GetTickCount64();
+    if (!gate_thread && !gate_open) {
+        if (HANDLE t = CreateThread(nullptr, 0, gate_worker, nullptr, 0, nullptr)) { CloseHandle(t); gate_thread = true; }
+        else gate_open = true;   // no thread, no deferral: patch at once, as before
+    }
+    ReleaseSRWLockExclusive(&broker_lock);
+}
+
+void broker_init_end() {
+    AcquireSRWLockExclusive(&broker_lock);
+    if (inits_running) --inits_running;
+    if (!inits_running) init_thread = 0;
+    last_init_end = GetTickCount64();
+    ReleaseSRWLockExclusive(&broker_lock);
+}
+
+// ---- Interfaces between mods (publish_interface / get_interface), as the platform keeps them -------------------
+struct Interface { char name[64]; uint32_t version; const void* table; };
+Interface interfaces[64];
+unsigned interface_count = 0;
+
+int broker_publish(const char* name, uint32_t version, const void* iface) {
+    if (!name || !*name || !iface || std::strlen(name) >= sizeof(Interface::name)) return 0;
+    AcquireSRWLockExclusive(&broker_lock);
+    bool taken = false;
+    for (unsigned i = 0; i < interface_count && !taken; ++i) taken = !std::strcmp(interfaces[i].name, name);
+    const bool ok = !taken && interface_count < 64;
+    if (ok) {
+        Interface& slot = interfaces[interface_count];
+        std::memcpy(slot.name, name, std::strlen(name) + 1);
+        slot.version = version;
+        slot.table = iface;
+        ++interface_count;
+    }
+    ReleaseSRWLockExclusive(&broker_lock);
+    return ok ? 1 : 0;
+}
+
+const void* broker_get(const char* name, uint32_t min_version) {
+    if (!name) return nullptr;
+    AcquireSRWLockShared(&broker_lock);
+    const void* found = nullptr;
+    for (unsigned i = 0; i < interface_count && !found; ++i)
+        if (!std::strcmp(interfaces[i].name, name) && interfaces[i].version >= min_version) found = interfaces[i].table;
+    ReleaseSRWLockShared(&broker_lock);
+    return found;
+}
+
+// 1 once every mod has started (the gate is open); 0 from inside an fh2mod_init (it would wait for itself) or when
+// timeout_ms passes first.
+int broker_wait_mods(uint32_t timeout_ms) {
+    const ULONGLONG until = GetTickCount64() + timeout_ms;
+    AcquireSRWLockExclusive(&broker_lock);
+    if (inits_running && GetCurrentThreadId() == init_thread) { ReleaseSRWLockExclusive(&broker_lock); return 0; }
+    while (!gate_open) {
+        const ULONGLONG now = GetTickCount64();
+        if (now >= until) break;
+        const ULONGLONG left = until - now;
+        SleepConditionVariableSRW(&mods_settled, &broker_lock, left > 0xFFFFFFF0ull ? 0xFFFFFFF0u : static_cast<DWORD>(left), 0);
+    }
+    const bool settled = gate_open;
+    ReleaseSRWLockExclusive(&broker_lock);
+    return settled ? 1 : 0;
 }
 
 void* broker_create(int kind, void* at_, void* detour, void** original, const char* name) {
     auto* at = static_cast<uint8_t*>(at_);
-    if (!at || !detour || !original || (kind != kFunction && kind != kCall)) return nullptr;
+    if (!at || !detour || !original || (kind != kFunction && kind != kCall && kind != kPointer)) return nullptr;
     AcquireSRWLockExclusive(&broker_lock);
     void* result = nullptr;
     Site* site = nullptr;
@@ -205,9 +360,25 @@ void* broker_create(int kind, void* at_, void* detour, void** original, const ch
         broker_log("refused: too many hooks:", name);
     } else {
         if (!site) {
-            Site fresh{kind, at, nullptr, nullptr, 0, false};
+            Site fresh{kind, at, nullptr, nullptr, 0, false, {}};
+            if (name) {
+                const size_t length = std::strlen(name) < sizeof fresh.name - 1 ? std::strlen(name) : sizeof fresh.name - 1;
+                std::memcpy(fresh.name, name, length);
+            }
             bool ok = false;
-            if (kind == kCall) {
+            if (kind == kPointer) {
+                // A function pointer (a vtable slot): 8-byte aligned and readable; its value now is the chain's end.
+                MEMORY_BASIC_INFORMATION mbi{};
+                void* const* slot = reinterpret_cast<void* const*>(at);
+                if (reinterpret_cast<uintptr_t>(at) % sizeof(void*) || !VirtualQuery(at, &mbi, sizeof mbi) || mbi.State != MEM_COMMIT
+                    || (mbi.Protect & (PAGE_NOACCESS | PAGE_GUARD)) || !*slot) {
+                    broker_log("refused: not a readable, aligned function pointer:", name);
+                } else {
+                    fresh.base = *slot;
+                    fresh.entry = new_stub(at, fresh.base);
+                    ok = fresh.entry != nullptr;
+                }
+            } else if (kind == kCall) {
                 if (at[0] == 0xE8) {
                     std::memcpy(&fresh.old_rel, at + 1, 4);
                     fresh.base = at + 5 + fresh.old_rel;
@@ -251,7 +422,8 @@ int broker_set(void* hook_, int on) {
     return ok ? 1 : 0;
 }
 
-const HookBroker own_broker = {sizeof(HookBroker), kBrokerVersion, broker_create, broker_set};
+const HookBroker own_broker = {sizeof(HookBroker), kBrokerVersion, broker_create, broker_set,
+                               broker_init_begin, broker_init_end, broker_publish, broker_get, broker_wait_mods};
 const HookBroker* broker = nullptr;
 
 // The process's broker: this adapter's, published, when it is the first; otherwise the first adapter's.
@@ -266,6 +438,10 @@ const HookBroker* find_broker() {
     // The mapping and its view stay for the life of the process (the plugin DLLs are never unloaded).
     if (first) {
         if (MH_Initialize() != MH_OK) { adapter_log("MinHook could not start."); return nullptr; }
+        // Every other adapter and the gate's thread run this DLL's code: it stays even if its own mod fails to start.
+        HMODULE pinned = nullptr;
+        GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_PIN,
+                           reinterpret_cast<LPCWSTR>(&own_broker), &pinned);
         InterlockedExchangePointer(shared, const_cast<HookBroker*>(&own_broker));
         return &own_broker;
     }
@@ -306,8 +482,10 @@ FH2Hook* hook_function(FH2Mod*, const char* name, void* target, void* detour, vo
 FH2Hook* hook_call(FH2Mod*, const char* name, void* site, void* detour, void** original) {
     return remember(broker->create(kCall, site, detour, original, name));
 }
+FH2Hook* hook_pointer(FH2Mod*, const char* name, void** slot, void* detour, void** original) {
+    return remember(broker->create(kPointer, slot, detour, original, name));
+}
 FH2Hook* unsupported_hook(const char* what) { adapter_log(what); return nullptr; }
-FH2Hook* hook_pointer(FH2Mod*, const char*, void**, void*, void**) { return unsupported_hook("hook_pointer is not supported."); }
 FH2Hook* patch_bytes(FH2Mod*, const char*, void*, const void*, const void*, uint32_t) { return unsupported_hook("patch_bytes is not supported."); }
 FH2Hook* hook_instruction(FH2Mod*, const char*, void*, FH2InstructionFn, void*) { return unsupported_hook("hook_instruction is not supported."); }
 int enable_hooks(FH2Mod*, FH2Hook* hook) { return set_hooks(hook, true); }
@@ -493,10 +671,13 @@ void set_notice(FH2Mod*, const char*) {}
 void* game_base() { return host ? host->game_image : nullptr; }
 void* wait_for_game(uint32_t) { return game_base(); }
 void* wait_for_code(uint32_t) { return game_base(); }
-// Interfaces between mods (ANNA's menus, say) do not exist here: the mod runs without them, as it does without those mods.
-void publish_interface(FH2Mod*, const char*, uint32_t, const void*) {}
-const void* get_interface(const char*, uint32_t) { return nullptr; }
-int wait_for_mods(uint32_t) { return 1; }
+// Interfaces between mods (FH2 ANNA's menu, NitroSystem's control) go through the process's broker, so they work
+// between the adapter DLLs as they do between platform mods. A name already taken is refused (logged).
+void publish_interface(FH2Mod*, const char* name, uint32_t version, const void* iface) {
+    if (!broker->publish(name, version, iface)) log_text("FH2 Mod Platform adapter: interface not published (name taken or invalid): ", name ? name : "?");
+}
+const void* get_interface(const char* name, uint32_t min_version) { return broker->get(name, min_version); }
+int wait_for_mods(uint32_t timeout_ms) { return broker->wait_mods(timeout_ms); }
 const char* mod_version(const char*) { return nullptr; }
 // Settings belong to the launcher's form (the INI in the mod folder); rows for the game's Mods page are never shown.
 int add_setting(FH2Mod*, const FH2Setting*) { return 1; }
@@ -598,7 +779,9 @@ extern "C" __declspec(dllexport) BOOL WINAPI FH2PluginInitialize(const PluginCon
     fill_table();
     remove_tree(media_dir);   // the previous start's files
     initializing.store(true);
+    broker->init_begin();
     const int result = init(&table);
+    broker->init_end();
     initializing.store(false);
     if (result != 0) {
         set_hooks(nullptr, false);

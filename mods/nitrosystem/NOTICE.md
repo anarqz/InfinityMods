@@ -17,5 +17,6 @@ to `plugins\generated\`, this mod's private media; its INI (`fh2-mods\FnFNitro.i
 uninstalled).
 
 Not required: FH2 Mod Platform (`DWrite.dll`), the Infinity mod runtime or `d3dcompiler_47.dll`. Do not also place
-FnFNitro.dll in `<Azimuth>\fh2-mods\`. Without the platform there is no in-game Mods page, no `fh2mod` commands and
-no ANNA Drone Mode link: the settings are in the Infinity launcher.
+FnFNitro.dll in `<Azimuth>\fh2-mods\`. Without the platform there is no in-game Mods page and no `fh2mod` commands:
+the settings are in the Infinity launcher. The mods' interfaces work between the adapters' folders: with FH2 ANNA
+installed, its Auto Drive switches NOS off while it drives.
