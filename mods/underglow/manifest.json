@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "underglow",
-  "version": "1.1.0-infinity.3",
+  "version": "1.1.0-infinity.4",
   "kind": "mod",
   "name": {
     "en": "Underglow · Infinity",
@@ -11,8 +11,8 @@
   "license": "MIT",
   "homepage": "https://github.com/anarqz/InfinityMods",
   "description": {
-    "en": "qiangqiang101's Underglow: neon under your car made of the game's own lights, so it lights up the road, with 61 effects (15 follow the car radio), 28 colors and each part on its own. Buy an Underglow Kit per car in the garage (Upgrades > Aero and Appearance); its colors, effects and parts are in FH2 ANNA (Car > Lights and Car > Underglow), which it needs. Its own release DLL, loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter.",
-    "pt-BR": "O Underglow de qiangqiang101: neon embaixo do carro feito com as próprias luzes do jogo, que ilumina a pista, com 61 efeitos (15 seguem o rádio do carro), 28 cores e cada parte independente. Compre um Kit de Neon por carro na garagem (Melhorias > Aerodinâmica e aparência); as cores, os efeitos e as partes ficam na FH2 ANNA (Carro > Luzes e Carro > Neon), que ele exige. A DLL da própria release do autor, carregada pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform."
+    "en": "qiangqiang101's Underglow: neon under your car made of the game's own lights, so it lights up the road, with 61 effects (15 follow the car radio), 28 colors and each part on its own. Buy an Underglow Kit per car in the garage (Upgrades > Aero and Appearance); its colors, effects and parts are in FH2 ANNA (Car > Lights and Car > Underglow), which it needs. Built here from the author's source with one patch, so it coexists with the Infinity hook (which also hooks the car update), and loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter.",
+    "pt-BR": "O Underglow de qiangqiang101: neon embaixo do carro feito com as próprias luzes do jogo, que ilumina a pista, com 61 efeitos (15 seguem o rádio do carro), 28 cores e cada parte independente. Compre um Kit de Neon por carro na garagem (Melhorias > Aerodinâmica e aparência); as cores, os efeitos e as partes ficam na FH2 ANNA (Carro > Luzes e Carro > Neon), que ele exige. Compilado aqui a partir do código do autor com um patch, para conviver com o hook do Infinity (que também intercepta a atualização do carro), e carregado pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform."
   },
   "runtime": "standalone",
   "review": {
@@ -49,20 +49,14 @@
       {
         "source": "fh2-mods/Underglow.dll",
         "destination": "mods/Forza Horizon 2/underglow/fh2-mods/Underglow.dll",
-        "sha256": "6c37dd4384b6e94007574c0f69631957a7a30a3da489d570c068ee13ee880faa",
-        "bytes": 1699840,
         "role": "binary",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
+        "mode": "add-or-replace"
       },
       {
         "source": "LICENSE.txt",
         "destination": "mods/Forza Horizon 2/underglow/LICENSE.txt",
-        "sha256": "be4891b23bcb10c0f757f2385d89709057d929a75299aeb2eed296ccee01b33b",
-        "bytes": 1092,
         "role": "license",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
+        "mode": "add-or-replace"
       },
       {
         "source": "Underglow.Infinity.dll",
@@ -2490,23 +2484,11 @@
     ]
   },
   "runtimeOutputs": [],
-  "excludedArchiveEntries": [
-    "DWrite.dll",
-    "LICENSE-MinHook.txt",
-    "README.md"
-  ],
+  "excludedArchiveEntries": [],
   "databaseMigrations": [],
   "source": {
     "repository": "https://github.com/anarqz/InfinityMods",
     "commit": ""
-  },
-  "additionalPackages": {
-    "upstream-assets": {
-      "url": "https://github.com/qiangqiang101/FH2-Underglow/releases/download/1.1.0/Underglow-1.1.0.zip",
-      "sha256": "085063290b3973efe7474ef4973b75f7d48f224bc6b97dd8c541fff413814a3d",
-      "bytes": 1884126,
-      "format": "zip"
-    }
   },
   "multiplayer": {
     "schemaVersion": 1,

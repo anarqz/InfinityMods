@@ -1,6 +1,6 @@
 {
   "id": "underglow",
-  "version": "1.1.0-infinity.3",
+  "version": "1.1.0-infinity.4",
   "folder": "underglow",
   "dll": "Underglow.Infinity.dll",
   "adapter": "fh2-mod-platform-eo",
@@ -24,13 +24,22 @@
     ],
     "libraries": []
   },
-  "upstreamRelease": {
-    "repository": "qiangqiang101/FH2-Underglow",
-    "asset": "Underglow-[0-9]+\\.[0-9]+\\.[0-9]+\\.zip",
-    "files": {
-      "fh2-mods/Underglow\\.dll": "fh2-mods/Underglow.dll",
-      "LICENSE\\.txt": "LICENSE.txt"
-    },
+  "modBuild": {
+    "output": "fh2-mods/Underglow.dll",
+    "sources": [
+      "src/neon_mod.cpp"
+    ],
+    "includes": [
+      "platform/include"
+    ],
+    "defines": [
+      "UNDERGLOW_VERSION=\\\"1.1.0\\\"",
+      "FH2MOD_PLATFORM_VERSION=\\\"2.8.0\\\""
+    ],
+    "patches": [
+      "mods/underglow/patches/0001-accept-a-hook-at-forzacar-update.patch"
+    ],
+    "libraries": [],
     "allowedImports": [
       "KERNEL32.dll"
     ]
@@ -46,10 +55,12 @@
     "LICENSE-FH2-Mod-Platform.txt": "upstream/underglow/platform/LICENSE",
     "LICENSE-MinHook.txt": "upstream/underglow/platform/third_party/minhook/LICENSE.txt",
     "LICENSE-Infinity.txt": "adapters/fh2-mod-platform-eo/LICENSE",
-    "NOTICE.md": "mods/underglow/NOTICE.md"
+    "NOTICE.md": "mods/underglow/NOTICE.md",
+    "fh2-mods/Underglow.dll": "$modDll",
+    "LICENSE.txt": "upstream/underglow/LICENSE"
   },
   "versionInfo": {
-    "description": "Runs qiangqiang101's Underglow (its own release DLL) as an ExtraOptions mod (Infinity edition)",
+    "description": "Runs qiangqiang101's Underglow (built from its source, patched to coexist with the Infinity hook) as an ExtraOptions mod (Infinity edition)",
     "company": "anarqz; Underglow by qiangqiang101",
     "product": "Infinity Mods",
     "license": "MIT"
