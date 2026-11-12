@@ -1,6 +1,6 @@
 [submodule "upstream/nitrosystem"]
 	path = upstream/nitrosystem
-	url = https://github.com/qiangqiang101/NitroSystem.git
+	url = https://github.com/qiangqiang101/FH2-NitroSystem.git
 [submodule "upstream/extraoptions"]
 	path = upstream/extraoptions
 	url = https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions.git
@@ -11,3 +11,9 @@
 [submodule "upstream/fh2-cameramods"]
 	path = upstream/fh2-cameramods
 	url = https://github.com/Deuquan/FH2-CameraMods.git
+[submodule "upstream/underglow"]
+	path = upstream/underglow
+	url = https://github.com/qiangqiang101/FH2-Underglow.git
+[submodule "upstream/anna"]
+	path = upstream/anna
+	url = https://github.com/qiangqiang101/FH2-ANNA.git

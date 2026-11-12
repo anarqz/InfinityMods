@@ -1,0 +1,68 @@
+{
+  "id": "underglow",
+  "version": "1.1.0-infinity.4",
+  "folder": "underglow",
+  "dll": "Underglow.Infinity.dll",
+  "adapter": "fh2-mod-platform-eo",
+  "adapterConfig": {
+    "modDll": "fh2-mods/Underglow.dll"
+  },
+  "toolchain": "msvc",
+  "upstream": {
+    "submodule": "upstream/underglow",
+    "repository": "https://github.com/qiangqiang101/FH2-Underglow",
+    "version": "1.1.0",
+    "sources": [
+      "platform/third_party/minhook/src/hook.c",
+      "platform/third_party/minhook/src/buffer.c",
+      "platform/third_party/minhook/src/trampoline.c",
+      "platform/third_party/minhook/src/hde/hde64.c"
+    ],
+    "includes": [
+      "platform/include",
+      "platform/third_party/minhook/include"
+    ],
+    "libraries": []
+  },
+  "modBuild": {
+    "output": "fh2-mods/Underglow.dll",
+    "sources": [
+      "src/neon_mod.cpp"
+    ],
+    "includes": [
+      "platform/include"
+    ],
+    "defines": [
+      "UNDERGLOW_VERSION=\\\"1.1.0\\\"",
+      "FH2MOD_PLATFORM_VERSION=\\\"2.8.0\\\""
+    ],
+    "patches": [
+      "mods/underglow/patches/0001-accept-a-hook-at-forzacar-update.patch"
+    ],
+    "libraries": [],
+    "allowedImports": [
+      "KERNEL32.dll"
+    ]
+  },
+  "allowedImports": [
+    "KERNEL32.dll"
+  ],
+  "package": {
+    "Underglow.Infinity.dll": "$dll",
+    "mod.json": "mods/underglow/extraoptions/mod.json",
+    "database.json": "mods/underglow/extraoptions/database.json",
+    "media/README.txt": "adapters/fh2-mod-platform-eo/media-README.txt",
+    "LICENSE-FH2-Mod-Platform.txt": "upstream/underglow/platform/LICENSE",
+    "LICENSE-MinHook.txt": "upstream/underglow/platform/third_party/minhook/LICENSE.txt",
+    "LICENSE-Infinity.txt": "adapters/fh2-mod-platform-eo/LICENSE",
+    "NOTICE.md": "mods/underglow/NOTICE.md",
+    "fh2-mods/Underglow.dll": "$modDll",
+    "LICENSE.txt": "upstream/underglow/LICENSE"
+  },
+  "versionInfo": {
+    "description": "Runs qiangqiang101's Underglow (built from its source, patched to coexist with the Infinity hook) as an ExtraOptions mod (Infinity edition)",
+    "company": "anarqz; Underglow by qiangqiang101",
+    "product": "Infinity Mods",
+    "license": "MIT"
+  }
+}

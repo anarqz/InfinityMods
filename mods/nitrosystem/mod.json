@@ -1,16 +1,18 @@
 {
   "id": "nitrosystem",
-  "version": "1.1.0-infinity.4",
+  "version": "2.0.0-infinity.3",
   "folder": "nitrosystem",
-  "dll": "FnFNitro.dll",
+  "dll": "NitroSystem.Infinity.dll",
   "adapter": "fh2-mod-platform-eo",
+  "adapterConfig": {
+    "modDll": "fh2-mods/FnFNitro.dll"
+  },
   "toolchain": "msvc",
   "upstream": {
     "submodule": "upstream/nitrosystem",
-    "repository": "https://github.com/qiangqiang101/NitroSystem",
-    "version": "1.1.0",
+    "repository": "https://github.com/qiangqiang101/FH2-NitroSystem",
+    "version": "2.0.0",
     "sources": [
-      "src/nitro_mod.cpp",
       "platform/third_party/minhook/src/hook.c",
       "platform/third_party/minhook/src/buffer.c",
       "platform/third_party/minhook/src/trampoline.c",
@@ -20,33 +22,39 @@
       "platform/include",
       "platform/third_party/minhook/include"
     ],
-    "libraries": [
-      "user32.lib",
-      "gdi32.lib",
-      "xinput.lib",
-      "winmm.lib"
+    "libraries": []
+  },
+  "upstreamRelease": {
+    "repository": "qiangqiang101/FH2-NitroSystem",
+    "asset": "FnFNitro-[0-9]+\\.[0-9]+\\.[0-9]+\\.zip",
+    "files": {
+      "FnFNitro-[0-9.]+/azimuth-windows/fh2-mods/FnFNitro\\.dll": "fh2-mods/FnFNitro.dll",
+      "FnFNitro-[0-9.]+/licenses/LICENSE-NitroSystem\\.txt": "LICENSE.txt"
+    },
+    "allowedImports": [
+      "KERNEL32.dll",
+      "USER32.dll",
+      "GDI32.dll",
+      "XINPUT1_4.dll",
+      "WINMM.dll"
     ]
   },
   "allowedImports": [
-    "KERNEL32.dll",
-    "USER32.dll",
-    "GDI32.dll",
-    "XINPUT1_4.dll",
-    "WINMM.dll"
+    "KERNEL32.dll"
   ],
   "package": {
-    "FnFNitro.dll": "$dll",
+    "NitroSystem.Infinity.dll": "$dll",
     "mod.json": "mods/nitrosystem/extraoptions/mod.json",
     "database.json": "mods/nitrosystem/extraoptions/database.json",
-    "LICENSE.txt": "upstream/nitrosystem/LICENSE",
+    "media/README.txt": "adapters/fh2-mod-platform-eo/media-README.txt",
     "LICENSE-FH2-Mod-Platform.txt": "upstream/nitrosystem/platform/LICENSE",
     "LICENSE-MinHook.txt": "upstream/nitrosystem/platform/third_party/minhook/LICENSE.txt",
     "LICENSE-Infinity.txt": "adapters/fh2-mod-platform-eo/LICENSE",
     "NOTICE.md": "mods/nitrosystem/NOTICE.md"
   },
   "versionInfo": {
-    "description": "Fast & Furious nitro for Forza Horizon 2 (ExtraOptions mod, Infinity edition)",
-    "company": "qiangqiang101; Infinity edition by anarqz",
+    "description": "Runs qiangqiang101's NitroSystem (its own release DLL) as an ExtraOptions mod (Infinity edition)",
+    "company": "anarqz; NitroSystem by qiangqiang101",
     "product": "Infinity Mods",
     "license": "MIT"
   }

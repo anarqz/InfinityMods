@@ -1,0 +1,69 @@
+{
+  "id": "fh2-anna",
+  "version": "1.2.0-infinity.2",
+  "folder": "fh2-anna",
+  "dll": "FH2ANNA.Infinity.dll",
+  "adapter": "fh2-mod-platform-eo",
+  "adapterConfig": {
+    "modDll": "fh2-mods/FH2ANNA.dll"
+  },
+  "toolchain": "msvc",
+  "upstream": {
+    "submodule": "upstream/anna",
+    "repository": "https://github.com/qiangqiang101/FH2-ANNA",
+    "version": "1.2.0",
+    "sources": [
+      "platform/third_party/minhook/src/hook.c",
+      "platform/third_party/minhook/src/buffer.c",
+      "platform/third_party/minhook/src/trampoline.c",
+      "platform/third_party/minhook/src/hde/hde64.c"
+    ],
+    "includes": [
+      "platform/include",
+      "platform/third_party/minhook/include"
+    ],
+    "libraries": []
+  },
+  "upstreamRelease": {
+    "repository": "qiangqiang101/FH2-ANNA",
+    "asset": "FH2ANNA-[0-9]+\\.[0-9]+\\.[0-9]+\\.zip",
+    "files": {
+      "fh2-mods/FH2ANNA\\.dll": "fh2-mods/FH2ANNA.dll",
+      "LICENSE\\.txt": "LICENSE.txt"
+    },
+    "allowedImports": [
+      "KERNEL32.dll",
+      "USER32.dll",
+      "ole32.dll",
+      "api-ms-win-crt-string-l1-1-0.dll",
+      "api-ms-win-crt-runtime-l1-1-0.dll",
+      "api-ms-win-crt-private-l1-1-0.dll",
+      "api-ms-win-crt-math-l1-1-0.dll",
+      "api-ms-win-crt-convert-l1-1-0.dll",
+      "api-ms-win-crt-heap-l1-1-0.dll",
+      "api-ms-win-crt-stdio-l1-1-0.dll",
+      "api-ms-win-crt-locale-l1-1-0.dll",
+      "api-ms-win-crt-environment-l1-1-0.dll",
+      "api-ms-win-crt-filesystem-l1-1-0.dll"
+    ]
+  },
+  "allowedImports": [
+    "KERNEL32.dll"
+  ],
+  "package": {
+    "FH2ANNA.Infinity.dll": "$dll",
+    "mod.json": "mods/fh2-anna/extraoptions/mod.json",
+    "database.json": "mods/fh2-anna/extraoptions/database.json",
+    "media/README.txt": "adapters/fh2-mod-platform-eo/media-README.txt",
+    "LICENSE-FH2-Mod-Platform.txt": "upstream/anna/platform/LICENSE",
+    "LICENSE-MinHook.txt": "upstream/anna/platform/third_party/minhook/LICENSE.txt",
+    "LICENSE-Infinity.txt": "adapters/fh2-mod-platform-eo/LICENSE",
+    "NOTICE.md": "mods/fh2-anna/NOTICE.md"
+  },
+  "versionInfo": {
+    "description": "Runs qiangqiang101's FH2 ANNA (its own release DLL) as an ExtraOptions mod (Infinity edition)",
+    "company": "anarqz; FH2 ANNA by qiangqiang101",
+    "product": "Infinity Mods",
+    "license": "MIT"
+  }
+}

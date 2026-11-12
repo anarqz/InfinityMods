@@ -6,6 +6,15 @@
   release [--zig ZIG] --tag TAG --catalog CURRENT.json [--out DIR] [--allow-dirty] [MOD ...]
   check   [--catalog FILE]                  validate catalog.json (schemas/ + rules below)
   external-packs <set folder>... --cars fh2-packs.json --out FILE   ZephyrSkies pack entries (OD-232), read from the ZIPs
+  sync    <mod> [--tag TAG] [--zip ZIP --url URL] [--write]   re-pin an FH2 Mod Platform mod to an upstream release
+
+An FH2 Mod Platform mod (adapter fh2-mod-platform-eo) is the author's own release DLL, never built here: the manifest
+takes it (adapterConfig.modDll) from the author's release ZIP (additionalPackages.upstream-assets, pinned by SHA-256),
+and the package holds only the adapter, which loads it. `sync` updates those pins from the release the recipe's
+upstreamRelease names (.claude/skills/upstream-sync/SKILL.md). The exception is a recipe with `modBuild` (Underglow,
+owner exception to the no-game-material rule for its camera_presets.h): the mod's DLL is built here from the pinned
+submodule commit with the recipe's patches applied (`git apply`, never in the submodule itself), and shipped in the
+package at adapterConfig.modDll.
 
 A recipe's `toolchain` is `zig` (Zig 0.15.2, any host; --zig) or `msvc` (Windows with Visual Studio
 C++ x64 tools, for sources that need MSVC, such as `__try`).
@@ -169,6 +178,22 @@ def build(name, zig, out):
     return dll
 
 
+def adapter_config(work, recipe):
+    """fh2_mod_platform_eo_config.h: the mod's own release DLL that the FH2 Mod Platform adapter loads, relative to the
+    mod folder (recipe `adapterConfig.modDll`; outside plugins/, so ExtraOptions never loads it itself)."""
+    if recipe.get("adapter") != "fh2-mod-platform-eo":
+        return
+    mod_dll = recipe.get("adapterConfig", {}).get("modDll", "")
+    if (not re.fullmatch(r"[A-Za-z0-9_.-]+(/[A-Za-z0-9_.-]+)*\.dll", mod_dll) or mod_dll.lower().startswith("plugins/")
+            or any(part in (".", "..") for part in mod_dll.split("/"))):
+        sys.exit(f"{recipe['id']}: adapterConfig.modDll must be a relative .dll path outside plugins/, found {mod_dll!r}")
+    literal = mod_dll.replace("/", "\\\\")  # a C string literal: fh2-mods\\FnFNitro.dll
+    (work / "fh2_mod_platform_eo_config.h").write_text(
+        "#pragma once\n"
+        f'#define FH2MP_EO_MOD_DLL L"{literal}"\n'
+        f'#define FH2MP_EO_MOD_DLL_TEXT "{literal}"\n', encoding="ascii", newline="\n")
+
+
 def build_msvc(recipe, out):
     upstream = ROOT / recipe["upstream"]["submodule"]
     adapter = ROOT / "adapters" / recipe["adapter"]
@@ -177,6 +202,7 @@ def build_msvc(recipe, out):
     with tempfile.TemporaryDirectory(prefix="infmods-") as temporary:
         work = Path(temporary)
         script = version_script(work, recipe)
+        adapter_config(work, recipe)
         includes = [adapter, work, *(upstream / folder for folder in recipe["upstream"]["includes"])]
         sources = [upstream / s for s in recipe["upstream"]["sources"]] + sorted(adapter.glob("*.cpp"))
         # Upstream's own MSVC flags (its CMakeLists: /W4 /permissive- /utf-8 /EHsc), static CRT, /Brepro.
@@ -192,6 +218,65 @@ cl {flags} /LD {" ".join(f'"{s}"' for s in sources)} /Fe:{dll} /link /Brepro /OP
         subprocess.run(["cmd", "/c", str(work / "build.cmd")], check=True, cwd=work)
         shutil.copyfile(work / dll, out / dll)
     return out / dll
+
+
+def build_mod(recipe, out):
+    """The mod's own DLL (recipe `modBuild`, MSVC): the pinned submodule commit's files (git archive, LF, so the
+    patches apply the same on any checkout), the recipe's patches applied in order, compiled with upstream's MSVC
+    flags (its CMakeLists: /W4 /permissive- /utf-8 /EHsc, static CRT) plus /Brepro; relative paths only, so two
+    builds in different folders give the same bytes."""
+    import tarfile
+    spec = recipe["modBuild"]
+    upstream = ROOT / recipe["upstream"]["submodule"]
+    environment = vcvars()
+    out.mkdir(parents=True, exist_ok=True)
+    name = Path(spec["output"]).name
+    with tempfile.TemporaryDirectory(prefix="infmods-mod-") as temporary:
+        work = Path(temporary)
+        tree = work / "src"
+        tree.mkdir()
+        archive = subprocess.run([shutil.which("git") or sys.exit("git not found"), "-c", "core.autocrlf=false",
+                                  "-c", "core.eol=lf", "-C", str(upstream), "archive", "--format=tar", "HEAD"],
+                                 check=True, capture_output=True).stdout
+        with tarfile.open(fileobj=io.BytesIO(archive)) as tar:
+            tar.extractall(tree, filter="data")
+        for patch in spec.get("patches", []):
+            subprocess.run([shutil.which("git"), "apply", "--whitespace=nowarn", "-p1", str(ROOT / patch)], check=True, cwd=tree)
+        # Headers outside the archive (the platform submodule), by path relative to the work folder: copied in.
+        for folder in spec.get("includes", []):
+            shutil.copytree(upstream / folder, work / "inc" / folder)
+        includes = " ".join(f'/I"inc/{folder}"' for folder in spec.get("includes", []))
+        defines = " ".join(f'/D{d}' for d in spec.get("defines", []))
+        sources = " ".join(f'"src/{s}"' for s in spec["sources"])
+        flags = ("/nologo /std:c++20 /utf-8 /EHsc /MT /O2 /DNDEBUG /W4 /permissive- /Brepro /DUNICODE /D_UNICODE "
+                 "/DWIN32_LEAN_AND_MEAN /DNOMINMAX")
+        (work / "build.cmd").write_text(f"""@echo off
+set "PATH=%ProgramFiles(x86)%\\Microsoft Visual Studio\\Installer;%PATH%"
+call "{environment}" >nul || exit /b 1
+cl {flags} {defines} {includes} /LD {sources} /Fe:{name} /link /Brepro /OPT:REF /OPT:ICF {" ".join(spec.get("libraries", []))} || exit /b 1
+""", encoding="ascii")
+        subprocess.run(["cmd", "/c", str(work / "build.cmd")], check=True, cwd=work)
+        shutil.copyfile(work / name, out / name)
+    return out / name
+
+
+def verify_mod_build(recipe, a, b):
+    """Two builds of the mod's own DLL give the same bytes; x64, fh2mod_init, imports in modBuild.allowedImports."""
+    first, second = build_mod(recipe, a / "mod"), build_mod(recipe, b / "mod")
+    digests = [hashlib.sha256(p.read_bytes()).hexdigest() for p in (first, second)]
+    machine, exports, imports = pe_report(first)
+    problems = []
+    if digests[0] != digests[1]:
+        problems.append("two builds of the mod's DLL differ (not reproducible)")
+    if machine != 0x8664:
+        problems.append("the mod's DLL is not x64")
+    if "fh2mod_init" not in exports:
+        problems.append("the mod's DLL does not export fh2mod_init")
+    allowed = {d.lower() for d in recipe["modBuild"]["allowedImports"]}
+    if extra := [d for d in imports if d.lower() not in allowed]:
+        problems.append(f"the mod's DLL imports {extra}, not in modBuild.allowedImports")
+    print(f"{first.name} sha256 {digests[0]}\nmod exports {exports}\nmod imports {imports}")
+    return problems
 
 
 def pe_report(path):
@@ -248,9 +333,19 @@ def layout_problems(recipe, manifest):
             problems.append(f"{path} is outside {folder}")
         if path.rsplit("/", 1)[-1].lower() in reserved:
             problems.append(f"{path} would replace ExtraOptions.Infinity's own file")
-    binaries = [f["destination"] for f in files["azimuth"] if f["role"] == "binary"]
-    if binaries != [f"{folder}plugins/{recipe['dll']}"]:
-        problems.append(f"the one binary must be {folder}plugins/{recipe['dll']}, found {binaries}")
+    binaries = [f["destination"] for f in files["azimuth"] if f["role"] == "binary" and "package" not in f]
+    mod_dll = recipe.get("adapterConfig", {}).get("modDll")
+    built = recipe.get("modBuild")
+    if built and built.get("output") != mod_dll:
+        problems.append("modBuild.output must be adapterConfig.modDll")
+    wanted_built = sorted([f"{folder}plugins/{recipe['dll']}"] + ([f"{folder}{mod_dll}"] if built else []))
+    if sorted(binaries) != wanted_built:
+        problems.append(f"the built binaries must be {wanted_built}, found {binaries}")
+    # The FH2 Mod Platform adapter starts the original author's release DLL, downloaded from their release (an
+    # additional package, pinned by SHA-256): never built or shipped here.
+    from_release = [f["destination"] for f in files["azimuth"] if f["role"] == "binary" and "package" in f]
+    if from_release != ([f"{folder}{mod_dll}"] if mod_dll and not built else []):
+        problems.append(f"the binary from the original release must be exactly adapterConfig.modDll, found {from_release}")
     if not any(f["destination"] == f"{folder}mod.json" and f["source"] == "mod.json" for f in files["azimuth"]):
         problems.append(f"{folder}mod.json is not installed")
     try:
@@ -274,7 +369,8 @@ def verify(name, zig):
         first, second = build(name, zig, Path(a)), build(name, zig, Path(b))
         digests = [hashlib.sha256(p.read_bytes()).hexdigest() for p in (first, second)]
         machine, exports, imports = pe_report(first)
-    problems = layout
+        mod_problems = verify_mod_build(recipe, Path(a), Path(b)) if recipe.get("modBuild") else []
+    problems = layout + mod_problems
     if digests[0] != digests[1]:
         problems.append("two builds differ (not reproducible)")
     if machine != 0x8664:
@@ -283,9 +379,15 @@ def verify(name, zig):
         problems.append(f"adapter {recipe['adapter']} is not an ExtraOptions adapter")
     if "FH2PluginInitialize" not in exports:
         problems.append("FH2PluginInitialize not exported")
-    entry = {"fh2-modloader-eo": "FH2ModLoad", "fh2-mod-platform-eo": "fh2mod_init"}.get(recipe["adapter"])
+    entry = {"fh2-modloader-eo": "FH2ModLoad"}.get(recipe["adapter"])
     if entry and entry not in exports:
         problems.append(f"{entry} missing: the adapter has nothing to start")
+    if recipe["adapter"] == "fh2-mod-platform-eo":
+        # The mod's fh2mod_init is in its own release DLL (adapterConfig.modDll); the adapter serves set_file.
+        if "fh2mod_init" in exports:
+            problems.append("the adapter exports fh2mod_init: the mod is linked in instead of loaded from its release")
+        if "FH2PluginMediaDirectory" not in exports:
+            problems.append("FH2PluginMediaDirectory missing: set_file has nowhere to go")
     retired = [e for e in exports if e.startswith("InfinityMod")]
     if retired:
         problems.append(f"exports the retired Infinity mod runtime's entry points {retired}")
@@ -320,11 +422,12 @@ def vcvars():
     return Path(vs) / "VC/Auxiliary/Build/vcvars64.bat"
 
 
-def package(recipe, dll, out):
+def package(recipe, dll, out, mod_dll=None):
     """Deterministic ZIP of the recipe's `package` map ("$dll" is the build): fixed time, sorted names.
     Text entries are stored with LF endings, so a Windows checkout (core.autocrlf) packs the same bytes."""
     generated = GENERATORS[recipe["generate"]](recipe) if recipe.get("generate") else {}
-    entries = {name: dll.read_bytes() if source == "$dll" else generated[name] if source == "$generated"
+    entries = {name: dll.read_bytes() if source == "$dll" else mod_dll.read_bytes() if source == "$modDll"
+               else generated[name] if source == "$generated"
                else (ROOT / source).read_bytes().replace(b"\r\n", b"\n")
                for name, source in recipe["package"].items()}
     buffer = io.BytesIO()
@@ -422,7 +525,8 @@ def release(names, zig, tag, catalog_path, out, allow_dirty):
             sys.exit(f"{name}: " + "; ".join(problems))
         with tempfile.TemporaryDirectory(prefix="infmods-") as temporary:
             dll = build(name, zig, Path(temporary))
-            zip_path, contents = package(recipe, dll, out / "assets")
+            mod_dll = build_mod(recipe, Path(temporary) / "mod") if recipe.get("modBuild") else None
+            zip_path, contents = package(recipe, dll, out / "assets", mod_dll)
         digest = hashlib.sha256(zip_path.read_bytes()).hexdigest()
         existing = current.get(recipe["id"])
         if existing and existing.get("download", {}).get("sha256") == digest:
@@ -701,6 +805,172 @@ def external_packs(set_dirs, cars_path, catalog_path, out):
     return 0
 
 
+ADAPTER_SOURCE = ROOT / "adapters" / "fh2-mod-platform-eo" / "fh2_mod_platform_eo_adapter.cpp"
+UPSTREAM_ZIP_MAX = 256 * 1024 * 1024
+SEMVER = re.compile(r"\d+\.\d+\.\d+")
+
+
+def github(path):
+    """One GitHub REST read (public, no credentials unless GITHUB_TOKEN is set), as JSON."""
+    import urllib.request
+    request = urllib.request.Request("https://api.github.com/" + path, headers={
+        "Accept": "application/vnd.github+json", "User-Agent": "infmods",
+        **({"Authorization": "Bearer " + os.environ["GITHUB_TOKEN"]} if os.environ.get("GITHUB_TOKEN") else {})})
+    with urllib.request.urlopen(request, timeout=60) as response:
+        return json.loads(response.read())
+
+
+def download(url):
+    import urllib.request
+    if not url.startswith("https://"):
+        sys.exit(f"refusing a non-HTTPS download: {url}")
+    request = urllib.request.Request(url, headers={"User-Agent": "infmods"})
+    with urllib.request.urlopen(request, timeout=300) as response:
+        data = response.read(UPSTREAM_ZIP_MAX + 1)
+    if len(data) > UPSTREAM_ZIP_MAX:
+        sys.exit(f"{url}: larger than {UPSTREAM_ZIP_MAX} bytes")
+    return data
+
+
+def sync(name, tag, zip_path, url, write):
+    """Re-pin a mod that runs the original author's release DLL through the FH2 Mod Platform adapter to an upstream
+    release (`upstreamRelease` in its recipe): the release ZIP's URL, SHA-256 and size, every file the manifest takes from
+    it (matched by the recipe's patterns), excludedArchiveEntries, and the version (<upstream>-infinity.1, or the next
+    -infinity.<n> when the upstream version is unchanged but its ZIP is not) in mod.json, manifest.json and the package's
+    ExtraOptions mod.json. Checks the DLL (x64, fh2mod_init, imports), the upstream submodule against the tag's commit,
+    the platform API the adapter implements and the INI keys the mod reads against the manifest's settings form.
+    Without --write it only reports. Nothing is built, committed or published."""
+    folder, recipe, manifest = load_mod(name)
+    spec = recipe.get("upstreamRelease") or sys.exit(f"{name}: the recipe has no upstreamRelease")
+    problems, notes = [], []
+    if zip_path:
+        if not (url and tag):
+            sys.exit("--zip needs --url and --tag")
+        data = Path(zip_path).read_bytes()
+    else:
+        release_info = github(f"repos/{spec['repository']}/releases/" + (f"tags/{tag}" if tag else "latest"))
+        tag = release_info["tag_name"]
+        assets = [a for a in release_info.get("assets", []) if re.fullmatch(spec["asset"], a["name"])]
+        if len(assets) != 1:
+            sys.exit(f"{name}: release {tag} has {len(assets)} assets matching {spec['asset']}")
+        url = assets[0]["browser_download_url"]
+        data = download(url)
+    version = tag[1:] if tag[:1] in "vV" else tag
+    if not SEMVER.fullmatch(version):
+        sys.exit(f"{name}: tag {tag} is not <a.b.c>")
+    digest = hashlib.sha256(data).hexdigest()
+    package = manifest.get("additionalPackages", {}).get("upstream-assets", {})
+    if not re.fullmatch(r"\d+\.\d+\.\d+-infinity\.\d+", manifest["version"]):
+        sys.exit(f"{name}: version {manifest['version']} is not <a.b.c>-infinity.<n>")
+    old_upstream = manifest["version"].split("-infinity.")[0]
+    if package.get("sha256") == digest:
+        print(f"{name}: already pinned to {url} ({digest}); nothing to do")
+        return 0
+    if tuple(map(int, version.split("."))) < tuple(map(int, old_upstream.split("."))):
+        sys.exit(f"{name}: {tag} is older than the pinned {old_upstream}")
+    revision = int(manifest["version"].split("-infinity.")[1]) + 1 if old_upstream == version else 1
+    new_version = f"{version}-infinity.{revision}"
+
+    with zipfile.ZipFile(io.BytesIO(data)) as archive:
+        entries = {i.filename: archive.read(i) for i in archive.infolist() if not i.is_dir()}
+    taken = {}
+    for pattern, destination in spec["files"].items():
+        matches = [e for e in entries if re.fullmatch(pattern, e)]
+        if len(matches) != 1:
+            problems.append(f"{len(matches)} entries match {pattern} (for {destination}): {matches}")
+            continue
+        taken[mod_folder(manifest) + destination] = matches[0]
+    mod_dll = mod_folder(manifest) + recipe["adapterConfig"]["modDll"]
+    if mod_dll in taken:
+        try:
+            machine, exports, imports = pe_report_bytes(entries[taken[mod_dll]])
+            if machine != 0x8664:
+                problems.append("the mod's DLL is not x64")
+            if "fh2mod_init" not in exports:
+                problems.append("the mod's DLL does not export fh2mod_init (not an FH2 Mod Platform mod any more?)")
+            allowed = {d.lower() for d in spec["allowedImports"]}
+            if extra := [d for d in imports if d.lower() not in allowed]:
+                problems.append(f"the mod's DLL imports {extra}, not in upstreamRelease.allowedImports")
+            notes.append(f"mod DLL exports {exports}, imports {imports}")
+        except (ValueError, struct.error, UnicodeDecodeError) as error:
+            problems.append(f"the mod's DLL is not a PE32+ file: {error}")
+    else:
+        problems.append(f"no pattern maps adapterConfig.modDll ({recipe['adapterConfig']['modDll']})")
+
+    # The submodule must be the tag's commit: its platform header is what the adapter is built against.
+    submodule = ROOT / recipe["upstream"]["submodule"]
+    try:
+        tag_commit = github(f"repos/{spec['repository']}/commits/{tag}")["sha"]
+        head = git("-C", str(submodule), "rev-parse", "HEAD") if (submodule / ".git").exists() else "(not checked out)"
+        if head != tag_commit:
+            problems.append(f"{recipe['upstream']['submodule']} is at {head}, the tag {tag} is {tag_commit}: "
+                            f"git -C {recipe['upstream']['submodule']} fetch --tags && git -C {recipe['upstream']['submodule']} checkout {tag_commit}")
+    except (OSError, subprocess.CalledProcessError) as error:
+        problems.append(f"could not resolve {tag}'s commit: {error}")
+    header = next(iter(sorted(submodule.glob("platform/include/fh2mod.h"))), None)
+    supported = re.search(r"FH2MOD_API_VERSION == (\d+)", ADAPTER_SOURCE.read_text(encoding="utf-8")).group(1)
+    if header:
+        api = re.search(r"#define FH2MOD_API_VERSION (\d+)", header.read_text(encoding="utf-8", errors="replace"))
+        if not api or api.group(1) != supported:
+            problems.append(f"the mod is built against FH2 Mod Platform API {api.group(1) if api else '?'}, the adapter "
+                            f"implements {supported}: update adapters/fh2-mod-platform-eo first")
+    else:
+        problems.append(f"no platform/include/fh2mod.h in {recipe['upstream']['submodule']}")
+
+    # INI keys the mod reads (its sources) against the manifest's settings form. A form key whose name is nowhere in
+    # the sources is gone; keys read through GetPrivateProfile*W or the mod's ini_* helpers that the form lacks are
+    # listed for review (keys kept in tables, such as FrontEffect, are found by name only).
+    sources = "\n".join(p.read_text(encoding="utf-8", errors="replace") for p in sorted(submodule.glob("src/**/*"))
+                        if p.suffix.lower() in (".c", ".cpp", ".h", ".hpp"))
+    read = set(re.findall(r'(?:GetPrivateProfile(?:String|Int)W|ini_\w+)\(\s*L"(\w+)"\s*,\s*L"(\w+)"', sources))
+    form = {(o["section"], o["key"]) for o in (manifest.get("config") or {}).get("options", [])}
+    if gone := sorted(k for k in form if f'"{k[1]}"' not in sources):
+        problems.append(f"settings in the manifest whose key is nowhere in the mod's sources: {gone}")
+    if new := sorted(k for k in read - form if k[0] in {s for s, _ in form}):
+        notes.append(f"INI keys the mod reads that the settings form does not offer (review): {new}")
+
+    filled = copy.deepcopy(manifest)
+    filled["version"] = new_version
+    filled["additionalPackages"]["upstream-assets"] = {"url": url, "sha256": digest, "bytes": len(data), "format": "zip"}
+    for file in filled["files"]["azimuth"]:
+        if file.get("package") != "upstream-assets":
+            continue
+        if file["destination"] not in taken:
+            problems.append(f"{file['destination']} comes from the original release but no recipe pattern maps it")
+            continue
+        content = entries[taken[file["destination"]]]
+        file["source"], file["sha256"], file["bytes"] = taken[file["destination"]], hashlib.sha256(content).hexdigest(), len(content)
+    filled["excludedArchiveEntries"] = sorted(set(entries) - set(taken.values()))
+    filled["package"] = {"url": "", "sha256": "", "bytes": 0, "format": "zip"}
+    filled["source"]["commit"] = ""
+    print(f"{name}: {manifest['version']} -> {new_version} from {url}\n  sha256 {digest}, {len(data)} bytes")
+    for n in notes:
+        print("  note:", n)
+    for p in problems:
+        print("  FAIL", p)
+    if problems:
+        return 1
+    if not write:
+        print("  (report only; --write updates mod.json, manifest.json and extraoptions/mod.json)")
+        return 0
+    recipe["version"] = new_version
+    recipe["upstream"]["version"] = version
+    own_path = ROOT / recipe["package"]["mod.json"]
+    own = json.loads(own_path.read_text(encoding="utf-8"))
+    own["version"] = new_version
+    for path, value in ((folder / "mod.json", recipe), (folder / "manifest.json", filled), (own_path, own)):
+        path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    print("  written: mod.json, manifest.json, " + recipe["package"]["mod.json"])
+    return 0
+
+
+def pe_report_bytes(data):
+    with tempfile.TemporaryDirectory(prefix="infmods-pe-") as temporary:
+        path = Path(temporary) / "module.dll"
+        path.write_bytes(data)
+        return pe_report(path)
+
+
 def main():
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -724,9 +994,17 @@ def main():
     e.add_argument("--cars", type=Path, required=True, help="the monorepo's crates/fi-gamedb/data/fh2-packs.json (OD-231)")
     e.add_argument("--catalog", type=Path, default=ROOT / "catalog.json")
     e.add_argument("--out", type=Path, required=True)
+    s = sub.add_parser("sync", help="re-pin an FH2 Mod Platform mod to an upstream release (report; --write to apply)")
+    s.add_argument("mod")
+    s.add_argument("--tag", help="the upstream release tag (default: its latest release)")
+    s.add_argument("--zip", type=Path, help="a release ZIP already downloaded (needs --url and --tag)")
+    s.add_argument("--url", help="where --zip was downloaded from (the URL the manifest pins)")
+    s.add_argument("--write", action="store_true")
     args = parser.parse_args()
     if args.cmd == "check":
         return check(args.catalog)
+    if args.cmd == "sync":
+        return sync(args.mod, args.tag, args.zip, args.url, args.write)
     if args.cmd == "external-packs":
         return external_packs(args.sets, args.cars, args.catalog, args.out)
     zig = args.zig.resolve() if args.zig else None
@@ -734,6 +1012,9 @@ def main():
         zig_check(zig)
     if args.cmd == "build":
         print(build(args.mod, zig, args.out.resolve()))
+        _, recipe, _ = load_mod(args.mod)
+        if recipe.get("modBuild"):
+            print(build_mod(recipe, args.out.resolve() / "mod"))
         return 0
     if args.cmd == "verify":
         return verify(args.mod, zig)

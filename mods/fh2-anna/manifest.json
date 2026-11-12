@@ -1,0 +1,311 @@
+{
+  "schemaVersion": 1,
+  "id": "fh2-anna",
+  "version": "1.2.0-infinity.2",
+  "kind": "mod",
+  "name": {
+    "en": "FH2 ANNA · Infinity",
+    "pt-BR": "FH2 ANNA · Infinity"
+  },
+  "author": "qiangqiang101; Infinity edition by anarqz",
+  "license": "MIT",
+  "homepage": "https://github.com/anarqz/InfinityMods",
+  "description": {
+    "en": "qiangqiang101's FH2 ANNA: the in-car assistant from Forza Horizon 3 back on Forza Horizon 2's HUD (D-pad down while driving), with Auto Drive along your GPS route and a cinematic camera, lights, doors, routes to the nearest event and voice commands. Other mods add to its menu (Underglow: Car > Underglow). Its own release DLL, loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter. Needs the minimap on.",
+    "pt-BR": "A FH2 ANNA de qiangqiang101: a assistente do carro do Forza Horizon 3 de volta ao HUD do Forza Horizon 2 (direcional para baixo ao dirigir), com direção automática pela rota do GPS e câmera cinematográfica, luzes, portas, rotas para o evento mais próximo e comandos de voz. Outros mods aparecem no menu dela (Neon: Carro > Neon). A DLL da própria release do autor, carregada pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform. Precisa do minimapa ligado."
+  },
+  "runtime": "standalone",
+  "review": {
+    "status": "reviewed",
+    "blockers": []
+  },
+  "compatibility": {
+    "azimuthVersions": [
+      "1.0.4"
+    ],
+    "gameBuilds": [],
+    "verification": "unverified"
+  },
+  "package": {
+    "url": "",
+    "sha256": "",
+    "bytes": 0,
+    "format": "zip"
+  },
+  "dependencies": [],
+  "conflicts": [],
+  "files": {
+    "game": [],
+    "azimuth": [
+      {
+        "source": "fh2-mods/FH2ANNA.dll",
+        "destination": "mods/Forza Horizon 2/fh2-anna/fh2-mods/FH2ANNA.dll",
+        "sha256": "da7032e35f3444fc77dc80b744f22418cb6fcffafd02617f7f597ce241cab02d",
+        "bytes": 1189376,
+        "role": "binary",
+        "mode": "add-or-replace",
+        "package": "upstream-assets"
+      },
+      {
+        "source": "LICENSE.txt",
+        "destination": "mods/Forza Horizon 2/fh2-anna/LICENSE.txt",
+        "sha256": "742109f80236c34e340712843a408c0f9fadf78339a833ce2de2742b9e221080",
+        "bytes": 1071,
+        "role": "license",
+        "mode": "add-or-replace",
+        "package": "upstream-assets"
+      },
+      {
+        "source": "FH2ANNA.Infinity.dll",
+        "destination": "mods/Forza Horizon 2/fh2-anna/plugins/FH2ANNA.Infinity.dll",
+        "role": "binary",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "mod.json",
+        "destination": "mods/Forza Horizon 2/fh2-anna/mod.json",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "database.json",
+        "destination": "mods/Forza Horizon 2/fh2-anna/database.json",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "media/README.txt",
+        "destination": "mods/Forza Horizon 2/fh2-anna/media/README.txt",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "NOTICE.md",
+        "destination": "mods/Forza Horizon 2/fh2-anna/NOTICE.md",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "LICENSE-Infinity.txt",
+        "destination": "mods/Forza Horizon 2/fh2-anna/LICENSE-Infinity.txt",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "LICENSE-FH2-Mod-Platform.txt",
+        "destination": "mods/Forza Horizon 2/fh2-anna/LICENSE-FH2-Mod-Platform.txt",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "LICENSE-MinHook.txt",
+        "destination": "mods/Forza Horizon 2/fh2-anna/LICENSE-MinHook.txt",
+        "role": "license",
+        "mode": "add-or-replace"
+      }
+    ]
+  },
+  "config": {
+    "root": "azimuth",
+    "path": "mods/Forza Horizon 2/fh2-anna/fh2-mods/FH2ANNA.ini",
+    "format": "ini",
+    "create": "defaults",
+    "preserveOnDisable": true,
+    "options": [
+      {
+        "id": "cinematic",
+        "section": "Autodrive",
+        "key": "Cinematic",
+        "label": {
+          "en": "Cinematic camera button",
+          "pt-BR": "Botão da câmera cinematográfica"
+        },
+        "description": {
+          "en": "While Auto Drive is on, this button switches to slow cinematic shots and back. None: no cinematic camera. Applied on the next game launch.",
+          "pt-BR": "Com a direção automática ativada, este botão alterna para tomadas cinematográficas lentas e volta. Nenhum: sem câmera cinematográfica. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "enum",
+        "default": "LB",
+        "choices": [
+          {
+            "value": "LB",
+            "label": {
+              "en": "LB",
+              "pt-BR": "LB"
+            }
+          },
+          {
+            "value": "RB",
+            "label": {
+              "en": "RB",
+              "pt-BR": "RB"
+            }
+          },
+          {
+            "value": "A",
+            "label": {
+              "en": "A",
+              "pt-BR": "A"
+            }
+          },
+          {
+            "value": "B",
+            "label": {
+              "en": "B",
+              "pt-BR": "B"
+            }
+          },
+          {
+            "value": "X",
+            "label": {
+              "en": "X",
+              "pt-BR": "X"
+            }
+          },
+          {
+            "value": "Y",
+            "label": {
+              "en": "Y",
+              "pt-BR": "Y"
+            }
+          },
+          {
+            "value": "View",
+            "label": {
+              "en": "View",
+              "pt-BR": "View"
+            }
+          },
+          {
+            "value": "L3",
+            "label": {
+              "en": "L3",
+              "pt-BR": "L3"
+            }
+          },
+          {
+            "value": "R3",
+            "label": {
+              "en": "R3",
+              "pt-BR": "R3"
+            }
+          },
+          {
+            "value": "None",
+            "label": {
+              "en": "None",
+              "pt-BR": "Nenhum"
+            }
+          }
+        ]
+      },
+      {
+        "id": "hidehoodtrunk",
+        "section": "Doors",
+        "key": "HideHoodTrunk",
+        "label": {
+          "en": "Hide hood and trunk in ANNA",
+          "pt-BR": "Ocultar capô e porta-malas na ANNA"
+        },
+        "description": {
+          "en": "Car > Doors leaves out the hood and the trunk, and Open All leaves them shut: for cars with an invisible trunk or a fake engine under the hood. Applied on the next game launch.",
+          "pt-BR": "Carro > Portas deixa de fora o capô e o porta-malas, e Abrir tudo os mantém fechados: para carros com porta-malas invisível ou motor falso sob o capô. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": false,
+        "encoding": "0/1"
+      },
+      {
+        "id": "closewhenmoving",
+        "section": "Doors",
+        "key": "CloseWhenMoving",
+        "label": {
+          "en": "Close doors when moving",
+          "pt-BR": "Fechar portas ao andar"
+        },
+        "description": {
+          "en": "The doors, hood, trunk and storage ANNA opened shut by themselves once the car drives off. The roof stays as it is. Applied on the next game launch.",
+          "pt-BR": "As portas, o capô, o porta-malas e os compartimentos abertos pela ANNA se fecham sozinhos quando o carro anda. O teto fica como está. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": true,
+        "encoding": "0/1"
+      },
+      {
+        "id": "matchmaking",
+        "section": "Online",
+        "key": "Matchmaking",
+        "label": {
+          "en": "Start Matchmaking in ANNA",
+          "pt-BR": "Buscar partida na ANNA"
+        },
+        "description": {
+          "en": "ANNA's \"Start Matchmaking for\" list: Online Road Trip, Online Freeroam, and their private sessions, started without the pause menu. Applied on the next game launch.",
+          "pt-BR": "A lista \"Buscar partida em\" da ANNA: Pegar a Estrada Online, Passeio Livre Online e suas sessões particulares, iniciadas sem o menu de pausa. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": true,
+        "encoding": "0/1"
+      },
+      {
+        "id": "enabled",
+        "section": "Voice",
+        "key": "Enabled",
+        "label": {
+          "en": "Voice commands",
+          "pt-BR": "Comandos de voz"
+        },
+        "description": {
+          "en": "Say \"ANNA\" and a command from ANNA's menu as it reads now (\"ANNA, Enable Auto Drive\"), and it's done. Uses Windows' speech recognition and the default microphone; a headset works best. Applied on the next game launch.",
+          "pt-BR": "Diga \"ANNA\" e um comando do menu da ANNA como ele aparece agora (\"ANNA, Ativar direção automática\"), e pronto. Usa o reconhecimento de fala do Windows e o microfone padrão; um headset funciona melhor. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": false,
+        "encoding": "0/1"
+      }
+    ]
+  },
+  "runtimeOutputs": [],
+  "excludedArchiveEntries": [
+    "DWrite.dll",
+    "LICENSE-MinHook.txt",
+    "README.md"
+  ],
+  "databaseMigrations": [],
+  "source": {
+    "repository": "https://github.com/anarqz/InfinityMods",
+    "commit": ""
+  },
+  "additionalPackages": {
+    "upstream-assets": {
+      "url": "https://github.com/qiangqiang101/FH2-ANNA/releases/download/1.2.0/FH2ANNA-1.2.0.zip",
+      "sha256": "b339186683f1b4f7949ec0ffce88e4ed00729c885085419105fa608c979554e8",
+      "bytes": 1341846,
+      "format": "zip"
+    }
+  },
+  "multiplayer": {
+    "schemaVersion": 1,
+    "impact": "gameplay",
+    "compatibilityId": "infinity-fh2-anna",
+    "revision": 1,
+    "match": "exact",
+    "settings": []
+  },
+  "incompatibleFiles": [
+    {
+      "root": "azimuth",
+      "path": "fh2-mods/FH2ANNA.dll"
+    }
+  ]
+}

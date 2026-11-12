@@ -3,26 +3,26 @@
   "mods": [
     {
       "id": "nitrosystem",
-      "version": "1.1.0-infinity.4",
+      "version": "2.0.0-infinity.3",
       "name": {
         "en": "Nitro System · Infinity",
         "pt-BR": "Sistema de Nitro · Infinity"
       },
       "description": {
-        "en": "qiangqiang101's NitroSystem, built unchanged and loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter. Its game files come from the original release.",
-        "pt-BR": "O NitroSystem de qiangqiang101, compilado sem alterações e carregado pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform. Os arquivos do jogo vêm da release original."
+        "en": "qiangqiang101's NitroSystem 2.0: Fast & Furious NOS, bought per car as a NOS Kit in the garage, with exhaust flames, sound and a NOS gauge. Its own release DLL, loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter; no FH2 Mod Platform needed.",
+        "pt-BR": "O NitroSystem 2.0 de qiangqiang101: NOS de Fast & Furious, comprado por carro como Kit de NOS na garagem, com chamas no escape, som e medidor de NOS. A DLL da própria release do autor, carregada pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform; a FH2 Mod Platform não é necessária."
       },
       "author": "qiangqiang101; Infinity edition by anarqz",
       "download": {
-        "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.10.28/nitrosystem-1.1.0-infinity.4.zip",
-        "sha256": "eb445fa0c026756ad8f4ed650c167ae3a3f50b33bfe3ece748811f214bb4c3f2",
-        "bytes": 121746
+        "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.11.12/nitrosystem-2.0.0-infinity.3.zip",
+        "sha256": "39b99f7be28b689f8bd675d024e47ac0f0bcd29661a4b1b62ac4d1dc1338e6e9",
+        "bytes": 94708
       },
       "additionalDownloads": {
         "upstream-assets": {
-          "url": "https://github.com/qiangqiang101/NitroSystem/releases/download/1.1.0/FnFNitro-1.1.0.zip",
-          "sha256": "a94848ecef2e68405c7d4aabaa82c733b8f76692ca45389bcdfede536f0cf94f",
-          "bytes": 2339419
+          "url": "https://github.com/qiangqiang101/FH2-NitroSystem/releases/download/2.0.0/FnFNitro-2.0.0.zip",
+          "sha256": "24ad49c4472387b61ec9ad638f8e4f0b5cfd7ceedf2fecb0948aa9e7fb5ea7af",
+          "bytes": 2573107
         }
       },
       "install": {
@@ -48,343 +48,62 @@
           "game": [],
           "azimuth": [
             {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/backfire.materialbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Materials/backfire.materialbin",
-              "sha256": "217cbed2e44ec2797dd4e454c18383f6a4b090424cd4b0d20c33a675b76c72cb",
-              "bytes": 352,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/backfire_blue.materialbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Materials/backfire_blue.materialbin",
-              "sha256": "c9c6309ec1a07a0da4f7ddb6a0c62619a87152a214b28eb7e37b8846e5aac22a",
-              "bytes": 352,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/backfire_purple.materialbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Materials/backfire_purple.materialbin",
-              "sha256": "e79795726feea5367bba5bd8b5581803780a2fbc89aeab64b402a1467c60efb1",
-              "bytes": 352,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Systems/Backfire.xml",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Systems/Backfire.xml",
-              "sha256": "2ac70254d35dbac5509fe793b3c236c013924a74c39f581ae6bc240ec2088f4a",
-              "bytes": 1705,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/Controls/HUDSpeedometerControl.xaml",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/Controls/HUDSpeedometerControl.xaml",
-              "sha256": "e53ad86d730591727c355ee0b380ddce4d0fc9f5a17df88c99c9e9972776a40d",
-              "bytes": 75116,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/Fire/backfire_blue.materialbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Materials/Fire/backfire_blue.materialbin",
-              "sha256": "c9c6309ec1a07a0da4f7ddb6a0c62619a87152a214b28eb7e37b8846e5aac22a",
-              "bytes": 352,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/Fire/carBackfire.materialbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Materials/Fire/carBackfire.materialbin",
-              "sha256": "c9c6309ec1a07a0da4f7ddb6a0c62619a87152a214b28eb7e37b8846e5aac22a",
-              "bytes": 352,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/Backfire.shaderbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/Backfire.shaderbin",
-              "sha256": "be571492903df723f38ca05f8a8f9bf4bfc489d22e16f56b57c2b422a06ec341",
-              "bytes": 788,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.durango.pso",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLightScenario.durango.pso",
-              "sha256": "f35e386274aef1247c2c42d02aa135bfac6b765b3e948e68a1065e7543cf800f",
-              "bytes": 10548,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.durango.vso",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLightScenario.durango.vso",
-              "sha256": "fd8ec27ba38ac727ccdaf186314963125ea9f719f21312f078411db2506f95cb",
-              "bytes": 28452,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.pc.pso",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLightScenario.pc.pso",
-              "sha256": "96ffcc3eb70cd6772f5535e78c9991df7efc5d3ef6d05296c16f61d1e00ad277",
-              "bytes": 11020,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.pc.vso",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLightScenario.pc.vso",
-              "sha256": "b79f5e7e01f114e69eb7a656d5ac6222c8c799a1be91f66a3311035ef8af0fe6",
-              "bytes": 31580,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.pso",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.pso",
-              "sha256": "229bb0dc5b3cd40992f47c3d7b56dddfb4f886f74549dab48a6c8c184ccf22a8",
-              "bytes": 11316,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.vso",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.vso",
-              "sha256": "567cc06f8a5bbfee521380d60e99403864048f06a1515ede1b5572b974d7fc00",
-              "bytes": 28460,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.pso",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.pso",
-              "sha256": "f9ed0f4cf7010c15a609a47f4492d8ab6996755e8de4601ccabcc0725467ff03",
-              "bytes": 11692,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.vso",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.vso",
-              "sha256": "b79f5e7e01f114e69eb7a656d5ac6222c8c799a1be91f66a3311035ef8af0fe6",
-              "bytes": 31580,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/HUD_XPBar_TipGlow.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/HUD_XPBar_TipGlow.swatchbin",
-              "sha256": "e74b50445a7e51bc516444f8032c26edfddbf4dece1a2b4bf076e18e7472cc5a",
-              "bytes": 1107,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/SkillBarTipGlow.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/SkillBarTipGlow.swatchbin",
-              "sha256": "cdf53b7a951f8b5d7b79948d246b141238bd2e4a195004926a9bafab74398e98",
-              "bytes": 4179,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/SkillsLargeGlow.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/SkillsLargeGlow.swatchbin",
-              "sha256": "c90784e0646e563cdf9e25f173586d59b55adb925da1a99b08bedeb00edcd8a1",
-              "bytes": 65619,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_Off.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_Off.swatchbin",
-              "sha256": "be681511ebe073868b95c40449d4249a48adc5369f6b1396d86d2d15a9ad5b62",
-              "bytes": 32851,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_On.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_On.swatchbin",
-              "sha256": "5697ca24c536055c650cd9267c009858f399877969d530db99cc7724f1c20b75",
-              "bytes": 32851,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_Off.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_Off.swatchbin",
-              "sha256": "14506b5176dfdb7e6965a979ecdae7a81c7e2546b2e7df0a4c35ccb8b145ff19",
-              "bytes": 32851,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_On.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_On.swatchbin",
-              "sha256": "24769047b89d0bc5981d54663c8889176c49ecd27d500d018ffdba502dd4b860",
-              "bytes": 32851,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Digital_Bar.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Digital_Bar.swatchbin",
-              "sha256": "86d4111220ffa5158a535e3e6cff6a43ce3ca629378b497f9aa3ddae2eff7e82",
-              "bytes": 9299,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Radial_Bar.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Radial_Bar.swatchbin",
-              "sha256": "c8002c716093e5d7863cec786ebc7ff929933bb997eb72d7e9389aa85035b4bd",
-              "bytes": 65619,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_1.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_1.swatchbin",
-              "sha256": "883bbee3c0c58af6659abb136205d37ecb983a359b85a6086c37bc64a5bebfe9",
-              "bytes": 32851,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_2.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_2.swatchbin",
-              "sha256": "e478ef350020246a14c2942a933089513739b50b74c5586580cf309f11c21b34",
-              "bytes": 32851,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_3.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_3.swatchbin",
-              "sha256": "225ef688a3e856edc811836b601a6a4e0873d13c407f16d0f61ada239fb4f62f",
-              "bytes": 32851,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_4.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_4.swatchbin",
-              "sha256": "1653b7d09123c956d91fd8f7fb011f0f8efa286145ef2d403c57a12a665d70b3",
-              "bytes": 32851,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_5.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_5.swatchbin",
-              "sha256": "02020c4e460aefd1ffe2d48249796c0321ae600b122009112f89daf9b1de44c9",
-              "bytes": 32851,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_6.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_6.swatchbin",
-              "sha256": "cda525a446b5c23e45e9c113a9d93c2fd0368089e5fa4b5400e633b0afda70a7",
-              "bytes": 32851,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_7.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_7.swatchbin",
-              "sha256": "033c5d18bc03fe18df1d640de27bdcd2b9fd0bc9c4ec83167045b6001d6469ce",
-              "bytes": 32851,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_8.swatchbin",
-              "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_8.swatchbin",
-              "sha256": "a6d4bc22f9817a5c6e30a5435bf896659b576b30ce929b267743ecc0258198a2",
-              "bytes": 32851,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/azimuth-windows/FnFNitro/nos_boost.wav",
-              "destination": "mods/Forza Horizon 2/nitrosystem/FnFNitro/nos_boost.wav",
-              "sha256": "8eaf24cc2714bda855a2f8596b6a69a88cd10b5318276075ff7a65c61d0cb3df",
-              "bytes": 1440102,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro-1.1.0/azimuth-windows/FnFNitro/nos_stop.wav",
-              "destination": "mods/Forza Horizon 2/nitrosystem/FnFNitro/nos_stop.wav",
-              "sha256": "332f3b7ff32be6d5b8ff34cc9b6848be42c38977f81ea7e0eaf3b6d172169df0",
-              "bytes": 264270,
-              "role": "asset",
-              "mode": "add-or-replace",
-              "package": "upstream-assets"
-            },
-            {
-              "source": "FnFNitro.dll",
-              "destination": "mods/Forza Horizon 2/nitrosystem/plugins/FnFNitro.dll",
+              "source": "FnFNitro-2.0.0/azimuth-windows/fh2-mods/FnFNitro.dll",
+              "destination": "mods/Forza Horizon 2/nitrosystem/fh2-mods/FnFNitro.dll",
+              "sha256": "a695c4a858e949001fab185db56e5f0365d14061dd3bcb6dfe0a5b3179c37325",
+              "bytes": 2603520,
               "role": "binary",
               "mode": "add-or-replace",
-              "sha256": "d7678673129c00a6e6d08e821aaa2b3a64d92536d3bbf7e1581fa0dbf86ebe39",
-              "bytes": 228352
+              "package": "upstream-assets"
             },
             {
-              "source": "LICENSE.txt",
+              "source": "FnFNitro-2.0.0/licenses/LICENSE-NitroSystem.txt",
               "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE.txt",
+              "sha256": "be4891b23bcb10c0f757f2385d89709057d929a75299aeb2eed296ccee01b33b",
+              "bytes": 1092,
               "role": "license",
               "mode": "add-or-replace",
-              "sha256": "742109f80236c34e340712843a408c0f9fadf78339a833ce2de2742b9e221080",
-              "bytes": 1071
+              "package": "upstream-assets"
             },
             {
-              "source": "LICENSE-FH2-Mod-Platform.txt",
-              "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE-FH2-Mod-Platform.txt",
+              "source": "NitroSystem.Infinity.dll",
+              "destination": "mods/Forza Horizon 2/nitrosystem/plugins/NitroSystem.Infinity.dll",
+              "role": "binary",
+              "mode": "add-or-replace",
+              "sha256": "72b89dbc8685c19b8413a5d7862e05550bca0476e6afd0bc57980b5d9b0edd7c",
+              "bytes": 173056
+            },
+            {
+              "source": "mod.json",
+              "destination": "mods/Forza Horizon 2/nitrosystem/mod.json",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "3f14a17f0396c2d0440a86e011ac1266663720043040de9184fa8a84d7fc8d29",
+              "bytes": 177
+            },
+            {
+              "source": "database.json",
+              "destination": "mods/Forza Horizon 2/nitrosystem/database.json",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "a35e92aa8740789f1584b7b3ce216a2001145c450e78a4454f0175c9fce74b0c",
+              "bytes": 187
+            },
+            {
+              "source": "media/README.txt",
+              "destination": "mods/Forza Horizon 2/nitrosystem/media/README.txt",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "a0b2834ab96df315fa062000e8be27354bf3a784f0850bd038c78ad05f2a5e97",
+              "bytes": 327
+            },
+            {
+              "source": "NOTICE.md",
+              "destination": "mods/Forza Horizon 2/nitrosystem/NOTICE.md",
               "role": "license",
               "mode": "add-or-replace",
-              "sha256": "592160090948f630b488f0766d5dda6c0345396dfb2f98cceeed54bea448dcf9",
-              "bytes": 1067
+              "sha256": "c7d3770edba76d46dd62e843734a51b30efb5ec52667ece64fd2ca8e7d9ebc4c",
+              "bytes": 1927
             },
             {
               "source": "LICENSE-Infinity.txt",
@@ -395,28 +114,12 @@
               "bytes": 1141
             },
             {
-              "source": "NOTICE.md",
-              "destination": "mods/Forza Horizon 2/nitrosystem/NOTICE.md",
+              "source": "LICENSE-FH2-Mod-Platform.txt",
+              "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE-FH2-Mod-Platform.txt",
               "role": "license",
               "mode": "add-or-replace",
-              "sha256": "d8fb22bc153d362f3a9776e963e751d44281eb579ab704284c62523e5c18dc1f",
-              "bytes": 1298
-            },
-            {
-              "source": "mod.json",
-              "destination": "mods/Forza Horizon 2/nitrosystem/mod.json",
-              "role": "asset",
-              "mode": "add-or-replace",
-              "sha256": "b2bfe0e2f1d0d67918151b67595ec562faf2e1b33d1a695b5f2bac8798f64933",
-              "bytes": 177
-            },
-            {
-              "source": "database.json",
-              "destination": "mods/Forza Horizon 2/nitrosystem/database.json",
-              "role": "asset",
-              "mode": "add-or-replace",
-              "sha256": "a35e92aa8740789f1584b7b3ce216a2001145c450e78a4454f0175c9fce74b0c",
-              "bytes": 187
+              "sha256": "592160090948f630b488f0766d5dda6c0345396dfb2f98cceeed54bea448dcf9",
+              "bytes": 1067
             },
             {
               "source": "LICENSE-MinHook.txt",
@@ -440,12 +143,12 @@
               "section": "Settings",
               "key": "NitroEnabled",
               "label": {
-                "en": "Nitro enabled",
-                "pt-BR": "Nitro ativado"
+                "en": "Nitro System",
+                "pt-BR": "Sistema de Nitro"
               },
               "description": {
-                "en": "Applied on the next game launch.",
-                "pt-BR": "Aplicado na próxima inicialização do jogo."
+                "en": "Turns the Fast & Furious NOS on or off. Hold the NOS Button while driving to boost. Applied on the next game launch.",
+                "pt-BR": "Liga ou desliga o NOS de Fast & Furious. Segure o Botão do NOS enquanto dirige para acelerar. Aplicado na próxima inicialização do jogo."
               },
               "advanced": false,
               "apply": "next-launch",
@@ -458,12 +161,12 @@
               "section": "Settings",
               "key": "NitroButton",
               "label": {
-                "en": "Nitro button",
-                "pt-BR": "Botão do nitro"
+                "en": "NOS Button",
+                "pt-BR": "Botão do NOS"
               },
               "description": {
-                "en": "Applied on the next game launch.",
-                "pt-BR": "Aplicado na próxima inicialização do jogo."
+                "en": "Which button burns NOS. Pick one the game doesn't use while driving. Applied on the next game launch.",
+                "pt-BR": "O botão que usa o NOS. Escolha um que o jogo não use ao dirigir. Aplicado na próxima inicialização do jogo."
               },
               "advanced": false,
               "apply": "next-launch",
@@ -515,43 +218,43 @@
                 {
                   "value": "LS",
                   "label": {
-                    "en": "LS",
-                    "pt-BR": "LS"
+                    "en": "LS click",
+                    "pt-BR": "Clique do LS"
                   }
                 },
                 {
                   "value": "RS",
                   "label": {
-                    "en": "RS",
-                    "pt-BR": "RS"
+                    "en": "RS click",
+                    "pt-BR": "Clique do RS"
                   }
                 },
                 {
                   "value": "DPadUp",
                   "label": {
-                    "en": "DPadUp",
-                    "pt-BR": "DPadUp"
+                    "en": "D-pad up",
+                    "pt-BR": "Direcional para cima"
                   }
                 },
                 {
                   "value": "DPadDown",
                   "label": {
-                    "en": "DPadDown",
-                    "pt-BR": "DPadDown"
+                    "en": "D-pad down",
+                    "pt-BR": "Direcional para baixo"
                   }
                 },
                 {
                   "value": "DPadLeft",
                   "label": {
-                    "en": "DPadLeft",
-                    "pt-BR": "DPadLeft"
+                    "en": "D-pad left",
+                    "pt-BR": "Direcional para a esquerda"
                   }
                 },
                 {
                   "value": "DPadRight",
                   "label": {
-                    "en": "DPadRight",
-                    "pt-BR": "DPadRight"
+                    "en": "D-pad right",
+                    "pt-BR": "Direcional para a direita"
                   }
                 },
                 {
@@ -585,16 +288,67 @@
               ]
             },
             {
+              "id": "hudtheme",
+              "section": "Settings",
+              "key": "HudTheme",
+              "label": {
+                "en": "HUD Theme",
+                "pt-BR": "Tema da tela do jogo"
+              },
+              "description": {
+                "en": "Original: the game's HUD with a yellow NOS bar. Fast & Furious: cyan NOS bar, gears and assist icons. Applied on the next game launch.",
+                "pt-BR": "Original: a tela do jogo com barra de NOS amarela. Fast & Furious: barra de NOS, marchas e ícones de assistência em ciano. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "enum",
+              "default": "FF",
+              "choices": [
+                {
+                  "value": "FF",
+                  "label": {
+                    "en": "Fast & Furious",
+                    "pt-BR": "Fast & Furious"
+                  }
+                },
+                {
+                  "value": "Original",
+                  "label": {
+                    "en": "Original",
+                    "pt-BR": "Original"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "requirenitrouskit",
+              "section": "Settings",
+              "key": "RequireNitrousKit",
+              "label": {
+                "en": "Require NOS Kit",
+                "pt-BR": "Exigir kit de NOS"
+              },
+              "description": {
+                "en": "On: only cars with the NOS Kit (Garage > Upgrades > Custom upgrade > Engine) have NOS, and the stage sets the tank and its recharge. Off: every car has NOS, with the NOS Tank Capacity and NOS Recharge Rate. Applied on the next game launch.",
+                "pt-BR": "Ligado: só carros com o kit de NOS (comprado na garagem, como melhoria do motor) têm NOS, e o estágio define o tanque e a recarga. Desligado: todos os carros têm NOS, com a capacidade do tanque de NOS e a recarga do NOS. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            },
+            {
               "id": "torquescale",
               "section": "Settings",
               "key": "TorqueScale",
               "label": {
-                "en": "Boost multiplier",
-                "pt-BR": "Multiplicador de potência"
+                "en": "NOS Boost Multiplier",
+                "pt-BR": "Multiplicador do NOS"
               },
               "description": {
-                "en": "Applied on the next game launch.",
-                "pt-BR": "Aplicado na próxima inicialização do jogo."
+                "en": "Multiplies forward acceleration while NOS is active (Spire default: 1.6x). Applied on the next game launch.",
+                "pt-BR": "Multiplica a aceleração para a frente enquanto o NOS está ativo (padrão do Spire: 1,6x). Aplicado na próxima inicialização do jogo."
               },
               "advanced": false,
               "apply": "next-launch",
@@ -611,12 +365,12 @@
               "section": "Settings",
               "key": "Duration",
               "label": {
-                "en": "Tank capacity",
-                "pt-BR": "Capacidade do tanque"
+                "en": "NOS Tank Capacity (sec)",
+                "pt-BR": "Capacidade do tanque de NOS (s)"
               },
               "description": {
-                "en": "Applied on the next game launch.",
-                "pt-BR": "Aplicado na próxima inicialização do jogo."
+                "en": "Total seconds of continuous boost available in a full tank (Spire default: 20s). Ignored while Require NOS Kit is on: then the NOS Kit's stage sets the tank. Applied on the next game launch.",
+                "pt-BR": "Segundos de NOS contínuo em um tanque cheio (padrão do Spire: 20 s). Ignorado com Exigir kit de NOS ligado: aí o estágio do kit de NOS define o tanque. Aplicado na próxima inicialização do jogo."
               },
               "advanced": false,
               "apply": "next-launch",
@@ -633,12 +387,12 @@
               "section": "Settings",
               "key": "BuildupTime",
               "label": {
-                "en": "Buildup time",
-                "pt-BR": "Tempo para potência máxima"
+                "en": "NOS Buildup Time (sec)",
+                "pt-BR": "Tempo de entrada do NOS (s)"
               },
               "description": {
-                "en": "Applied on the next game launch.",
-                "pt-BR": "Aplicado na próxima inicialização do jogo."
+                "en": "Time taken to ramp up to full boost torque (Spire default: 0.5s). Applied on the next game launch.",
+                "pt-BR": "Tempo até chegar à força total do NOS (padrão do Spire: 0,5 s). Aplicado na próxima inicialização do jogo."
               },
               "advanced": false,
               "apply": "next-launch",
@@ -655,39 +409,235 @@
               "section": "Settings",
               "key": "RechargeRate",
               "label": {
-                "en": "Recharge rate",
-                "pt-BR": "Taxa de recarga"
+                "en": "NOS Recharge Rate",
+                "pt-BR": "Recarga do NOS"
               },
               "description": {
-                "en": "Applied on the next game launch.",
-                "pt-BR": "Aplicado na próxima inicialização do jogo."
+                "en": "Seconds of NOS restored per second while not boosting. Ignored while Require NOS Kit is on: then the NOS Kit's stage sets the recharge rate. Applied on the next game launch.",
+                "pt-BR": "Segundos de NOS recuperados por segundo sem usar o NOS. Ignorado com Exigir kit de NOS ligado: aí o estágio do kit de NOS define a recarga. Aplicado na próxima inicialização do jogo."
               },
               "advanced": false,
               "apply": "next-launch",
               "type": "number",
-              "default": 1.0,
+              "default": 0.2,
               "minimum": 0.0,
-              "maximum": 1.0,
-              "step": 0.1,
+              "maximum": 5.0,
+              "step": 0.05,
               "decimals": 2,
               "unit": "ratio"
             },
             {
-              "id": "debugoverlay",
+              "id": "refillonracestart",
               "section": "Settings",
-              "key": "DebugOverlay",
+              "key": "RefillOnRaceStart",
               "label": {
-                "en": "Debug overlay",
-                "pt-BR": "Informações de depuração"
+                "en": "Refill NOS on Race Start",
+                "pt-BR": "Recarregar NOS no início da corrida"
               },
               "description": {
-                "en": "Applied on the next game launch.",
-                "pt-BR": "Aplicado na próxima inicialização do jogo."
+                "en": "Fills the NOS tank when a race starts, you quit one, you change car or you fast travel. Applied on the next game launch.",
+                "pt-BR": "Enche o tanque de NOS quando uma corrida começa, quando você sai de uma, troca de carro ou faz viagem rápida. Aplicado na próxima inicialização do jogo."
               },
-              "advanced": true,
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            },
+            {
+              "id": "refundonrewind",
+              "section": "Settings",
+              "key": "RefundOnRewind",
+              "label": {
+                "en": "Refund NOS on Rewind",
+                "pt-BR": "Devolver NOS ao retroceder"
+              },
+              "description": {
+                "en": "Rewinding gives back the NOS you used since the point you rewind to. Applied on the next game launch.",
+                "pt-BR": "Ao retroceder, você recebe de volta o NOS usado desde o ponto para onde voltou. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            },
+            {
+              "id": "drivatarnitro",
+              "section": "Settings",
+              "key": "DrivatarNitro",
+              "label": {
+                "en": "Drivatar NOS",
+                "pt-BR": "NOS dos Drivatars"
+              },
+              "description": {
+                "en": "Drivatars use NOS too, whenever they can (not before the race starts), from a tank with twice your capacity and recharge, with flames and sound. Not once they're over 100 m ahead of you, so you can catch up. Applied on the next game launch.",
+                "pt-BR": "Os Drivatars também usam NOS sempre que podem (nunca antes da largada), com um tanque de capacidade e recarga duas vezes maiores que as suas, com chamas e som. Não quando estão mais de 100 m à sua frente, para você poder alcançá-los. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
               "apply": "next-launch",
               "type": "boolean",
               "default": false,
+              "encoding": "0/1"
+            },
+            {
+              "id": "soundvolume",
+              "section": "Settings",
+              "key": "SoundVolume",
+              "label": {
+                "en": "NOS Sound Volume",
+                "pt-BR": "Volume do som do NOS"
+              },
+              "description": {
+                "en": "Volume of the boost and stop sounds. The game's own volume sliders don't change them. Applied on the next game launch.",
+                "pt-BR": "Volume dos sons do NOS. Os controles de volume do próprio jogo não os alteram. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "number",
+              "default": 0.5,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "step": 0.05,
+              "decimals": 2,
+              "unit": "ratio"
+            },
+            {
+              "id": "drivatarsoundvolume",
+              "section": "Settings",
+              "key": "DrivatarSoundVolume",
+              "label": {
+                "en": "Drivatar NOS Volume",
+                "pt-BR": "Volume do NOS dos Drivatars"
+              },
+              "description": {
+                "en": "Volume of the Drivatars' NOS, heard from their cars (with Drivatar NOS on). 0 silences it. Applied on the next game launch.",
+                "pt-BR": "Volume do NOS dos Drivatars, ouvido dos carros deles (com o NOS dos Drivatars ligado). 0 silencia. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "number",
+              "default": 0.25,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "step": 0.05,
+              "decimals": 2,
+              "unit": "ratio"
+            },
+            {
+              "id": "rumble",
+              "section": "Settings",
+              "key": "Rumble",
+              "label": {
+                "en": "NOS Controller Rumble",
+                "pt-BR": "Vibração do controle no NOS"
+              },
+              "description": {
+                "en": "Rumbles the controller while NOS is active. The game's own rumble isn't affected. Applied on the next game launch.",
+                "pt-BR": "Faz o controle vibrar enquanto o NOS está ativo. A vibração do próprio jogo não é afetada. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            },
+            {
+              "id": "camerashake",
+              "section": "Settings",
+              "key": "CameraShake",
+              "label": {
+                "en": "NOS Camera Shake",
+                "pt-BR": "Tremor da câmera no NOS"
+              },
+              "description": {
+                "en": "How much the camera shakes while NOS is active, in the driver, hood, bumper and chase views. 0 turns it off. Applied on the next game launch.",
+                "pt-BR": "Quanto a câmera treme com o NOS ativo, nas visões do piloto, capô, para-choque e perseguição. 0 desliga. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "number",
+              "default": 0.65,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "step": 0.05,
+              "decimals": 2,
+              "unit": "ratio"
+            },
+            {
+              "id": "fovboost",
+              "section": "Settings",
+              "key": "FovBoost",
+              "label": {
+                "en": "NOS Wider FOV",
+                "pt-BR": "Campo de visão maior no NOS"
+              },
+              "description": {
+                "en": "How much wider the field of view gets while NOS is active, in the driver, hood, bumper and chase views. 0 turns it off. Applied on the next game launch.",
+                "pt-BR": "Quanto o campo de visão aumenta com o NOS ativo, nas visões do piloto, capô, para-choque e perseguição. 0 desliga. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "number",
+              "default": 0.1,
+              "minimum": 0.0,
+              "maximum": 0.3,
+              "step": 0.01,
+              "decimals": 2,
+              "unit": "ratio"
+            },
+            {
+              "id": "vignetteenabled",
+              "section": "Settings",
+              "key": "VignetteEnabled",
+              "label": {
+                "en": "NOS Blue Vignette",
+                "pt-BR": "Vinheta azul do NOS"
+              },
+              "description": {
+                "en": "A pulsing blue vignette at the screen edges while NOS is active. Applied on the next game launch.",
+                "pt-BR": "Uma vinheta azul pulsante nas bordas da tela enquanto o NOS está ativo. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            },
+            {
+              "id": "speedlinesenabled",
+              "section": "Settings",
+              "key": "SpeedLinesEnabled",
+              "label": {
+                "en": "NOS Speed Lines",
+                "pt-BR": "Linhas de velocidade do NOS"
+              },
+              "description": {
+                "en": "Thin blue streaks flying out toward the screen edges while NOS is active, in step with the car's speed. Applied on the next game launch.",
+                "pt-BR": "Finos riscos azuis voando para as bordas da tela enquanto o NOS está ativo, no ritmo da velocidade do carro. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            },
+            {
+              "id": "hudhide",
+              "section": "Settings",
+              "key": "HudHide",
+              "label": {
+                "en": "Hide NOS Gauge Without Kit",
+                "pt-BR": "Ocultar medidor sem kit"
+              },
+              "description": {
+                "en": "On: the NOS gauge frame is hidden on cars without a NOS Kit. Off: an empty frame stays. Applied on the next game launch.",
+                "pt-BR": "Ligado: a moldura do medidor de NOS fica oculta nos carros sem kit de NOS. Desligado: fica uma moldura vazia. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
               "encoding": "0/1"
             },
             {
@@ -695,47 +645,68 @@
               "section": "Settings",
               "key": "BackfireOnAllCars",
               "label": {
-                "en": "Backfire on all cars",
-                "pt-BR": "Chamas em todos os carros"
+                "en": "Backfire on All Cars",
+                "pt-BR": "Estouros no escape em todos os carros"
               },
               "description": {
-                "en": "Applied on the next game launch.",
-                "pt-BR": "Aplicado na próxima inicialização do jogo."
+                "en": "Lets every car backfire, which the NOS exhaust flames need. Off leaves the game's own backfire settings alone. Applied on the next game launch.",
+                "pt-BR": "Permite que todos os carros estourem no escape, o que as chamas do NOS precisam. Desligado mantém as configurações do próprio jogo. Aplicado na próxima inicialização do jogo."
               },
               "advanced": true,
               "apply": "next-launch",
               "type": "boolean",
               "default": true,
               "encoding": "0/1"
+            },
+            {
+              "id": "debugoverlay",
+              "section": "Settings",
+              "key": "DebugOverlay",
+              "label": {
+                "en": "NOS Debug Overlay",
+                "pt-BR": "Sobreposição de depuração do NOS"
+              },
+              "description": {
+                "en": "Draws NOS and flame debug info over the game (needs borderless/windowed mode). Applied on the next game launch.",
+                "pt-BR": "Mostra informações de depuração do NOS e das chamas sobre o jogo (requer modo janela ou sem bordas). Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": true,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": false,
+              "encoding": "0/1"
             }
           ]
         },
         "runtimeOutputs": [],
         "excludedArchiveEntries": [
-          "FnFNitro-1.1.0/INSTALL.txt",
-          "FnFNitro-1.1.0/README.md",
-          "FnFNitro-1.1.0/azimuth-windows/d3dcompiler_47.dll",
-          "FnFNitro-1.1.0/licenses/LICENSE-FH2-Mod-Platform.txt",
-          "FnFNitro-1.1.0/licenses/LICENSE-MinHook.txt",
-          "FnFNitro-1.1.0/azimuth-windows/fh2-mods/FnFNitro.dll"
+          "FnFNitro-2.0.0/INSTALL.txt",
+          "FnFNitro-2.0.0/README.md",
+          "FnFNitro-2.0.0/azimuth-windows/DWrite.dll",
+          "FnFNitro-2.0.0/licenses/LICENSE-FH2-Mod-Platform.txt",
+          "FnFNitro-2.0.0/licenses/LICENSE-MinHook.txt"
         ],
         "databaseMigrations": [],
         "source": {
           "repository": "https://github.com/anarqz/InfinityMods",
-          "commit": "d7c38bfcbc9aa538d215184ce3c09681c570a306"
+          "commit": "a1a819f7a7607eb09a764fb41924295baef1754a"
         },
         "multiplayer": {
           "schemaVersion": 1,
           "impact": "gameplay",
           "compatibilityId": "infinity-nitrosystem",
-          "revision": 1,
+          "revision": 2,
           "match": "exact",
           "settings": [
             "nitroenabled",
+            "requirenitrouskit",
             "torquescale",
             "duration",
             "builduptime",
             "rechargerate",
+            "refillonracestart",
+            "refundonrewind",
+            "drivatarnitro",
             "backfireonallcars"
           ]
         },
@@ -15679,6 +15650,2865 @@
           {
             "root": "azimuth",
             "path": "fh2-mods/CameraModsMenu.dll"
+          }
+        ]
+      }
+    },
+    {
+      "id": "underglow",
+      "version": "1.1.0-infinity.4",
+      "name": {
+        "en": "Underglow · Infinity",
+        "pt-BR": "Neon · Infinity"
+      },
+      "description": {
+        "en": "qiangqiang101's Underglow: neon under your car made of the game's own lights, so it lights up the road, with 61 effects (15 follow the car radio), 28 colors and each part on its own. Buy an Underglow Kit per car in the garage (Upgrades > Aero and Appearance); its colors, effects and parts are in FH2 ANNA (Car > Lights and Car > Underglow), which it needs. Built here from the author's source with one patch, so it coexists with the Infinity hook (which also hooks the car update), and loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter.",
+        "pt-BR": "O Underglow de qiangqiang101: neon embaixo do carro feito com as próprias luzes do jogo, que ilumina a pista, com 61 efeitos (15 seguem o rádio do carro), 28 cores e cada parte independente. Compre um Kit de Neon por carro na garagem (Melhorias > Aerodinâmica e aparência); as cores, os efeitos e as partes ficam na FH2 ANNA (Carro > Luzes e Carro > Neon), que ele exige. Compilado aqui a partir do código do autor com um patch, para conviver com o hook do Infinity (que também intercepta a atualização do carro), e carregado pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform."
+      },
+      "author": "qiangqiang101; Infinity edition by anarqz",
+      "download": {
+        "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.11.12/underglow-1.1.0-infinity.4.zip",
+        "sha256": "75d197b93ada9cdb3f71a93ee99be36965ce37d07174a573aadd258134ac9105",
+        "bytes": 894705
+      },
+      "install": {
+        "schemaVersion": 1,
+        "kind": "mod",
+        "license": "MIT",
+        "homepage": "https://github.com/anarqz/InfinityMods",
+        "runtime": "standalone",
+        "review": {
+          "status": "reviewed",
+          "blockers": []
+        },
+        "compatibility": {
+          "azimuthVersions": [
+            "1.0.4"
+          ],
+          "gameBuilds": [],
+          "verification": "unverified"
+        },
+        "dependencies": [
+          {
+            "id": "fh2-anna",
+            "versions": [
+              "1.2.0-infinity.2"
+            ]
+          }
+        ],
+        "conflicts": [],
+        "files": {
+          "game": [],
+          "azimuth": [
+            {
+              "source": "fh2-mods/Underglow.dll",
+              "destination": "mods/Forza Horizon 2/underglow/fh2-mods/Underglow.dll",
+              "role": "binary",
+              "mode": "add-or-replace",
+              "sha256": "bb3f0cc51915d595d75a4dc7b4af100f97224441e3fe44ee13f59ceecadc90b2",
+              "bytes": 1697792
+            },
+            {
+              "source": "LICENSE.txt",
+              "destination": "mods/Forza Horizon 2/underglow/LICENSE.txt",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "742109f80236c34e340712843a408c0f9fadf78339a833ce2de2742b9e221080",
+              "bytes": 1071
+            },
+            {
+              "source": "Underglow.Infinity.dll",
+              "destination": "mods/Forza Horizon 2/underglow/plugins/Underglow.Infinity.dll",
+              "role": "binary",
+              "mode": "add-or-replace",
+              "sha256": "db7690db0c3a711e3ad72376ac253fe0cf6db9b67f189e0cc1f50997ea0d472c",
+              "bytes": 173056
+            },
+            {
+              "source": "mod.json",
+              "destination": "mods/Forza Horizon 2/underglow/mod.json",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "19c72ccf291c575d18e7d46d1fefc3e66f3c12b4529240b22ac0b2927a19e563",
+              "bytes": 213
+            },
+            {
+              "source": "database.json",
+              "destination": "mods/Forza Horizon 2/underglow/database.json",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "a35e92aa8740789f1584b7b3ce216a2001145c450e78a4454f0175c9fce74b0c",
+              "bytes": 187
+            },
+            {
+              "source": "media/README.txt",
+              "destination": "mods/Forza Horizon 2/underglow/media/README.txt",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "a0b2834ab96df315fa062000e8be27354bf3a784f0850bd038c78ad05f2a5e97",
+              "bytes": 327
+            },
+            {
+              "source": "NOTICE.md",
+              "destination": "mods/Forza Horizon 2/underglow/NOTICE.md",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "f1810c91305068e59d815c5232333dc0093579749d9a7d6cf4ee7c0e2807895e",
+              "bytes": 2918
+            },
+            {
+              "source": "LICENSE-Infinity.txt",
+              "destination": "mods/Forza Horizon 2/underglow/LICENSE-Infinity.txt",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "273ac90b4f4411cc341cb66aa12c12cd8b2d462429f4e67b40472e8cf65c38b6",
+              "bytes": 1141
+            },
+            {
+              "source": "LICENSE-FH2-Mod-Platform.txt",
+              "destination": "mods/Forza Horizon 2/underglow/LICENSE-FH2-Mod-Platform.txt",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "592160090948f630b488f0766d5dda6c0345396dfb2f98cceeed54bea448dcf9",
+              "bytes": 1067
+            },
+            {
+              "source": "LICENSE-MinHook.txt",
+              "destination": "mods/Forza Horizon 2/underglow/LICENSE-MinHook.txt",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "d5c2224982b0b95a16b098a561335fa93f3eaf4d0aa964b7843edb986df78dc8",
+              "bytes": 4365
+            }
+          ]
+        },
+        "config": {
+          "root": "azimuth",
+          "path": "mods/Forza Horizon 2/underglow/fh2-mods/Underglow.ini",
+          "format": "ini",
+          "create": "defaults",
+          "preserveOnDisable": true,
+          "options": [
+            {
+              "id": "neon",
+              "section": "Settings",
+              "key": "Neon",
+              "label": {
+                "en": "Underglow",
+                "pt-BR": "Neon"
+              },
+              "description": {
+                "en": "Neon lights under your car. Applied on the next game launch.",
+                "pt-BR": "Luzes de neon embaixo do seu carro. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            },
+            {
+              "id": "requirekit",
+              "section": "Settings",
+              "key": "RequireKit",
+              "label": {
+                "en": "Require Underglow Kit",
+                "pt-BR": "Exigir kit de neon"
+              },
+              "description": {
+                "en": "On: a car only lights the parts of its Underglow Kit (Garage > Upgrades > Aero and Appearance). Off: every car lights every part. Applied on the next game launch.",
+                "pt-BR": "Ligado: o carro só acende as partes do seu kit de neon (Garagem > Melhorias > Aerodinâmica e aparência). Desligado: todo carro acende todas as partes. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            },
+            {
+              "id": "color",
+              "section": "Settings",
+              "key": "Color",
+              "label": {
+                "en": "Primary Color",
+                "pt-BR": "Cor primária"
+              },
+              "description": {
+                "en": "The underglow's main color. Custom 1 to 10 are set in fh2-mods\\Underglow.ini ([CustomColors]) in the mod's folder. Applied on the next game launch.",
+                "pt-BR": "A cor principal do neon. As cores Personalizada 1 a 10 ficam em fh2-mods\\Underglow.ini ([CustomColors]), na pasta do mod. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "enum",
+              "default": "0",
+              "choices": [
+                {
+                  "value": "0",
+                  "label": {
+                    "en": "Cyan",
+                    "pt-BR": "Ciano"
+                  }
+                },
+                {
+                  "value": "1",
+                  "label": {
+                    "en": "Blue",
+                    "pt-BR": "Azul"
+                  }
+                },
+                {
+                  "value": "2",
+                  "label": {
+                    "en": "Purple",
+                    "pt-BR": "Roxo"
+                  }
+                },
+                {
+                  "value": "3",
+                  "label": {
+                    "en": "Pink",
+                    "pt-BR": "Rosa"
+                  }
+                },
+                {
+                  "value": "4",
+                  "label": {
+                    "en": "Red",
+                    "pt-BR": "Vermelho"
+                  }
+                },
+                {
+                  "value": "5",
+                  "label": {
+                    "en": "Orange",
+                    "pt-BR": "Laranja"
+                  }
+                },
+                {
+                  "value": "6",
+                  "label": {
+                    "en": "Yellow",
+                    "pt-BR": "Amarelo"
+                  }
+                },
+                {
+                  "value": "7",
+                  "label": {
+                    "en": "Green",
+                    "pt-BR": "Verde"
+                  }
+                },
+                {
+                  "value": "8",
+                  "label": {
+                    "en": "White",
+                    "pt-BR": "Branco"
+                  }
+                },
+                {
+                  "value": "9",
+                  "label": {
+                    "en": "Lime",
+                    "pt-BR": "Verde-limão"
+                  }
+                },
+                {
+                  "value": "10",
+                  "label": {
+                    "en": "Teal",
+                    "pt-BR": "Azul-petróleo"
+                  }
+                },
+                {
+                  "value": "11",
+                  "label": {
+                    "en": "Sky Blue",
+                    "pt-BR": "Azul-celeste"
+                  }
+                },
+                {
+                  "value": "12",
+                  "label": {
+                    "en": "Indigo",
+                    "pt-BR": "Anil"
+                  }
+                },
+                {
+                  "value": "13",
+                  "label": {
+                    "en": "Magenta",
+                    "pt-BR": "Magenta"
+                  }
+                },
+                {
+                  "value": "14",
+                  "label": {
+                    "en": "Crimson",
+                    "pt-BR": "Carmesim"
+                  }
+                },
+                {
+                  "value": "15",
+                  "label": {
+                    "en": "Amber",
+                    "pt-BR": "Âmbar"
+                  }
+                },
+                {
+                  "value": "16",
+                  "label": {
+                    "en": "Mint",
+                    "pt-BR": "Menta"
+                  }
+                },
+                {
+                  "value": "17",
+                  "label": {
+                    "en": "Lavender",
+                    "pt-BR": "Lavanda"
+                  }
+                },
+                {
+                  "value": "18",
+                  "label": {
+                    "en": "Custom 1",
+                    "pt-BR": "Personalizada 1"
+                  }
+                },
+                {
+                  "value": "19",
+                  "label": {
+                    "en": "Custom 2",
+                    "pt-BR": "Personalizada 2"
+                  }
+                },
+                {
+                  "value": "20",
+                  "label": {
+                    "en": "Custom 3",
+                    "pt-BR": "Personalizada 3"
+                  }
+                },
+                {
+                  "value": "21",
+                  "label": {
+                    "en": "Custom 4",
+                    "pt-BR": "Personalizada 4"
+                  }
+                },
+                {
+                  "value": "22",
+                  "label": {
+                    "en": "Custom 5",
+                    "pt-BR": "Personalizada 5"
+                  }
+                },
+                {
+                  "value": "23",
+                  "label": {
+                    "en": "Custom 6",
+                    "pt-BR": "Personalizada 6"
+                  }
+                },
+                {
+                  "value": "24",
+                  "label": {
+                    "en": "Custom 7",
+                    "pt-BR": "Personalizada 7"
+                  }
+                },
+                {
+                  "value": "25",
+                  "label": {
+                    "en": "Custom 8",
+                    "pt-BR": "Personalizada 8"
+                  }
+                },
+                {
+                  "value": "26",
+                  "label": {
+                    "en": "Custom 9",
+                    "pt-BR": "Personalizada 9"
+                  }
+                },
+                {
+                  "value": "27",
+                  "label": {
+                    "en": "Custom 10",
+                    "pt-BR": "Personalizada 10"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "color2",
+              "section": "Settings",
+              "key": "Color2",
+              "label": {
+                "en": "Secondary Color",
+                "pt-BR": "Cor secundária"
+              },
+              "description": {
+                "en": "The second color, for the effects with 2 colors and some audio visualizers. Custom 1 to 10 are set in fh2-mods\\Underglow.ini ([CustomColors]) in the mod's folder. Applied on the next game launch.",
+                "pt-BR": "A segunda cor, para os efeitos com 2 cores e alguns visualizadores de áudio. As cores Personalizada 1 a 10 ficam em fh2-mods\\Underglow.ini ([CustomColors]), na pasta do mod. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "enum",
+              "default": "3",
+              "choices": [
+                {
+                  "value": "0",
+                  "label": {
+                    "en": "Cyan",
+                    "pt-BR": "Ciano"
+                  }
+                },
+                {
+                  "value": "1",
+                  "label": {
+                    "en": "Blue",
+                    "pt-BR": "Azul"
+                  }
+                },
+                {
+                  "value": "2",
+                  "label": {
+                    "en": "Purple",
+                    "pt-BR": "Roxo"
+                  }
+                },
+                {
+                  "value": "3",
+                  "label": {
+                    "en": "Pink",
+                    "pt-BR": "Rosa"
+                  }
+                },
+                {
+                  "value": "4",
+                  "label": {
+                    "en": "Red",
+                    "pt-BR": "Vermelho"
+                  }
+                },
+                {
+                  "value": "5",
+                  "label": {
+                    "en": "Orange",
+                    "pt-BR": "Laranja"
+                  }
+                },
+                {
+                  "value": "6",
+                  "label": {
+                    "en": "Yellow",
+                    "pt-BR": "Amarelo"
+                  }
+                },
+                {
+                  "value": "7",
+                  "label": {
+                    "en": "Green",
+                    "pt-BR": "Verde"
+                  }
+                },
+                {
+                  "value": "8",
+                  "label": {
+                    "en": "White",
+                    "pt-BR": "Branco"
+                  }
+                },
+                {
+                  "value": "9",
+                  "label": {
+                    "en": "Lime",
+                    "pt-BR": "Verde-limão"
+                  }
+                },
+                {
+                  "value": "10",
+                  "label": {
+                    "en": "Teal",
+                    "pt-BR": "Azul-petróleo"
+                  }
+                },
+                {
+                  "value": "11",
+                  "label": {
+                    "en": "Sky Blue",
+                    "pt-BR": "Azul-celeste"
+                  }
+                },
+                {
+                  "value": "12",
+                  "label": {
+                    "en": "Indigo",
+                    "pt-BR": "Anil"
+                  }
+                },
+                {
+                  "value": "13",
+                  "label": {
+                    "en": "Magenta",
+                    "pt-BR": "Magenta"
+                  }
+                },
+                {
+                  "value": "14",
+                  "label": {
+                    "en": "Crimson",
+                    "pt-BR": "Carmesim"
+                  }
+                },
+                {
+                  "value": "15",
+                  "label": {
+                    "en": "Amber",
+                    "pt-BR": "Âmbar"
+                  }
+                },
+                {
+                  "value": "16",
+                  "label": {
+                    "en": "Mint",
+                    "pt-BR": "Menta"
+                  }
+                },
+                {
+                  "value": "17",
+                  "label": {
+                    "en": "Lavender",
+                    "pt-BR": "Lavanda"
+                  }
+                },
+                {
+                  "value": "18",
+                  "label": {
+                    "en": "Custom 1",
+                    "pt-BR": "Personalizada 1"
+                  }
+                },
+                {
+                  "value": "19",
+                  "label": {
+                    "en": "Custom 2",
+                    "pt-BR": "Personalizada 2"
+                  }
+                },
+                {
+                  "value": "20",
+                  "label": {
+                    "en": "Custom 3",
+                    "pt-BR": "Personalizada 3"
+                  }
+                },
+                {
+                  "value": "21",
+                  "label": {
+                    "en": "Custom 4",
+                    "pt-BR": "Personalizada 4"
+                  }
+                },
+                {
+                  "value": "22",
+                  "label": {
+                    "en": "Custom 5",
+                    "pt-BR": "Personalizada 5"
+                  }
+                },
+                {
+                  "value": "23",
+                  "label": {
+                    "en": "Custom 6",
+                    "pt-BR": "Personalizada 6"
+                  }
+                },
+                {
+                  "value": "24",
+                  "label": {
+                    "en": "Custom 7",
+                    "pt-BR": "Personalizada 7"
+                  }
+                },
+                {
+                  "value": "25",
+                  "label": {
+                    "en": "Custom 8",
+                    "pt-BR": "Personalizada 8"
+                  }
+                },
+                {
+                  "value": "26",
+                  "label": {
+                    "en": "Custom 9",
+                    "pt-BR": "Personalizada 9"
+                  }
+                },
+                {
+                  "value": "27",
+                  "label": {
+                    "en": "Custom 10",
+                    "pt-BR": "Personalizada 10"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "brightness",
+              "section": "Settings",
+              "key": "Brightness",
+              "label": {
+                "en": "Brightness",
+                "pt-BR": "Brilho"
+              },
+              "description": {
+                "en": "1 is as bright as your headlight. Applied on the next game launch.",
+                "pt-BR": "1 é tão forte quanto o seu farol. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "number",
+              "default": 0.25,
+              "minimum": 0.05,
+              "maximum": 1.0,
+              "step": 0.05,
+              "decimals": 2,
+              "unit": "ratio"
+            },
+            {
+              "id": "speed",
+              "section": "Settings",
+              "key": "Speed",
+              "label": {
+                "en": "Effect speed",
+                "pt-BR": "Velocidade dos efeitos"
+              },
+              "description": {
+                "en": "Effect cycles per second. Applied on the next game launch.",
+                "pt-BR": "Ciclos do efeito por segundo. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "number",
+              "default": 0.3,
+              "minimum": 0.05,
+              "maximum": 2.0,
+              "step": 0.05,
+              "decimals": 2,
+              "unit": "ratio"
+            },
+            {
+              "id": "fronteffect",
+              "section": "Settings",
+              "key": "FrontEffect",
+              "label": {
+                "en": "Effect: Front",
+                "pt-BR": "Efeito do neon: Frente"
+              },
+              "description": {
+                "en": "The effect this part plays (Rainbow Wave by default). Applied on the next game launch.",
+                "pt-BR": "O efeito desta parte (Onda arco-íris, por padrão). Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "enum",
+              "default": "2",
+              "choices": [
+                {
+                  "value": "0",
+                  "label": {
+                    "en": "Static",
+                    "pt-BR": "Estático"
+                  }
+                },
+                {
+                  "value": "1",
+                  "label": {
+                    "en": "Rainbow",
+                    "pt-BR": "Arco-íris"
+                  }
+                },
+                {
+                  "value": "2",
+                  "label": {
+                    "en": "Rainbow Wave",
+                    "pt-BR": "Onda arco-íris"
+                  }
+                },
+                {
+                  "value": "3",
+                  "label": {
+                    "en": "Breathe",
+                    "pt-BR": "Respirar"
+                  }
+                },
+                {
+                  "value": "4",
+                  "label": {
+                    "en": "Wipe",
+                    "pt-BR": "Varrer"
+                  }
+                },
+                {
+                  "value": "5",
+                  "label": {
+                    "en": "Stack",
+                    "pt-BR": "Empilhar"
+                  }
+                },
+                {
+                  "value": "6",
+                  "label": {
+                    "en": "Blink",
+                    "pt-BR": "Piscar"
+                  }
+                },
+                {
+                  "value": "7",
+                  "label": {
+                    "en": "Police",
+                    "pt-BR": "Polícia"
+                  }
+                },
+                {
+                  "value": "8",
+                  "label": {
+                    "en": "Audio Visualizer",
+                    "pt-BR": "Visualizador de áudio"
+                  }
+                },
+                {
+                  "value": "9",
+                  "label": {
+                    "en": "Crossing Beams",
+                    "pt-BR": "Feixes cruzados"
+                  }
+                },
+                {
+                  "value": "10",
+                  "label": {
+                    "en": "Hypnotoad",
+                    "pt-BR": "Hypnotoad"
+                  }
+                },
+                {
+                  "value": "11",
+                  "label": {
+                    "en": "Lightning",
+                    "pt-BR": "Relâmpago"
+                  }
+                },
+                {
+                  "value": "12",
+                  "label": {
+                    "en": "Random Marquee",
+                    "pt-BR": "Letreiro aleatório"
+                  }
+                },
+                {
+                  "value": "13",
+                  "label": {
+                    "en": "Comet",
+                    "pt-BR": "Cometa"
+                  }
+                },
+                {
+                  "value": "14",
+                  "label": {
+                    "en": "Fill",
+                    "pt-BR": "Preencher"
+                  }
+                },
+                {
+                  "value": "15",
+                  "label": {
+                    "en": "Swap",
+                    "pt-BR": "Trocar"
+                  }
+                },
+                {
+                  "value": "16",
+                  "label": {
+                    "en": "Visor",
+                    "pt-BR": "Visor"
+                  }
+                },
+                {
+                  "value": "17",
+                  "label": {
+                    "en": "Audio Pulse",
+                    "pt-BR": "Pulso de áudio"
+                  }
+                },
+                {
+                  "value": "18",
+                  "label": {
+                    "en": "Peak Meter",
+                    "pt-BR": "Medidor de pico"
+                  }
+                },
+                {
+                  "value": "19",
+                  "label": {
+                    "en": "Audio Blend",
+                    "pt-BR": "Mistura de áudio"
+                  }
+                },
+                {
+                  "value": "20",
+                  "label": {
+                    "en": "Bass Flash",
+                    "pt-BR": "Flash de grave"
+                  }
+                },
+                {
+                  "value": "21",
+                  "label": {
+                    "en": "Audio Sparkle",
+                    "pt-BR": "Brilho de áudio"
+                  }
+                },
+                {
+                  "value": "22",
+                  "label": {
+                    "en": "Audio Rainbow",
+                    "pt-BR": "Arco-íris de áudio"
+                  }
+                },
+                {
+                  "value": "23",
+                  "label": {
+                    "en": "Center Burst",
+                    "pt-BR": "Explosão central"
+                  }
+                },
+                {
+                  "value": "24",
+                  "label": {
+                    "en": "Audio Bubbles",
+                    "pt-BR": "Bolhas de áudio"
+                  }
+                },
+                {
+                  "value": "25",
+                  "label": {
+                    "en": "Audio Party",
+                    "pt-BR": "Festa de áudio"
+                  }
+                },
+                {
+                  "value": "26",
+                  "label": {
+                    "en": "Audio Sine",
+                    "pt-BR": "Senoide de áudio"
+                  }
+                },
+                {
+                  "value": "27",
+                  "label": {
+                    "en": "Audio Star",
+                    "pt-BR": "Estrelas de áudio"
+                  }
+                },
+                {
+                  "value": "28",
+                  "label": {
+                    "en": "Audio Sync",
+                    "pt-BR": "Sincronia de áudio"
+                  }
+                },
+                {
+                  "value": "29",
+                  "label": {
+                    "en": "VU Meter",
+                    "pt-BR": "Medidor VU"
+                  }
+                },
+                {
+                  "value": "30",
+                  "label": {
+                    "en": "Audio Swirl",
+                    "pt-BR": "Redemoinho de áudio"
+                  }
+                },
+                {
+                  "value": "31",
+                  "label": {
+                    "en": "Bouncing Ball",
+                    "pt-BR": "Bola quicando"
+                  }
+                },
+                {
+                  "value": "32",
+                  "label": {
+                    "en": "Breathing Circle",
+                    "pt-BR": "Círculo que respira"
+                  }
+                },
+                {
+                  "value": "33",
+                  "label": {
+                    "en": "Fractal Motion",
+                    "pt-BR": "Movimento fractal"
+                  }
+                },
+                {
+                  "value": "34",
+                  "label": {
+                    "en": "Motion Point",
+                    "pt-BR": "Ponto em movimento"
+                  }
+                },
+                {
+                  "value": "35",
+                  "label": {
+                    "en": "Rain",
+                    "pt-BR": "Chuva"
+                  }
+                },
+                {
+                  "value": "36",
+                  "label": {
+                    "en": "Rotating Beam",
+                    "pt-BR": "Feixe giratório"
+                  }
+                },
+                {
+                  "value": "37",
+                  "label": {
+                    "en": "Smooth Blink",
+                    "pt-BR": "Piscar suave"
+                  }
+                },
+                {
+                  "value": "38",
+                  "label": {
+                    "en": "Sparkle Fade",
+                    "pt-BR": "Brilhos que somem"
+                  }
+                },
+                {
+                  "value": "39",
+                  "label": {
+                    "en": "Zig Zag",
+                    "pt-BR": "Zigue-zague"
+                  }
+                },
+                {
+                  "value": "40",
+                  "label": {
+                    "en": "Marquee",
+                    "pt-BR": "Letreiro"
+                  }
+                },
+                {
+                  "value": "41",
+                  "label": {
+                    "en": "Alternate Blink",
+                    "pt-BR": "Piscar alternado"
+                  }
+                },
+                {
+                  "value": "42",
+                  "label": {
+                    "en": "Gradient Wave",
+                    "pt-BR": "Onda gradiente"
+                  }
+                },
+                {
+                  "value": "43",
+                  "label": {
+                    "en": "Moving Panes",
+                    "pt-BR": "Painéis móveis"
+                  }
+                },
+                {
+                  "value": "44",
+                  "label": {
+                    "en": "Noise Map",
+                    "pt-BR": "Mapa de ruído"
+                  }
+                },
+                {
+                  "value": "45",
+                  "label": {
+                    "en": "Sequence",
+                    "pt-BR": "Sequência"
+                  }
+                },
+                {
+                  "value": "46",
+                  "label": {
+                    "en": "Wavy",
+                    "pt-BR": "Ondulado"
+                  }
+                },
+                {
+                  "value": "47",
+                  "label": {
+                    "en": "Two-Color Marquee",
+                    "pt-BR": "Letreiro de 2 cores"
+                  }
+                },
+                {
+                  "value": "48",
+                  "label": {
+                    "en": "Bloom",
+                    "pt-BR": "Florescer"
+                  }
+                },
+                {
+                  "value": "49",
+                  "label": {
+                    "en": "Bubbles",
+                    "pt-BR": "Bolhas"
+                  }
+                },
+                {
+                  "value": "50",
+                  "label": {
+                    "en": "Color Wheel",
+                    "pt-BR": "Roda de cores"
+                  }
+                },
+                {
+                  "value": "51",
+                  "label": {
+                    "en": "Double Rainbow",
+                    "pt-BR": "Arco-íris duplo"
+                  }
+                },
+                {
+                  "value": "52",
+                  "label": {
+                    "en": "Motion Points",
+                    "pt-BR": "Pontos em movimento"
+                  }
+                },
+                {
+                  "value": "53",
+                  "label": {
+                    "en": "Mosaic",
+                    "pt-BR": "Mosaico"
+                  }
+                },
+                {
+                  "value": "54",
+                  "label": {
+                    "en": "Radial Rainbow",
+                    "pt-BR": "Arco-íris radial"
+                  }
+                },
+                {
+                  "value": "55",
+                  "label": {
+                    "en": "Random Spin",
+                    "pt-BR": "Giro aleatório"
+                  }
+                },
+                {
+                  "value": "56",
+                  "label": {
+                    "en": "Rotating Rainbow",
+                    "pt-BR": "Arco-íris giratório"
+                  }
+                },
+                {
+                  "value": "57",
+                  "label": {
+                    "en": "Spiral",
+                    "pt-BR": "Espiral"
+                  }
+                },
+                {
+                  "value": "58",
+                  "label": {
+                    "en": "Starry Night",
+                    "pt-BR": "Noite estrelada"
+                  }
+                },
+                {
+                  "value": "59",
+                  "label": {
+                    "en": "Sunrise",
+                    "pt-BR": "Nascer do sol"
+                  }
+                },
+                {
+                  "value": "60",
+                  "label": {
+                    "en": "Swirl Circles",
+                    "pt-BR": "Círculos em redemoinho"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "fronton",
+              "section": "Settings",
+              "key": "FrontOn",
+              "label": {
+                "en": "Underglow: Front",
+                "pt-BR": "Neon: Frente"
+              },
+              "description": {
+                "en": "Turns this part of the underglow on or off. Applied on the next game launch.",
+                "pt-BR": "Liga ou desliga esta parte do neon. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            },
+            {
+              "id": "righteffect",
+              "section": "Settings",
+              "key": "RightEffect",
+              "label": {
+                "en": "Effect: Right Side",
+                "pt-BR": "Efeito do neon: Lado direito"
+              },
+              "description": {
+                "en": "The effect this part plays (Rainbow Wave by default). Applied on the next game launch.",
+                "pt-BR": "O efeito desta parte (Onda arco-íris, por padrão). Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "enum",
+              "default": "2",
+              "choices": [
+                {
+                  "value": "0",
+                  "label": {
+                    "en": "Static",
+                    "pt-BR": "Estático"
+                  }
+                },
+                {
+                  "value": "1",
+                  "label": {
+                    "en": "Rainbow",
+                    "pt-BR": "Arco-íris"
+                  }
+                },
+                {
+                  "value": "2",
+                  "label": {
+                    "en": "Rainbow Wave",
+                    "pt-BR": "Onda arco-íris"
+                  }
+                },
+                {
+                  "value": "3",
+                  "label": {
+                    "en": "Breathe",
+                    "pt-BR": "Respirar"
+                  }
+                },
+                {
+                  "value": "4",
+                  "label": {
+                    "en": "Wipe",
+                    "pt-BR": "Varrer"
+                  }
+                },
+                {
+                  "value": "5",
+                  "label": {
+                    "en": "Stack",
+                    "pt-BR": "Empilhar"
+                  }
+                },
+                {
+                  "value": "6",
+                  "label": {
+                    "en": "Blink",
+                    "pt-BR": "Piscar"
+                  }
+                },
+                {
+                  "value": "7",
+                  "label": {
+                    "en": "Police",
+                    "pt-BR": "Polícia"
+                  }
+                },
+                {
+                  "value": "8",
+                  "label": {
+                    "en": "Audio Visualizer",
+                    "pt-BR": "Visualizador de áudio"
+                  }
+                },
+                {
+                  "value": "9",
+                  "label": {
+                    "en": "Crossing Beams",
+                    "pt-BR": "Feixes cruzados"
+                  }
+                },
+                {
+                  "value": "10",
+                  "label": {
+                    "en": "Hypnotoad",
+                    "pt-BR": "Hypnotoad"
+                  }
+                },
+                {
+                  "value": "11",
+                  "label": {
+                    "en": "Lightning",
+                    "pt-BR": "Relâmpago"
+                  }
+                },
+                {
+                  "value": "12",
+                  "label": {
+                    "en": "Random Marquee",
+                    "pt-BR": "Letreiro aleatório"
+                  }
+                },
+                {
+                  "value": "13",
+                  "label": {
+                    "en": "Comet",
+                    "pt-BR": "Cometa"
+                  }
+                },
+                {
+                  "value": "14",
+                  "label": {
+                    "en": "Fill",
+                    "pt-BR": "Preencher"
+                  }
+                },
+                {
+                  "value": "15",
+                  "label": {
+                    "en": "Swap",
+                    "pt-BR": "Trocar"
+                  }
+                },
+                {
+                  "value": "16",
+                  "label": {
+                    "en": "Visor",
+                    "pt-BR": "Visor"
+                  }
+                },
+                {
+                  "value": "17",
+                  "label": {
+                    "en": "Audio Pulse",
+                    "pt-BR": "Pulso de áudio"
+                  }
+                },
+                {
+                  "value": "18",
+                  "label": {
+                    "en": "Peak Meter",
+                    "pt-BR": "Medidor de pico"
+                  }
+                },
+                {
+                  "value": "19",
+                  "label": {
+                    "en": "Audio Blend",
+                    "pt-BR": "Mistura de áudio"
+                  }
+                },
+                {
+                  "value": "20",
+                  "label": {
+                    "en": "Bass Flash",
+                    "pt-BR": "Flash de grave"
+                  }
+                },
+                {
+                  "value": "21",
+                  "label": {
+                    "en": "Audio Sparkle",
+                    "pt-BR": "Brilho de áudio"
+                  }
+                },
+                {
+                  "value": "22",
+                  "label": {
+                    "en": "Audio Rainbow",
+                    "pt-BR": "Arco-íris de áudio"
+                  }
+                },
+                {
+                  "value": "23",
+                  "label": {
+                    "en": "Center Burst",
+                    "pt-BR": "Explosão central"
+                  }
+                },
+                {
+                  "value": "24",
+                  "label": {
+                    "en": "Audio Bubbles",
+                    "pt-BR": "Bolhas de áudio"
+                  }
+                },
+                {
+                  "value": "25",
+                  "label": {
+                    "en": "Audio Party",
+                    "pt-BR": "Festa de áudio"
+                  }
+                },
+                {
+                  "value": "26",
+                  "label": {
+                    "en": "Audio Sine",
+                    "pt-BR": "Senoide de áudio"
+                  }
+                },
+                {
+                  "value": "27",
+                  "label": {
+                    "en": "Audio Star",
+                    "pt-BR": "Estrelas de áudio"
+                  }
+                },
+                {
+                  "value": "28",
+                  "label": {
+                    "en": "Audio Sync",
+                    "pt-BR": "Sincronia de áudio"
+                  }
+                },
+                {
+                  "value": "29",
+                  "label": {
+                    "en": "VU Meter",
+                    "pt-BR": "Medidor VU"
+                  }
+                },
+                {
+                  "value": "30",
+                  "label": {
+                    "en": "Audio Swirl",
+                    "pt-BR": "Redemoinho de áudio"
+                  }
+                },
+                {
+                  "value": "31",
+                  "label": {
+                    "en": "Bouncing Ball",
+                    "pt-BR": "Bola quicando"
+                  }
+                },
+                {
+                  "value": "32",
+                  "label": {
+                    "en": "Breathing Circle",
+                    "pt-BR": "Círculo que respira"
+                  }
+                },
+                {
+                  "value": "33",
+                  "label": {
+                    "en": "Fractal Motion",
+                    "pt-BR": "Movimento fractal"
+                  }
+                },
+                {
+                  "value": "34",
+                  "label": {
+                    "en": "Motion Point",
+                    "pt-BR": "Ponto em movimento"
+                  }
+                },
+                {
+                  "value": "35",
+                  "label": {
+                    "en": "Rain",
+                    "pt-BR": "Chuva"
+                  }
+                },
+                {
+                  "value": "36",
+                  "label": {
+                    "en": "Rotating Beam",
+                    "pt-BR": "Feixe giratório"
+                  }
+                },
+                {
+                  "value": "37",
+                  "label": {
+                    "en": "Smooth Blink",
+                    "pt-BR": "Piscar suave"
+                  }
+                },
+                {
+                  "value": "38",
+                  "label": {
+                    "en": "Sparkle Fade",
+                    "pt-BR": "Brilhos que somem"
+                  }
+                },
+                {
+                  "value": "39",
+                  "label": {
+                    "en": "Zig Zag",
+                    "pt-BR": "Zigue-zague"
+                  }
+                },
+                {
+                  "value": "40",
+                  "label": {
+                    "en": "Marquee",
+                    "pt-BR": "Letreiro"
+                  }
+                },
+                {
+                  "value": "41",
+                  "label": {
+                    "en": "Alternate Blink",
+                    "pt-BR": "Piscar alternado"
+                  }
+                },
+                {
+                  "value": "42",
+                  "label": {
+                    "en": "Gradient Wave",
+                    "pt-BR": "Onda gradiente"
+                  }
+                },
+                {
+                  "value": "43",
+                  "label": {
+                    "en": "Moving Panes",
+                    "pt-BR": "Painéis móveis"
+                  }
+                },
+                {
+                  "value": "44",
+                  "label": {
+                    "en": "Noise Map",
+                    "pt-BR": "Mapa de ruído"
+                  }
+                },
+                {
+                  "value": "45",
+                  "label": {
+                    "en": "Sequence",
+                    "pt-BR": "Sequência"
+                  }
+                },
+                {
+                  "value": "46",
+                  "label": {
+                    "en": "Wavy",
+                    "pt-BR": "Ondulado"
+                  }
+                },
+                {
+                  "value": "47",
+                  "label": {
+                    "en": "Two-Color Marquee",
+                    "pt-BR": "Letreiro de 2 cores"
+                  }
+                },
+                {
+                  "value": "48",
+                  "label": {
+                    "en": "Bloom",
+                    "pt-BR": "Florescer"
+                  }
+                },
+                {
+                  "value": "49",
+                  "label": {
+                    "en": "Bubbles",
+                    "pt-BR": "Bolhas"
+                  }
+                },
+                {
+                  "value": "50",
+                  "label": {
+                    "en": "Color Wheel",
+                    "pt-BR": "Roda de cores"
+                  }
+                },
+                {
+                  "value": "51",
+                  "label": {
+                    "en": "Double Rainbow",
+                    "pt-BR": "Arco-íris duplo"
+                  }
+                },
+                {
+                  "value": "52",
+                  "label": {
+                    "en": "Motion Points",
+                    "pt-BR": "Pontos em movimento"
+                  }
+                },
+                {
+                  "value": "53",
+                  "label": {
+                    "en": "Mosaic",
+                    "pt-BR": "Mosaico"
+                  }
+                },
+                {
+                  "value": "54",
+                  "label": {
+                    "en": "Radial Rainbow",
+                    "pt-BR": "Arco-íris radial"
+                  }
+                },
+                {
+                  "value": "55",
+                  "label": {
+                    "en": "Random Spin",
+                    "pt-BR": "Giro aleatório"
+                  }
+                },
+                {
+                  "value": "56",
+                  "label": {
+                    "en": "Rotating Rainbow",
+                    "pt-BR": "Arco-íris giratório"
+                  }
+                },
+                {
+                  "value": "57",
+                  "label": {
+                    "en": "Spiral",
+                    "pt-BR": "Espiral"
+                  }
+                },
+                {
+                  "value": "58",
+                  "label": {
+                    "en": "Starry Night",
+                    "pt-BR": "Noite estrelada"
+                  }
+                },
+                {
+                  "value": "59",
+                  "label": {
+                    "en": "Sunrise",
+                    "pt-BR": "Nascer do sol"
+                  }
+                },
+                {
+                  "value": "60",
+                  "label": {
+                    "en": "Swirl Circles",
+                    "pt-BR": "Círculos em redemoinho"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "righton",
+              "section": "Settings",
+              "key": "RightOn",
+              "label": {
+                "en": "Underglow: Right Side",
+                "pt-BR": "Neon: Lado direito"
+              },
+              "description": {
+                "en": "Turns this part of the underglow on or off. Applied on the next game launch.",
+                "pt-BR": "Liga ou desliga esta parte do neon. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            },
+            {
+              "id": "reareffect",
+              "section": "Settings",
+              "key": "RearEffect",
+              "label": {
+                "en": "Effect: Rear",
+                "pt-BR": "Efeito do neon: Traseira"
+              },
+              "description": {
+                "en": "The effect this part plays (Rainbow Wave by default). Applied on the next game launch.",
+                "pt-BR": "O efeito desta parte (Onda arco-íris, por padrão). Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "enum",
+              "default": "2",
+              "choices": [
+                {
+                  "value": "0",
+                  "label": {
+                    "en": "Static",
+                    "pt-BR": "Estático"
+                  }
+                },
+                {
+                  "value": "1",
+                  "label": {
+                    "en": "Rainbow",
+                    "pt-BR": "Arco-íris"
+                  }
+                },
+                {
+                  "value": "2",
+                  "label": {
+                    "en": "Rainbow Wave",
+                    "pt-BR": "Onda arco-íris"
+                  }
+                },
+                {
+                  "value": "3",
+                  "label": {
+                    "en": "Breathe",
+                    "pt-BR": "Respirar"
+                  }
+                },
+                {
+                  "value": "4",
+                  "label": {
+                    "en": "Wipe",
+                    "pt-BR": "Varrer"
+                  }
+                },
+                {
+                  "value": "5",
+                  "label": {
+                    "en": "Stack",
+                    "pt-BR": "Empilhar"
+                  }
+                },
+                {
+                  "value": "6",
+                  "label": {
+                    "en": "Blink",
+                    "pt-BR": "Piscar"
+                  }
+                },
+                {
+                  "value": "7",
+                  "label": {
+                    "en": "Police",
+                    "pt-BR": "Polícia"
+                  }
+                },
+                {
+                  "value": "8",
+                  "label": {
+                    "en": "Audio Visualizer",
+                    "pt-BR": "Visualizador de áudio"
+                  }
+                },
+                {
+                  "value": "9",
+                  "label": {
+                    "en": "Crossing Beams",
+                    "pt-BR": "Feixes cruzados"
+                  }
+                },
+                {
+                  "value": "10",
+                  "label": {
+                    "en": "Hypnotoad",
+                    "pt-BR": "Hypnotoad"
+                  }
+                },
+                {
+                  "value": "11",
+                  "label": {
+                    "en": "Lightning",
+                    "pt-BR": "Relâmpago"
+                  }
+                },
+                {
+                  "value": "12",
+                  "label": {
+                    "en": "Random Marquee",
+                    "pt-BR": "Letreiro aleatório"
+                  }
+                },
+                {
+                  "value": "13",
+                  "label": {
+                    "en": "Comet",
+                    "pt-BR": "Cometa"
+                  }
+                },
+                {
+                  "value": "14",
+                  "label": {
+                    "en": "Fill",
+                    "pt-BR": "Preencher"
+                  }
+                },
+                {
+                  "value": "15",
+                  "label": {
+                    "en": "Swap",
+                    "pt-BR": "Trocar"
+                  }
+                },
+                {
+                  "value": "16",
+                  "label": {
+                    "en": "Visor",
+                    "pt-BR": "Visor"
+                  }
+                },
+                {
+                  "value": "17",
+                  "label": {
+                    "en": "Audio Pulse",
+                    "pt-BR": "Pulso de áudio"
+                  }
+                },
+                {
+                  "value": "18",
+                  "label": {
+                    "en": "Peak Meter",
+                    "pt-BR": "Medidor de pico"
+                  }
+                },
+                {
+                  "value": "19",
+                  "label": {
+                    "en": "Audio Blend",
+                    "pt-BR": "Mistura de áudio"
+                  }
+                },
+                {
+                  "value": "20",
+                  "label": {
+                    "en": "Bass Flash",
+                    "pt-BR": "Flash de grave"
+                  }
+                },
+                {
+                  "value": "21",
+                  "label": {
+                    "en": "Audio Sparkle",
+                    "pt-BR": "Brilho de áudio"
+                  }
+                },
+                {
+                  "value": "22",
+                  "label": {
+                    "en": "Audio Rainbow",
+                    "pt-BR": "Arco-íris de áudio"
+                  }
+                },
+                {
+                  "value": "23",
+                  "label": {
+                    "en": "Center Burst",
+                    "pt-BR": "Explosão central"
+                  }
+                },
+                {
+                  "value": "24",
+                  "label": {
+                    "en": "Audio Bubbles",
+                    "pt-BR": "Bolhas de áudio"
+                  }
+                },
+                {
+                  "value": "25",
+                  "label": {
+                    "en": "Audio Party",
+                    "pt-BR": "Festa de áudio"
+                  }
+                },
+                {
+                  "value": "26",
+                  "label": {
+                    "en": "Audio Sine",
+                    "pt-BR": "Senoide de áudio"
+                  }
+                },
+                {
+                  "value": "27",
+                  "label": {
+                    "en": "Audio Star",
+                    "pt-BR": "Estrelas de áudio"
+                  }
+                },
+                {
+                  "value": "28",
+                  "label": {
+                    "en": "Audio Sync",
+                    "pt-BR": "Sincronia de áudio"
+                  }
+                },
+                {
+                  "value": "29",
+                  "label": {
+                    "en": "VU Meter",
+                    "pt-BR": "Medidor VU"
+                  }
+                },
+                {
+                  "value": "30",
+                  "label": {
+                    "en": "Audio Swirl",
+                    "pt-BR": "Redemoinho de áudio"
+                  }
+                },
+                {
+                  "value": "31",
+                  "label": {
+                    "en": "Bouncing Ball",
+                    "pt-BR": "Bola quicando"
+                  }
+                },
+                {
+                  "value": "32",
+                  "label": {
+                    "en": "Breathing Circle",
+                    "pt-BR": "Círculo que respira"
+                  }
+                },
+                {
+                  "value": "33",
+                  "label": {
+                    "en": "Fractal Motion",
+                    "pt-BR": "Movimento fractal"
+                  }
+                },
+                {
+                  "value": "34",
+                  "label": {
+                    "en": "Motion Point",
+                    "pt-BR": "Ponto em movimento"
+                  }
+                },
+                {
+                  "value": "35",
+                  "label": {
+                    "en": "Rain",
+                    "pt-BR": "Chuva"
+                  }
+                },
+                {
+                  "value": "36",
+                  "label": {
+                    "en": "Rotating Beam",
+                    "pt-BR": "Feixe giratório"
+                  }
+                },
+                {
+                  "value": "37",
+                  "label": {
+                    "en": "Smooth Blink",
+                    "pt-BR": "Piscar suave"
+                  }
+                },
+                {
+                  "value": "38",
+                  "label": {
+                    "en": "Sparkle Fade",
+                    "pt-BR": "Brilhos que somem"
+                  }
+                },
+                {
+                  "value": "39",
+                  "label": {
+                    "en": "Zig Zag",
+                    "pt-BR": "Zigue-zague"
+                  }
+                },
+                {
+                  "value": "40",
+                  "label": {
+                    "en": "Marquee",
+                    "pt-BR": "Letreiro"
+                  }
+                },
+                {
+                  "value": "41",
+                  "label": {
+                    "en": "Alternate Blink",
+                    "pt-BR": "Piscar alternado"
+                  }
+                },
+                {
+                  "value": "42",
+                  "label": {
+                    "en": "Gradient Wave",
+                    "pt-BR": "Onda gradiente"
+                  }
+                },
+                {
+                  "value": "43",
+                  "label": {
+                    "en": "Moving Panes",
+                    "pt-BR": "Painéis móveis"
+                  }
+                },
+                {
+                  "value": "44",
+                  "label": {
+                    "en": "Noise Map",
+                    "pt-BR": "Mapa de ruído"
+                  }
+                },
+                {
+                  "value": "45",
+                  "label": {
+                    "en": "Sequence",
+                    "pt-BR": "Sequência"
+                  }
+                },
+                {
+                  "value": "46",
+                  "label": {
+                    "en": "Wavy",
+                    "pt-BR": "Ondulado"
+                  }
+                },
+                {
+                  "value": "47",
+                  "label": {
+                    "en": "Two-Color Marquee",
+                    "pt-BR": "Letreiro de 2 cores"
+                  }
+                },
+                {
+                  "value": "48",
+                  "label": {
+                    "en": "Bloom",
+                    "pt-BR": "Florescer"
+                  }
+                },
+                {
+                  "value": "49",
+                  "label": {
+                    "en": "Bubbles",
+                    "pt-BR": "Bolhas"
+                  }
+                },
+                {
+                  "value": "50",
+                  "label": {
+                    "en": "Color Wheel",
+                    "pt-BR": "Roda de cores"
+                  }
+                },
+                {
+                  "value": "51",
+                  "label": {
+                    "en": "Double Rainbow",
+                    "pt-BR": "Arco-íris duplo"
+                  }
+                },
+                {
+                  "value": "52",
+                  "label": {
+                    "en": "Motion Points",
+                    "pt-BR": "Pontos em movimento"
+                  }
+                },
+                {
+                  "value": "53",
+                  "label": {
+                    "en": "Mosaic",
+                    "pt-BR": "Mosaico"
+                  }
+                },
+                {
+                  "value": "54",
+                  "label": {
+                    "en": "Radial Rainbow",
+                    "pt-BR": "Arco-íris radial"
+                  }
+                },
+                {
+                  "value": "55",
+                  "label": {
+                    "en": "Random Spin",
+                    "pt-BR": "Giro aleatório"
+                  }
+                },
+                {
+                  "value": "56",
+                  "label": {
+                    "en": "Rotating Rainbow",
+                    "pt-BR": "Arco-íris giratório"
+                  }
+                },
+                {
+                  "value": "57",
+                  "label": {
+                    "en": "Spiral",
+                    "pt-BR": "Espiral"
+                  }
+                },
+                {
+                  "value": "58",
+                  "label": {
+                    "en": "Starry Night",
+                    "pt-BR": "Noite estrelada"
+                  }
+                },
+                {
+                  "value": "59",
+                  "label": {
+                    "en": "Sunrise",
+                    "pt-BR": "Nascer do sol"
+                  }
+                },
+                {
+                  "value": "60",
+                  "label": {
+                    "en": "Swirl Circles",
+                    "pt-BR": "Círculos em redemoinho"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "rearon",
+              "section": "Settings",
+              "key": "RearOn",
+              "label": {
+                "en": "Underglow: Rear",
+                "pt-BR": "Neon: Traseira"
+              },
+              "description": {
+                "en": "Turns this part of the underglow on or off. Applied on the next game launch.",
+                "pt-BR": "Liga ou desliga esta parte do neon. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            },
+            {
+              "id": "lefteffect",
+              "section": "Settings",
+              "key": "LeftEffect",
+              "label": {
+                "en": "Effect: Left Side",
+                "pt-BR": "Efeito do neon: Lado esquerdo"
+              },
+              "description": {
+                "en": "The effect this part plays (Rainbow Wave by default). Applied on the next game launch.",
+                "pt-BR": "O efeito desta parte (Onda arco-íris, por padrão). Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "enum",
+              "default": "2",
+              "choices": [
+                {
+                  "value": "0",
+                  "label": {
+                    "en": "Static",
+                    "pt-BR": "Estático"
+                  }
+                },
+                {
+                  "value": "1",
+                  "label": {
+                    "en": "Rainbow",
+                    "pt-BR": "Arco-íris"
+                  }
+                },
+                {
+                  "value": "2",
+                  "label": {
+                    "en": "Rainbow Wave",
+                    "pt-BR": "Onda arco-íris"
+                  }
+                },
+                {
+                  "value": "3",
+                  "label": {
+                    "en": "Breathe",
+                    "pt-BR": "Respirar"
+                  }
+                },
+                {
+                  "value": "4",
+                  "label": {
+                    "en": "Wipe",
+                    "pt-BR": "Varrer"
+                  }
+                },
+                {
+                  "value": "5",
+                  "label": {
+                    "en": "Stack",
+                    "pt-BR": "Empilhar"
+                  }
+                },
+                {
+                  "value": "6",
+                  "label": {
+                    "en": "Blink",
+                    "pt-BR": "Piscar"
+                  }
+                },
+                {
+                  "value": "7",
+                  "label": {
+                    "en": "Police",
+                    "pt-BR": "Polícia"
+                  }
+                },
+                {
+                  "value": "8",
+                  "label": {
+                    "en": "Audio Visualizer",
+                    "pt-BR": "Visualizador de áudio"
+                  }
+                },
+                {
+                  "value": "9",
+                  "label": {
+                    "en": "Crossing Beams",
+                    "pt-BR": "Feixes cruzados"
+                  }
+                },
+                {
+                  "value": "10",
+                  "label": {
+                    "en": "Hypnotoad",
+                    "pt-BR": "Hypnotoad"
+                  }
+                },
+                {
+                  "value": "11",
+                  "label": {
+                    "en": "Lightning",
+                    "pt-BR": "Relâmpago"
+                  }
+                },
+                {
+                  "value": "12",
+                  "label": {
+                    "en": "Random Marquee",
+                    "pt-BR": "Letreiro aleatório"
+                  }
+                },
+                {
+                  "value": "13",
+                  "label": {
+                    "en": "Comet",
+                    "pt-BR": "Cometa"
+                  }
+                },
+                {
+                  "value": "14",
+                  "label": {
+                    "en": "Fill",
+                    "pt-BR": "Preencher"
+                  }
+                },
+                {
+                  "value": "15",
+                  "label": {
+                    "en": "Swap",
+                    "pt-BR": "Trocar"
+                  }
+                },
+                {
+                  "value": "16",
+                  "label": {
+                    "en": "Visor",
+                    "pt-BR": "Visor"
+                  }
+                },
+                {
+                  "value": "17",
+                  "label": {
+                    "en": "Audio Pulse",
+                    "pt-BR": "Pulso de áudio"
+                  }
+                },
+                {
+                  "value": "18",
+                  "label": {
+                    "en": "Peak Meter",
+                    "pt-BR": "Medidor de pico"
+                  }
+                },
+                {
+                  "value": "19",
+                  "label": {
+                    "en": "Audio Blend",
+                    "pt-BR": "Mistura de áudio"
+                  }
+                },
+                {
+                  "value": "20",
+                  "label": {
+                    "en": "Bass Flash",
+                    "pt-BR": "Flash de grave"
+                  }
+                },
+                {
+                  "value": "21",
+                  "label": {
+                    "en": "Audio Sparkle",
+                    "pt-BR": "Brilho de áudio"
+                  }
+                },
+                {
+                  "value": "22",
+                  "label": {
+                    "en": "Audio Rainbow",
+                    "pt-BR": "Arco-íris de áudio"
+                  }
+                },
+                {
+                  "value": "23",
+                  "label": {
+                    "en": "Center Burst",
+                    "pt-BR": "Explosão central"
+                  }
+                },
+                {
+                  "value": "24",
+                  "label": {
+                    "en": "Audio Bubbles",
+                    "pt-BR": "Bolhas de áudio"
+                  }
+                },
+                {
+                  "value": "25",
+                  "label": {
+                    "en": "Audio Party",
+                    "pt-BR": "Festa de áudio"
+                  }
+                },
+                {
+                  "value": "26",
+                  "label": {
+                    "en": "Audio Sine",
+                    "pt-BR": "Senoide de áudio"
+                  }
+                },
+                {
+                  "value": "27",
+                  "label": {
+                    "en": "Audio Star",
+                    "pt-BR": "Estrelas de áudio"
+                  }
+                },
+                {
+                  "value": "28",
+                  "label": {
+                    "en": "Audio Sync",
+                    "pt-BR": "Sincronia de áudio"
+                  }
+                },
+                {
+                  "value": "29",
+                  "label": {
+                    "en": "VU Meter",
+                    "pt-BR": "Medidor VU"
+                  }
+                },
+                {
+                  "value": "30",
+                  "label": {
+                    "en": "Audio Swirl",
+                    "pt-BR": "Redemoinho de áudio"
+                  }
+                },
+                {
+                  "value": "31",
+                  "label": {
+                    "en": "Bouncing Ball",
+                    "pt-BR": "Bola quicando"
+                  }
+                },
+                {
+                  "value": "32",
+                  "label": {
+                    "en": "Breathing Circle",
+                    "pt-BR": "Círculo que respira"
+                  }
+                },
+                {
+                  "value": "33",
+                  "label": {
+                    "en": "Fractal Motion",
+                    "pt-BR": "Movimento fractal"
+                  }
+                },
+                {
+                  "value": "34",
+                  "label": {
+                    "en": "Motion Point",
+                    "pt-BR": "Ponto em movimento"
+                  }
+                },
+                {
+                  "value": "35",
+                  "label": {
+                    "en": "Rain",
+                    "pt-BR": "Chuva"
+                  }
+                },
+                {
+                  "value": "36",
+                  "label": {
+                    "en": "Rotating Beam",
+                    "pt-BR": "Feixe giratório"
+                  }
+                },
+                {
+                  "value": "37",
+                  "label": {
+                    "en": "Smooth Blink",
+                    "pt-BR": "Piscar suave"
+                  }
+                },
+                {
+                  "value": "38",
+                  "label": {
+                    "en": "Sparkle Fade",
+                    "pt-BR": "Brilhos que somem"
+                  }
+                },
+                {
+                  "value": "39",
+                  "label": {
+                    "en": "Zig Zag",
+                    "pt-BR": "Zigue-zague"
+                  }
+                },
+                {
+                  "value": "40",
+                  "label": {
+                    "en": "Marquee",
+                    "pt-BR": "Letreiro"
+                  }
+                },
+                {
+                  "value": "41",
+                  "label": {
+                    "en": "Alternate Blink",
+                    "pt-BR": "Piscar alternado"
+                  }
+                },
+                {
+                  "value": "42",
+                  "label": {
+                    "en": "Gradient Wave",
+                    "pt-BR": "Onda gradiente"
+                  }
+                },
+                {
+                  "value": "43",
+                  "label": {
+                    "en": "Moving Panes",
+                    "pt-BR": "Painéis móveis"
+                  }
+                },
+                {
+                  "value": "44",
+                  "label": {
+                    "en": "Noise Map",
+                    "pt-BR": "Mapa de ruído"
+                  }
+                },
+                {
+                  "value": "45",
+                  "label": {
+                    "en": "Sequence",
+                    "pt-BR": "Sequência"
+                  }
+                },
+                {
+                  "value": "46",
+                  "label": {
+                    "en": "Wavy",
+                    "pt-BR": "Ondulado"
+                  }
+                },
+                {
+                  "value": "47",
+                  "label": {
+                    "en": "Two-Color Marquee",
+                    "pt-BR": "Letreiro de 2 cores"
+                  }
+                },
+                {
+                  "value": "48",
+                  "label": {
+                    "en": "Bloom",
+                    "pt-BR": "Florescer"
+                  }
+                },
+                {
+                  "value": "49",
+                  "label": {
+                    "en": "Bubbles",
+                    "pt-BR": "Bolhas"
+                  }
+                },
+                {
+                  "value": "50",
+                  "label": {
+                    "en": "Color Wheel",
+                    "pt-BR": "Roda de cores"
+                  }
+                },
+                {
+                  "value": "51",
+                  "label": {
+                    "en": "Double Rainbow",
+                    "pt-BR": "Arco-íris duplo"
+                  }
+                },
+                {
+                  "value": "52",
+                  "label": {
+                    "en": "Motion Points",
+                    "pt-BR": "Pontos em movimento"
+                  }
+                },
+                {
+                  "value": "53",
+                  "label": {
+                    "en": "Mosaic",
+                    "pt-BR": "Mosaico"
+                  }
+                },
+                {
+                  "value": "54",
+                  "label": {
+                    "en": "Radial Rainbow",
+                    "pt-BR": "Arco-íris radial"
+                  }
+                },
+                {
+                  "value": "55",
+                  "label": {
+                    "en": "Random Spin",
+                    "pt-BR": "Giro aleatório"
+                  }
+                },
+                {
+                  "value": "56",
+                  "label": {
+                    "en": "Rotating Rainbow",
+                    "pt-BR": "Arco-íris giratório"
+                  }
+                },
+                {
+                  "value": "57",
+                  "label": {
+                    "en": "Spiral",
+                    "pt-BR": "Espiral"
+                  }
+                },
+                {
+                  "value": "58",
+                  "label": {
+                    "en": "Starry Night",
+                    "pt-BR": "Noite estrelada"
+                  }
+                },
+                {
+                  "value": "59",
+                  "label": {
+                    "en": "Sunrise",
+                    "pt-BR": "Nascer do sol"
+                  }
+                },
+                {
+                  "value": "60",
+                  "label": {
+                    "en": "Swirl Circles",
+                    "pt-BR": "Círculos em redemoinho"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "lefton",
+              "section": "Settings",
+              "key": "LeftOn",
+              "label": {
+                "en": "Underglow: Left Side",
+                "pt-BR": "Neon: Lado esquerdo"
+              },
+              "description": {
+                "en": "Turns this part of the underglow on or off. Applied on the next game launch.",
+                "pt-BR": "Liga ou desliga esta parte do neon. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            }
+          ]
+        },
+        "runtimeOutputs": [],
+        "excludedArchiveEntries": [],
+        "databaseMigrations": [],
+        "source": {
+          "repository": "https://github.com/anarqz/InfinityMods",
+          "commit": "a1a819f7a7607eb09a764fb41924295baef1754a"
+        },
+        "multiplayer": {
+          "schemaVersion": 1,
+          "impact": "gameplay",
+          "compatibilityId": "infinity-underglow",
+          "revision": 1,
+          "match": "exact",
+          "settings": [
+            "requirekit"
+          ]
+        },
+        "incompatibleFiles": [
+          {
+            "root": "azimuth",
+            "path": "fh2-mods/Underglow.dll"
+          },
+          {
+            "root": "azimuth",
+            "path": "fh2-mods/FH2Neon.dll"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fh2-anna",
+      "version": "1.2.0-infinity.2",
+      "name": {
+        "en": "FH2 ANNA · Infinity",
+        "pt-BR": "FH2 ANNA · Infinity"
+      },
+      "description": {
+        "en": "qiangqiang101's FH2 ANNA: the in-car assistant from Forza Horizon 3 back on Forza Horizon 2's HUD (D-pad down while driving), with Auto Drive along your GPS route and a cinematic camera, lights, doors, routes to the nearest event and voice commands. Other mods add to its menu (Underglow: Car > Underglow). Its own release DLL, loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter. Needs the minimap on.",
+        "pt-BR": "A FH2 ANNA de qiangqiang101: a assistente do carro do Forza Horizon 3 de volta ao HUD do Forza Horizon 2 (direcional para baixo ao dirigir), com direção automática pela rota do GPS e câmera cinematográfica, luzes, portas, rotas para o evento mais próximo e comandos de voz. Outros mods aparecem no menu dela (Neon: Carro > Neon). A DLL da própria release do autor, carregada pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform. Precisa do minimapa ligado."
+      },
+      "author": "qiangqiang101; Infinity edition by anarqz",
+      "download": {
+        "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.11.12/fh2-anna-1.2.0-infinity.2.zip",
+        "sha256": "8444fba80b9083200f0accd24931d137620a0d12b2c9d22c7b864cff547f07bf",
+        "bytes": 94650
+      },
+      "additionalDownloads": {
+        "upstream-assets": {
+          "url": "https://github.com/qiangqiang101/FH2-ANNA/releases/download/1.2.0/FH2ANNA-1.2.0.zip",
+          "sha256": "b339186683f1b4f7949ec0ffce88e4ed00729c885085419105fa608c979554e8",
+          "bytes": 1341846
+        }
+      },
+      "install": {
+        "schemaVersion": 1,
+        "kind": "mod",
+        "license": "MIT",
+        "homepage": "https://github.com/anarqz/InfinityMods",
+        "runtime": "standalone",
+        "review": {
+          "status": "reviewed",
+          "blockers": []
+        },
+        "compatibility": {
+          "azimuthVersions": [
+            "1.0.4"
+          ],
+          "gameBuilds": [],
+          "verification": "unverified"
+        },
+        "dependencies": [],
+        "conflicts": [],
+        "files": {
+          "game": [],
+          "azimuth": [
+            {
+              "source": "fh2-mods/FH2ANNA.dll",
+              "destination": "mods/Forza Horizon 2/fh2-anna/fh2-mods/FH2ANNA.dll",
+              "sha256": "da7032e35f3444fc77dc80b744f22418cb6fcffafd02617f7f597ce241cab02d",
+              "bytes": 1189376,
+              "role": "binary",
+              "mode": "add-or-replace",
+              "package": "upstream-assets"
+            },
+            {
+              "source": "LICENSE.txt",
+              "destination": "mods/Forza Horizon 2/fh2-anna/LICENSE.txt",
+              "sha256": "742109f80236c34e340712843a408c0f9fadf78339a833ce2de2742b9e221080",
+              "bytes": 1071,
+              "role": "license",
+              "mode": "add-or-replace",
+              "package": "upstream-assets"
+            },
+            {
+              "source": "FH2ANNA.Infinity.dll",
+              "destination": "mods/Forza Horizon 2/fh2-anna/plugins/FH2ANNA.Infinity.dll",
+              "role": "binary",
+              "mode": "add-or-replace",
+              "sha256": "b1db54dd842ff7de8ef5f12e52114401c08dfaeeed1a67ab8fac2a4366c27a92",
+              "bytes": 173056
+            },
+            {
+              "source": "mod.json",
+              "destination": "mods/Forza Horizon 2/fh2-anna/mod.json",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "8c72cd53ef377fecfcf427d09711abdd28106b91474ea77c8ca86a9c7d7d8801",
+              "bytes": 171
+            },
+            {
+              "source": "database.json",
+              "destination": "mods/Forza Horizon 2/fh2-anna/database.json",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "a35e92aa8740789f1584b7b3ce216a2001145c450e78a4454f0175c9fce74b0c",
+              "bytes": 187
+            },
+            {
+              "source": "media/README.txt",
+              "destination": "mods/Forza Horizon 2/fh2-anna/media/README.txt",
+              "role": "asset",
+              "mode": "add-or-replace",
+              "sha256": "a0b2834ab96df315fa062000e8be27354bf3a784f0850bd038c78ad05f2a5e97",
+              "bytes": 327
+            },
+            {
+              "source": "NOTICE.md",
+              "destination": "mods/Forza Horizon 2/fh2-anna/NOTICE.md",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "4be8c66d3abd2f2c4572fa96ccd7245d36ca752763b19f43f8cdb57c25ca0540",
+              "bytes": 1841
+            },
+            {
+              "source": "LICENSE-Infinity.txt",
+              "destination": "mods/Forza Horizon 2/fh2-anna/LICENSE-Infinity.txt",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "273ac90b4f4411cc341cb66aa12c12cd8b2d462429f4e67b40472e8cf65c38b6",
+              "bytes": 1141
+            },
+            {
+              "source": "LICENSE-FH2-Mod-Platform.txt",
+              "destination": "mods/Forza Horizon 2/fh2-anna/LICENSE-FH2-Mod-Platform.txt",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "592160090948f630b488f0766d5dda6c0345396dfb2f98cceeed54bea448dcf9",
+              "bytes": 1067
+            },
+            {
+              "source": "LICENSE-MinHook.txt",
+              "destination": "mods/Forza Horizon 2/fh2-anna/LICENSE-MinHook.txt",
+              "role": "license",
+              "mode": "add-or-replace",
+              "sha256": "d5c2224982b0b95a16b098a561335fa93f3eaf4d0aa964b7843edb986df78dc8",
+              "bytes": 4365
+            }
+          ]
+        },
+        "config": {
+          "root": "azimuth",
+          "path": "mods/Forza Horizon 2/fh2-anna/fh2-mods/FH2ANNA.ini",
+          "format": "ini",
+          "create": "defaults",
+          "preserveOnDisable": true,
+          "options": [
+            {
+              "id": "cinematic",
+              "section": "Autodrive",
+              "key": "Cinematic",
+              "label": {
+                "en": "Cinematic camera button",
+                "pt-BR": "Botão da câmera cinematográfica"
+              },
+              "description": {
+                "en": "While Auto Drive is on, this button switches to slow cinematic shots and back. None: no cinematic camera. Applied on the next game launch.",
+                "pt-BR": "Com a direção automática ativada, este botão alterna para tomadas cinematográficas lentas e volta. Nenhum: sem câmera cinematográfica. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "enum",
+              "default": "LB",
+              "choices": [
+                {
+                  "value": "LB",
+                  "label": {
+                    "en": "LB",
+                    "pt-BR": "LB"
+                  }
+                },
+                {
+                  "value": "RB",
+                  "label": {
+                    "en": "RB",
+                    "pt-BR": "RB"
+                  }
+                },
+                {
+                  "value": "A",
+                  "label": {
+                    "en": "A",
+                    "pt-BR": "A"
+                  }
+                },
+                {
+                  "value": "B",
+                  "label": {
+                    "en": "B",
+                    "pt-BR": "B"
+                  }
+                },
+                {
+                  "value": "X",
+                  "label": {
+                    "en": "X",
+                    "pt-BR": "X"
+                  }
+                },
+                {
+                  "value": "Y",
+                  "label": {
+                    "en": "Y",
+                    "pt-BR": "Y"
+                  }
+                },
+                {
+                  "value": "View",
+                  "label": {
+                    "en": "View",
+                    "pt-BR": "View"
+                  }
+                },
+                {
+                  "value": "L3",
+                  "label": {
+                    "en": "L3",
+                    "pt-BR": "L3"
+                  }
+                },
+                {
+                  "value": "R3",
+                  "label": {
+                    "en": "R3",
+                    "pt-BR": "R3"
+                  }
+                },
+                {
+                  "value": "None",
+                  "label": {
+                    "en": "None",
+                    "pt-BR": "Nenhum"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "hidehoodtrunk",
+              "section": "Doors",
+              "key": "HideHoodTrunk",
+              "label": {
+                "en": "Hide hood and trunk in ANNA",
+                "pt-BR": "Ocultar capô e porta-malas na ANNA"
+              },
+              "description": {
+                "en": "Car > Doors leaves out the hood and the trunk, and Open All leaves them shut: for cars with an invisible trunk or a fake engine under the hood. Applied on the next game launch.",
+                "pt-BR": "Carro > Portas deixa de fora o capô e o porta-malas, e Abrir tudo os mantém fechados: para carros com porta-malas invisível ou motor falso sob o capô. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": false,
+              "encoding": "0/1"
+            },
+            {
+              "id": "closewhenmoving",
+              "section": "Doors",
+              "key": "CloseWhenMoving",
+              "label": {
+                "en": "Close doors when moving",
+                "pt-BR": "Fechar portas ao andar"
+              },
+              "description": {
+                "en": "The doors, hood, trunk and storage ANNA opened shut by themselves once the car drives off. The roof stays as it is. Applied on the next game launch.",
+                "pt-BR": "As portas, o capô, o porta-malas e os compartimentos abertos pela ANNA se fecham sozinhos quando o carro anda. O teto fica como está. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            },
+            {
+              "id": "matchmaking",
+              "section": "Online",
+              "key": "Matchmaking",
+              "label": {
+                "en": "Start Matchmaking in ANNA",
+                "pt-BR": "Buscar partida na ANNA"
+              },
+              "description": {
+                "en": "ANNA's \"Start Matchmaking for\" list: Online Road Trip, Online Freeroam, and their private sessions, started without the pause menu. Applied on the next game launch.",
+                "pt-BR": "A lista \"Buscar partida em\" da ANNA: Pegar a Estrada Online, Passeio Livre Online e suas sessões particulares, iniciadas sem o menu de pausa. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": true,
+              "encoding": "0/1"
+            },
+            {
+              "id": "enabled",
+              "section": "Voice",
+              "key": "Enabled",
+              "label": {
+                "en": "Voice commands",
+                "pt-BR": "Comandos de voz"
+              },
+              "description": {
+                "en": "Say \"ANNA\" and a command from ANNA's menu as it reads now (\"ANNA, Enable Auto Drive\"), and it's done. Uses Windows' speech recognition and the default microphone; a headset works best. Applied on the next game launch.",
+                "pt-BR": "Diga \"ANNA\" e um comando do menu da ANNA como ele aparece agora (\"ANNA, Ativar direção automática\"), e pronto. Usa o reconhecimento de fala do Windows e o microfone padrão; um headset funciona melhor. Aplicado na próxima inicialização do jogo."
+              },
+              "advanced": false,
+              "apply": "next-launch",
+              "type": "boolean",
+              "default": false,
+              "encoding": "0/1"
+            }
+          ]
+        },
+        "runtimeOutputs": [],
+        "excludedArchiveEntries": [
+          "DWrite.dll",
+          "LICENSE-MinHook.txt",
+          "README.md"
+        ],
+        "databaseMigrations": [],
+        "source": {
+          "repository": "https://github.com/anarqz/InfinityMods",
+          "commit": "a1a819f7a7607eb09a764fb41924295baef1754a"
+        },
+        "multiplayer": {
+          "schemaVersion": 1,
+          "impact": "gameplay",
+          "compatibilityId": "infinity-fh2-anna",
+          "revision": 1,
+          "match": "exact",
+          "settings": []
+        },
+        "incompatibleFiles": [
+          {
+            "root": "azimuth",
+            "path": "fh2-mods/FH2ANNA.dll"
           }
         ]
       }
