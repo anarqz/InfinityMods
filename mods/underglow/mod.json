@@ -1,6 +1,6 @@
 {
   "id": "underglow",
-  "version": "1.1.0-infinity.1",
+  "version": "1.1.0-infinity.2",
   "folder": "underglow",
   "dll": "Underglow.Infinity.dll",
   "adapter": "fh2-mod-platform-eo",

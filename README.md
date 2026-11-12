@@ -18,6 +18,7 @@ Their authors release often: `tools/infmods.py sync` and the skill in `.claude/s
 | Mod | Original | Adapter | Licence | Modes |
 |---|---|---|---|---|
 | [Nitro System](mods/nitrosystem) | [qiangqiang101/FH2-NitroSystem](https://github.com/qiangqiang101/FH2-NitroSystem) (its release DLL) | [FH2 Mod Platform for ExtraOptions](adapters/fh2-mod-platform-eo) | MIT | Noob |
+| [FH2 ANNA](mods/fh2-anna) | [qiangqiang101/FH2-ANNA](https://github.com/qiangqiang101/FH2-ANNA) (its release DLL) | [FH2 Mod Platform for ExtraOptions](adapters/fh2-mod-platform-eo) | MIT | Noob |
 | [Underglow](mods/underglow) | [qiangqiang101/FH2-Underglow](https://github.com/qiangqiang101/FH2-Underglow) (its release DLL) | [FH2 Mod Platform for ExtraOptions](adapters/fh2-mod-platform-eo) | MIT | Noob |
 | [Garage Revving](mods/extraoptions-garagerevving) | [Extra Options](https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions) `fh2/plugins/garage-engine-rev` | none (an ExtraOptions plugin) | GPL-3.0 | both |
 | [Weather Control](mods/extraoptions-weathercontrol) | [Extra Options](https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions) `fh2/plugins/weather-control` | none (an ExtraOptions plugin) | GPL-3.0 | Noob |
@@ -68,6 +69,7 @@ git submodule update --init --recursive
 python3 -I tools/infmods.py build  nitrosystem                      # Windows (MSVC)
 python3 -I tools/infmods.py verify nitrosystem                      # Windows (MSVC)
 python3 -I tools/infmods.py verify underglow                        # Windows (MSVC)
+python3 -I tools/infmods.py verify fh2-anna                         # Windows (MSVC)
 python3 -I tools/infmods.py sync   underglow                        # any OS: report a newer upstream release (--write to re-pin)
 python3 -I tools/infmods.py verify extraoptions-garagerevving --zig /path/to/zig
 python3 -I tools/infmods.py verify extraoptions-weathercontrol --zig /path/to/zig   # Windows (its systemImports)

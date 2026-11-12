@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "underglow",
-  "version": "1.1.0-infinity.1",
+  "version": "1.1.0-infinity.2",
   "kind": "mod",
   "name": {
     "en": "Underglow · Infinity",
@@ -11,8 +11,8 @@
   "license": "MIT",
   "homepage": "https://github.com/anarqz/InfinityMods",
   "description": {
-    "en": "qiangqiang101's Underglow: neon under your car made of the game's own lights, so it lights up the road, with 61 effects (15 follow the car radio), 28 colors and each part on its own. Buy an Underglow Kit per car in the garage (Upgrades > Aero and Appearance). Its own release DLL, loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter.",
-    "pt-BR": "O Underglow de qiangqiang101: neon embaixo do carro feito com as próprias luzes do jogo, que ilumina a pista, com 61 efeitos (15 seguem o rádio do carro), 28 cores e cada parte independente. Compre um Kit de Neon por carro na garagem (Melhorias > Aerodinâmica e aparência). A DLL da própria release do autor, carregada pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform."
+    "en": "qiangqiang101's Underglow: neon under your car made of the game's own lights, so it lights up the road, with 61 effects (15 follow the car radio), 28 colors and each part on its own. Buy an Underglow Kit per car in the garage (Upgrades > Aero and Appearance); its colors, effects and parts are in FH2 ANNA (Car > Lights and Car > Underglow), which it needs. Its own release DLL, loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter.",
+    "pt-BR": "O Underglow de qiangqiang101: neon embaixo do carro feito com as próprias luzes do jogo, que ilumina a pista, com 61 efeitos (15 seguem o rádio do carro), 28 cores e cada parte independente. Compre um Kit de Neon por carro na garagem (Melhorias > Aerodinâmica e aparência); as cores, os efeitos e as partes ficam na FH2 ANNA (Carro > Luzes e Carro > Neon), que ele exige. A DLL da própria release do autor, carregada pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform."
   },
   "runtime": "standalone",
   "review": {
@@ -34,7 +34,14 @@
     "bytes": 0,
     "format": "zip"
   },
-  "dependencies": [],
+  "dependencies": [
+    {
+      "id": "fh2-anna",
+      "versions": [
+        "1.2.0-infinity.1"
+      ]
+    }
+  ],
   "conflicts": [],
   "files": {
     "game": [],
