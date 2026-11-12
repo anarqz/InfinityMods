@@ -1,0 +1,2 @@
+# Patches apply to LF trees (git archive with core.eol=lf, tools/infmods.py): keep them LF on every checkout.
+*.patch text eol=lf
