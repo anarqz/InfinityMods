@@ -1,0 +1,57 @@
+{
+  "id": "underglow",
+  "version": "1.1.0-infinity.1",
+  "folder": "underglow",
+  "dll": "Underglow.Infinity.dll",
+  "adapter": "fh2-mod-platform-eo",
+  "adapterConfig": {
+    "modDll": "fh2-mods/Underglow.dll"
+  },
+  "toolchain": "msvc",
+  "upstream": {
+    "submodule": "upstream/underglow",
+    "repository": "https://github.com/qiangqiang101/FH2-Underglow",
+    "version": "1.1.0",
+    "sources": [
+      "platform/third_party/minhook/src/hook.c",
+      "platform/third_party/minhook/src/buffer.c",
+      "platform/third_party/minhook/src/trampoline.c",
+      "platform/third_party/minhook/src/hde/hde64.c"
+    ],
+    "includes": [
+      "platform/include",
+      "platform/third_party/minhook/include"
+    ],
+    "libraries": []
+  },
+  "upstreamRelease": {
+    "repository": "qiangqiang101/FH2-Underglow",
+    "asset": "Underglow-[0-9]+\\.[0-9]+\\.[0-9]+\\.zip",
+    "files": {
+      "fh2-mods/Underglow\\.dll": "fh2-mods/Underglow.dll",
+      "LICENSE\\.txt": "LICENSE.txt"
+    },
+    "allowedImports": [
+      "KERNEL32.dll"
+    ]
+  },
+  "allowedImports": [
+    "KERNEL32.dll"
+  ],
+  "package": {
+    "Underglow.Infinity.dll": "$dll",
+    "mod.json": "mods/underglow/extraoptions/mod.json",
+    "database.json": "mods/underglow/extraoptions/database.json",
+    "media/README.txt": "adapters/fh2-mod-platform-eo/media-README.txt",
+    "LICENSE-FH2-Mod-Platform.txt": "upstream/underglow/platform/LICENSE",
+    "LICENSE-MinHook.txt": "upstream/underglow/platform/third_party/minhook/LICENSE.txt",
+    "LICENSE-Infinity.txt": "adapters/fh2-mod-platform-eo/LICENSE",
+    "NOTICE.md": "mods/underglow/NOTICE.md"
+  },
+  "versionInfo": {
+    "description": "Runs qiangqiang101's Underglow (its own release DLL) as an ExtraOptions mod (Infinity edition)",
+    "company": "anarqz; Underglow by qiangqiang101",
+    "product": "Infinity Mods",
+    "license": "MIT"
+  }
+}
