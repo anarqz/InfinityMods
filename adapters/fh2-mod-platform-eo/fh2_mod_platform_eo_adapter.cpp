@@ -121,14 +121,15 @@ bool within_rel32(const void* a, const void* b) {
     return d > -0x7ff00000ll && d < 0x7ff00000ll;
 }
 
-// A stub within +/-2 GB of `near` (a call site must reach its entry stub with rel32). Broker lock held.
-Stub* new_stub(void* near, void* target) {
+// A stub within +/-2 GB of `place` (a call site must reach its entry stub with rel32). Broker lock held.
+// (Not named `near`: windows.h defines near and far as empty macros.)
+Stub* new_stub(void* place, void* target) {
     Page* page = nullptr;
     for (unsigned i = 0; i < page_count && !page; ++i)
-        if (pages[i].used + sizeof(Stub) <= 4096 && within_rel32(pages[i].base, near)) page = &pages[i];
+        if (pages[i].used + sizeof(Stub) <= 4096 && within_rel32(pages[i].base, place)) page = &pages[i];
     if (!page) {
         if (page_count >= 64) return nullptr;
-        auto* base = static_cast<uint8_t*>(near_alloc(near, 4096));
+        auto* base = static_cast<uint8_t*>(near_alloc(place, 4096));
         if (!base) return nullptr;
         pages[page_count] = {base, 0};
         page = &pages[page_count++];
@@ -260,16 +261,16 @@ const HookBroker* find_broker() {
     HANDLE mapping = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, 4096, name);
     if (!mapping) return nullptr;
     const bool first = GetLastError() != ERROR_ALREADY_EXISTS;
-    auto* shared = static_cast<const HookBroker* volatile*>(MapViewOfFile(mapping, FILE_MAP_ALL_ACCESS, 0, 0, sizeof(void*)));
+    auto* shared = static_cast<void* volatile*>(MapViewOfFile(mapping, FILE_MAP_ALL_ACCESS, 0, 0, sizeof(void*)));
     if (!shared) { CloseHandle(mapping); return nullptr; }
     // The mapping and its view stay for the life of the process (the plugin DLLs are never unloaded).
     if (first) {
         if (MH_Initialize() != MH_OK) { adapter_log("MinHook could not start."); return nullptr; }
-        InterlockedExchangePointer(reinterpret_cast<void* volatile*>(shared), const_cast<HookBroker*>(&own_broker));
+        InterlockedExchangePointer(shared, const_cast<HookBroker*>(&own_broker));
         return &own_broker;
     }
     for (int i = 0; i < 200; ++i) {   // ExtraOptions starts plugins one by one; the first has published already
-        if (const HookBroker* found = *shared) return found->size >= sizeof(HookBroker) && found->version == kBrokerVersion ? found : nullptr;
+        if (const auto* found = static_cast<const HookBroker*>(*shared)) return found->size >= sizeof(HookBroker) && found->version == kBrokerVersion ? found : nullptr;
         Sleep(10);
     }
     return nullptr;
