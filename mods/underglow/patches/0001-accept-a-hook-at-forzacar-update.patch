@@ -1,0 +1,43 @@
+From: Infinity Mods <noreply@infinitymods.invalid>
+Subject: [PATCH] Accept another hook's jump at ForzaCar::Update
+
+Underglow checks ForzaCar::Update's stock bytes before hooking it. Under Infinity
+the Infinity hook's headlight and roof sync (a 14-byte FF 25 detour) and
+NitroSystem (an E9 jump through the same hook chain) can be there first; Underglow
+then stayed off. Accept those two jump shapes; everything else must still be the
+stock bytes. The hook chain relocates the jump into its trampoline.
+---
+diff --git a/src/neon_mod.cpp b/src/neon_mod.cpp
+index 7057a01..61c0dd7 100644
+--- a/src/neon_mod.cpp
++++ b/src/neon_mod.cpp
+@@ -2816,17 +2816,27 @@ void add_anna_entries() {
+ 
+ // ---- Start ----------------------------------------------------------------------------------------------------
+ 
++// Infinity: ForzaCar::Update may already start with another hook's jump: the Infinity hook's 14-byte detour
++// (FF 25 00000000 and its address) or a mod's E9 rel32 (NitroSystem's, through the same hook chain). Underglow then
++// hooks over it (the hook chain moves that jump to its trampoline); anything else must be the stock bytes.
++bool forzacar_update_known(const char* at, bool* detoured) {
++    const auto* b = reinterpret_cast<const unsigned char*>(at);
++    *detoured = b[0] == 0xE9 || (b[0] == 0xFF && b[1] == 0x25 && !b[2] && !b[3] && !b[4] && !b[5]);
++    return *detoured || !memcmp(at, FH2_GAME_FORZACAR_UPDATE_BYTES, sizeof FH2_GAME_FORZACAR_UPDATE_BYTES - 1);
++}
++
+ DWORD WINAPI start(LPVOID) {
+     char* game = static_cast<char*>(g_api->wait_for_code(0xFFFFFFFFu));
+     if (!game) return 0;
+     g_base = reinterpret_cast<uintptr_t>(game);
+ 
++    bool detoured = false;
+     if (memcmp(game + FH2_GAME_FORZACAR_KIND, FH2_GAME_FORZACAR_KIND_BYTES, sizeof FH2_GAME_FORZACAR_KIND_BYTES - 1) ||
+-        memcmp(game + FH2_GAME_FORZACAR_UPDATE, FH2_GAME_FORZACAR_UPDATE_BYTES,
+-               sizeof FH2_GAME_FORZACAR_UPDATE_BYTES - 1)) {
++        !forzacar_update_known(game + FH2_GAME_FORZACAR_UPDATE, &detoured)) {
+         g_api->log(g_mod, "this isn't the FH2 build Underglow knows (ForzaCar code differs): staying off");
+         return 0;
+     }
++    if (detoured) g_api->log(g_mod, "ForzaCar::Update already has another hook's jump: hooking over it");
+ 
+     struct {
+         const char* name;

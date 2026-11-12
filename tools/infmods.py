@@ -11,7 +11,10 @@
 An FH2 Mod Platform mod (adapter fh2-mod-platform-eo) is the author's own release DLL, never built here: the manifest
 takes it (adapterConfig.modDll) from the author's release ZIP (additionalPackages.upstream-assets, pinned by SHA-256),
 and the package holds only the adapter, which loads it. `sync` updates those pins from the release the recipe's
-upstreamRelease names (.claude/skills/upstream-sync/SKILL.md).
+upstreamRelease names (.claude/skills/upstream-sync/SKILL.md). The exception is a recipe with `modBuild` (Underglow,
+owner exception to the no-game-material rule for its camera_presets.h): the mod's DLL is built here from the pinned
+submodule commit with the recipe's patches applied (`git apply`, never in the submodule itself), and shipped in the
+package at adapterConfig.modDll.
 
 A recipe's `toolchain` is `zig` (Zig 0.15.2, any host; --zig) or `msvc` (Windows with Visual Studio
 C++ x64 tools, for sources that need MSVC, such as `__try`).
@@ -217,6 +220,65 @@ cl {flags} /LD {" ".join(f'"{s}"' for s in sources)} /Fe:{dll} /link /Brepro /OP
     return out / dll
 
 
+def build_mod(recipe, out):
+    """The mod's own DLL (recipe `modBuild`, MSVC): the pinned submodule commit's files (git archive, LF, so the
+    patches apply the same on any checkout), the recipe's patches applied in order, compiled with upstream's MSVC
+    flags (its CMakeLists: /W4 /permissive- /utf-8 /EHsc, static CRT) plus /Brepro; relative paths only, so two
+    builds in different folders give the same bytes."""
+    import tarfile
+    spec = recipe["modBuild"]
+    upstream = ROOT / recipe["upstream"]["submodule"]
+    environment = vcvars()
+    out.mkdir(parents=True, exist_ok=True)
+    name = Path(spec["output"]).name
+    with tempfile.TemporaryDirectory(prefix="infmods-mod-") as temporary:
+        work = Path(temporary)
+        tree = work / "src"
+        tree.mkdir()
+        archive = subprocess.run([shutil.which("git") or sys.exit("git not found"), "-c", "core.autocrlf=false",
+                                  "-c", "core.eol=lf", "-C", str(upstream), "archive", "--format=tar", "HEAD"],
+                                 check=True, capture_output=True).stdout
+        with tarfile.open(fileobj=io.BytesIO(archive)) as tar:
+            tar.extractall(tree, filter="data")
+        for patch in spec.get("patches", []):
+            subprocess.run([shutil.which("git"), "apply", "--whitespace=nowarn", "-p1", str(ROOT / patch)], check=True, cwd=tree)
+        # Headers outside the archive (the platform submodule), by path relative to the work folder: copied in.
+        for folder in spec.get("includes", []):
+            shutil.copytree(upstream / folder, work / "inc" / folder)
+        includes = " ".join(f'/I"inc/{folder}"' for folder in spec.get("includes", []))
+        defines = " ".join(f'/D{d}' for d in spec.get("defines", []))
+        sources = " ".join(f'"src/{s}"' for s in spec["sources"])
+        flags = ("/nologo /std:c++20 /utf-8 /EHsc /MT /O2 /DNDEBUG /W4 /permissive- /Brepro /DUNICODE /D_UNICODE "
+                 "/DWIN32_LEAN_AND_MEAN /DNOMINMAX")
+        (work / "build.cmd").write_text(f"""@echo off
+set "PATH=%ProgramFiles(x86)%\\Microsoft Visual Studio\\Installer;%PATH%"
+call "{environment}" >nul || exit /b 1
+cl {flags} {defines} {includes} /LD {sources} /Fe:{name} /link /Brepro /OPT:REF /OPT:ICF {" ".join(spec.get("libraries", []))} || exit /b 1
+""", encoding="ascii")
+        subprocess.run(["cmd", "/c", str(work / "build.cmd")], check=True, cwd=work)
+        shutil.copyfile(work / name, out / name)
+    return out / name
+
+
+def verify_mod_build(recipe, a, b):
+    """Two builds of the mod's own DLL give the same bytes; x64, fh2mod_init, imports in modBuild.allowedImports."""
+    first, second = build_mod(recipe, a / "mod"), build_mod(recipe, b / "mod")
+    digests = [hashlib.sha256(p.read_bytes()).hexdigest() for p in (first, second)]
+    machine, exports, imports = pe_report(first)
+    problems = []
+    if digests[0] != digests[1]:
+        problems.append("two builds of the mod's DLL differ (not reproducible)")
+    if machine != 0x8664:
+        problems.append("the mod's DLL is not x64")
+    if "fh2mod_init" not in exports:
+        problems.append("the mod's DLL does not export fh2mod_init")
+    allowed = {d.lower() for d in recipe["modBuild"]["allowedImports"]}
+    if extra := [d for d in imports if d.lower() not in allowed]:
+        problems.append(f"the mod's DLL imports {extra}, not in modBuild.allowedImports")
+    print(f"{first.name} sha256 {digests[0]}\nmod exports {exports}\nmod imports {imports}")
+    return problems
+
+
 def pe_report(path):
     """(machine, exports, imported DLLs) from a PE32+ file, stdlib only."""
     data = path.read_bytes()
@@ -272,13 +334,17 @@ def layout_problems(recipe, manifest):
         if path.rsplit("/", 1)[-1].lower() in reserved:
             problems.append(f"{path} would replace ExtraOptions.Infinity's own file")
     binaries = [f["destination"] for f in files["azimuth"] if f["role"] == "binary" and "package" not in f]
-    if binaries != [f"{folder}plugins/{recipe['dll']}"]:
-        problems.append(f"the one built binary must be {folder}plugins/{recipe['dll']}, found {binaries}")
+    mod_dll = recipe.get("adapterConfig", {}).get("modDll")
+    built = recipe.get("modBuild")
+    if built and built.get("output") != mod_dll:
+        problems.append("modBuild.output must be adapterConfig.modDll")
+    wanted_built = sorted([f"{folder}plugins/{recipe['dll']}"] + ([f"{folder}{mod_dll}"] if built else []))
+    if sorted(binaries) != wanted_built:
+        problems.append(f"the built binaries must be {wanted_built}, found {binaries}")
     # The FH2 Mod Platform adapter starts the original author's release DLL, downloaded from their release (an
     # additional package, pinned by SHA-256): never built or shipped here.
-    mod_dll = recipe.get("adapterConfig", {}).get("modDll")
     from_release = [f["destination"] for f in files["azimuth"] if f["role"] == "binary" and "package" in f]
-    if from_release != ([f"{folder}{mod_dll}"] if mod_dll else []):
+    if from_release != ([f"{folder}{mod_dll}"] if mod_dll and not built else []):
         problems.append(f"the binary from the original release must be exactly adapterConfig.modDll, found {from_release}")
     if not any(f["destination"] == f"{folder}mod.json" and f["source"] == "mod.json" for f in files["azimuth"]):
         problems.append(f"{folder}mod.json is not installed")
@@ -303,7 +369,8 @@ def verify(name, zig):
         first, second = build(name, zig, Path(a)), build(name, zig, Path(b))
         digests = [hashlib.sha256(p.read_bytes()).hexdigest() for p in (first, second)]
         machine, exports, imports = pe_report(first)
-    problems = layout
+        mod_problems = verify_mod_build(recipe, Path(a), Path(b)) if recipe.get("modBuild") else []
+    problems = layout + mod_problems
     if digests[0] != digests[1]:
         problems.append("two builds differ (not reproducible)")
     if machine != 0x8664:
@@ -355,11 +422,12 @@ def vcvars():
     return Path(vs) / "VC/Auxiliary/Build/vcvars64.bat"
 
 
-def package(recipe, dll, out):
+def package(recipe, dll, out, mod_dll=None):
     """Deterministic ZIP of the recipe's `package` map ("$dll" is the build): fixed time, sorted names.
     Text entries are stored with LF endings, so a Windows checkout (core.autocrlf) packs the same bytes."""
     generated = GENERATORS[recipe["generate"]](recipe) if recipe.get("generate") else {}
-    entries = {name: dll.read_bytes() if source == "$dll" else generated[name] if source == "$generated"
+    entries = {name: dll.read_bytes() if source == "$dll" else mod_dll.read_bytes() if source == "$modDll"
+               else generated[name] if source == "$generated"
                else (ROOT / source).read_bytes().replace(b"\r\n", b"\n")
                for name, source in recipe["package"].items()}
     buffer = io.BytesIO()
@@ -457,7 +525,8 @@ def release(names, zig, tag, catalog_path, out, allow_dirty):
             sys.exit(f"{name}: " + "; ".join(problems))
         with tempfile.TemporaryDirectory(prefix="infmods-") as temporary:
             dll = build(name, zig, Path(temporary))
-            zip_path, contents = package(recipe, dll, out / "assets")
+            mod_dll = build_mod(recipe, Path(temporary) / "mod") if recipe.get("modBuild") else None
+            zip_path, contents = package(recipe, dll, out / "assets", mod_dll)
         digest = hashlib.sha256(zip_path.read_bytes()).hexdigest()
         existing = current.get(recipe["id"])
         if existing and existing.get("download", {}).get("sha256") == digest:
@@ -943,6 +1012,9 @@ def main():
         zig_check(zig)
     if args.cmd == "build":
         print(build(args.mod, zig, args.out.resolve()))
+        _, recipe, _ = load_mod(args.mod)
+        if recipe.get("modBuild"):
+            print(build_mod(recipe, args.out.resolve() / "mod"))
         return 0
     if args.cmd == "verify":
         return verify(args.mod, zig)

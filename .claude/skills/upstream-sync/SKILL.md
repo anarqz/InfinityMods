@@ -15,7 +15,7 @@ therefore a **re-pin plus a review**, not a port. Read `adapters/fh2-mod-platfor
 adapter provides and what it does not.
 
 Current mods: `nitrosystem` (qiangqiang101/FH2-NitroSystem, asset `FnFNitro-<v>.zip`) and `underglow`
-(qiangqiang101/FH2-Underglow, asset `Underglow-<v>.zip`) and `fh2-anna` (qiangqiang101/FH2-ANNA, asset `FH2ANNA-<v>.zip`;
+(qiangqiang101/FH2-Underglow; since 1.1.0-infinity.4 built here from the submodule with `mods/underglow/patches/`, so a new Underglow is a submodule bump, the patch rebased, and a new version by hand, not `sync`) and `fh2-anna` (qiangqiang101/FH2-ANNA, asset `FH2ANNA-<v>.zip`;
 Underglow depends on it with an exact version, so a new ANNA version also needs Underglow's `dependencies` and a new
 Underglow version).
 
