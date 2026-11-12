@@ -22,14 +22,13 @@ release was built from) are compiled with MSVC (`toolchain: msvc`) against the m
 
 | FH2 Mod Platform | Under ExtraOptions |
 |---|---|
-| `hook_function` | MinHook (`MH_CreateHook`), created disabled |
-| `hook_call` | the `E8` call's rel32 redirected through a jump stub allocated within ±2 GB; `*original` = the old target |
-| `enable_hooks`, `disable_hooks` | one hook, or every hook with `nullptr`; 1 when all succeeded (128 hooks at most) |
+| `hook_function`, `hook_call` | one hook broker per process, shared by every adapter DLL (the first to start publishes it in a per-process named mapping; only its MinHook patches), chained like the platform's `hooks.cpp`: a patched place's entry stub jumps to the newest enabled hook's detour, each hook's `*original` is a stub of its own pointing at the next older one, the oldest at the real code (MinHook's trampoline, or the `E8` call's old target). So NitroSystem and Underglow can both hook `ForzaCar::Update`. Created disabled |
+| `enable_hooks`, `disable_hooks` | one of this mod's hooks, or all of them with `nullptr`; a place is patched while any hook on it is enabled and restored when none is; 1 when all succeeded |
 | `hook_pointer`, `patch_bytes`, `hook_instruction` | not supported: logged, `nullptr` (a mod that needs them is not adapted yet) |
 | `wait_for_code`, `wait_for_game`, `game_base` | the context's `game_image` (the mapped FH2 image; ExtraOptions calls the initializer after the game's first file lookup) |
-| `azimuth_dir` | the mod's own folder (`<Azimuth>\mods\Forza Horizon 2\<id>`, the parent of `plugins\`): its INI (`fh2-mods\<mod>.ini`) and its per-car files (`data\titles\1A96545B\<mod>\player-1\`) stay there; it never sees the real saves |
+| `azimuth_dir` | the mod's own folder (`<Azimuth>\mods\Forza Horizon 2\<id>`, the parent of `plugins\`): its INI (`fh2-mods\<mod>.ini`) and its per-car files (`data\titles\1A96545B\<mod>\player-1\`) stay there. It never sees the real saves, so every player profile shares `player-1`, and uninstalling the mod deletes those files with its folder. The adapter refuses a mod folder longer than 160 characters (the mods build `MAX_PATH` paths below it) |
 | `game_dir` | empty (a mod's cleanup of old `mediaoverride` files does nothing) |
-| `set_file`, `clear_file` | taken while `fh2mod_init` runs (256 files, 64 MiB each), then written once to `<id>\plugins\generated\<media path>` (the previous start's tree is removed first) and returned by `FH2PluginMediaDirectory`: ExtraOptions reads it as the mod's private media, a zip's name standing in for the zip as in the platform. Later calls are refused (logged) |
+| `set_file`, `clear_file` | while `fh2mod_init` runs, written at once to `<id>\plugins\generated\<media path>` (the result is the real write's; the previous start's tree is removed first, never following a link) and returned by `FH2PluginMediaDirectory`: ExtraOptions reads it as the mod's private media, a zip's name standing in for the zip as in the platform. Paths with `..`, a device name or a part ending in `.` or space are refused. Later calls are refused (logged) |
 | `add_sql` | queued (64 calls, 1 MiB each, several statements per call) and run, statement by statement, by `FH2PluginDatabaseUpdate` on ExtraOptions' merged in-memory database inside one savepoint; the folder ships an empty `database.json` so ExtraOptions builds that merge |
 | `register_mod`, `log` | one mod per DLL; ExtraOptions' log (`FH2_ExtraOptions.log`) |
 | `add_setting`, sliders, `set_setting` | accepted, never shown: the launcher's form owns the INI, so `on_change` never runs; `get_setting` is -1 |
@@ -39,7 +38,9 @@ release was built from) are compiled with MSVC (`toolchain: msvc`) against the m
 
 `FH2PluginInitialize` returns FALSE (ExtraOptions logs it and keeps the DLL loaded without callbacks) when the context
 is not ABI 1 for Azimuth, the DLL is not in `plugins\`, MinHook cannot start, the mod's DLL is missing or has no
-`fh2mod_init`, or `fh2mod_init` fails. A mod built against another platform API than 9 does not compile here
+`fh2mod_init`, or `fh2mod_init` fails (its hooks are then switched off and its files removed). Upstream's own race
+stays as it is under the platform: Underglow checks `ForzaCar::Update`'s stock bytes before hooking it, so when
+NitroSystem has already patched it, Underglow logs that it does not know the build and stays off for that start. A mod built against another platform API than 9 does not compile here
 (`static_assert`): `tools/infmods.py sync` reports it, and the table must be updated for the new header first.
 
 ExtraOptions activates a mod's private media only when its ordinary `media` folder exists at startup, so every package
