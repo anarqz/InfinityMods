@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "nitrosystem",
-  "version": "1.1.0-infinity.4",
+  "version": "2.0.0-infinity.1",
   "kind": "mod",
   "name": {
     "en": "Nitro System · Infinity",
@@ -11,17 +11,19 @@
   "license": "MIT",
   "homepage": "https://github.com/anarqz/InfinityMods",
   "description": {
-    "en": "qiangqiang101's NitroSystem, built unchanged and loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter. Its game files come from the original release.",
-    "pt-BR": "O NitroSystem de qiangqiang101, compilado sem alterações e carregado pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform. Os arquivos do jogo vêm da release original."
+    "en": "qiangqiang101's NitroSystem 2.0: Fast & Furious NOS, bought per car as a NOS Kit in the garage, with exhaust flames, sound and a NOS gauge. Its own release DLL, loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter; no FH2 Mod Platform needed.",
+    "pt-BR": "O NitroSystem 2.0 de qiangqiang101: NOS de Fast & Furious, comprado por carro como Kit de NOS na garagem, com chamas no escape, som e medidor de NOS. A DLL da própria release do autor, carregada pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform; a FH2 Mod Platform não é necessária."
   },
   "runtime": "standalone",
   "review": {
-    "status": "reviewed",
-    "blockers": []
+    "status": "draft",
+    "blockers": [
+      "the adapter build (WINDOWS, MSVC) and a native game check through the Infinity launcher are pending"
+    ]
   },
   "compatibility": {
     "azimuthVersions": [
-      "1.0.3"
+      "1.0.4"
     ],
     "gameBuilds": [],
     "verification": "unverified"
@@ -38,348 +40,27 @@
     "game": [],
     "azimuth": [
       {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/backfire.materialbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Materials/backfire.materialbin",
-        "sha256": "217cbed2e44ec2797dd4e454c18383f6a4b090424cd4b0d20c33a675b76c72cb",
-        "bytes": 352,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/backfire_blue.materialbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Materials/backfire_blue.materialbin",
-        "sha256": "c9c6309ec1a07a0da4f7ddb6a0c62619a87152a214b28eb7e37b8846e5aac22a",
-        "bytes": 352,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/backfire_purple.materialbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Materials/backfire_purple.materialbin",
-        "sha256": "e79795726feea5367bba5bd8b5581803780a2fbc89aeab64b402a1467c60efb1",
-        "bytes": 352,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Systems/Backfire.xml",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Systems/Backfire.xml",
-        "sha256": "2ac70254d35dbac5509fe793b3c236c013924a74c39f581ae6bc240ec2088f4a",
-        "bytes": 1705,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/Controls/HUDSpeedometerControl.xaml",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/Controls/HUDSpeedometerControl.xaml",
-        "sha256": "e53ad86d730591727c355ee0b380ddce4d0fc9f5a17df88c99c9e9972776a40d",
-        "bytes": 75116,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/Fire/backfire_blue.materialbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Materials/Fire/backfire_blue.materialbin",
-        "sha256": "c9c6309ec1a07a0da4f7ddb6a0c62619a87152a214b28eb7e37b8846e5aac22a",
-        "bytes": 352,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Materials/Fire/carBackfire.materialbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Materials/Fire/carBackfire.materialbin",
-        "sha256": "c9c6309ec1a07a0da4f7ddb6a0c62619a87152a214b28eb7e37b8846e5aac22a",
-        "bytes": 352,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/Backfire.shaderbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/Backfire.shaderbin",
-        "sha256": "be571492903df723f38ca05f8a8f9bf4bfc489d22e16f56b57c2b422a06ec341",
-        "bytes": 788,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.durango.pso",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLightScenario.durango.pso",
-        "sha256": "f35e386274aef1247c2c42d02aa135bfac6b765b3e948e68a1065e7543cf800f",
-        "bytes": 10548,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.durango.vso",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLightScenario.durango.vso",
-        "sha256": "fd8ec27ba38ac727ccdaf186314963125ea9f719f21312f078411db2506f95cb",
-        "bytes": 28452,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.pc.pso",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLightScenario.pc.pso",
-        "sha256": "96ffcc3eb70cd6772f5535e78c9991df7efc5d3ef6d05296c16f61d1e00ad277",
-        "bytes": 11020,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLightScenario.pc.vso",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLightScenario.pc.vso",
-        "sha256": "b79f5e7e01f114e69eb7a656d5ac6222c8c799a1be91f66a3311035ef8af0fe6",
-        "bytes": 31580,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.pso",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.pso",
-        "sha256": "229bb0dc5b3cd40992f47c3d7b56dddfb4f886f74549dab48a6c8c184ccf22a8",
-        "bytes": 11316,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.vso",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLowResLightScenario.durango.vso",
-        "sha256": "567cc06f8a5bbfee521380d60e99403864048f06a1515ede1b5572b974d7fc00",
-        "bytes": 28460,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.pso",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.pso",
-        "sha256": "f9ed0f4cf7010c15a609a47f4492d8ab6996755e8de4601ccabcc0725467ff03",
-        "bytes": 11692,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.vso",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/Particles/Shaders/backfire/backfireParticleLowResLightScenario.pc.vso",
-        "sha256": "b79f5e7e01f114e69eb7a656d5ac6222c8c799a1be91f66a3311035ef8af0fe6",
-        "bytes": 31580,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/HUD_XPBar_TipGlow.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/HUD_XPBar_TipGlow.swatchbin",
-        "sha256": "e74b50445a7e51bc516444f8032c26edfddbf4dece1a2b4bf076e18e7472cc5a",
-        "bytes": 1107,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/SkillBarTipGlow.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/SkillBarTipGlow.swatchbin",
-        "sha256": "cdf53b7a951f8b5d7b79948d246b141238bd2e4a195004926a9bafab74398e98",
-        "bytes": 4179,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/SkillsLargeGlow.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/SkillsLargeGlow.swatchbin",
-        "sha256": "c90784e0646e563cdf9e25f173586d59b55adb925da1a99b08bedeb00edcd8a1",
-        "bytes": 65619,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_Off.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_Off.swatchbin",
-        "sha256": "be681511ebe073868b95c40449d4249a48adc5369f6b1396d86d2d15a9ad5b62",
-        "bytes": 32851,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_On.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Analogue_NOS_On.swatchbin",
-        "sha256": "5697ca24c536055c650cd9267c009858f399877969d530db99cc7724f1c20b75",
-        "bytes": 32851,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_Off.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_Off.swatchbin",
-        "sha256": "14506b5176dfdb7e6965a979ecdae7a81c7e2546b2e7df0a4c35ccb8b145ff19",
-        "bytes": 32851,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_On.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Dial_Assist_Digital_NOS_On.swatchbin",
-        "sha256": "24769047b89d0bc5981d54663c8889176c49ecd27d500d018ffdba502dd4b860",
-        "bytes": 32851,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Digital_Bar.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Digital_Bar.swatchbin",
-        "sha256": "86d4111220ffa5158a535e3e6cff6a43ce3ca629378b497f9aa3ddae2eff7e82",
-        "bytes": 9299,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Radial_Bar.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/data_bound/SpireHUD/HUD_Nos_Outline_Radial_Bar.swatchbin",
-        "sha256": "c8002c716093e5d7863cec786ebc7ff929933bb997eb72d7e9389aa85035b4bd",
-        "bytes": 65619,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_1.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_1.swatchbin",
-        "sha256": "883bbee3c0c58af6659abb136205d37ecb983a359b85a6086c37bc64a5bebfe9",
-        "bytes": 32851,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_2.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_2.swatchbin",
-        "sha256": "e478ef350020246a14c2942a933089513739b50b74c5586580cf309f11c21b34",
-        "bytes": 32851,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_3.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_3.swatchbin",
-        "sha256": "225ef688a3e856edc811836b601a6a4e0873d13c407f16d0f61ada239fb4f62f",
-        "bytes": 32851,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_4.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_4.swatchbin",
-        "sha256": "1653b7d09123c956d91fd8f7fb011f0f8efa286145ef2d403c57a12a665d70b3",
-        "bytes": 32851,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_5.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_5.swatchbin",
-        "sha256": "02020c4e460aefd1ffe2d48249796c0321ae600b122009112f89daf9b1de44c9",
-        "bytes": 32851,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_6.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_6.swatchbin",
-        "sha256": "cda525a446b5c23e45e9c113a9d93c2fd0368089e5fa4b5400e633b0afda70a7",
-        "bytes": 32851,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_7.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_7.swatchbin",
-        "sha256": "033c5d18bc03fe18df1d640de27bdcd2b9fd0bc9c4ec83167045b6001d6469ce",
-        "bytes": 32851,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/Mount/mediaoverride/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_8.swatchbin",
-        "destination": "mods/Forza Horizon 2/nitrosystem/media/ui/textures/Anthem/HUD/Speedometer/HUD_Dial_Digital_Gear_8.swatchbin",
-        "sha256": "a6d4bc22f9817a5c6e30a5435bf896659b576b30ce929b267743ecc0258198a2",
-        "bytes": 32851,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/azimuth-windows/FnFNitro/nos_boost.wav",
-        "destination": "mods/Forza Horizon 2/nitrosystem/FnFNitro/nos_boost.wav",
-        "sha256": "8eaf24cc2714bda855a2f8596b6a69a88cd10b5318276075ff7a65c61d0cb3df",
-        "bytes": 1440102,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro-1.1.0/azimuth-windows/FnFNitro/nos_stop.wav",
-        "destination": "mods/Forza Horizon 2/nitrosystem/FnFNitro/nos_stop.wav",
-        "sha256": "332f3b7ff32be6d5b8ff34cc9b6848be42c38977f81ea7e0eaf3b6d172169df0",
-        "bytes": 264270,
-        "role": "asset",
-        "mode": "add-or-replace",
-        "package": "upstream-assets"
-      },
-      {
-        "source": "FnFNitro.dll",
-        "destination": "mods/Forza Horizon 2/nitrosystem/plugins/FnFNitro.dll",
+        "source": "FnFNitro-2.0.0/azimuth-windows/fh2-mods/FnFNitro.dll",
+        "destination": "mods/Forza Horizon 2/nitrosystem/fh2-mods/FnFNitro.dll",
+        "sha256": "a695c4a858e949001fab185db56e5f0365d14061dd3bcb6dfe0a5b3179c37325",
+        "bytes": 2603520,
         "role": "binary",
-        "mode": "add-or-replace"
+        "mode": "add-or-replace",
+        "package": "upstream-assets"
       },
       {
-        "source": "LICENSE.txt",
+        "source": "FnFNitro-2.0.0/licenses/LICENSE-NitroSystem.txt",
         "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE.txt",
+        "sha256": "be4891b23bcb10c0f757f2385d89709057d929a75299aeb2eed296ccee01b33b",
+        "bytes": 1092,
         "role": "license",
-        "mode": "add-or-replace"
+        "mode": "add-or-replace",
+        "package": "upstream-assets"
       },
       {
-        "source": "LICENSE-FH2-Mod-Platform.txt",
-        "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE-FH2-Mod-Platform.txt",
-        "role": "license",
-        "mode": "add-or-replace"
-      },
-      {
-        "source": "LICENSE-Infinity.txt",
-        "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE-Infinity.txt",
-        "role": "license",
-        "mode": "add-or-replace"
-      },
-      {
-        "source": "NOTICE.md",
-        "destination": "mods/Forza Horizon 2/nitrosystem/NOTICE.md",
-        "role": "license",
+        "source": "NitroSystem.Infinity.dll",
+        "destination": "mods/Forza Horizon 2/nitrosystem/plugins/NitroSystem.Infinity.dll",
+        "role": "binary",
         "mode": "add-or-replace"
       },
       {
@@ -392,6 +73,30 @@
         "source": "database.json",
         "destination": "mods/Forza Horizon 2/nitrosystem/database.json",
         "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "media/README.txt",
+        "destination": "mods/Forza Horizon 2/nitrosystem/media/README.txt",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "NOTICE.md",
+        "destination": "mods/Forza Horizon 2/nitrosystem/NOTICE.md",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "LICENSE-Infinity.txt",
+        "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE-Infinity.txt",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "LICENSE-FH2-Mod-Platform.txt",
+        "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE-FH2-Mod-Platform.txt",
+        "role": "license",
         "mode": "add-or-replace"
       },
       {
@@ -414,12 +119,12 @@
         "section": "Settings",
         "key": "NitroEnabled",
         "label": {
-          "en": "Nitro enabled",
-          "pt-BR": "Nitro ativado"
+          "en": "Nitro System",
+          "pt-BR": "Sistema de Nitro"
         },
         "description": {
-          "en": "Applied on the next game launch.",
-          "pt-BR": "Aplicado na próxima inicialização do jogo."
+          "en": "Turns the Fast & Furious NOS on or off. Hold the NOS Button while driving to boost. Applied on the next game launch.",
+          "pt-BR": "Liga ou desliga o NOS de Fast & Furious. Segure o Botão do NOS enquanto dirige para acelerar. Aplicado na próxima inicialização do jogo."
         },
         "advanced": false,
         "apply": "next-launch",
@@ -432,12 +137,12 @@
         "section": "Settings",
         "key": "NitroButton",
         "label": {
-          "en": "Nitro button",
-          "pt-BR": "Botão do nitro"
+          "en": "NOS Button",
+          "pt-BR": "Botão do NOS"
         },
         "description": {
-          "en": "Applied on the next game launch.",
-          "pt-BR": "Aplicado na próxima inicialização do jogo."
+          "en": "Which button burns NOS. Pick one the game doesn't use while driving. Applied on the next game launch.",
+          "pt-BR": "O botão que usa o NOS. Escolha um que o jogo não use ao dirigir. Aplicado na próxima inicialização do jogo."
         },
         "advanced": false,
         "apply": "next-launch",
@@ -489,43 +194,43 @@
           {
             "value": "LS",
             "label": {
-              "en": "LS",
-              "pt-BR": "LS"
+              "en": "LS click",
+              "pt-BR": "Clique do LS"
             }
           },
           {
             "value": "RS",
             "label": {
-              "en": "RS",
-              "pt-BR": "RS"
+              "en": "RS click",
+              "pt-BR": "Clique do RS"
             }
           },
           {
             "value": "DPadUp",
             "label": {
-              "en": "DPadUp",
-              "pt-BR": "DPadUp"
+              "en": "D-pad up",
+              "pt-BR": "Direcional para cima"
             }
           },
           {
             "value": "DPadDown",
             "label": {
-              "en": "DPadDown",
-              "pt-BR": "DPadDown"
+              "en": "D-pad down",
+              "pt-BR": "Direcional para baixo"
             }
           },
           {
             "value": "DPadLeft",
             "label": {
-              "en": "DPadLeft",
-              "pt-BR": "DPadLeft"
+              "en": "D-pad left",
+              "pt-BR": "Direcional para a esquerda"
             }
           },
           {
             "value": "DPadRight",
             "label": {
-              "en": "DPadRight",
-              "pt-BR": "DPadRight"
+              "en": "D-pad right",
+              "pt-BR": "Direcional para a direita"
             }
           },
           {
@@ -559,16 +264,67 @@
         ]
       },
       {
+        "id": "hudtheme",
+        "section": "Settings",
+        "key": "HudTheme",
+        "label": {
+          "en": "HUD Theme",
+          "pt-BR": "Tema da tela do jogo"
+        },
+        "description": {
+          "en": "Original: the game's HUD with a yellow NOS bar. Fast & Furious: cyan NOS bar, gears and assist icons. Applied on the next game launch.",
+          "pt-BR": "Original: a tela do jogo com barra de NOS amarela. Fast & Furious: barra de NOS, marchas e ícones de assistência em ciano. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "enum",
+        "default": "FF",
+        "choices": [
+          {
+            "value": "FF",
+            "label": {
+              "en": "Fast & Furious",
+              "pt-BR": "Fast & Furious"
+            }
+          },
+          {
+            "value": "Original",
+            "label": {
+              "en": "Original",
+              "pt-BR": "Original"
+            }
+          }
+        ]
+      },
+      {
+        "id": "requirenitrouskit",
+        "section": "Settings",
+        "key": "RequireNitrousKit",
+        "label": {
+          "en": "Require NOS Kit",
+          "pt-BR": "Exigir kit de NOS"
+        },
+        "description": {
+          "en": "On: only cars with the NOS Kit (Garage > Upgrades > Custom upgrade > Engine) have NOS, and the stage sets the tank and its recharge. Off: every car has NOS, with the NOS Tank Capacity and NOS Recharge Rate. Applied on the next game launch.",
+          "pt-BR": "Ligado: só carros com o kit de NOS (comprado na garagem, como melhoria do motor) têm NOS, e o estágio define o tanque e a recarga. Desligado: todos os carros têm NOS, com a capacidade do tanque de NOS e a recarga do NOS. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": true,
+        "encoding": "0/1"
+      },
+      {
         "id": "torquescale",
         "section": "Settings",
         "key": "TorqueScale",
         "label": {
-          "en": "Boost multiplier",
-          "pt-BR": "Multiplicador de potência"
+          "en": "NOS Boost Multiplier",
+          "pt-BR": "Multiplicador do NOS"
         },
         "description": {
-          "en": "Applied on the next game launch.",
-          "pt-BR": "Aplicado na próxima inicialização do jogo."
+          "en": "Multiplies forward acceleration while NOS is active (Spire default: 1.6x). Applied on the next game launch.",
+          "pt-BR": "Multiplica a aceleração para a frente enquanto o NOS está ativo (padrão do Spire: 1,6x). Aplicado na próxima inicialização do jogo."
         },
         "advanced": false,
         "apply": "next-launch",
@@ -585,12 +341,12 @@
         "section": "Settings",
         "key": "Duration",
         "label": {
-          "en": "Tank capacity",
-          "pt-BR": "Capacidade do tanque"
+          "en": "NOS Tank Capacity (sec)",
+          "pt-BR": "Capacidade do tanque de NOS (s)"
         },
         "description": {
-          "en": "Applied on the next game launch.",
-          "pt-BR": "Aplicado na próxima inicialização do jogo."
+          "en": "Total seconds of continuous boost available in a full tank (Spire default: 20s). Ignored while Require NOS Kit is on: then the NOS Kit's stage sets the tank. Applied on the next game launch.",
+          "pt-BR": "Segundos de NOS contínuo em um tanque cheio (padrão do Spire: 20 s). Ignorado com Exigir kit de NOS ligado: aí o estágio do kit de NOS define o tanque. Aplicado na próxima inicialização do jogo."
         },
         "advanced": false,
         "apply": "next-launch",
@@ -607,12 +363,12 @@
         "section": "Settings",
         "key": "BuildupTime",
         "label": {
-          "en": "Buildup time",
-          "pt-BR": "Tempo para potência máxima"
+          "en": "NOS Buildup Time (sec)",
+          "pt-BR": "Tempo de entrada do NOS (s)"
         },
         "description": {
-          "en": "Applied on the next game launch.",
-          "pt-BR": "Aplicado na próxima inicialização do jogo."
+          "en": "Time taken to ramp up to full boost torque (Spire default: 0.5s). Applied on the next game launch.",
+          "pt-BR": "Tempo até chegar à força total do NOS (padrão do Spire: 0,5 s). Aplicado na próxima inicialização do jogo."
         },
         "advanced": false,
         "apply": "next-launch",
@@ -629,39 +385,235 @@
         "section": "Settings",
         "key": "RechargeRate",
         "label": {
-          "en": "Recharge rate",
-          "pt-BR": "Taxa de recarga"
+          "en": "NOS Recharge Rate",
+          "pt-BR": "Recarga do NOS"
         },
         "description": {
-          "en": "Applied on the next game launch.",
-          "pt-BR": "Aplicado na próxima inicialização do jogo."
+          "en": "Seconds of NOS restored per second while not boosting. Ignored while Require NOS Kit is on: then the NOS Kit's stage sets the recharge rate. Applied on the next game launch.",
+          "pt-BR": "Segundos de NOS recuperados por segundo sem usar o NOS. Ignorado com Exigir kit de NOS ligado: aí o estágio do kit de NOS define a recarga. Aplicado na próxima inicialização do jogo."
         },
         "advanced": false,
         "apply": "next-launch",
         "type": "number",
-        "default": 1.0,
+        "default": 0.2,
         "minimum": 0.0,
-        "maximum": 1.0,
-        "step": 0.1,
+        "maximum": 5.0,
+        "step": 0.05,
         "decimals": 2,
         "unit": "ratio"
       },
       {
-        "id": "debugoverlay",
+        "id": "refillonracestart",
         "section": "Settings",
-        "key": "DebugOverlay",
+        "key": "RefillOnRaceStart",
         "label": {
-          "en": "Debug overlay",
-          "pt-BR": "Informações de depuração"
+          "en": "Refill NOS on Race Start",
+          "pt-BR": "Recarregar NOS no início da corrida"
         },
         "description": {
-          "en": "Applied on the next game launch.",
-          "pt-BR": "Aplicado na próxima inicialização do jogo."
+          "en": "Fills the NOS tank when a race starts, you quit one, you change car or you fast travel. Applied on the next game launch.",
+          "pt-BR": "Enche o tanque de NOS quando uma corrida começa, quando você sai de uma, troca de carro ou faz viagem rápida. Aplicado na próxima inicialização do jogo."
         },
-        "advanced": true,
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": true,
+        "encoding": "0/1"
+      },
+      {
+        "id": "refundonrewind",
+        "section": "Settings",
+        "key": "RefundOnRewind",
+        "label": {
+          "en": "Refund NOS on Rewind",
+          "pt-BR": "Devolver NOS ao retroceder"
+        },
+        "description": {
+          "en": "Rewinding gives back the NOS you used since the point you rewind to. Applied on the next game launch.",
+          "pt-BR": "Ao retroceder, você recebe de volta o NOS usado desde o ponto para onde voltou. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": true,
+        "encoding": "0/1"
+      },
+      {
+        "id": "drivatarnitro",
+        "section": "Settings",
+        "key": "DrivatarNitro",
+        "label": {
+          "en": "Drivatar NOS",
+          "pt-BR": "NOS dos Drivatars"
+        },
+        "description": {
+          "en": "Drivatars use NOS too, whenever they can (not before the race starts), from a tank with twice your capacity and recharge, with flames and sound. Not once they're over 100 m ahead of you, so you can catch up. Applied on the next game launch.",
+          "pt-BR": "Os Drivatars também usam NOS sempre que podem (nunca antes da largada), com um tanque de capacidade e recarga duas vezes maiores que as suas, com chamas e som. Não quando estão mais de 100 m à sua frente, para você poder alcançá-los. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
         "apply": "next-launch",
         "type": "boolean",
         "default": false,
+        "encoding": "0/1"
+      },
+      {
+        "id": "soundvolume",
+        "section": "Settings",
+        "key": "SoundVolume",
+        "label": {
+          "en": "NOS Sound Volume",
+          "pt-BR": "Volume do som do NOS"
+        },
+        "description": {
+          "en": "Volume of the boost and stop sounds. The game's own volume sliders don't change them. Applied on the next game launch.",
+          "pt-BR": "Volume dos sons do NOS. Os controles de volume do próprio jogo não os alteram. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "number",
+        "default": 0.5,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "step": 0.05,
+        "decimals": 2,
+        "unit": "ratio"
+      },
+      {
+        "id": "drivatarsoundvolume",
+        "section": "Settings",
+        "key": "DrivatarSoundVolume",
+        "label": {
+          "en": "Drivatar NOS Volume",
+          "pt-BR": "Volume do NOS dos Drivatars"
+        },
+        "description": {
+          "en": "Volume of the Drivatars' NOS, heard from their cars (with Drivatar NOS on). 0 silences it. Applied on the next game launch.",
+          "pt-BR": "Volume do NOS dos Drivatars, ouvido dos carros deles (com o NOS dos Drivatars ligado). 0 silencia. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "number",
+        "default": 0.25,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "step": 0.05,
+        "decimals": 2,
+        "unit": "ratio"
+      },
+      {
+        "id": "rumble",
+        "section": "Settings",
+        "key": "Rumble",
+        "label": {
+          "en": "NOS Controller Rumble",
+          "pt-BR": "Vibração do controle no NOS"
+        },
+        "description": {
+          "en": "Rumbles the controller while NOS is active. The game's own rumble isn't affected. Applied on the next game launch.",
+          "pt-BR": "Faz o controle vibrar enquanto o NOS está ativo. A vibração do próprio jogo não é afetada. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": true,
+        "encoding": "0/1"
+      },
+      {
+        "id": "camerashake",
+        "section": "Settings",
+        "key": "CameraShake",
+        "label": {
+          "en": "NOS Camera Shake",
+          "pt-BR": "Tremor da câmera no NOS"
+        },
+        "description": {
+          "en": "How much the camera shakes while NOS is active, in the driver, hood, bumper and chase views. 0 turns it off. Applied on the next game launch.",
+          "pt-BR": "Quanto a câmera treme com o NOS ativo, nas visões do piloto, capô, para-choque e perseguição. 0 desliga. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "number",
+        "default": 0.65,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "step": 0.05,
+        "decimals": 2,
+        "unit": "ratio"
+      },
+      {
+        "id": "fovboost",
+        "section": "Settings",
+        "key": "FovBoost",
+        "label": {
+          "en": "NOS Wider FOV",
+          "pt-BR": "Campo de visão maior no NOS"
+        },
+        "description": {
+          "en": "How much wider the field of view gets while NOS is active, in the driver, hood, bumper and chase views. 0 turns it off. Applied on the next game launch.",
+          "pt-BR": "Quanto o campo de visão aumenta com o NOS ativo, nas visões do piloto, capô, para-choque e perseguição. 0 desliga. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "number",
+        "default": 0.1,
+        "minimum": 0.0,
+        "maximum": 0.3,
+        "step": 0.01,
+        "decimals": 2,
+        "unit": "ratio"
+      },
+      {
+        "id": "vignetteenabled",
+        "section": "Settings",
+        "key": "VignetteEnabled",
+        "label": {
+          "en": "NOS Blue Vignette",
+          "pt-BR": "Vinheta azul do NOS"
+        },
+        "description": {
+          "en": "A pulsing blue vignette at the screen edges while NOS is active. Applied on the next game launch.",
+          "pt-BR": "Uma vinheta azul pulsante nas bordas da tela enquanto o NOS está ativo. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": true,
+        "encoding": "0/1"
+      },
+      {
+        "id": "speedlinesenabled",
+        "section": "Settings",
+        "key": "SpeedLinesEnabled",
+        "label": {
+          "en": "NOS Speed Lines",
+          "pt-BR": "Linhas de velocidade do NOS"
+        },
+        "description": {
+          "en": "Thin blue streaks flying out toward the screen edges while NOS is active, in step with the car's speed. Applied on the next game launch.",
+          "pt-BR": "Finos riscos azuis voando para as bordas da tela enquanto o NOS está ativo, no ritmo da velocidade do carro. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": true,
+        "encoding": "0/1"
+      },
+      {
+        "id": "hudhide",
+        "section": "Settings",
+        "key": "HudHide",
+        "label": {
+          "en": "Hide NOS Gauge Without Kit",
+          "pt-BR": "Ocultar medidor sem kit"
+        },
+        "description": {
+          "en": "On: the NOS gauge frame is hidden on cars without a NOS Kit. Off: an empty frame stays. Applied on the next game launch.",
+          "pt-BR": "Ligado: a moldura do medidor de NOS fica oculta nos carros sem kit de NOS. Desligado: fica uma moldura vazia. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": true,
         "encoding": "0/1"
       },
       {
@@ -669,29 +621,46 @@
         "section": "Settings",
         "key": "BackfireOnAllCars",
         "label": {
-          "en": "Backfire on all cars",
-          "pt-BR": "Chamas em todos os carros"
+          "en": "Backfire on All Cars",
+          "pt-BR": "Estouros no escape em todos os carros"
         },
         "description": {
-          "en": "Applied on the next game launch.",
-          "pt-BR": "Aplicado na próxima inicialização do jogo."
+          "en": "Lets every car backfire, which the NOS exhaust flames need. Off leaves the game's own backfire settings alone. Applied on the next game launch.",
+          "pt-BR": "Permite que todos os carros estourem no escape, o que as chamas do NOS precisam. Desligado mantém as configurações do próprio jogo. Aplicado na próxima inicialização do jogo."
         },
         "advanced": true,
         "apply": "next-launch",
         "type": "boolean",
         "default": true,
         "encoding": "0/1"
+      },
+      {
+        "id": "debugoverlay",
+        "section": "Settings",
+        "key": "DebugOverlay",
+        "label": {
+          "en": "NOS Debug Overlay",
+          "pt-BR": "Sobreposição de depuração do NOS"
+        },
+        "description": {
+          "en": "Draws NOS and flame debug info over the game (needs borderless/windowed mode). Applied on the next game launch.",
+          "pt-BR": "Mostra informações de depuração do NOS e das chamas sobre o jogo (requer modo janela ou sem bordas). Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": true,
+        "apply": "next-launch",
+        "type": "boolean",
+        "default": false,
+        "encoding": "0/1"
       }
     ]
   },
   "runtimeOutputs": [],
   "excludedArchiveEntries": [
-    "FnFNitro-1.1.0/INSTALL.txt",
-    "FnFNitro-1.1.0/README.md",
-    "FnFNitro-1.1.0/azimuth-windows/d3dcompiler_47.dll",
-    "FnFNitro-1.1.0/licenses/LICENSE-FH2-Mod-Platform.txt",
-    "FnFNitro-1.1.0/licenses/LICENSE-MinHook.txt",
-    "FnFNitro-1.1.0/azimuth-windows/fh2-mods/FnFNitro.dll"
+    "FnFNitro-2.0.0/INSTALL.txt",
+    "FnFNitro-2.0.0/README.md",
+    "FnFNitro-2.0.0/azimuth-windows/DWrite.dll",
+    "FnFNitro-2.0.0/licenses/LICENSE-FH2-Mod-Platform.txt",
+    "FnFNitro-2.0.0/licenses/LICENSE-MinHook.txt"
   ],
   "databaseMigrations": [],
   "source": {
@@ -700,9 +669,9 @@
   },
   "additionalPackages": {
     "upstream-assets": {
-      "url": "https://github.com/qiangqiang101/NitroSystem/releases/download/1.1.0/FnFNitro-1.1.0.zip",
-      "sha256": "a94848ecef2e68405c7d4aabaa82c733b8f76692ca45389bcdfede536f0cf94f",
-      "bytes": 2339419,
+      "url": "https://github.com/qiangqiang101/FH2-NitroSystem/releases/download/2.0.0/FnFNitro-2.0.0.zip",
+      "sha256": "24ad49c4472387b61ec9ad638f8e4f0b5cfd7ceedf2fecb0948aa9e7fb5ea7af",
+      "bytes": 2573107,
       "format": "zip"
     }
   },
@@ -710,14 +679,18 @@
     "schemaVersion": 1,
     "impact": "gameplay",
     "compatibilityId": "infinity-nitrosystem",
-    "revision": 1,
+    "revision": 2,
     "match": "exact",
     "settings": [
       "nitroenabled",
+      "requirenitrouskit",
       "torquescale",
       "duration",
       "builduptime",
       "rechargerate",
+      "refillonracestart",
+      "refundonrewind",
+      "drivatarnitro",
       "backfireonallcars"
     ]
   },
