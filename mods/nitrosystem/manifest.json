@@ -16,10 +16,8 @@
   },
   "runtime": "standalone",
   "review": {
-    "status": "draft",
-    "blockers": [
-      "the adapter build (WINDOWS, MSVC) and a native game check through the Infinity launcher are pending"
-    ]
+    "status": "reviewed",
+    "blockers": []
   },
   "compatibility": {
     "azimuthVersions": [

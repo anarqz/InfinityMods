@@ -16,10 +16,8 @@
   },
   "runtime": "standalone",
   "review": {
-    "status": "draft",
-    "blockers": [
-      "a native game check through the Infinity launcher is pending"
-    ]
+    "status": "reviewed",
+    "blockers": []
   },
   "compatibility": {
     "azimuthVersions": [
