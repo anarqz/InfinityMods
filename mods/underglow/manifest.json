@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "underglow",
-  "version": "1.1.0-infinity.2",
+  "version": "1.1.0-infinity.3",
   "kind": "mod",
   "name": {
     "en": "Underglow · Infinity",
@@ -38,7 +38,7 @@
     {
       "id": "fh2-anna",
       "versions": [
-        "1.2.0-infinity.1"
+        "1.2.0-infinity.2"
       ]
     }
   ],

@@ -83,9 +83,10 @@ void* heap_copy(const void* data, size_t size) {
 // enabled hook's detour; each hook's `original` is a stub of its own pointing at the next older enabled hook's
 // detour, the oldest at the real code (MinHook's trampoline or the call's old target). Only 8-byte slots change,
 // atomically, and nothing a running thread may be in is ever freed (DLLs stay resident under ExtraOptions).
-// Patching waits for every adapter to start (the gate below): a mod that checks a function's stock bytes before
-// hooking it (Underglow and ForzaCar::Update) must not see another mod's jump there. The broker also holds the
-// interfaces mods publish for each other (FH2 ANNA's menu, NitroSystem's control) and answers wait_for_mods.
+// A hook is patched as soon as it is enabled, as under the platform (version 2 deferred patching until every mod had
+// started; the game then read its merged database before the mods' database hooks were in). The broker also holds
+// the interfaces mods publish for each other (FH2 ANNA's menu, NitroSystem's control) and answers wait_for_mods once
+// every mod has started (the gate below).
 struct HookBroker {
     uint32_t size, version;
     void* (*create)(int kind, void* at, void* detour, void** original, const char* name);   // kind 0 function, 1 call, 2 pointer
@@ -97,10 +98,10 @@ struct HookBroker {
     const void* (*get)(const char* name, uint32_t min_version);
     int (*wait_mods)(uint32_t timeout_ms);
 };
-constexpr uint32_t kBrokerVersion = 2;
+constexpr uint32_t kBrokerVersion = 3;
 enum { kFunction = 0, kCall = 1, kPointer = 2 };
-// The game's code is patched once no adapter has started a mod for this long (ExtraOptions starts the plugins one
-// after another on its loader thread, so the gaps between them are far shorter).
+// Every mod has started once no adapter has started one for this long (ExtraOptions starts the plugins one after
+// another on its loader thread, so the gaps between them are far shorter).
 constexpr ULONGLONG kGateQuietMs = 3000, kGateLimitMs = 30000;
 
 struct alignas(16) Stub {
@@ -223,9 +224,8 @@ void broker_log(const char* what, const char* name) {
     if (name) log_text("  ", name);
 }
 
-// Rebuilds a site's chain from its enabled hooks, newest first; patches the game when the first one comes (once the
-// gate is open; until then the place stays stock and the chain is only prepared) and restores it when the last one
-// goes. Broker lock held.
+// Rebuilds a site's chain from its enabled hooks, newest first; patches the game when the first one comes and
+// restores it when the last one goes. Broker lock held.
 bool relink(Site& site) {
     BrokerHook* active[512];
     unsigned n = 0;
@@ -234,7 +234,6 @@ bool relink(Site& site) {
     for (unsigned i = 0; i < n; ++i) set_slot(active[i]->original, i + 1 < n ? active[i + 1]->detour : site.base);
     set_slot(site.entry, n ? active[0]->detour : site.base);
     if (n && !site.installed) {
-        if (!gate_open) return true;
         site.installed = install(site);
         if (!site.installed) broker_log("could not patch:", site.name);
         return site.installed;
@@ -247,8 +246,7 @@ bool relink(Site& site) {
     return true;
 }
 
-// Opens the gate once every adapter has started its mod and none has for kGateQuietMs: patches every place an
-// enabled hook waits for, then wakes wait_for_mods.
+// Opens the gate once every adapter has started its mod and none has for kGateQuietMs, and wakes wait_for_mods.
 DWORD WINAPI gate_worker(void*) {
     for (;;) {
         Sleep(100);
@@ -256,21 +254,15 @@ DWORD WINAPI gate_worker(void*) {
         const ULONGLONG now = GetTickCount64();
         // At the latest kGateLimitMs after the first mod started: a mod whose fh2mod_init never returns holds no one back.
         const bool open = (!inits_running && last_init_end && now - last_init_end >= kGateQuietMs) || now - first_init_begin >= kGateLimitMs;
-        unsigned patched = 0, failed = 0;
+        unsigned patched = 0;
         if (open) {
             gate_open = true;
-            for (unsigned i = 0; i < site_count; ++i) {
-                if (sites[i].installed) continue;
-                bool wanted = false;
-                for (unsigned h = 0; h < broker_hook_count && !wanted; ++h) wanted = broker_hooks[h].site == &sites[i] && broker_hooks[h].enabled;
-                if (!wanted) continue;
-                if (relink(sites[i])) ++patched; else ++failed;
-            }
+            for (unsigned i = 0; i < site_count; ++i) patched += sites[i].installed ? 1 : 0;
         }
         ReleaseSRWLockExclusive(&broker_lock);
         if (open) {
             char line[96];
-            std::snprintf(line, sizeof line, "every mod has started: %u places patched, %u failed.", patched, failed);
+            std::snprintf(line, sizeof line, "every mod has started: %u places patched.", patched);
             broker_log(line, nullptr);
             WakeAllConditionVariable(&mods_settled);
             return 0;
@@ -285,7 +277,7 @@ void broker_init_begin() {
     if (!first_init_begin) first_init_begin = GetTickCount64();
     if (!gate_thread && !gate_open) {
         if (HANDLE t = CreateThread(nullptr, 0, gate_worker, nullptr, 0, nullptr)) { CloseHandle(t); gate_thread = true; }
-        else gate_open = true;   // no thread, no deferral: patch at once, as before
+        else gate_open = true;   // no thread: wait_for_mods returns at once
     }
     ReleaseSRWLockExclusive(&broker_lock);
 }
