@@ -14,7 +14,8 @@ SHA-256 and installs `fh2-mods\Underglow.dll` and its licence into this folder (
 starts the mod's `fh2mod_init`. The garage camera shots and Underglow Kit pictures the mod hands to the game are
 written at each start to `plugins\generated\`, this mod's private media; its INI (`fh2-mods\Underglow.ini`) and the
 kit, colors and effects of each car (`data\titles\1A96545B\Underglow\player-1\UnderglowGarage.json`) stay in this
-folder.
+folder (shared by every player profile, and deleted with the folder when the mod is
+uninstalled).
 
 Buying an Underglow Kit goes through the game's own shop, so the save records the part (part type 48); that entry
 stays in the save if the mod is removed. Not required: FH2 Mod Platform (`DWrite.dll`) or the Infinity mod runtime.

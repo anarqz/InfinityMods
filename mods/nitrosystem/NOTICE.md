@@ -13,7 +13,8 @@ SHA-256 and installs `fh2-mods\FnFNitro.dll` and its licence into this folder (`
 2\nitrosystem\`). ExtraOptions' mod loader (built into Infinity as ExtraOptions.Infinity) loads the adapter, which
 starts the mod's `fh2mod_init`. The HUD, flame and garage files the mod hands to the game are written at each start
 to `plugins\generated\`, this mod's private media; its INI (`fh2-mods\FnFNitro.ini`) and the NOS Kit of each car
-(`data\titles\1A96545B\FnFNitro\player-1\FnFNitroGarage.json`) stay in this folder.
+(`data\titles\1A96545B\FnFNitro\player-1\FnFNitroGarage.json`) stay in this folder (shared by every player profile, and deleted with the folder when the mod is
+uninstalled).
 
 Not required: FH2 Mod Platform (`DWrite.dll`), the Infinity mod runtime or `d3dcompiler_47.dll`. Do not also place
 FnFNitro.dll in `<Azimuth>\fh2-mods\`. Without the platform there is no in-game Mods page, no `fh2mod` commands and

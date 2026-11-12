@@ -40,6 +40,8 @@ struct DatabaseFrame {
 constexpr uint32_t kAzimuth = 1;
 constexpr int kSqliteOk = 0, kSqliteRow = 100, kSqliteDone = 101;
 constexpr size_t kPath = MAX_PATH * 2;
+// The mods build MAX_PATH paths from azimuth_dir (their INI, their per-car files about 70 characters below it).
+constexpr size_t kModDirMax = 160;
 
 const PluginContext* host = nullptr;
 std::atomic<bool> started{false};
@@ -72,21 +74,31 @@ void* heap_copy(const void* data, size_t size) {
     return copy;
 }
 
-// Hooks: a function detour through MinHook, or a rel32 call site redirected through a jump stub
-// allocated within +/-2 GB of the site. Created disabled; enable_hooks turns them on.
-enum class Kind { Function, Call };
-struct Hook {
-    Kind kind;
-    void* target;      // Function: the entry; Call: the E8 instruction
-    void* stub;        // Call: the jump stub
-    int32_t original_rel, detour_rel;
-    bool enabled;
+// ---- Hooks ---------------------------------------------------------------------------------------------------
+// Every adapter in the process (one per FH2 Mod Platform mod) uses one hook broker, as the platform does, so two
+// mods can hook the same function or call site: the first adapter to start publishes its broker (a named mapping
+// holding a pointer to it, per process), the others use that one. Its MinHook is the only one that patches.
+// As in the platform's hooks.cpp, each patched place is a Site whose entry stub ("jmp [slot]") holds the newest
+// enabled hook's detour; each hook's `original` is a stub of its own pointing at the next older enabled hook's
+// detour, the oldest at the real code (MinHook's trampoline or the call's old target). Only 8-byte slots change,
+// atomically, and nothing a running thread may be in is ever freed (DLLs stay resident under ExtraOptions).
+struct HookBroker {
+    uint32_t size, version;
+    void* (*create)(int kind, void* at, void* detour, void** original, const char* name);   // kind 0 function, 1 call
+    int (*set)(void* hook, int on);
 };
-constexpr unsigned kHooks = 128;
-Hook hooks[kHooks];
-std::atomic<unsigned> hook_count{0};
-SRWLOCK lock = SRWLOCK_INIT;
-bool minhook_ready = false;
+constexpr uint32_t kBrokerVersion = 1;
+enum { kFunction = 0, kCall = 1 };
+
+struct alignas(16) Stub {
+    uint8_t code[8];          // FF 25 02 00 00 00 CC CC: jmp [rip+2], the slot below
+    void* volatile slot;
+};
+static_assert(sizeof(Stub) == 16, "stub: 16 bytes");
+
+struct Page { uint8_t* base; size_t used; };
+Page pages[64];
+unsigned page_count = 0;
 
 void* near_alloc(void* site, size_t size) {
     SYSTEM_INFO info; GetSystemInfo(&info);
@@ -104,70 +116,195 @@ void* near_alloc(void* site, size_t size) {
     return nullptr;
 }
 
-bool write_rel(void* site, int32_t rel) {
+bool within_rel32(const void* a, const void* b) {
+    const intptr_t d = reinterpret_cast<intptr_t>(a) - reinterpret_cast<intptr_t>(b);
+    return d > -0x7ff00000ll && d < 0x7ff00000ll;
+}
+
+// A stub within +/-2 GB of `near` (a call site must reach its entry stub with rel32). Broker lock held.
+Stub* new_stub(void* near, void* target) {
+    Page* page = nullptr;
+    for (unsigned i = 0; i < page_count && !page; ++i)
+        if (pages[i].used + sizeof(Stub) <= 4096 && within_rel32(pages[i].base, near)) page = &pages[i];
+    if (!page) {
+        if (page_count >= 64) return nullptr;
+        auto* base = static_cast<uint8_t*>(near_alloc(near, 4096));
+        if (!base) return nullptr;
+        pages[page_count] = {base, 0};
+        page = &pages[page_count++];
+    }
+    auto* stub = reinterpret_cast<Stub*>(page->base + page->used);
+    page->used += sizeof(Stub);
+    static const uint8_t code[8] = {0xFF, 0x25, 0x02, 0x00, 0x00, 0x00, 0xCC, 0xCC};
+    std::memcpy(stub->code, code, sizeof code);
+    stub->slot = target;
+    FlushInstructionCache(GetCurrentProcess(), stub, sizeof(Stub));
+    return stub;
+}
+
+void set_slot(Stub* stub, void* target) {
+    InterlockedExchangePointer(&stub->slot, target);
+}
+
+struct Site { int kind; uint8_t* at; Stub* entry; void* base; int32_t old_rel; bool installed; };
+struct BrokerHook { Site* site; void* detour; Stub* original; bool enabled; };
+Site sites[128];
+unsigned site_count = 0;
+BrokerHook broker_hooks[512];
+unsigned broker_hook_count = 0;
+SRWLOCK broker_lock = SRWLOCK_INIT;
+
+bool write_rel(uint8_t* site, int32_t rel) {
     DWORD old = 0;
-    auto* at = static_cast<uint8_t*>(site) + 1;
-    if (!VirtualProtect(at, 4, PAGE_EXECUTE_READWRITE, &old)) return false;
-    std::memcpy(at, &rel, 4);
-    VirtualProtect(at, 4, old, &old);
+    if (!VirtualProtect(site + 1, 4, PAGE_EXECUTE_READWRITE, &old)) return false;
+    std::memcpy(site + 1, &rel, 4);
+    VirtualProtect(site + 1, 4, old, &old);
     FlushInstructionCache(GetCurrentProcess(), site, 5);
     return true;
 }
 
-Hook* add(Kind kind, void* target) {
-    const unsigned slot = hook_count.fetch_add(1);
-    if (slot >= kHooks) { adapter_log("more than 128 hooks; refused."); return nullptr; }
-    hooks[slot] = {kind, target, nullptr, 0, 0, false};
-    return &hooks[slot];
+// Rebuilds a site's chain from its enabled hooks, newest first; patches the game when the first one comes and
+// restores it when the last one goes. Broker lock held.
+bool relink(Site& site) {
+    BrokerHook* active[512];
+    unsigned n = 0;
+    for (unsigned i = broker_hook_count; i-- > 0;)
+        if (broker_hooks[i].site == &site && broker_hooks[i].enabled) active[n++] = &broker_hooks[i];
+    for (unsigned i = 0; i < n; ++i) set_slot(active[i]->original, i + 1 < n ? active[i + 1]->detour : site.base);
+    set_slot(site.entry, n ? active[0]->detour : site.base);
+    if (n && !site.installed) {
+        site.installed = site.kind == kFunction
+            ? MH_EnableHook(site.at) == MH_OK
+            : write_rel(site.at, static_cast<int32_t>(reinterpret_cast<uint8_t*>(site.entry) - (site.at + 5)));
+        return site.installed;
+    }
+    if (!n && site.installed) {
+        const bool restored = site.kind == kFunction ? MH_DisableHook(site.at) == MH_OK : write_rel(site.at, site.old_rel);
+        if (restored) site.installed = false;
+        return restored;
+    }
+    return true;
 }
 
-bool set_one(Hook& hook, bool on) {
-    if (hook.enabled == on) return true;
-    bool ok = hook.kind == Kind::Function
-        ? (on ? MH_EnableHook(hook.target) : MH_DisableHook(hook.target)) == MH_OK
-        : write_rel(hook.target, on ? hook.detour_rel : hook.original_rel);
-    if (ok) hook.enabled = on;
-    return ok;
+void broker_log(const char* what, const char* name) {
+    log_text("FH2 Mod Platform adapter (hooks): ", what);
+    if (name) log_text("  ", name);
 }
 
-int set_hooks(FH2Hook* which, bool on) {
-    AcquireSRWLockExclusive(&lock);
-    const unsigned count = hook_count.load() < kHooks ? hook_count.load() : kHooks;
-    bool ok = true;
-    for (unsigned i = 0; i < count; ++i)
-        if (!which || reinterpret_cast<FH2Hook*>(&hooks[i]) == which) ok = set_one(hooks[i], on) && ok;
-    ReleaseSRWLockExclusive(&lock);
-    if (!ok) adapter_log(on ? "a hook could not be enabled." : "a hook could not be disabled.");
+void* broker_create(int kind, void* at_, void* detour, void** original, const char* name) {
+    auto* at = static_cast<uint8_t*>(at_);
+    if (!at || !detour || !original || (kind != kFunction && kind != kCall)) return nullptr;
+    AcquireSRWLockExclusive(&broker_lock);
+    void* result = nullptr;
+    Site* site = nullptr;
+    for (unsigned i = 0; i < site_count && !site; ++i) if (sites[i].at == at) site = &sites[i];
+    if (site && site->kind != kind) {
+        broker_log("refused: the place is already hooked as another kind:", name);
+    } else if (broker_hook_count >= 512 || (!site && site_count >= 128)) {
+        broker_log("refused: too many hooks:", name);
+    } else {
+        if (!site) {
+            Site fresh{kind, at, nullptr, nullptr, 0, false};
+            bool ok = false;
+            if (kind == kCall) {
+                if (at[0] == 0xE8) {
+                    std::memcpy(&fresh.old_rel, at + 1, 4);
+                    fresh.base = at + 5 + fresh.old_rel;
+                    fresh.entry = new_stub(at, fresh.base);
+                    ok = fresh.entry != nullptr;
+                } else {
+                    broker_log("refused: not a call site:", name);
+                }
+            } else {
+                fresh.entry = new_stub(at, nullptr);
+                void* trampoline = nullptr;
+                ok = fresh.entry && MH_CreateHook(at, fresh.entry, &trampoline) == MH_OK;
+                if (ok) { fresh.base = trampoline; set_slot(fresh.entry, trampoline); }
+                else broker_log("hook not made:", name);
+            }
+            if (ok) { sites[site_count] = fresh; site = &sites[site_count++]; }
+        }
+        if (site) {
+            if (Stub* own = new_stub(at, site->base)) {
+                broker_hooks[broker_hook_count] = {site, detour, own, false};
+                result = &broker_hooks[broker_hook_count++];
+                *original = own;
+            } else {
+                broker_log("no stub memory near:", name);
+            }
+        }
+    }
+    ReleaseSRWLockExclusive(&broker_lock);
+    return result;
+}
+
+int broker_set(void* hook_, int on) {
+    auto* hook = static_cast<BrokerHook*>(hook_);
+    if (hook < broker_hooks || hook >= broker_hooks + 512) return 0;
+    AcquireSRWLockExclusive(&broker_lock);
+    const bool before = hook->enabled;
+    hook->enabled = on != 0;
+    bool ok = before == hook->enabled || relink(*hook->site);
+    if (!ok) { hook->enabled = before; relink(*hook->site); }
+    ReleaseSRWLockExclusive(&broker_lock);
     return ok ? 1 : 0;
 }
 
-FH2Hook* hook_function(FH2Mod*, const char* name, void* target, void* detour, void** original) {
-    if (!minhook_ready || !target || !detour || !original) return nullptr;
-    if (MH_CreateHook(target, detour, original) != MH_OK) { log_text("FH2 Mod Platform adapter: hook not made: ", name ? name : "?"); return nullptr; }
-    return reinterpret_cast<FH2Hook*>(add(Kind::Function, target));
-}
+const HookBroker own_broker = {sizeof(HookBroker), kBrokerVersion, broker_create, broker_set};
+const HookBroker* broker = nullptr;
 
-FH2Hook* hook_call(FH2Mod*, const char* name, void* site, void* detour, void** original) {
-    if (!site || !detour || !original || *static_cast<uint8_t*>(site) != 0xE8) {
-        log_text("FH2 Mod Platform adapter: not a call site: ", name ? name : "?");
-        return nullptr;
+// The process's broker: this adapter's, published, when it is the first; otherwise the first adapter's.
+const HookBroker* find_broker() {
+    wchar_t name[64];
+    swprintf_s(name, L"Local\\fh2mp-eo-hook-broker-%lu", GetCurrentProcessId());
+    HANDLE mapping = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, 4096, name);
+    if (!mapping) return nullptr;
+    const bool first = GetLastError() != ERROR_ALREADY_EXISTS;
+    auto* shared = static_cast<const HookBroker* volatile*>(MapViewOfFile(mapping, FILE_MAP_ALL_ACCESS, 0, 0, sizeof(void*)));
+    if (!shared) { CloseHandle(mapping); return nullptr; }
+    // The mapping and its view stay for the life of the process (the plugin DLLs are never unloaded).
+    if (first) {
+        if (MH_Initialize() != MH_OK) { adapter_log("MinHook could not start."); return nullptr; }
+        InterlockedExchangePointer(reinterpret_cast<void* volatile*>(shared), const_cast<HookBroker*>(&own_broker));
+        return &own_broker;
     }
-    int32_t rel; std::memcpy(&rel, static_cast<uint8_t*>(site) + 1, 4);
-    auto* next = static_cast<uint8_t*>(site) + 5;
-    auto* stub = static_cast<uint8_t*>(near_alloc(site, 16));
-    if (!stub) { log_text("FH2 Mod Platform adapter: no stub memory near: ", name ? name : "?"); return nullptr; }
-    static const uint8_t jump[6] = {0xFF, 0x25, 0, 0, 0, 0}; // jmp [rip+0]
-    std::memcpy(stub, jump, 6);
-    std::memcpy(stub + 6, &detour, 8);
-    FlushInstructionCache(GetCurrentProcess(), stub, 14);
-    *original = next + rel;
-    Hook* hook = add(Kind::Call, site);
-    if (!hook) return nullptr;
-    hook->stub = stub; hook->original_rel = rel;
-    hook->detour_rel = static_cast<int32_t>(stub - next);
-    return reinterpret_cast<FH2Hook*>(hook);
+    for (int i = 0; i < 200; ++i) {   // ExtraOptions starts plugins one by one; the first has published already
+        if (const HookBroker* found = *shared) return found->size >= sizeof(HookBroker) && found->version == kBrokerVersion ? found : nullptr;
+        Sleep(10);
+    }
+    return nullptr;
 }
 
+// This mod's hooks (enable_hooks(nullptr) means all of them).
+void* mine[256];
+std::atomic<unsigned> mine_count{0};
+
+FH2Hook* remember(void* hook) {
+    if (!hook) return nullptr;
+    const unsigned slot = mine_count.fetch_add(1);
+    if (slot >= 256) { adapter_log("more than 256 hooks; refused."); return nullptr; }
+    mine[slot] = hook;
+    return static_cast<FH2Hook*>(hook);
+}
+
+int set_hooks(FH2Hook* which, bool on) {
+    const unsigned count = mine_count.load() < 256 ? mine_count.load() : 256;
+    bool ok = true, found = !which;
+    for (unsigned i = 0; i < count; ++i) {
+        if (which && mine[i] != static_cast<void*>(which)) continue;
+        found = true;
+        ok = broker->set(mine[i], on ? 1 : 0) != 0 && ok;
+    }
+    if (!ok) adapter_log(on ? "a hook could not be enabled." : "a hook could not be disabled.");
+    return ok && found ? 1 : 0;
+}
+
+FH2Hook* hook_function(FH2Mod*, const char* name, void* target, void* detour, void** original) {
+    return remember(broker->create(kFunction, target, detour, original, name));
+}
+FH2Hook* hook_call(FH2Mod*, const char* name, void* site, void* detour, void** original) {
+    return remember(broker->create(kCall, site, detour, original, name));
+}
 FH2Hook* unsupported_hook(const char* what) { adapter_log(what); return nullptr; }
 FH2Hook* hook_pointer(FH2Mod*, const char*, void**, void*, void**) { return unsupported_hook("hook_pointer is not supported."); }
 FH2Hook* patch_bytes(FH2Mod*, const char*, void*, const void*, const void*, uint32_t) { return unsupported_hook("patch_bytes is not supported."); }
@@ -175,6 +312,7 @@ FH2Hook* hook_instruction(FH2Mod*, const char*, void*, FH2InstructionFn, void*) 
 int enable_hooks(FH2Mod*, FH2Hook* hook) { return set_hooks(hook, true); }
 int disable_hooks(FH2Mod*, FH2Hook* hook) { return set_hooks(hook, false); }
 
+// ---- SQL -------------------------------------------------------------------------------------------------------
 // The mod's SQL (its add_sql calls in fh2mod_init, under its own INI conditions; several statements per call,
 // as the platform allows) runs on ExtraOptions' merged in-memory database; the mod folder's database.json makes
 // ExtraOptions build that merge.
@@ -225,81 +363,62 @@ bool exec(const DatabaseFrame* f, const char* text) {
     return true;
 }
 
-// set_file: the files the mod gives the game (by media path, a zip's name standing in for the zip, as the
-// platform defines it) are kept here while fh2mod_init runs, then written once under <mod>\plugins\generated,
-// which FH2PluginMediaDirectory hands to ExtraOptions as this mod's private media.
-struct MediaFile { char* path; void* data; size_t size; };
-constexpr unsigned kFiles = 256;
-MediaFile files[kFiles];
-unsigned file_count = 0;
+// ---- Files (set_file) ------------------------------------------------------------------------------------------
+// The files the mod gives the game (by media path, a zip's name standing in for the zip, as the platform defines
+// it) are written while fh2mod_init runs under <mod>\plugins\generated, which FH2PluginMediaDirectory hands to
+// ExtraOptions as this mod's private media. The previous start's tree is removed first.
 SRWLOCK file_lock = SRWLOCK_INIT;
 
-// A relative media path: letters, digits, space and ._-/\ only, no empty, '.' or '..' part, at most 200 bytes.
+// CON, PRN, AUX, NUL, COM0-9 and LPT0-9, with or without an extension: Windows opens the device, not a file.
+bool reserved_name(const char* part, size_t length) {
+    size_t stem = 0;
+    while (stem < length && part[stem] != '.') ++stem;
+    if (stem < 3 || stem > 4) return false;
+    char up[5] = {};
+    for (size_t i = 0; i < stem; ++i) up[i] = part[i] >= 'a' && part[i] <= 'z' ? static_cast<char>(part[i] - 'a' + 'A') : part[i];
+    if (stem == 3) return !std::strcmp(up, "CON") || !std::strcmp(up, "PRN") || !std::strcmp(up, "AUX") || !std::strcmp(up, "NUL");
+    return (!std::strncmp(up, "COM", 3) || !std::strncmp(up, "LPT", 3)) && up[3] >= '0' && up[3] <= '9';
+}
+
+// A relative media path: letters, digits, space and ._- in parts separated by / or \, no empty part, no part
+// ending in '.' or ' ' (so no '.' or '..'), no device name, at most 200 bytes.
 bool safe_media_path(const char* path) {
     if (!path || !*path) return false;
-    size_t length = 0, part = 0;
-    bool dots_only = true;
-    for (const char* c = path;; ++c, ++length) {
-        if (length > 200) return false;
+    const char* part = path;
+    for (const char* c = path;; ++c) {
+        if (c - path > 200) return false;
         if (*c == 0 || *c == '/' || *c == '\\') {
-            if (part == 0 || (dots_only && part <= 2)) return false;
+            const size_t length = static_cast<size_t>(c - part);
+            if (!length || part[length - 1] == '.' || part[length - 1] == ' ' || reserved_name(part, length)) return false;
             if (*c == 0) return true;
-            part = 0; dots_only = true;
+            part = c + 1;
             continue;
         }
         const bool ok = (*c >= 'a' && *c <= 'z') || (*c >= 'A' && *c <= 'Z') || (*c >= '0' && *c <= '9')
             || *c == ' ' || *c == '.' || *c == '_' || *c == '-';
         if (!ok) return false;
-        if (*c != '.') dots_only = false;
-        ++part;
     }
 }
 
-bool same_path(const char* a, const char* b) {
-    for (;; ++a, ++b) {
-        char x = *a == '\\' ? '/' : *a, y = *b == '\\' ? '/' : *b;
-        if (x >= 'A' && x <= 'Z') x = static_cast<char>(x - 'A' + 'a');
-        if (y >= 'A' && y <= 'Z') y = static_cast<char>(y - 'A' + 'a');
-        if (x != y) return false;
-        if (!x) return true;
-    }
-}
-
-void drop_file(unsigned i) {
-    HeapFree(GetProcessHeap(), 0, files[i].path);
-    HeapFree(GetProcessHeap(), 0, files[i].data);
-    files[i] = files[--file_count];
-}
-
-int set_file(FH2Mod*, const char* media_path, const void* data, size_t size) {
-    if (!initializing.load()) { log_text("FH2 Mod Platform adapter: set_file after start is not supported: ", media_path ? media_path : "?"); return 0; }
-    if (!safe_media_path(media_path) || (!data && size) || size > 64u * 1024 * 1024) {
-        log_text("FH2 Mod Platform adapter: set_file refused: ", media_path ? media_path : "?");
-        return 0;
-    }
-    AcquireSRWLockExclusive(&file_lock);
-    for (unsigned i = 0; i < file_count; ++i) if (same_path(files[i].path, media_path)) { drop_file(i); break; }
-    int ok = 0;
-    if (file_count < kFiles) {
-        char* path = static_cast<char*>(heap_copy(media_path, std::strlen(media_path) + 1));
-        void* copy = heap_copy(data, size);
-        if (path && copy) { files[file_count++] = {path, copy, size}; ok = 1; }
-        else { if (path) HeapFree(GetProcessHeap(), 0, path); if (copy) HeapFree(GetProcessHeap(), 0, copy); }
-    }
-    ReleaseSRWLockExclusive(&file_lock);
-    if (!ok) log_text("FH2 Mod Platform adapter: set_file failed: ", media_path);
-    return ok;
-}
-
-void clear_file(FH2Mod*, const char* media_path) {
-    AcquireSRWLockExclusive(&file_lock);
-    for (unsigned i = file_count; i-- > 0;)
-        if (!media_path || same_path(files[i].path, media_path)) drop_file(i);
-    ReleaseSRWLockExclusive(&file_lock);
+// <media_dir>\<media path> with backslashes; false when it does not fit.
+bool media_file_path(const char* media_path, wchar_t (&path)[kPath], int& prefix) {
+    prefix = swprintf_s(path, kPath, L"%s\\", media_dir);
+    if (prefix < 0) return false;
+    const int n = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, media_path, -1, path + prefix, static_cast<int>(kPath) - prefix);
+    if (n <= 0) return false;
+    for (wchar_t* c = path + prefix; *c; ++c) if (*c == L'/') *c = L'\\';
+    return true;
 }
 
 // Deletes the tree at `dir` (this adapter's own generated folder). Links are removed, never followed.
 void remove_tree(const wchar_t* dir) {
+    const DWORD attributes = GetFileAttributesW(dir);
+    if (attributes == INVALID_FILE_ATTRIBUTES) return;
+    if (!(attributes & FILE_ATTRIBUTE_DIRECTORY) || (attributes & FILE_ATTRIBUTE_REPARSE_POINT)) {
+        if (attributes & FILE_ATTRIBUTE_DIRECTORY) RemoveDirectoryW(dir);
+        else { SetFileAttributesW(dir, FILE_ATTRIBUTE_NORMAL); DeleteFileW(dir); }
+        return;
+    }
     wchar_t pattern[kPath];
     if (swprintf_s(pattern, kPath, L"%s\\*", dir) < 0) return;
     WIN32_FIND_DATAW fd;
@@ -309,60 +428,58 @@ void remove_tree(const wchar_t* dir) {
             if (!std::wcscmp(fd.cFileName, L".") || !std::wcscmp(fd.cFileName, L"..")) continue;
             wchar_t child[kPath];
             if (swprintf_s(child, kPath, L"%s\\%s", dir, fd.cFileName) < 0) continue;
-            const bool directory = (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
-            if (directory && !(fd.dwFileAttributes & FILE_ATTRIBUTE_REPARSE_POINT)) remove_tree(child);
-            else if (directory) RemoveDirectoryW(child);
-            else { SetFileAttributesW(child, FILE_ATTRIBUTE_NORMAL); DeleteFileW(child); }
+            remove_tree(child);
         } while (FindNextFileW(h, &fd));
         FindClose(h);
     }
     RemoveDirectoryW(dir);
 }
 
-bool write_media_file(const MediaFile& file) {
+int set_file(FH2Mod*, const char* media_path, const void* data, size_t size) {
+    if (!initializing.load()) { log_text("FH2 Mod Platform adapter: set_file after start is not supported: ", media_path ? media_path : "?"); return 0; }
+    if (!safe_media_path(media_path) || (!data && size) || size > 0xFFFFFFFFu) {
+        log_text("FH2 Mod Platform adapter: set_file refused: ", media_path ? media_path : "?");
+        return 0;
+    }
     wchar_t path[kPath];
-    int at = swprintf_s(path, kPath, L"%s\\", media_dir);
-    if (at < 0) return false;
-    const int n = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, file.path, -1, path + at, static_cast<int>(kPath) - at);
-    if (n <= 0) return false;
-    for (wchar_t* c = path + at; *c; ++c) {
-        if (*c != L'/' && *c != L'\\') continue;
+    int prefix = 0;
+    if (!media_file_path(media_path, path, prefix)) return 0;
+    AcquireSRWLockExclusive(&file_lock);
+    CreateDirectoryW(media_dir, nullptr);
+    for (wchar_t* c = path + prefix; *c; ++c) {
+        if (*c != L'\\') continue;
         *c = 0;
         CreateDirectoryW(path, nullptr);
         *c = L'\\';
     }
+    bool ok = false;
     HANDLE out = CreateFileW(path, GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
-    if (out == INVALID_HANDLE_VALUE) return false;
-    DWORD written = 0;
-    const bool ok = file.size <= 0xFFFFFFFFu && (file.size == 0 ||
-        (WriteFile(out, file.data, static_cast<DWORD>(file.size), &written, nullptr) && written == file.size));
-    CloseHandle(out);
-    return ok;
-}
-
-// The previous start's files go, this start's are written; the folder exists only when it holds files.
-void publish_media() {
-    remove_tree(media_dir);
-    AcquireSRWLockExclusive(&file_lock);
-    unsigned written = 0;
-    if (file_count && CreateDirectoryW(media_dir, nullptr)) {
-        for (unsigned i = 0; i < file_count; ++i) {
-            if (write_media_file(files[i])) ++written;
-            else log_text("FH2 Mod Platform adapter: could not write ", files[i].path);
-        }
+    if (out != INVALID_HANDLE_VALUE) {
+        DWORD written = 0;
+        ok = size == 0 || (WriteFile(out, data, static_cast<DWORD>(size), &written, nullptr) && written == size);
+        CloseHandle(out);
+        if (!ok) DeleteFileW(path);
     }
-    const unsigned total = file_count;
-    while (file_count) drop_file(file_count - 1);
     ReleaseSRWLockExclusive(&file_lock);
-    media_ready = total && written == total;
-    if (total) adapter_log(media_ready ? "the mod's files are ready as its private media."
-                                       : "not every file the mod gave could be written; its private media is off.");
-    if (total && !media_ready) remove_tree(media_dir);
+    if (!ok) log_text("FH2 Mod Platform adapter: set_file could not write ", media_path);
+    return ok ? 1 : 0;
 }
 
+void clear_file(FH2Mod*, const char* media_path) {
+    if (!initializing.load()) return;
+    AcquireSRWLockExclusive(&file_lock);
+    if (!media_path) remove_tree(media_dir);
+    else if (safe_media_path(media_path)) {
+        wchar_t path[kPath];
+        int prefix = 0;
+        if (media_file_path(media_path, path, prefix)) { SetFileAttributesW(path, FILE_ATTRIBUTE_NORMAL); DeleteFileW(path); }
+    }
+    ReleaseSRWLockExclusive(&file_lock);
+}
+
+// ---- The rest of the table -------------------------------------------------------------------------------------
 FH2Mod* register_mod(const FH2ModInfo* info) {
-    if (info && info->name)
-        log_text("FH2 Mod Platform adapter: starting ", info->name);
+    if (info && info->name) log_text("FH2 Mod Platform adapter: starting ", info->name);
     return self;
 }
 void log_line(FH2Mod*, const char* line) { if (line) log_text(line); }
@@ -395,7 +512,8 @@ int focus_page_element(FH2Mod*, const char*, const char*) { return 0; }
 int set_page_tile_text(FH2Mod*, const char*, const char*) { return 0; }
 int set_page_tile_colors(FH2Mod*, const char*, uint32_t, uint32_t) { return 0; }
 // API 9: title-screen entries, hotkeys, commands, session logs and save snapshots are the platform's own
-// services; none exists here (Infinity owns the saves), so each reports "not added".
+// services; none exists here (Infinity owns the saves), so each reports "not added". offline_only is not
+// needed: Infinity offers a mod whose multiplayer impact is not cosmetic in Noob only.
 int add_title_entry(FH2Mod*, const FH2TitleEntry*) { return 0; }
 const char* title_started_by(FH2Mod*) { return nullptr; }
 int playing_online() { return 0; }
@@ -471,21 +589,25 @@ extern "C" __declspec(dllexport) BOOL WINAPI FH2PluginInitialize(const PluginCon
     host = context;
     if (context->adapter != kAzimuth) { adapter_log("only Azimuth is supported."); return FALSE; }
     if (!derive_mod_dir(context->plugins_directory)) { adapter_log("the DLL is not in <mod>\\plugins\\."); return FALSE; }
-    minhook_ready = MH_Initialize() == MH_OK;
-    if (!minhook_ready) { adapter_log("MinHook could not start."); return FALSE; }
+    if (std::wcslen(mod_dir) > kModDirMax) { adapter_log("the mod folder's path is too long for the mod's own paths; install Azimuth in a shorter folder."); return FALSE; }
+    broker = find_broker();
+    if (!broker) { adapter_log("no hook broker (MinHook could not start, or another adapter is incompatible)."); return FALSE; }
     const InitFn init = load_mod();
     if (!init) return FALSE;
     fill_table();
+    remove_tree(media_dir);   // the previous start's files
     initializing.store(true);
     const int result = init(&table);
     initializing.store(false);
     if (result != 0) {
-        clear_file(self, nullptr);
+        set_hooks(nullptr, false);
         remove_tree(media_dir);
         adapter_log("fh2mod_init refused to start.");
         return FALSE;
     }
-    publish_media();
+    const DWORD media = GetFileAttributesW(media_dir);
+    media_ready = media != INVALID_FILE_ATTRIBUTES && (media & FILE_ATTRIBUTE_DIRECTORY);
+    if (media_ready) adapter_log("the mod's files are ready as its private media.");
     adapter_log("started.");
     return TRUE;
 }

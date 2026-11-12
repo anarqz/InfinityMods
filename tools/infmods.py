@@ -181,7 +181,8 @@ def adapter_config(work, recipe):
     if recipe.get("adapter") != "fh2-mod-platform-eo":
         return
     mod_dll = recipe.get("adapterConfig", {}).get("modDll", "")
-    if not re.fullmatch(r"[A-Za-z0-9_.-]+(/[A-Za-z0-9_.-]+)*\.dll", mod_dll) or mod_dll.lower().startswith("plugins/"):
+    if (not re.fullmatch(r"[A-Za-z0-9_.-]+(/[A-Za-z0-9_.-]+)*\.dll", mod_dll) or mod_dll.lower().startswith("plugins/")
+            or any(part in (".", "..") for part in mod_dll.split("/"))):
         sys.exit(f"{recipe['id']}: adapterConfig.modDll must be a relative .dll path outside plugins/, found {mod_dll!r}")
     literal = mod_dll.replace("/", "\\\\")  # a C string literal: fh2-mods\\FnFNitro.dll
     (work / "fh2_mod_platform_eo_config.h").write_text(
@@ -790,6 +791,8 @@ def sync(name, tag, zip_path, url, write):
         sys.exit(f"{name}: tag {tag} is not <a.b.c>")
     digest = hashlib.sha256(data).hexdigest()
     package = manifest.get("additionalPackages", {}).get("upstream-assets", {})
+    if not re.fullmatch(r"\d+\.\d+\.\d+-infinity\.\d+", manifest["version"]):
+        sys.exit(f"{name}: version {manifest['version']} is not <a.b.c>-infinity.<n>")
     old_upstream = manifest["version"].split("-infinity.")[0]
     if package.get("sha256") == digest:
         print(f"{name}: already pinned to {url} ({digest}); nothing to do")
@@ -820,7 +823,7 @@ def sync(name, tag, zip_path, url, write):
             if extra := [d for d in imports if d.lower() not in allowed]:
                 problems.append(f"the mod's DLL imports {extra}, not in upstreamRelease.allowedImports")
             notes.append(f"mod DLL exports {exports}, imports {imports}")
-        except ValueError as error:
+        except (ValueError, struct.error, UnicodeDecodeError) as error:
             problems.append(f"the mod's DLL is not a PE32+ file: {error}")
     else:
         problems.append(f"no pattern maps adapterConfig.modDll ({recipe['adapterConfig']['modDll']})")
