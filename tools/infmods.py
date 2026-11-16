@@ -343,6 +343,14 @@ def layout_problems(recipe, manifest):
     if files["game"]:
         problems.append("an ExtraOptions mod installs only into its own mods folder (game files listed)")
     reserved = {"winmm.dll", "fh2_extraoptions.ini"}
+    # Infinity.Core ModManifest: file roles and modes, and a config-role file only as the settings form's own file
+    config_path = (manifest.get("config") or {}).get("path")
+    for f in files["azimuth"]:
+        if f["role"] not in ("binary", "config", "asset", "user-asset", "license") or f["mode"] not in ("add", "replace", "add-or-replace", "seed") \
+                or f["mode"] == "seed" and f["role"] not in ("config", "user-asset") \
+                or f["role"] == "config" and (f["mode"] != "seed" or f["destination"] != config_path) \
+                or config_path and f["destination"].lower() == config_path.lower() and f["role"] != "config":
+            problems.append(f"{f['destination']}: invalid role {f['role']}/mode {f['mode']} (a config file is the config block's path, seeded)")
     for path in [f["destination"] for f in files["azimuth"]] + [(manifest.get("config") or {}).get("path", folder)]:
         path = path.replace("\\", "/")
         if not path.startswith(folder) or ".." in path.split("/"):
@@ -754,9 +762,15 @@ def layout_problem(entry):
     """OD-233: every file in its game's mods folder (the launcher still reads the old mods/<id>/ form, as its game's)."""
     install = entry["install"]
     folder = mod_folder({"id": entry["id"], **({"games": install["games"]} if "games" in install else {})})
+    config_path = (install.get("config") or {}).get("path")
     for f in install.get("files", {}).get("azimuth", []):
         if not f["destination"].startswith(folder):
             return f"{f['destination']} is outside {folder}"
+        # Infinity.Core ModManifest: a seeded file is config or user-asset; a config file is the config block's path
+        if f["mode"] == "seed" and f["role"] not in ("config", "user-asset") \
+                or f["role"] == "config" and (f["mode"] != "seed" or f["destination"] != config_path) \
+                or config_path and f["destination"].lower() == config_path.lower() and f["role"] != "config":
+            return f"{f['destination']}: invalid role {f['role']}/mode {f['mode']} for its settings mapping"
     return None
 
 

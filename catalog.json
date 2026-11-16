@@ -15204,7 +15204,7 @@
             {
               "source": "mods/Forza Horizon 2/Extra Options - Weather Control/plugins/EO_WeatherControl.ini",
               "destination": "mods/Forza Horizon 2/extraoptions-weathercontrol/plugins/EO_WeatherControl.ini",
-              "role": "config",
+              "role": "user-asset",
               "mode": "seed",
               "sha256": "a0c8d4009f002d360997c096262f239c11fcf8e88336c13c39f5ad57acc07807",
               "bytes": 83
