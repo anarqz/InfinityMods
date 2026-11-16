@@ -1,5 +1,4 @@
-# The files every Infinity launcher reads from main (catalog/ from schema 3, catalog.json before it): only the owner approves a change.
-/catalog.json @anarqz
+# The files every Infinity launcher reads from main: only the owner approves a change.
 /catalog/ @anarqz
 /schemas/ @anarqz
 /.github/CODEOWNERS @anarqz

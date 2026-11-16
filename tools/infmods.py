@@ -4,7 +4,7 @@
   build   <mod> [--zig ZIG] [--out DIR]     compile the mod and its adapter
   verify  <mod> [--zig ZIG]                 build twice in separate folders: same bytes, sane PE, plugin exports
   release [--zig ZIG] --tag TAG [--catalog INDEX] [--out DIR] [--allow-dirty] [MOD ...]
-  catalog [--from V2.json]                  re-pin catalog/index.json and rewrite catalog.json (v2) from catalog/
+  catalog [--from V2.json]                  re-pin catalog/index.json after editing catalog/ (--from: split a v2 file)
   check   [--catalog FILE]                  validate the catalog (schemas/ + rules below); FILE may be a v2 custom catalog
   external-packs <set folder>... --cars fh2-packs.json --out DIR   ZephyrSkies pack entries (OD-232), read from the ZIPs
   sync    <mod> [--tag TAG] [--zip ZIP --url URL] [--write]   re-pin an FH2 Mod Platform mod to an upstream release
@@ -35,18 +35,18 @@ exports it. There is no Infinity mod runtime: no entry needs `infinity-mod-runti
 The catalog is split (schema 3, schemas/catalog-v3.schema.json): catalog/index.json lists each mod's card details
 (id, version, name, description, author) and pins its detail file catalog/<id>.json (path, sha256, bytes); the
 detail file holds the rest of its schema-2 entry. catalog/ is what people edit; `catalog` re-pins the index after an
-edit and writes catalog.json, the full schema-2 file launchers before schema 3 read, generated, never edited by hand.
+edit. The schema-2 catalog.json was retired once every launcher read schema 3 (floor 3.1.7).
 
 `release` writes one ZIP per mod (<id>-<version>.zip), each mod's filled manifest and the merged
-catalog (dist/catalog/ and dist/catalog.json). A mod whose ZIP has the same SHA-256 as its current catalog entry keeps that entry
+catalog (dist/catalog/). A mod whose ZIP has the same SHA-256 as its current catalog entry keeps that entry
 unchanged (URL, version and source commit), so players see no update; a changed ZIP needs a new
 version. Nothing is uploaded or published.
 
 `check` validates what launchers read from this repository's main branch: catalog/index.json and every detail
 file against schemas/catalog-v3.schema.json (the subset of JSON Schema it uses), with no BOM, no duplicate JSON keys and
 the launcher's size limits, each pin matching its file, ids unique, no detail file left unlisted, every installed
-file in its game's mods folder; then catalog.json against schemas/catalog.schema.json and byte-for-byte equal to the
-schema-2 file `catalog` writes. OD-233 retired the parity exemptions
+file in its game's mods folder. `check --catalog FILE` validates any one catalog file too, a schema-2 custom catalog
+included (schemas/catalog.schema.json). OD-233 retired the parity exemptions
 (parity-non-required.json): a mod is either both modes (its multiplayer impact cosmetic) or Noob only.
 """
 import argparse
@@ -530,7 +530,6 @@ def catalog_entry(manifest):
 
 CATALOG_DIR = ROOT / "catalog"
 INDEX_NAME = "index.json"
-CATALOG_V2 = "catalog.json"  # schema 2, for launchers before schema 3 (OD-166 address); generated from catalog/
 CARD_FIELDS = ("id", "version", "name", "description", "author")
 DETAIL_MAX_BYTES = 256 * 1024  # Infinity.Core: a schema-3 detail file's limit
 
@@ -551,7 +550,7 @@ def entry_of(card, detail):
 
 
 def split_catalog(catalog):
-    """A schema-2 catalog as (index bytes, {file name: detail bytes}, schema-2 bytes)."""
+    """A schema-2 catalog as (index bytes, {file name: detail bytes})."""
     details, cards = {}, []
     for entry in catalog["mods"]:
         raw = dumps(detail_of(entry))
@@ -559,12 +558,12 @@ def split_catalog(catalog):
         details[name] = raw
         cards.append({**{k: entry[k] for k in CARD_FIELDS}, "path": name,
                       "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)})
-    return dumps({"schemaVersion": 3, "mods": cards}), details, dumps(catalog)
+    return dumps({"schemaVersion": 3, "mods": cards}), details
 
 
 def write_catalog(catalog, out):
-    """Writes out/catalog/ (index and one detail file per mod, any other .json there removed) and out/catalog.json."""
-    index, details, v2 = split_catalog(catalog)
+    """Writes out/catalog/: the index and one detail file per mod (any other .json there removed)."""
+    index, details = split_catalog(catalog)
     folder = out / "catalog"
     folder.mkdir(parents=True, exist_ok=True)
     for stale in folder.glob("*.json"):
@@ -573,8 +572,7 @@ def write_catalog(catalog, out):
     for name, raw in details.items():
         (folder / name).write_bytes(raw)
     (folder / INDEX_NAME).write_bytes(index)
-    (out / CATALOG_V2).write_bytes(v2)
-    return len(index), len(v2)
+    return len(index)
 
 
 def load_catalog(path):
@@ -596,7 +594,7 @@ def load_catalog(path):
 
 
 def catalog_command(from_v2):
-    """Re-pins catalog/index.json after an edit of catalog/ and rewrites catalog.json; --from splits a schema-2 file."""
+    """Re-pins catalog/index.json after an edit of catalog/; --from splits a schema-2 file into catalog/."""
     catalog = json.loads(Path(from_v2).read_text(encoding="utf-8")) if from_v2 else load_catalog(CATALOG_DIR / INDEX_NAME)
     if from_v2 is None:  # the index's card text wins; details come from the files as edited
         index = json.loads((CATALOG_DIR / INDEX_NAME).read_text(encoding="utf-8"))
@@ -604,8 +602,8 @@ def catalog_command(from_v2):
         unlisted = sorted(p.name for p in CATALOG_DIR.glob("*.json") if p.name != INDEX_NAME and p.name not in listed)
         if unlisted:
             sys.exit("not in catalog/index.json (add a card for each, or delete them): " + ", ".join(unlisted))
-    index_bytes, v2_bytes = write_catalog(catalog, ROOT)
-    print(f"catalog/{INDEX_NAME} {index_bytes} bytes, {len(catalog['mods'])} detail files; {CATALOG_V2} {v2_bytes} bytes of {CATALOG_MAX_BYTES}")
+    index_bytes = write_catalog(catalog, ROOT)
+    print(f"catalog/{INDEX_NAME} {index_bytes} bytes of {CATALOG_MAX_BYTES}, {len(catalog['mods'])} detail files")
     return check(CATALOG_DIR / INDEX_NAME)
 
 
@@ -775,7 +773,7 @@ def layout_problem(entry):
 
 
 def check_v2(path, name, problems):
-    """A schema-2 catalog file (catalog.json, or a custom catalog): its schema, unique ids, layout. Returns it, or None."""
+    """A schema-2 catalog file (a custom catalog): its schema, unique ids, layout. Returns it, or None."""
     schema = json.loads((ROOT / "schemas" / "catalog.schema.json").read_text(encoding="utf-8"))
     try:
         document = read_strict(path, CATALOG_MAX_BYTES)
@@ -837,25 +835,23 @@ def check_v3(index_path, problems):
 
 
 def check(catalog_path):
-    """The official catalog (catalog/index.json, its detail files, the generated catalog.json), or any one catalog file."""
+    """The official catalog (catalog/index.json and its detail files), or any one catalog file."""
     problems, catalog_path = [], Path(catalog_path)
     try:
         schema_version = json.loads(catalog_path.read_text(encoding="utf-8")).get("schemaVersion")
     except (OSError, ValueError) as error:
         print("FAIL", f"{catalog_path}: {error}")
         return 1
-    if schema_version != 3:  # a schema-2 file: catalog.json alone, or a custom catalog
+    if schema_version != 3:  # a schema-2 file: a custom catalog
         catalog = check_v2(catalog_path, catalog_path.name, problems)
     else:
         catalog = check_v3(catalog_path, problems)
-        v2_path = catalog_path.parent.parent / CATALOG_V2
-        if v2_path.exists() or catalog_path.resolve() == (CATALOG_DIR / INDEX_NAME).resolve():
-            if check_v2(v2_path, CATALOG_V2, problems) is not None and catalog is not None and v2_path.read_bytes() != dumps(catalog):
-                problems.append(f"{CATALOG_V2}: not the schema-2 file catalog/ stands for (run: python3 -I tools/infmods.py catalog)")
+    if (ROOT / "catalog.json").exists():
+        problems.append("catalog.json: retired (every launcher reads catalog/index.json); delete it")
     for p in problems:
         print("FAIL", p)
     if not problems:
-        print(f"ok: {catalog_path.name} {len(catalog['mods'])} mods" + (f", {CATALOG_V2} up to date" if schema_version == 3 else ""))
+        print(f"ok: {catalog_path.name} {len(catalog['mods'])} mods")
     return 1 if problems else 0
 
 
@@ -1002,9 +998,9 @@ def external_packs(set_dirs, cars_path, catalog_path, out):
                           + (", load order first" if first else "") + (f", left out {', '.join(skipped)}" if skipped else ""))
     ids = {e["id"] for e in entries}
     catalog["mods"] = [m for m in catalog["mods"] if m["id"] not in ids] + entries
-    _, v2_bytes = write_catalog(catalog, Path(out))
+    index_bytes = write_catalog(catalog, Path(out))
     print("\n".join(report))
-    print(f"{len(entries)} entries; {CATALOG_V2} {v2_bytes} bytes of {CATALOG_MAX_BYTES} -> {out}/catalog/, {out}/{CATALOG_V2}")
+    print(f"{len(entries)} entries; index {index_bytes} bytes of {CATALOG_MAX_BYTES} -> {out}/catalog/")
     return 0
 
 
@@ -1236,13 +1232,13 @@ def main():
     r.add_argument("--allow-dirty", action="store_true", help="development only: the commit pinned is HEAD, not the tree")
     c = sub.add_parser("check")
     c.add_argument("--catalog", type=Path, default=CATALOG_DIR / INDEX_NAME)
-    g = sub.add_parser("catalog", help="re-pin catalog/index.json after editing catalog/, and rewrite catalog.json (v2)")
+    g = sub.add_parser("catalog", help="re-pin catalog/index.json after editing catalog/")
     g.add_argument("--from", dest="from_v2", type=Path, help="split this schema-2 catalog into catalog/ instead")
     e = sub.add_parser("external-packs", help="catalog entries for the ZephyrSkies pack sets from their ZIPs (read only)")
     e.add_argument("sets", nargs="+", type=Path, help="a set folder of pack ZIPs, named as in PACK_SETS")
     e.add_argument("--cars", type=Path, required=True, help="the monorepo's crates/fi-gamedb/data/fh2-packs.json (OD-231)")
     e.add_argument("--catalog", type=Path, default=CATALOG_DIR / INDEX_NAME)
-    e.add_argument("--out", type=Path, required=True, help="a folder: gets catalog/ and catalog.json")
+    e.add_argument("--out", type=Path, required=True, help="a folder: gets catalog/")
     a = sub.add_parser("pin-author", help="re-pin an authorPackage mod to its author's release ZIP (report; --write to apply)")
     a.add_argument("mod")
     a.add_argument("--zip", type=Path, help="the author's ZIP, already downloaded from its release URL")

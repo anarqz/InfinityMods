@@ -47,8 +47,7 @@ mods/<id>/extraoptions/   the package's own ExtraOptions mod.json (format_versio
 mods/<id>/LICENSE, NOTICE.md   the original licence and the attribution shipped in the package
 catalog/index.json        the official mod catalog (schema 3): each mod's card (id, version, name, description, author) and its detail file's pin
 catalog/<id>.json         the rest of that mod's catalog entry (downloads, install); what you edit
-catalog.json              the same catalog as one schema-2 file, for launchers before schema 3: generated, never edited by hand
-schemas/                  JSON Schema of catalog/ (catalog-v3.schema.json) and of catalog.json (catalog.schema.json)
+schemas/                  JSON Schema of catalog/ (catalog-v3.schema.json) and of a schema-2 custom catalog (catalog.schema.json)
 tools/infmods.py          build, verify, release, check (Python 3.10+, standard library only)
 ```
 
@@ -56,23 +55,22 @@ tools/infmods.py          build, verify, release, check (Python 3.10+, standard 
 
 The Infinity launcher reads the catalog straight from this repository's `main` branch
 (raw.githubusercontent.com) and keeps a cached copy for offline listing. A change merged to `main` reaches every
-player at once, so only the owner (@anarqz, `.github/CODEOWNERS`) approves changes to `catalog/`, `catalog.json`
-or `schemas/`.
+player at once, so only the owner (@anarqz, `.github/CODEOWNERS`) approves changes to `catalog/` or `schemas/`.
 
 The catalog is split (schema 3, [`schemas/catalog-v3.schema.json`](schemas/catalog-v3.schema.json)):
 `catalog/index.json` lists every mod's card and pins its detail file `catalog/<id>.json` by `path`, `sha256` and
 `bytes`; the detail file repeats the mod's `id` and `version` and holds the rest of its entry (`download` or
 `externalSources`, `additionalDownloads`, `requires`, `install`). Launchers with schema 3 read only
 `catalog/index.json`, download only the detail files whose pin changed, and refuse one that differs from its pin.
-`catalog.json` is the same catalog as one schema-2 file for the launchers before schema 3 (they read only it); it
-is generated from `catalog/` and goes away once the launcher floor is past them.
+The schema-2 `catalog.json` was retired once the launcher floor reached 3.1.7, the first launcher that reads
+schema 3.
 
 To change a mod's entry, edit `catalog/<id>.json` (card text and `version`: `catalog/index.json`; a version
 changes in both), then:
 
 ```sh
-python3 -I tools/infmods.py catalog    # re-pin catalog/index.json, rewrite catalog.json, then check
-python3 -I tools/infmods.py check      # schemas, pins, no duplicate or unlisted ids, catalog.json up to date, every file in its game's mods folder
+python3 -I tools/infmods.py catalog    # re-pin catalog/index.json, then check
+python3 -I tools/infmods.py check      # schemas, pins, no duplicate or unlisted ids, every file in its game's mods folder
 ```
 
 Custom catalogs (the launcher's "Use a different catalog") may be either form: a schema-3 index whose `path`s are
@@ -110,9 +108,8 @@ One GitHub release per drop, one ZIP per mod (`<id>-<version>.zip`, deterministi
 python3 -I tools/infmods.py release --zig /path/to/zig --tag <tag>
 ```
 
-writes `dist/assets/*.zip`, `dist/manifests/*.json`, `dist/catalog/`, `dist/catalog.json` and `dist/RELEASE.txt`.
-After the release's assets are uploaded, `dist/catalog/` and `dist/catalog.json` replace `catalog/` and
-`catalog.json` in a pull request.
+writes `dist/assets/*.zip`, `dist/manifests/*.json`, `dist/catalog/` and `dist/RELEASE.txt`.
+After the release's assets are uploaded, `dist/catalog/` replaces `catalog/` in a commit to `main`.
 No entry requires `infinity-mod-runtime`; the release drops that retired entry from the catalog it writes.
 A mod whose ZIP is byte-identical to the one its catalog entry already points to keeps that entry
 unchanged (old URL), so players get no update; its ZIP may still be attached to the new release.

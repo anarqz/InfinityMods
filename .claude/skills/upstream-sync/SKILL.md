@@ -24,10 +24,11 @@ Underglow version).
 - Python with `-I`; downloads stay in memory (`sync`) or in an empty scratch folder; never run upstream scripts,
   build files or binaries. Never commit a release ZIP, a DLL or anything from it.
 - Branch from `main` (`sync/<id>-<version>`); stage exact paths, never `git add -A`.
-- Pushing a branch and opening a PR is fine when Alex asked for the update. **Publishing a GitHub release, uploading
-  assets and merging a `catalog.json` change are Alex's to approve, each time** (`main` reaches every player at once).
+- Pushing a branch is fine when Alex asked for the update; never open a pull request (Alex, 2026-11-16): the branch
+  reaches `main` by fast-forward, timed with WINDOWS-FORZA and SAURON-FORZA. **Publishing a GitHub release, uploading
+  assets and moving a `catalog/` change to `main` are Alex's to approve, each time** (`main` reaches every player at once).
 - Building is WINDOWS' (MSVC). Game checks need Alex's explicit authorization in the conversation; never launch the game.
-- One upstream version per mod per PR. Never "fix" the author's code or offsets here: a mod that needs a source change
+- One upstream version per mod per commit. Never "fix" the author's code or offsets here: a mod that needs a source change
   is not a re-pin (stop and ask).
 
 ## Steps
@@ -68,7 +69,7 @@ git -C upstream/<name> diff --stat <pinned>..<new>
 grep -ohE "(g_)?api->[a-z_]+" -r upstream/<name>/src | sed 's/.*->//' | sort -u
 ```
 
-Check, and write what you found in the PR description:
+Check, and write what you found in the commit message:
 
 - **Platform calls:** every call in the list above is in the adapter's table. Calls the adapter answers with "not
   added" (`add_command`, `add_hotkey`, pages, string tables, `get_interface`...) are acceptable only if the mod still
@@ -82,7 +83,7 @@ Check, and write what you found in the PR description:
 - **Paths:** the mod builds paths from `azimuth_dir` (= its own mod folder here) and `game_dir` (empty here). Any new
   write outside those (the real saves, `mediaoverride`, the game folder) blocks the re-pin: ask Alex.
 - **Online behaviour:** a new `offline_only` or `playing_online` use changes nothing here (the manifest's multiplayer
-  impact decides: not cosmetic = Noob only), but say so in the PR.
+  impact decides: not cosmetic = Noob only), but say so in the commit message.
 
 ### 4. Settings form
 
@@ -118,20 +119,20 @@ python3 -I tools/infmods.py release --tag v<YYYY.MM.DD> <id> [<id> ...]
 ```
 
 `release` builds the adapter, packs `<id>-<version>.zip`, fills the manifest (package hash, source commit) and writes
-the merged catalog (`dist/catalog/`, `dist/catalog.json`). With Alex's approval: create the GitHub release
+the merged catalog (`dist/catalog/`). With Alex's approval: create the GitHub release
 `v<YYYY.MM.DD>` with `dist/assets/*.zip`, download the assets back and compare their SHA-256 with `dist/RELEASE.txt`,
-then open a PR replacing `catalog/` and `catalog.json` with `dist/catalog/` and `dist/catalog.json` (and committing `dist/manifests/<id>-<version>.json` over `mods/<id>/manifest.json` if you keep
-the filled copy). Alex merges.
+then commit `dist/catalog/` over `catalog/` (and `dist/manifests/<id>-<version>.json` over `mods/<id>/manifest.json`
+if you keep the filled copy) to `main`: no pull request, timed with WINDOWS-FORZA and SAURON-FORZA.
 
 ### 7. Native check and review status
 
-With Alex's authorization only: install from the PR's catalog in a DEV launcher, start the game once, and read
+With Alex's authorization only: install from the branch's catalog (Use a different catalog: its raw `catalog/index.json`) in a DEV launcher, start the game once, and read
 `FH2_ExtraOptions.log` for `FH2 Mod Platform adapter: started`, `private media directory ready` (when the mod hands
 files over) and `the mod's SQL is applied`. Then set `review.status` to `reviewed` (blockers `[]`) in the manifest
-before the catalog PR merges.
+before the catalog change reaches `main`.
 
 ## Done means
 
-`sync` reports "already pinned" for the new release on `main`; the PR states the upstream range reviewed, the
-platform calls checked, the settings changed and the release/asset hashes; Alex approved the release and merged the
-catalog.
+`sync` reports "already pinned" for the new release on `main`; the commit states the upstream range reviewed, the
+platform calls checked, the settings changed and the release/asset hashes; Alex approved the release, and the catalog
+change is on `main`.
