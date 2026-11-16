@@ -1,0 +1,288 @@
+{
+  "schemaVersion": 3,
+  "id": "fm5-zs-midnight-touge-pack",
+  "version": "1.0.5",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS Midnight Touge Pack",
+        "pt-BR": "ZS Midnight Touge Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM5 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "fm5-zs-fm5-common",
+        "versions": [
+          "1.0.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/database.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/database.json",
+          "sha256": "bcdabcdb1e16599de7392f154e775c6d53a790cbda8b1df70d38d08b9cc880e0",
+          "bytes": 573080,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
+          "sha256": "500e70b54c45960abe221757c9e8b4cc7a398bc4afb15b8eba006b3c44e197eb",
+          "bytes": 2583296,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/audio/fmodanthem/durango/PG_HON_NSXR_05.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/audio/fmodanthem/durango/PG_HON_NSXR_05.bank",
+          "sha256": "39629a1af38e6d9515c015bce75f417a9da16b90420a22e8a3ade21077448026",
+          "bytes": 2572192,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/audio/fmodanthem/durango/PG_MAZ_RX7_85.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/audio/fmodanthem/durango/PG_MAZ_RX7_85.bank",
+          "sha256": "428815c1c25bbde88582a8ca1310ae703616dd194004aa292a9548515267dc6f",
+          "bytes": 2045152,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/audio/fmodanthem/durango/PG_MIT_GTO_97.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/audio/fmodanthem/durango/PG_MIT_GTO_97.bank",
+          "sha256": "6ac817960b233756e35c182f691ec314431959f4792ab9d4c21a10beb5358ca9",
+          "bytes": 2221664,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/audio/fmodanthem/durango/PG_NIS_FairladyZ_03.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/audio/fmodanthem/durango/PG_NIS_FairladyZ_03.bank",
+          "sha256": "add026ed9c5d8c148bce59b2747f03600eb0a02fd1dc5f2989847a26d4f24cd1",
+          "bytes": 2589856,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/audio/fmodanthem/durango/PG_NIS_SkylineGTRVSpec_95.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/audio/fmodanthem/durango/PG_NIS_SkylineGTRVSpec_95.bank",
+          "sha256": "56c740b20a49a893ecb06a1dcff704f12265df5501b0a3b5109476ae6282bcfa",
+          "bytes": 2007072,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/audio/fmodanthem/durango/PG_TOY_MR2SC_89.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/audio/fmodanthem/durango/PG_TOY_MR2SC_89.bank",
+          "sha256": "8a5619b67f891f406ae460a9be4016d2c213dfa6f06f463509a15068aaaf2b55",
+          "bytes": 2638624,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/cars/HON_NSXR_05.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/cars/HON_NSXR_05.zip",
+          "sha256": "7839e2a14e9560ca84f029aa2222d8f9fa8f047e828db01503305dcf934b77a9",
+          "bytes": 14524253,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/cars/MAZ_RX7_85.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/cars/MAZ_RX7_85.zip",
+          "sha256": "cc10f61c8d2457febf71d775ede6eec5692fafd1d8e6985f893484ec37602522",
+          "bytes": 20633479,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/cars/MIT_GTO_97.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/cars/MIT_GTO_97.zip",
+          "sha256": "87249f694a4793155362469107c35169bdb8685c26e9022224b463472f403188",
+          "bytes": 18366445,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/cars/NIS_FairladyZ_03.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/cars/NIS_FairladyZ_03.zip",
+          "sha256": "0fe4952d5e66e6e6f2ce34608dd4030b91b79240183fff2a8bfb37530ec8de98",
+          "bytes": 15611429,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/cars/NIS_SkylineGTRVspec_95.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/cars/NIS_SkylineGTRVspec_95.zip",
+          "sha256": "cbbc80aee8aeb6433680ada4901427fad71bdfe4d6284926516f8c211231d7aa",
+          "bytes": 18455160,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/cars/TOY_MR2SC_89.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/cars/TOY_MR2SC_89.zip",
+          "sha256": "b3ae53ed886278bec9d4a25c8d1a8dc9abf885855cc0fca3fdaab6d037d48ebb",
+          "bytes": 18547577,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/stripped/RC0/Thumbnail_1043_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/stripped/RC0/Thumbnail_1043_Big.swatchbin",
+          "sha256": "30cfb9d3240b07d894ec5bf2dbcb009303a866b45f89b5b39f4f79e10934fa91",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/stripped/RC0/Thumbnail_1043_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/stripped/RC0/Thumbnail_1043_Small.swatchbin",
+          "sha256": "842fc6604875bd76b20070ef6fbb6b9a3cfb1c24c772371c4bfbed4873336b44",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/stripped/RC0/Thumbnail_1395_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/stripped/RC0/Thumbnail_1395_Big.swatchbin",
+          "sha256": "28da4d1b05bd157ae30f48c3164d85a0e5f39201f5471c33fadb1aad9c228c89",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/stripped/RC0/Thumbnail_1395_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/stripped/RC0/Thumbnail_1395_Small.swatchbin",
+          "sha256": "3d7b253a1aacf565922bdbc01830bc1b9f66b22ece7c14ae90c349e59cf5b47c",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/stripped/RC0/Thumbnail_1480_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/stripped/RC0/Thumbnail_1480_Big.swatchbin",
+          "sha256": "115c8971adddcb50acc10972bd80c93975d475694b0deacdad81e55f3300e387",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/stripped/RC0/Thumbnail_1480_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/stripped/RC0/Thumbnail_1480_Small.swatchbin",
+          "sha256": "879d2391ba04e178a9f008a2c006f33b73d76280f00ee4764952f119378dad22",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/stripped/RC0/Thumbnail_344_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/stripped/RC0/Thumbnail_344_Big.swatchbin",
+          "sha256": "eb75add29a21d859b19577958002d9ecbbd49f1d505b0c8b6d3d007f2f8bf92e",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/stripped/RC0/Thumbnail_344_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/stripped/RC0/Thumbnail_344_Small.swatchbin",
+          "sha256": "8674d02914c0b8172b8b58008957bcaa5809992f1bd38a3978b49a0b33bbc77e",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/stripped/RC0/Thumbnail_357_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/stripped/RC0/Thumbnail_357_Big.swatchbin",
+          "sha256": "214012b5c3da466887a3cfa2419cf023f559ef01bd85504adc935bcf15a79b10",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/stripped/RC0/Thumbnail_357_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/stripped/RC0/Thumbnail_357_Small.swatchbin",
+          "sha256": "bad8fe36439218aa2742b9a57eae6a16b215977767e14cd985977ce8c2307eb3",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/stripped/RC0/Thumbnail_411_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/stripped/RC0/Thumbnail_411_Big.swatchbin",
+          "sha256": "1c4fa15b5f6cb3cc0d51386f4e3b462343170d808cada9df162a42437c9bb1b4",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/media/stripped/RC0/Thumbnail_411_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/media/stripped/RC0/Thumbnail_411_Small.swatchbin",
+          "sha256": "0890ed7618710e0910be9d6678516011454cc138acd54a85e6f5f70c13841b8e",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/mod.json",
+          "sha256": "1603950ae16c0fe3be382485f772b0e65b1209e2901bc5fbb0652fef1855e6a3",
+          "bytes": 473,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Midnight Touge Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-midnight-touge-pack/strings.json",
+          "sha256": "296c2dce9497fdccc9422733128afb309955943db5e0b4b76b2fd99897470ce7",
+          "bytes": 509,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "fm5-zs-midnight-touge-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

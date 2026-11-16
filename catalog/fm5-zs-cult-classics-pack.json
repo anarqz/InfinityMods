@@ -1,0 +1,320 @@
+{
+  "schemaVersion": 3,
+  "id": "fm5-zs-cult-classics-pack",
+  "version": "1.0.5",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS Cult Classics Pack",
+        "pt-BR": "ZS Cult Classics Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM5 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "fm5-zs-fm5-common",
+        "versions": [
+          "1.0.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/database.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/database.json",
+          "sha256": "3ecf70f6615005281d79c6ec4dfcfad4b9969b4231ae3c25157dc45fd39c3020",
+          "bytes": 662613,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/audio/fmodanthem/durango/PG_ALF_GTA_65.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/audio/fmodanthem/durango/PG_ALF_GTA_65.bank",
+          "sha256": "f41bbc6074170dfbf4eae5d8b6638f42c51f6f82d39167907d5cbbcff4d8baaa",
+          "bytes": 2472384,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/audio/fmodanthem/durango/PG_ALF_GTV6_86.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/audio/fmodanthem/durango/PG_ALF_GTV6_86.bank",
+          "sha256": "cf5d1125c2ae8ad46a714caa57395a5f62266eb77451753b5c8ff96ec5af23a1",
+          "bytes": 2223456,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/audio/fmodanthem/durango/PG_ALF_SZ_90.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/audio/fmodanthem/durango/PG_ALF_SZ_90.bank",
+          "sha256": "5b3163361735ac4d9a2165d695c54d237dd57bd0b7229c870373ce10772f9583",
+          "bytes": 2012320,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
+          "sha256": "500e70b54c45960abe221757c9e8b4cc7a398bc4afb15b8eba006b3c44e197eb",
+          "bytes": 2583296,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/audio/fmodanthem/durango/PG_FER_365GTB4_68.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/audio/fmodanthem/durango/PG_FER_365GTB4_68.bank",
+          "sha256": "81a860ef08ffef6a49e952ab68a68c5bdc956305d7a1ca7553b12219b7daa136",
+          "bytes": 2342176,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/audio/fmodanthem/durango/PG_FIA_X19_75.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/audio/fmodanthem/durango/PG_FIA_X19_75.bank",
+          "sha256": "f39bdcbb9896866aacfb952e8858eb50efae126551f7fa69d159c39e48801699",
+          "bytes": 2445600,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/audio/fmodanthem/durango/PG_LOT_ElanSprint_72.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/audio/fmodanthem/durango/PG_LOT_ElanSprint_72.bank",
+          "sha256": "2201cf73ed1b0d5a6126585af25d2e2edcadd12e3a1e9b50b7e2227a50c819ce",
+          "bytes": 2210592,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/audio/fmodanthem/durango/PG_MAZ_RX3_73.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/audio/fmodanthem/durango/PG_MAZ_RX3_73.bank",
+          "sha256": "456d52aed62e45adfb30dd5e9c311f1d141fc69b77d495f0882a16dc634dbd48",
+          "bytes": 1805088,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/cars/ALF_GTA_65.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/cars/ALF_GTA_65.zip",
+          "sha256": "5ee629ce92e06f49524e22c061319bd98be6e6d2d3636452ec3617eb61a2ebb3",
+          "bytes": 13791052,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/cars/ALF_GTV6_86.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/cars/ALF_GTV6_86.zip",
+          "sha256": "a8c9d0b5256088aba75cd037eb09f9ebd6f4bbbcc86b71de334ae12895214c53",
+          "bytes": 25406700,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/cars/ALF_SZ_90.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/cars/ALF_SZ_90.zip",
+          "sha256": "64470467ae6859ee827b075e521cc23cb0273b4813851fbfd12b2b292778b6fa",
+          "bytes": 19144678,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/cars/FER_365GTB4_68.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/cars/FER_365GTB4_68.zip",
+          "sha256": "2a9f75dd505d2a42e6e3e3dc3c6db5a14c6d186719a5d8df2f0e825447e1edb8",
+          "bytes": 13869372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/cars/FIA_X19_75.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/cars/FIA_X19_75.zip",
+          "sha256": "1925372e3e536cb35195d6482234e62aec3ab8be768e6d8657b6412b719d5b5b",
+          "bytes": 17538880,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/cars/LOT_ElanSprint_72.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/cars/LOT_ElanSprint_72.zip",
+          "sha256": "db93884d32f7068e9372897fac5270a37c15eb3ce9a6994eda893a12b6c61919",
+          "bytes": 12987581,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/cars/MAZ_RX3_73.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/cars/MAZ_RX3_73.zip",
+          "sha256": "d7e4ef4b9b59e21f1802a5636f5c9776e6b87d56bf1489ae4233bb755732c4a5",
+          "bytes": 17232357,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_1150_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_1150_Big.swatchbin",
+          "sha256": "528d0b332216368d97994d67981e426847bc9a8613c8219e580a6c5430ff4e42",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_1150_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_1150_Small.swatchbin",
+          "sha256": "3aaf7bd6049f04fe3358032dc5ebda7d1c014c33273f3756819d5c03e4c46364",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_1318_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_1318_Big.swatchbin",
+          "sha256": "0aec489dea8b543fbeb97bb73f1d6ec35bedad473804e3a15e4b2616b6d08575",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_1318_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_1318_Small.swatchbin",
+          "sha256": "65bfc2b8b641f5aa9c45a9bab53357f7e4881750a79fd8f63aa3b2b71c60665f",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_1507_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_1507_Big.swatchbin",
+          "sha256": "20db10b5a5bba6c294046556d9d58f587413a38b904a60bd2d94ea63081b53c9",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_1507_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_1507_Small.swatchbin",
+          "sha256": "b210a7666aead387cbd3f691b0deaf602e91f373ed8d26f805028de1e1d31edc",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_1514_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_1514_Big.swatchbin",
+          "sha256": "d483b1622daa4ee12bff08b744e432ce79fd89fe2e28d631f902184b55c7fe31",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_1514_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_1514_Small.swatchbin",
+          "sha256": "9691cb4fd5e5d23a4a3ec4e16526adde3859b6a5c33556ebc92cc0a9d70cae10",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_1571_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_1571_Big.swatchbin",
+          "sha256": "70b9d1ef7815d191eeaad0b7c1d6c7c1363977fcf745c21313237148ef2961ed",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_1571_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_1571_Small.swatchbin",
+          "sha256": "b2ecd9307bc09f02248c3baefc3f259320b7b812c97d71d8ae34ccbc4157121e",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_1579_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_1579_Big.swatchbin",
+          "sha256": "e892f41d9da18c497ed220f4270a6a99e33b175885e2ee5f3358078ecdfae22c",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_1579_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_1579_Small.swatchbin",
+          "sha256": "8e7f3eefc13409fd58ffd1320777c95f86b72f62cef7e4ed3b6362a5a7f0048d",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_330_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_330_Big.swatchbin",
+          "sha256": "08c0144680a528ecb7cd72b1e4d96db1a7414f98dedc6ca880bc842f2cc2d7b6",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/media/stripped/RC0/Thumbnail_330_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/media/stripped/RC0/Thumbnail_330_Small.swatchbin",
+          "sha256": "272a1c7860b7064796f2b231f4b7bbf4f0d4277d9136aaa71d5082a61f049d5a",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/mod.json",
+          "sha256": "621d310da4b72bec6b3f45727ebf0f963cee865f7bd935c01e530255c2e22425",
+          "bytes": 515,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Cult Classics Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-cult-classics-pack/strings.json",
+          "sha256": "64a262d05949f47faff7d71aa48f1837c2772d167789051de9c138b95a0d135c",
+          "bytes": 578,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "fm5-zs-cult-classics-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

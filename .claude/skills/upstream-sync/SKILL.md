@@ -114,13 +114,13 @@ On WINDOWS (Visual Studio C++ x64 tools):
 
 ```sh
 python3 -I tools/infmods.py verify <id>
-python3 -I tools/infmods.py release --tag v<YYYY.MM.DD> --catalog catalog.json <id> [<id> ...]
+python3 -I tools/infmods.py release --tag v<YYYY.MM.DD> <id> [<id> ...]
 ```
 
 `release` builds the adapter, packs `<id>-<version>.zip`, fills the manifest (package hash, source commit) and writes
-`dist/catalog.json`. With Alex's approval: create the GitHub release `v<YYYY.MM.DD>` with `dist/assets/*.zip`,
-download the assets back and compare their SHA-256 with `dist/RELEASE.txt`, then open a PR replacing `catalog.json`
-with `dist/catalog.json` (and committing `dist/manifests/<id>-<version>.json` over `mods/<id>/manifest.json` if you keep
+the merged catalog (`dist/catalog/`, `dist/catalog.json`). With Alex's approval: create the GitHub release
+`v<YYYY.MM.DD>` with `dist/assets/*.zip`, download the assets back and compare their SHA-256 with `dist/RELEASE.txt`,
+then open a PR replacing `catalog/` and `catalog.json` with `dist/catalog/` and `dist/catalog.json` (and committing `dist/manifests/<id>-<version>.json` over `mods/<id>/manifest.json` if you keep
 the filled copy). Alex merges.
 
 ### 7. Native check and review status

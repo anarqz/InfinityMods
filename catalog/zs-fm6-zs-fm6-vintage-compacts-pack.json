@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 3,
+  "id": "zs-fm6-zs-fm6-vintage-compacts-pack",
+  "version": "0.1.0",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS FM6 Vintage Compacts Pack",
+        "pt-BR": "ZS FM6 Vintage Compacts Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM6 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "zs-fm6-zs-fm6-common",
+        "versions": [
+          "0.1.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/database.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/database.json",
+          "sha256": "27511e981112e644c55217d5081e1afa62cccc83c01e558757d9fecc4a9c1cfd",
+          "bytes": 613610,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/audio/cars/SUN_Tiger_67.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/audio/cars/SUN_Tiger_67.xml",
+          "sha256": "0b11c64c6a900638a8e6e0056d8f2f251736441694e5a99540b32b818d7a3aa5",
+          "bytes": 364,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/audio/fmodanthem/durango/PG_HOL_Torana_77.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/audio/fmodanthem/durango/PG_HOL_Torana_77.bank",
+          "sha256": "4dd473c6653b401feaa8d3e4ea2cd25ccb6d5adcefce25fe7048b0cb299d6344",
+          "bytes": 2944000,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/audio/fmodanthem/durango/PG_NIS_SkylineGTR_73.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/audio/fmodanthem/durango/PG_NIS_SkylineGTR_73.bank",
+          "sha256": "3bf35891cc4e1177e980e1eb1f339dadeae3889efd08f89362ca23f333e19794",
+          "bytes": 2082336,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/audio/fmodanthem/durango/PG_SUN_Tiger_67.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/audio/fmodanthem/durango/PG_SUN_Tiger_67.bank",
+          "sha256": "1b4aacfed2cabbc084320d99b88dd08a7ed9349f628da9c5221ade0ab936ad43",
+          "bytes": 2415200,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/cars/DAT_2000_69.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/cars/DAT_2000_69.zip",
+          "sha256": "aa048c7919162a1bc69d0e8777fa6ad3832a64acf1e2276852f61121c91279ed",
+          "bytes": 18441472,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/cars/DAT_Silvia_66.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/cars/DAT_Silvia_66.zip",
+          "sha256": "35a73cf66b540b0de19885fc87c259c9fb19294d8a84848de29305176a3c2b35",
+          "bytes": 18449147,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/cars/FIA_124Spider_80.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/cars/FIA_124Spider_80.zip",
+          "sha256": "4dd86a4b3ef985eff511d61054676be63579d0a2bdceec76a26281e89e37e025",
+          "bytes": 20159585,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/cars/FOR_EscortRS1600_73.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/cars/FOR_EscortRS1600_73.zip",
+          "sha256": "33658b0456348c267153c43e29633ce40f4f00d64c4617879f58c63074485fa8",
+          "bytes": 18600995,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/cars/HOL_Torana_77.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/cars/HOL_Torana_77.zip",
+          "sha256": "f66d0f65c0e03f5ba8c8f32e0c7d60b168c64ae96d33dc37d53c8d89e3540cbc",
+          "bytes": 19459188,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/cars/NIS_SkylineGTR_73.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/cars/NIS_SkylineGTR_73.zip",
+          "sha256": "f6256747516a01db441c4ee5ec100c8a96eababdaad18ab20e16ebe7d70f1993",
+          "bytes": 17935906,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/cars/OPE_GT_68.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/cars/OPE_GT_68.zip",
+          "sha256": "fe53d7a1821189cd9c84d8865ebed6f3c0ca496ad53f0bd75c6fe147190440ba",
+          "bytes": 18386459,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/cars/OPE_Kadett_79.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/cars/OPE_Kadett_79.zip",
+          "sha256": "5658a8b8723c3e6a3836e3cc6539e3ccb6e240756e562dfee9fbd6a8e0f0045c",
+          "bytes": 21083060,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/cars/SUN_Tiger_67.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/cars/SUN_Tiger_67.zip",
+          "sha256": "cb3c434ec124c012e447a4c70e84ecc3b7e542f51331af96f0a2fb71ed72ea69",
+          "bytes": 25112316,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/cars/TOY_CorollaSR5_73.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/cars/TOY_CorollaSR5_73.zip",
+          "sha256": "818a8a848faf5c667af290e4456e252809f4f740491634f476564dec5782f57c",
+          "bytes": 19942509,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/cars/VOL_123GT_68.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/cars/VOL_123GT_68.zip",
+          "sha256": "c9568137f5a0b5f8e55279a61ae2430ed16223bb4116f53cf0c6e7b4cf2276e5",
+          "bytes": 22574113,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_1533_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_1533_Big.swatchbin",
+          "sha256": "63a736675ac7edcfa3ee7e1777b67246aae19645f4d65a01e4d8a1e442ccf8e0",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_1533_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_1533_Small.swatchbin",
+          "sha256": "db3b6d1f2f62616f5ca9ba6d7e1356f86a37e77462655dd42c4960b77b4a511f",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_1537_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_1537_Big.swatchbin",
+          "sha256": "4082a5cfa28a004069933ca7db327974a39ff5cd97e7f0f94e938ec10bd76d67",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_1537_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_1537_Small.swatchbin",
+          "sha256": "af8847a4831e1a0c5496f3dea67c5020d62ca23d764f23cc14d49efd4b62d3b2",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_1580_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_1580_Big.swatchbin",
+          "sha256": "8326bf64223c5a2e58a87114fe6df4450f0b50593fbdef5868c137190520a77b",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_1580_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_1580_Small.swatchbin",
+          "sha256": "7b896bb84008810e6112d280c831d2e323f20c9d314ebf1b0bff1065d6d156bb",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_1594_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_1594_Big.swatchbin",
+          "sha256": "182c165e37906b42e1214b834529cb0df64aee6672a32f538de468ded5ce8345",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_1594_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_1594_Small.swatchbin",
+          "sha256": "1090b8b138584aba5c54fb0473885fde4114bc38ff9b1a555b7b43070b499128",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2141_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2141_Big.swatchbin",
+          "sha256": "5448c0b1e38f16583dacd6ccbaf624520e16bea48ac99c1e7e1034a48e5e8c58",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2141_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2141_Small.swatchbin",
+          "sha256": "114c558442bbe8060c9cf8f1928588fef55cc9d6416ec8f7bb5ad2e668fcb561",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2160_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2160_Big.swatchbin",
+          "sha256": "a7692fdb6585076a9c2e399e675dd01cc12c1e53de97c39217e183734387dc1d",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2160_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2160_Small.swatchbin",
+          "sha256": "373d6f93fb6b001594dd5042a37d768438404228d7b36f441e1bfb6f8412f04f",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2195_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2195_Big.swatchbin",
+          "sha256": "aae69cbe54980182a9b9266a0ba0eab2914fe71a9912f1c1ee5d41a4a2ec5806",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2195_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2195_Small.swatchbin",
+          "sha256": "9033834a4ad08849443a0a8233d4c1dabdc5fddb3d24a8d9f96865996ad2f39f",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2270_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2270_Big.swatchbin",
+          "sha256": "970983db17172ef7411bc4ca78c56c064a3aaa4bac43c7d5490bf72bf65900a2",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2270_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2270_Small.swatchbin",
+          "sha256": "e98316627b829919117483c12eb6c56a0494a45c7b34c27470e3ef5b1d273c46",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2272_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2272_Big.swatchbin",
+          "sha256": "da48580b8927a608958b34a47845de609ea0d678b100c8c206878bc471c3a337",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2272_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2272_Small.swatchbin",
+          "sha256": "4d35eab695abe8071b956b3d91dc3e39a7787c6355d0dee2bb85efa6e54eb54f",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2273_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2273_Big.swatchbin",
+          "sha256": "cabc888feae08bb90dc99b7ca87a87f9c1ed47239202754a5ba7dab4b7252276",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2273_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2273_Small.swatchbin",
+          "sha256": "5ed0d60d3fd552a452af7900ae3cecaf11fcac76be421bb8864790b02136b43d",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2429_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2429_Big.swatchbin",
+          "sha256": "f2ee041305fc2db628e99ca45498f5c3b0db4dc0e79a14dfdff3dfbdc9ec8779",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/media/stripped/RC0/Thumbnail_2429_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/media/stripped/RC0/Thumbnail_2429_Small.swatchbin",
+          "sha256": "5037922e3ca67972c20b58b3dc1072f000c2271867610f5032b46547140bfdef",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/mod.json",
+          "sha256": "e969ef85a34860eafe62d240e56181cbb31cace1ce5b40b58e418e16e4ce855c",
+          "bytes": 325,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage Compacts Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-compacts-pack/strings.json",
+          "sha256": "8c35424600a9945b021ebbbe50b1c3c27e499f684d1f0408a1a05fb6ec501929",
+          "bytes": 905,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "zs-fm6-zs-fm6-vintage-compacts-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

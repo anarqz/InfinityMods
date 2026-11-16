@@ -1,0 +1,528 @@
+{
+  "schemaVersion": 3,
+  "id": "zs-fm6-zs-fm6-modern-le-mans-pack",
+  "version": "0.1.0",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS FM6 Modern Le Mans Pack",
+        "pt-BR": "ZS FM6 Modern Le Mans Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM6 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "zs-fm6-zs-fm6-common",
+        "versions": [
+          "0.1.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/database.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/database.json",
+          "sha256": "309c11f0046d626ec4ccbb8e084e0ae3d46412b7e117d89f8299e18af6068dc4",
+          "bytes": 290617,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/cars/AUD_2_R15_11.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/cars/AUD_2_R15_11.xml",
+          "sha256": "d17d430b9ea37cddef0f6eff5f3c50cf64a92e9efb4ee7b60f5e08556b06ffeb",
+          "bytes": 2028,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/cars/CHE_10_CorvetteDP_15.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/cars/CHE_10_CorvetteDP_15.xml",
+          "sha256": "b5eff6bda13b5876d701fc6303404f0c6cc210a0dd92221c7f986c334fe35ba8",
+          "bytes": 1289,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/cars/MAZ_70_B1280_14.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/cars/MAZ_70_B1280_14.xml",
+          "sha256": "6546332b2ac84b33e6775e8ea2806fedf920bec0577eaa9dfc5aedceed476bb2",
+          "bytes": 2028,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/cars/NIS_23_GTRLM_15.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/cars/NIS_23_GTRLM_15.xml",
+          "sha256": "d5d679225346f54ad0b979bfe2ce28ed46fe63eefa733cc8fcb6bd8303313877",
+          "bytes": 1861,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/cars/POR_19_919Hybrid_15.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/cars/POR_19_919Hybrid_15.xml",
+          "sha256": "3e54e3a3779d58247c39bcbe342bb40c259ae6d04d8360bb0045904e888a8617",
+          "bytes": 1409,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/cars/POR_7_RSSpyder_08.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/cars/POR_7_RSSpyder_08.xml",
+          "sha256": "2eafdacfe26aff084035afd1f83d311ffb8c9e3da42ac8e28531e93e347d80fe",
+          "bytes": 1390,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/cars/TOY_12_B1260_14.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/cars/TOY_12_B1260_14.xml",
+          "sha256": "1a6b18d0498bac7695d11e027d1f23035b27b0e0a90908f45fd14a1e9a08d813",
+          "bytes": 814,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/fmodanthem/durango/PG_AUD_2_R15_11.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/fmodanthem/durango/PG_AUD_2_R15_11.bank",
+          "sha256": "ef40a94f90ec28733b45afc1d1667efbaaf850e172522252b68175f6971fd352",
+          "bytes": 1386112,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/fmodanthem/durango/PG_CHE_10_CorvetteDP_15.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/fmodanthem/durango/PG_CHE_10_CorvetteDP_15.bank",
+          "sha256": "94c543ce8c12b928d57805d663b9e6ebf80cec91280d9bba09772e66b8201496",
+          "bytes": 2853728,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/fmodanthem/durango/PG_FM6_AUD_1_R18_12.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/fmodanthem/durango/PG_FM6_AUD_1_R18_12.bank",
+          "sha256": "7b1f10e2218466556848fd9b598b72f3b2076014e9ca8e36a7c4399246324919",
+          "bytes": 1873824,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/fmodanthem/durango/PG_FM6_AUD_2_R8_06.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/fmodanthem/durango/PG_FM6_AUD_2_R8_06.bank",
+          "sha256": "381d8745c110d74d2ff0152633606b8ae6dff44b2ea7a90afd8452a66d9de473",
+          "bytes": 2194336,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/fmodanthem/durango/PG_FM6_PEU_9_908_09.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/fmodanthem/durango/PG_FM6_PEU_9_908_09.bank",
+          "sha256": "626c8d59a2d378de2dacecf107d99c84b1e5430d2f19a8d9256129b790b82ca5",
+          "bytes": 1813728,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/fmodanthem/durango/PG_MAZ_70_B1280_14.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/fmodanthem/durango/PG_MAZ_70_B1280_14.bank",
+          "sha256": "799c6f2162d016ee274721d9a433bbf18f81af577c7ce12e77f2be606809f201",
+          "bytes": 2264032,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/fmodanthem/durango/PG_POR_19_919Hybrid_15.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/fmodanthem/durango/PG_POR_19_919Hybrid_15.bank",
+          "sha256": "f169da77447228fdc3fd4c2bc4a1a8e6388c4108bae2479fb81d63cb93ee1743",
+          "bytes": 2247488,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/fmodanthem/durango/PG_POR_7_RSSpyder_08.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/fmodanthem/durango/PG_POR_7_RSSpyder_08.bank",
+          "sha256": "4e5593890144af8d0f3c6bdf1dec4fae16a8e6a19be2df193cefbc72eb703329",
+          "bytes": 3121280,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/audio/fmodanthem/durango/PG_TOY_12_B1260_14.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/audio/fmodanthem/durango/PG_TOY_12_B1260_14.bank",
+          "sha256": "6c4b52f7fddabbee7c727b2186072c46b8741d3763b55e540fe85514854a5ffb",
+          "bytes": 3115840,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/cars/AUD_2_R15_11.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/cars/AUD_2_R15_11.zip",
+          "sha256": "9181039336416507bc0b1a23c70e705e5e1ef3423f9c0d898def95f53d571321",
+          "bytes": 24398257,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/cars/AUD_2_R18_14.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/cars/AUD_2_R18_14.zip",
+          "sha256": "9c4ff9b05eb5fbfc17c59e833e21785b7dd820c9a0c26ff05a327b4f91343b2d",
+          "bytes": 19161013,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/cars/AUD_5_R8_04.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/cars/AUD_5_R8_04.zip",
+          "sha256": "c0007a26ef71d9f76a5fa996b44d693fe15d293d73511089a2dd9064f3b35238",
+          "bytes": 25696052,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/cars/BEN_7_Speed8_03.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/cars/BEN_7_Speed8_03.zip",
+          "sha256": "6bf34b7694c482e10d76565793d48fc3aba31e10c4bb95450ffb682da0bbd058",
+          "bytes": 18153039,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/cars/CHE_10_CorvetteDP_15.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/cars/CHE_10_CorvetteDP_15.zip",
+          "sha256": "13f6db5c4213a2002f8e047199e0b808dd67884ef342a80e7373d48a57783f13",
+          "bytes": 21305125,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/cars/FOR_02_RileyDP_15.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/cars/FOR_02_RileyDP_15.zip",
+          "sha256": "7d9237f1c7c84f8b805ce8d443228f52deb48378f4c0d4b3629e60aa9d7f672d",
+          "bytes": 20456546,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/cars/MAZ_70_B1280_14.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/cars/MAZ_70_B1280_14.zip",
+          "sha256": "ee63ce796207f2fd4b4f599036d44b6c34becbfd33f606834ea3fb56a6d3d641",
+          "bytes": 22972531,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/cars/NIS_23_GTRLM_15.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/cars/NIS_23_GTRLM_15.zip",
+          "sha256": "737c8975fc05bb92ae5812f323e6f3db4ba8a3a72872b86b4102215e12becca4",
+          "bytes": 25180593,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/cars/PEU_10_908_11.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/cars/PEU_10_908_11.zip",
+          "sha256": "01e9582b672a13d7b3cc79d0b11cfe2b0ce0b241ef00abd1e769222eae42216f",
+          "bytes": 21060815,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/cars/POR_19_919Hybrid_15.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/cars/POR_19_919Hybrid_15.zip",
+          "sha256": "9e8de2ecc613f5cdcb1078eac88a4732446c221046d11b2304556914b331cf8b",
+          "bytes": 19627859,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/cars/POR_7_RSSpyder_08.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/cars/POR_7_RSSpyder_08.zip",
+          "sha256": "40d88fc23c9c8d621c104371357c5fa51efffb5819b5ec0684bad81ca65db672",
+          "bytes": 16371050,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/cars/TOY_12_B1260_14.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/cars/TOY_12_B1260_14.zip",
+          "sha256": "3047044e864e32460ccee84ed54c56ce91e061afa8fcb380f2e3282831c3b47c",
+          "bytes": 17675259,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/cars/TOY_8_TS040_14.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/cars/TOY_8_TS040_14.zip",
+          "sha256": "165871b9443b37f81372d4b30cd7f359b0afe062d0e856913e34fa805e253052",
+          "bytes": 19757890,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_1030_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_1030_Big.swatchbin",
+          "sha256": "4429606a9da400f7e901aaa2290d7365531b53bb77d65a1c5d333e035a820ee5",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_1030_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_1030_Small.swatchbin",
+          "sha256": "23d1ecff4e2f5a48cb7f86b3b0a2084f7481230bf9bcec0e98b296da8a287cd3",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_1436_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_1436_Big.swatchbin",
+          "sha256": "2404fb0e7c22da8845e5aaaf2455785daf8638f46637eecdba6ed3967e8dd9f0",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_1436_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_1436_Small.swatchbin",
+          "sha256": "32a14956236a572158d1b94ca347f9ce3fc4eb73548cb987e5f698ffab0a7486",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_1445_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_1445_Big.swatchbin",
+          "sha256": "4b561c8870ea51880126302e3f3cbf0ee5fbc031a56f5e318743c0ab688c92e0",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_1445_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_1445_Small.swatchbin",
+          "sha256": "a8d6cf5e824904be4dcaa7b3bb7b142ead58552faa8a8047e5435d3d90f90af7",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2240_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2240_Big.swatchbin",
+          "sha256": "439e75347dec7eb93de61170e8caea1027169693bdcf114a3a7e2b6c90ee5e03",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2240_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2240_Small.swatchbin",
+          "sha256": "36928fa2fe5b6414a32d94a4fc976ff9f439ad19b8e5fd36df0d9b35efd82cf5",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2246_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2246_Big.swatchbin",
+          "sha256": "15361f7627dea41ec6eae5368b14f9c508b61b84b7582f148f6f933e2b07ffdc",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2246_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2246_Small.swatchbin",
+          "sha256": "4e7a396dc018aadcef4d459e3c8d06866aad220438ba864b0b5034173f284332",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2271_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2271_Big.swatchbin",
+          "sha256": "0ad86ec60009107f3912b9c29c260974141528ac3b19f59aaacdd39fc6d5d6c3",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2271_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2271_Small.swatchbin",
+          "sha256": "e2bb8ab3f73a5f5b458187ad6fdf318072ca4cda5f72c423058f3c87bd80f380",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2302_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2302_Big.swatchbin",
+          "sha256": "deac7ce1ae959f592d90c88fdfdff2eadd2f9b9f5e21f29dc9088c75912c21b5",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2302_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2302_Small.swatchbin",
+          "sha256": "054c0f3315ed61f50f621991f7049b9c72eb27000dc96ff20a234a83005384fa",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2368_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2368_Big.swatchbin",
+          "sha256": "8ce41c32d33b4791310dd0a2cef41b8e5f37f909939d7b77d1b1070756da0340",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2368_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2368_Small.swatchbin",
+          "sha256": "b3eca86ec5070a4ed547f6bbff42b25f2d17fe4f70f1f9f0f49ad9dbb9761a28",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2409_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2409_Big.swatchbin",
+          "sha256": "8ffdbeffdc30c275e97491218672e46beebae3f9b3d426dcc8db20d25d3d2ccd",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2409_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2409_Small.swatchbin",
+          "sha256": "a06c24557e89bfcae70aacb29fb76a7f379319ab1dc99f385a68e60307cb0603",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2485_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2485_Big.swatchbin",
+          "sha256": "15064f7580ebd797c39e21747c885c2751517ec2ce2ab56ad08b7482d315a1be",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2485_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2485_Small.swatchbin",
+          "sha256": "2522a7b28ae184a1c9d099a6757e8c9e2e7e7b781dc626e5e82dafcd81bede22",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2554_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2554_Big.swatchbin",
+          "sha256": "e5bbef5520d51486bda825512ada44cf9cf6ceb9cd5fa6d0f05b62c391a8f472",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_2554_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_2554_Small.swatchbin",
+          "sha256": "ab777ea15f37269a1fb0d4bf74cc2c531724f219425654eb2d22eb93f0877f21",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_496_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_496_Big.swatchbin",
+          "sha256": "4e892333231210dbde145982df8dabb2b5fc0463dd43035641277dd9ac312459",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_496_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_496_Small.swatchbin",
+          "sha256": "9b5acf76afef5bb40428cd626aefb40d6996ff043d4398aaeb8c9bc96e8fae20",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_498_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_498_Big.swatchbin",
+          "sha256": "6972181786d0c678a208771fe0f342eae8b435176749227a71591e72c27f643c",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/media/stripped/RC0/Thumbnail_498_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/media/stripped/RC0/Thumbnail_498_Small.swatchbin",
+          "sha256": "78582d15ed00020e2a8cf4435e40f941b83c719c6a3f6fdabf89f963d83413a1",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/mod.json",
+          "sha256": "f86b75d905b05d892e9b72615dd07b21140c7453c595c1cf8b855f15a2604366",
+          "bytes": 321,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Le Mans Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-le-mans-pack/strings.json",
+          "sha256": "6f46300f39f231fa69b36ee15fe908955fa52e25f1b84c4fd9089785ed09f1e2",
+          "bytes": 1269,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "zs-fm6-zs-fm6-modern-le-mans-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

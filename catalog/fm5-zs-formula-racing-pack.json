@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 3,
+  "id": "fm5-zs-formula-racing-pack",
+  "version": "1.0.5",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS Formula Racing Pack",
+        "pt-BR": "ZS Formula Racing Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM5 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "fm5-zs-fm5-common",
+        "versions": [
+          "1.0.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/database.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/database.json",
+          "sha256": "a2136c53cda17548269e2a4238317aef91162592e3cbd5ede7cc134d821757c5",
+          "bytes": 426498,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/audio/cars/CHE_28_DW12_12.xml",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/audio/cars/CHE_28_DW12_12.xml",
+          "sha256": "1a01a005df8a85a534eaa294097a1697aaf991064e22fec2eb99a51c5959a3f3",
+          "bytes": 366,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/audio/cars/REN_FormulaE_14.xml",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/audio/cars/REN_FormulaE_14.xml",
+          "sha256": "038284dac0ceeccb1acd6faab213f3acb69415810d8c22271ae716adfb10a5f2",
+          "bytes": 1533,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/audio/fmodanthem/durango/PG_BMW_P83_03.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/audio/fmodanthem/durango/PG_BMW_P83_03.bank",
+          "sha256": "dacf51c92547542b6f0d6b8c8a5da36e98a7cd46be95e44f8464f2cfe0f4ebe6",
+          "bytes": 8320928,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/audio/fmodanthem/durango/PG_CHE_12_DW12_13.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/audio/fmodanthem/durango/PG_CHE_12_DW12_13.bank",
+          "sha256": "5abfba1b3d61c8948d991076afe9341d633f1c219acfd8e574f03fd068dc8b7e",
+          "bytes": 1664256,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/audio/fmodanthem/durango/PG_CHE_28_DW12_12.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/audio/fmodanthem/durango/PG_CHE_28_DW12_12.bank",
+          "sha256": "9cd3eafc328ef31900fd9f0ce2db2ab7cedcf50b040f68860fa22fe341390e6d",
+          "bytes": 1664896,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/audio/fmodanthem/durango/PG_FOR_FormulaFord_13.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/audio/fmodanthem/durango/PG_FOR_FormulaFord_13.bank",
+          "sha256": "6896618d910a697079cf041c99c22a630c1aa3969c9e09180257c661699a7154",
+          "bytes": 2596640,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/audio/fmodanthem/durango/PG_HON_15_DW12_13.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/audio/fmodanthem/durango/PG_HON_15_DW12_13.bank",
+          "sha256": "0602c56ab4c4ebb887f007f2e577f0800c6e9169c4711362710c10ebdd86024e",
+          "bytes": 1664864,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/audio/fmodanthem/durango/PG_HON_9_DW12_13.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/audio/fmodanthem/durango/PG_HON_9_DW12_13.bank",
+          "sha256": "51ff09462c286551e9cbb0a3d74ce2b822b6e3ee93acb67588799330715bcf4a",
+          "bytes": 1664832,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/audio/fmodanthem/durango/PG_INF_IndyLights_13.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/audio/fmodanthem/durango/PG_INF_IndyLights_13.bank",
+          "sha256": "5196b03f1cd8617a386c993298b9ee279c0dc3abab6c5f97a51a714a02ec272b",
+          "bytes": 2564640,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/audio/fmodanthem/durango/PG_LOT_E21_13.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/audio/fmodanthem/durango/PG_LOT_E21_13.bank",
+          "sha256": "c59f6710114fbaa694e2e03df487521c6eb2a899058786f48d941187a816d27b",
+          "bytes": 2854368,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/audio/fmodanthem/durango/PG_MAZ_USF2000_13.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/audio/fmodanthem/durango/PG_MAZ_USF2000_13.bank",
+          "sha256": "11efb973e3ad5562608a1b97a27b61c9fd6b30f6129be5001a9d18049942e67a",
+          "bytes": 2587072,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/cars/CHE_12_DW12_13.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/cars/CHE_12_DW12_13.zip",
+          "sha256": "eb164427e406a20dfb58397d7d77d0b2808bf884271839cc79e012faa701f3bf",
+          "bytes": 15465714,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/cars/CHE_28_DW12_12.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/cars/CHE_28_DW12_12.zip",
+          "sha256": "08037bdfad2fcd6b7700cc823d32233ce53092dc7e02f9bd54d1d47f91f283bf",
+          "bytes": 18584790,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/cars/FOR_FormulaFord_13.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/cars/FOR_FormulaFord_13.zip",
+          "sha256": "bd2b23a70799631875f16df38898d236520ae5b9af464ca4877b485082be50bf",
+          "bytes": 20276326,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/cars/HON_15_DW12_13.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/cars/HON_15_DW12_13.zip",
+          "sha256": "76af4e51a558d475da645fde009b03ce395ca676fe106b6054afe5533cfdd4dc",
+          "bytes": 21715837,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/cars/HON_9_DW12_13.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/cars/HON_9_DW12_13.zip",
+          "sha256": "79e31ff6e7a2becb138cc53dde84d460cddd4eef311fb7244c03c41c0f69ee28",
+          "bytes": 12340190,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/cars/INF_IndyLights_13.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/cars/INF_IndyLights_13.zip",
+          "sha256": "1857f5b99f0f407ebe911c431c839f58bc60112aecf3cbed90654e99e3d16ccf",
+          "bytes": 17104483,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/cars/LOT_E21_13.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/cars/LOT_E21_13.zip",
+          "sha256": "54bd57fb34b7a8b341d916a0d49cdae40efefec50f43cb8ae37983dd2606d2e4",
+          "bytes": 18129505,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/cars/MAZ_USF2000_13.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/cars/MAZ_USF2000_13.zip",
+          "sha256": "59626bac5f2054aaa37c50f7bc0f3feb343a9242ebd885c438f7381bfb94adbc",
+          "bytes": 19192642,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/cars/REN_FormulaE_14.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/cars/REN_FormulaE_14.zip",
+          "sha256": "9ad8f354a7964a4d27c116381c741610be52be4b76a3e32237e16a989380f1bb",
+          "bytes": 17816927,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2032_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2032_Big.swatchbin",
+          "sha256": "aadec0f19d61882fb3c0bb1d4300f099dd535dcfed39b22b801bf2ed1bc6cada",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2032_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2032_Small.swatchbin",
+          "sha256": "392812d87183fd8d8bbe588429e15cfeaeaa8b7db59a1040156aa1ae82c65bd7",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2036_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2036_Big.swatchbin",
+          "sha256": "248bbab9bd5547caa50e0a3fccb8f847428b195c2585d515096d28ed96df533b",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2036_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2036_Small.swatchbin",
+          "sha256": "d94f85305e2e4aa405bbbe42a00e6c3c16086f69105c880a10d7e55010734c09",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2037_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2037_Big.swatchbin",
+          "sha256": "f350e8a826a7acea8838e11bbe93ad705e659b5d01c0d3b4f5f4c6b026974d07",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2037_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2037_Small.swatchbin",
+          "sha256": "97d9dda8baee455b8dc41da4e9fc47ad036aa4802f6ca16d8c9bab02663ab5b8",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2046_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2046_Big.swatchbin",
+          "sha256": "10c69b0590ee8e06623be6909c2194dc7e0e29144856edc4db2186adaad98969",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2046_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2046_Small.swatchbin",
+          "sha256": "e7cd09dcd6db17e9c864a27d9d1dbc61d4bc71c9a6ad900035526085163d852f",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2081_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2081_Big.swatchbin",
+          "sha256": "bb9d59c6d968ffd06fe3e980ad9f7794302a4078fb8cc3e4f8c3bf2ab96ddd31",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2081_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2081_Small.swatchbin",
+          "sha256": "5e27d427d0f8af08401c5a481dff5356c808c15be1da52c5d5d25b98aa2e6396",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2082_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2082_Big.swatchbin",
+          "sha256": "b5845528530c94e7b91c53f123bfca39b88962a58193bc4ed4b4b4c8fdb0982a",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2082_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2082_Small.swatchbin",
+          "sha256": "e6a80d67044b44ff1b919a7aef07928e1fec88173f7e2a87fc9bbdfe78f2e005",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2086_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2086_Big.swatchbin",
+          "sha256": "3e452825fa25e228e768067887d04db4ce5af0ba1adf0c6f8e56d6e07fa6395f",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2086_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2086_Small.swatchbin",
+          "sha256": "5d52fba8168502906d7149c7fd25f27dd6c807f78bb97e5bfbb568a259ace408",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2111_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2111_Big.swatchbin",
+          "sha256": "27d765db5517bf6fb389edc65008a39bf775eda4d2069aadfb59e64375f99644",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_2111_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_2111_Small.swatchbin",
+          "sha256": "04055950f608ce576a629cf606430dbf767029aab95ecdde8bc3481a13945695",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_9674_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_9674_Big.swatchbin",
+          "sha256": "4108fb88a203e4cacc3974af23845bdba484115af5d8a0f33501ce523b630b2e",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/media/stripped/RC0/Thumbnail_9674_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/media/stripped/RC0/Thumbnail_9674_Small.swatchbin",
+          "sha256": "7d5a29efedce3a83f0a4b6dbca0759dbca88c6f16b85a6d01fafbfbceee3dfe5",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/mod.json",
+          "sha256": "e1f62ace51848fc6f74a579a8528a518ae204f6552765a429450e837f0a419c5",
+          "bytes": 708,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Formula Racing Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-formula-racing-pack/strings.json",
+          "sha256": "a39fca6874c89cd5bdf9d8868b46cece3169ef04becfa4a15e73dd886d7bc990",
+          "bytes": 939,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "fm5-zs-formula-racing-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

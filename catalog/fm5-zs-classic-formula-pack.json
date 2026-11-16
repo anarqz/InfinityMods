@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 3,
+  "id": "fm5-zs-classic-formula-pack",
+  "version": "1.0.5",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS Classic Formula Pack",
+        "pt-BR": "ZS Classic Formula Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM5 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "fm5-zs-fm5-common",
+        "versions": [
+          "1.0.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/database.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/database.json",
+          "sha256": "0c99ee8e6e82b74c1c3e7d6c3da8f03ca31e19e324affe3ce277383ad3994629",
+          "bytes": 237984,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/audio/fmodanthem/durango/PG_BRA_BT24_67.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/audio/fmodanthem/durango/PG_BRA_BT24_67.bank",
+          "sha256": "713fdee3f61a33bba180cd9f143a1e1f9b586091c1bb0f23dc75a8ff4efa47ef",
+          "bytes": 2255936,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/audio/fmodanthem/durango/PG_FER_1_312T2_76.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/audio/fmodanthem/durango/PG_FER_1_312T2_76.bank",
+          "sha256": "a3c7194bff0e396b2b26d4996019a563e34e566ceda4aa84597ddede344015ca",
+          "bytes": 1529024,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/audio/fmodanthem/durango/PG_FOR_CoyoteGilmore_77.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/audio/fmodanthem/durango/PG_FOR_CoyoteGilmore_77.bank",
+          "sha256": "27a257ce7499c9422821d7fb09e5f896a047d5f1ec335733ab138bb82350fefa",
+          "bytes": 2918464,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/audio/fmodanthem/durango/PG_LOT_Type49_67.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/audio/fmodanthem/durango/PG_LOT_Type49_67.bank",
+          "sha256": "8fe6b7fad4d9594acafd3bcd1489e61449656f2dcc4740c30a6ad26a1d9a625d",
+          "bytes": 2255008,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/audio/fmodanthem/durango/PG_MCL_11_M23_76.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/audio/fmodanthem/durango/PG_MCL_11_M23_76.bank",
+          "sha256": "56d44493274b5dedf4cceaa666c5095d084987360072622e53a94674f0108ac2",
+          "bytes": 2205824,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/cars/BRA_BT24_67.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/cars/BRA_BT24_67.zip",
+          "sha256": "b3c09010501b12b554daa3e7427fb37b76f1f8187c54e880aa810b3674c1e164",
+          "bytes": 18391497,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/cars/FER_1_312T2_76.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/cars/FER_1_312T2_76.zip",
+          "sha256": "c8b0a7c2dbb4fd35b8e99194a1f442f8cd67c38b00f48a2f9b21ed4130730360",
+          "bytes": 18144561,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/cars/FOR_CoyoteGilmore_77.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/cars/FOR_CoyoteGilmore_77.zip",
+          "sha256": "4227ca727af6fcfbda1ec1e3119d62dc0dd2e30a200c760895788fd9822c7bce",
+          "bytes": 19350579,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/cars/LOT_Type49_67.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/cars/LOT_Type49_67.zip",
+          "sha256": "c73514d13a8c1800971de16a02714587a98a24c9d5352491d34270b0b6ad43a7",
+          "bytes": 16154635,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/cars/MCL_11_M23_76.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/cars/MCL_11_M23_76.zip",
+          "sha256": "0847d054dcde72568244562147058c3a52ad7d1eba7321689eab4a1f5f8c630e",
+          "bytes": 16183769,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/stripped/RC0/L_Manu_Logo_BRA.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/stripped/RC0/L_Manu_Logo_BRA.swatchbin",
+          "sha256": "714e8598bdb6bad26483ecddc074c481b2affb832df29598e48c9447393e90e7",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/stripped/RC0/Manu_Logo_BRA.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/stripped/RC0/Manu_Logo_BRA.swatchbin",
+          "sha256": "a4e55db93016554465e33c9e0c003ac0f7cf873dd029aff9a371fe89b3f52ddc",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/stripped/RC0/Thumbnail_1672_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/stripped/RC0/Thumbnail_1672_Big.swatchbin",
+          "sha256": "a6c19b7fe62582ab609fa3a850e0181ee53d73d1ff77e702c15b07eb0d507be4",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/stripped/RC0/Thumbnail_1672_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/stripped/RC0/Thumbnail_1672_Small.swatchbin",
+          "sha256": "130b6b5dba2a4971be26fbee98fa62a93bf2821af4f9928ce797258a22a0cf16",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/stripped/RC0/Thumbnail_2015_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/stripped/RC0/Thumbnail_2015_Big.swatchbin",
+          "sha256": "55920b74076032b17c268667d5d9eb46e46db210d78ea6586cf6e0ef0158ddd5",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/stripped/RC0/Thumbnail_2015_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/stripped/RC0/Thumbnail_2015_Small.swatchbin",
+          "sha256": "a7aa6c644080654c2bd30404dc3e6002cd0455615c517434911bd7dcafe857f6",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/stripped/RC0/Thumbnail_2024_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/stripped/RC0/Thumbnail_2024_Big.swatchbin",
+          "sha256": "92dd66bf1bd3806b82ee82b466893a8ff6e263c6b819fff73a14dd4d97352c51",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/stripped/RC0/Thumbnail_2024_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/stripped/RC0/Thumbnail_2024_Small.swatchbin",
+          "sha256": "7d19a6918d8858f98dc267d9e5e8a557d042a9a498ce7406089c752a4adfef95",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/stripped/RC0/Thumbnail_2033_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/stripped/RC0/Thumbnail_2033_Big.swatchbin",
+          "sha256": "fd3e133263ceb058f2b380f82ffa76ecd7713b2f578c2d6ee13455c608cdf353",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/stripped/RC0/Thumbnail_2033_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/stripped/RC0/Thumbnail_2033_Small.swatchbin",
+          "sha256": "6e850c712f1577f374b61fdacd99756a96021ce1445a9ce03adf21e3e139e5b5",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/stripped/RC0/Thumbnail_2076_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/stripped/RC0/Thumbnail_2076_Big.swatchbin",
+          "sha256": "fd65c56460aec9841250b8949ac22742b1503c0cfb4654e256cf58f1d3a7101f",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/media/stripped/RC0/Thumbnail_2076_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/media/stripped/RC0/Thumbnail_2076_Small.swatchbin",
+          "sha256": "b6fc25cefea8359153412adfbb00219f5f270e6a409068f2e63120613f81e3bc",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/mod.json",
+          "sha256": "27555980ce4970e76f2af840a3ea0a06a581d841ee8103269d3761d9758194e1",
+          "bytes": 483,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic Formula Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-formula-pack/strings.json",
+          "sha256": "4b5372c1054eda352145bb67e9488b9276468d691ee05443565759de861d5dd8",
+          "bytes": 558,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "fm5-zs-classic-formula-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

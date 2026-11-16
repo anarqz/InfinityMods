@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 3,
+  "id": "fm5-zs-classic-american-muscle-pack",
+  "version": "1.0.5",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS Classic American Muscle Pack",
+        "pt-BR": "ZS Classic American Muscle Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM5 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "fm5-zs-fm5-common",
+        "versions": [
+          "1.0.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/database.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/database.json",
+          "sha256": "eb8eed03a5c22aeb01fe5f313f9ccc6a82afb0dd22da07a1e427420a5ade5f09",
+          "bytes": 1047571,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/audio/fmodanthem/durango/PG_CHE_2_MonteCarloSS_11_EN.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/audio/fmodanthem/durango/PG_CHE_2_MonteCarloSS_11_EN.bank",
+          "sha256": "da3cb2af7b79abdfcffa25634c509b6256803d110d485c6c7f3e0977ef6feb6c",
+          "bytes": 2286432,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
+          "sha256": "500e70b54c45960abe221757c9e8b4cc7a398bc4afb15b8eba006b3c44e197eb",
+          "bytes": 2583296,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/audio/fmodanthem/durango/PG_CHE_Chevelle396_67.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/audio/fmodanthem/durango/PG_CHE_Chevelle396_67.bank",
+          "sha256": "50e833e68b2bda8ce25e6e025e7ce956f834a1deabf47f954123038a1b569d2f",
+          "bytes": 2518240,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/audio/fmodanthem/durango/PG_CHE_ElCaminoSS_70.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/audio/fmodanthem/durango/PG_CHE_ElCaminoSS_70.bank",
+          "sha256": "9f6882053f4c2963c06581416ce6e208b2578775ec414f25dadef6a01cec89ca",
+          "bytes": 2408128,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/audio/fmodanthem/durango/PG_CHE_NovaSS_66.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/audio/fmodanthem/durango/PG_CHE_NovaSS_66.bank",
+          "sha256": "f60e223c8c2825e6c70c99ec7a9634cd4233492c9f0fdd3cd66d469abc9e158c",
+          "bytes": 2392736,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/audio/fmodanthem/durango/PG_CHE_NovaSS_69.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/audio/fmodanthem/durango/PG_CHE_NovaSS_69.bank",
+          "sha256": "4ebdc1d9ee7dd7aa55a3768c74994c4adbc8f5fa56a3dbcdbcf8e7e604f68638",
+          "bytes": 2567968,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/audio/fmodanthem/durango/PG_DOD_SuperBee_70.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/audio/fmodanthem/durango/PG_DOD_SuperBee_70.bank",
+          "sha256": "70872d0e06e65cab574992555bfaf5be715b940b195d03ad7446690b2f13697b",
+          "bytes": 2317760,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/audio/fmodanthem/durango/PG_FOR_Coupe_40.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/audio/fmodanthem/durango/PG_FOR_Coupe_40.bank",
+          "sha256": "00f374318e85a447e199bbb043b155befe9e8f4e5116008bdecf9d09802bc90b",
+          "bytes": 2644800,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/audio/fmodanthem/durango/PG_FOR_MustangMach1_71.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/audio/fmodanthem/durango/PG_FOR_MustangMach1_71.bank",
+          "sha256": "672a57e60f77c86fb57a2c06ed2a1b63fe64163d259affddc77a1f62fdc9fabe",
+          "bytes": 2305504,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/audio/fmodanthem/durango/PG_FOR_Mustang_65.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/audio/fmodanthem/durango/PG_FOR_Mustang_65.bank",
+          "sha256": "bd0b8caef11218d4b4a26799ce43d8ee99bf741d9ed62e411c410b07e2e9136f",
+          "bytes": 2539616,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/audio/fmodanthem/durango/PG_FOR_XBFalconGT_73.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/audio/fmodanthem/durango/PG_FOR_XBFalconGT_73.bank",
+          "sha256": "0733b9eed0d7c2f6df94b35f18ab381a37226fb06836795ea1605ef30c396032",
+          "bytes": 2096544,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/audio/fmodanthem/durango/PG_MRC_CougarEliminator_70.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/audio/fmodanthem/durango/PG_MRC_CougarEliminator_70.bank",
+          "sha256": "8ac0be0a2f361c26858866cae30a4eecf54c0c3c47c5ac0bc3c56cbc86477e64",
+          "bytes": 2560896,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/audio/fmodanthem/durango/PG_PON_FirebirdTransAm_69.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/audio/fmodanthem/durango/PG_PON_FirebirdTransAm_69.bank",
+          "sha256": "9602b15843764fdda55865d6fb97090d1f8543b13f373122a0e750bd663261e4",
+          "bytes": 2368096,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/cars/CHE_Chevelle396_67.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/cars/CHE_Chevelle396_67.zip",
+          "sha256": "75e3df93517b0515807875ac7d551a64b06d63c7145431a2f3daa785f65cbb4b",
+          "bytes": 19101509,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/cars/CHE_ElCaminoSS_70.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/cars/CHE_ElCaminoSS_70.zip",
+          "sha256": "9fd6bce5c91d0f9bb9c06f1299c84ce5be182ec0b51ef9c138e75fa1b7d8bc65",
+          "bytes": 13491565,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/cars/CHE_NovaSS_66.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/cars/CHE_NovaSS_66.zip",
+          "sha256": "d3e880c5df9c60e2bfeb893e6402e3a62975c293f3358e15c3e1fcbe257a027f",
+          "bytes": 18139734,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/cars/CHE_NovaSS_69.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/cars/CHE_NovaSS_69.zip",
+          "sha256": "27a4e67aff38d02c737457926140d2898e86c3d45b421f6994ba15cc215bea59",
+          "bytes": 12251661,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/cars/DOD_SuperBee_70.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/cars/DOD_SuperBee_70.zip",
+          "sha256": "2a36f5e47c4ce2b37089f789338618210f3b3d78a9cf6e89c18f4aba1a59c736",
+          "bytes": 19290130,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/cars/FOR_Coupe_40.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/cars/FOR_Coupe_40.zip",
+          "sha256": "da5a17876b0377259c23df60b9a34ed66205729d4f142e064e105828c6135bdc",
+          "bytes": 24296960,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/cars/FOR_MustangMach1_71.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/cars/FOR_MustangMach1_71.zip",
+          "sha256": "ef04e1d5ea182d940d17312790e1e05b03de22690ca205b5130f5df1926c06f9",
+          "bytes": 15539788,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/cars/FOR_Mustang_65.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/cars/FOR_Mustang_65.zip",
+          "sha256": "e3d5d0154b48b7a68d82f1e585766c7c487d31880aa3485089e8295aab4347fb",
+          "bytes": 19486167,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/cars/FOR_XBFalconGT_73.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/cars/FOR_XBFalconGT_73.zip",
+          "sha256": "84781c1cfe9dcfa4a37f17a5716314443e85ce4633aa6625f0c1c3385f2741fb",
+          "bytes": 20241729,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/cars/MRC_CougarEliminator_70.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/cars/MRC_CougarEliminator_70.zip",
+          "sha256": "260767e6ae9bb596dc4a92f63731fdfcca3e673c9773c03ee1c1ba91d0c79453",
+          "bytes": 16244687,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/cars/PON_FirebirdTransAm_69.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/cars/PON_FirebirdTransAm_69.zip",
+          "sha256": "f8642b69713b97445e24545f457a4d6da6eea1306490b211040f4ace03d33862",
+          "bytes": 12945368,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1278_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1278_Big.swatchbin",
+          "sha256": "9b4b4abf7c0faed0ef4a4b3f4e15b3dc22b14c9cca306169600d676b29277325",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1278_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1278_Small.swatchbin",
+          "sha256": "4989e1ec5f14e1067e096cfeb04a6abbeba984af17026971b1b4c308011d2470",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1280_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1280_Big.swatchbin",
+          "sha256": "1937155fbca1228125b2eaf0f7f6ed748a50a5a4f3ea54278fadf99f7d5eb43a",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1280_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1280_Small.swatchbin",
+          "sha256": "be4982df85cd42e5b0d9e512e5bec840838de979404aaa3c929c863ddfed968a",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1291_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1291_Big.swatchbin",
+          "sha256": "610667d2c5cf3895a899ce0f61ded17d820a2bdd8e73d0341ea91451ef409989",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1291_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1291_Small.swatchbin",
+          "sha256": "4afae793baa29801fd7e22bf77e94174d0ce7ac9c4b7181d1278711165e246bf",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1320_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1320_Big.swatchbin",
+          "sha256": "3090eb067266bb51e9631da8e3af0acee86b58bf82c4583f865b15be7cd7e8a9",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1320_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1320_Small.swatchbin",
+          "sha256": "86a341aa517c4155eae2634600f7ccb32cf7ff02925c24204ae72262f371e613",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1337_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1337_Big.swatchbin",
+          "sha256": "296ea10e946fe040afdef88fc493cf4b1358ea71f22f425f2762fdccf0c5d022",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1337_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1337_Small.swatchbin",
+          "sha256": "a935249471b4a24c4270f2e40c946ccb058996884bc5b0874d562d30bb815d90",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1352_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1352_Big.swatchbin",
+          "sha256": "05ebfe1ef6e6020cd0724e1d5a8e13a44ee16e252cd0638929afc2b4deaa02e1",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1352_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1352_Small.swatchbin",
+          "sha256": "3233b8185230b66981d0449b05e0862159446bfc8812d13bad38c6da283735f4",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1354_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1354_Big.swatchbin",
+          "sha256": "591962dad09cb2ed08de2d67e21e23199c68a185782c97b8beff45747e7f966c",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1354_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1354_Small.swatchbin",
+          "sha256": "2d99badf76aa92fd70fb6c4cd19e3f479f0f2f8f1ba623fc0039d4cd5b593f93",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1355_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1355_Big.swatchbin",
+          "sha256": "1320b04bbb2e6a78722e8dfb5362c5039b49d83f66ec3724e4d682684336ce92",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1355_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1355_Small.swatchbin",
+          "sha256": "7210abe15e92940edd11348e5027bcbb9a9ec88b5deec02469b8bac8139ef097",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1420_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1420_Big.swatchbin",
+          "sha256": "b1a5bf3071c8024e095e44280050a92f1feba6985db2e145ace57471e92765eb",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1420_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1420_Small.swatchbin",
+          "sha256": "c19d1493bca0e1b7e29765fb133b6766173f876b815f7cc276a1366602ea2ebc",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1429_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1429_Big.swatchbin",
+          "sha256": "5a1690d3ae94e9c85d414663837104bb97b5d16a5a02e153f5ecd44405a773e9",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1429_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1429_Small.swatchbin",
+          "sha256": "8bf46920533a9495edb845df6b8f4338f9201875d8838fc2b27a3da9eca5b289",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1530_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1530_Big.swatchbin",
+          "sha256": "f7740c019370c39d8043d8befa4542b3c3ece811072cc1b59255d61e2dbd4b54",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/media/stripped/RC0/Thumbnail_1530_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/media/stripped/RC0/Thumbnail_1530_Small.swatchbin",
+          "sha256": "da0be33586da0337d3bbc35029baad6b752c906910620d0e9375898915c8a9f8",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/mod.json",
+          "sha256": "9b7257e01f2d5952c16c3c9b16512ba8b6d4b6f575eae8cb5307c98d49d39e48",
+          "bytes": 676,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Classic American Muscle Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-classic-american-muscle-pack/strings.json",
+          "sha256": "8f1b0878f25d80a343b79c75158b8947b166f4e67ec2f4d55f48a8d194ceeefc",
+          "bytes": 890,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "fm5-zs-classic-american-muscle-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

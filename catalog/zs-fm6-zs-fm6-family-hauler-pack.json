@@ -1,0 +1,440 @@
+{
+  "schemaVersion": 3,
+  "id": "zs-fm6-zs-fm6-family-hauler-pack",
+  "version": "0.1.0",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS FM6 Family Hauler Pack",
+        "pt-BR": "ZS FM6 Family Hauler Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM6 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "zs-fm6-zs-fm6-common",
+        "versions": [
+          "0.1.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/database.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/database.json",
+          "sha256": "746d0588287f1dd2bb58f76c038cb8b3e6790d50785eb1608cfd62296d2ef2a0",
+          "bytes": 489288,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/audio/cars/AUD_RS6_09.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/audio/cars/AUD_RS6_09.xml",
+          "sha256": "d828a48f08d190cc5dadb9239f074dfdc788bb4544f3e7e1003e72bb31c8f2bf",
+          "bytes": 364,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/audio/cars/LEX_IS350_14.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/audio/cars/LEX_IS350_14.xml",
+          "sha256": "61961691408a6e1d5170c5445c5a43e43715265244396d06976cd23c7d164f2b",
+          "bytes": 364,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/audio/cars/MAS_Ghibli_14.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/audio/cars/MAS_Ghibli_14.xml",
+          "sha256": "5e10091db6a8ff9d548c6fe64902b4850404480642beb6e9701273ecfa3ef3e2",
+          "bytes": 364,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/audio/fmodanthem/durango/PG_BMW_323Sport_00.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/audio/fmodanthem/durango/PG_BMW_323Sport_00.bank",
+          "sha256": "a7fb186529e94b838cbcee60f43a78284ce4ef58bbcb8195fab5c8032659663b",
+          "bytes": 2578976,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/audio/fmodanthem/durango/PG_FM6_ALF_SZ_90.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/audio/fmodanthem/durango/PG_FM6_ALF_SZ_90.bank",
+          "sha256": "62e2169f7b2d43d4e63f1feadd58afd44a761f4be9dbca5280444cd167e88866",
+          "bytes": 2600224,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/audio/fmodanthem/durango/PG_FM6_AUD_RS6_03.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/audio/fmodanthem/durango/PG_FM6_AUD_RS6_03.bank",
+          "sha256": "7a03053bc86965fdf1810d775d74e0337dc5efc758fc732d9f04dcaaeddddaf8",
+          "bytes": 2798048,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/audio/fmodanthem/durango/PG_FM6_AUD_RS6_09.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/audio/fmodanthem/durango/PG_FM6_AUD_RS6_09.bank",
+          "sha256": "49fe27af3ca289e0f2c332b4a7c6a08ef15282f70f5683530d1e4d2ed22bffc8",
+          "bytes": 2627296,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/audio/fmodanthem/durango/PG_FM6_MIT_GTO_97.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/audio/fmodanthem/durango/PG_FM6_MIT_GTO_97.bank",
+          "sha256": "073f010031681e415db4b0e82aac520a782b3f366593895b617f67c48fcc1702",
+          "bytes": 2582592,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/audio/fmodanthem/durango/PG_INF_Q60_16.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/audio/fmodanthem/durango/PG_INF_Q60_16.bank",
+          "sha256": "1e4a44fda97ed70eef7064fd0cb36cfdd61331e4b44a3c9f1da82d86dcd92995",
+          "bytes": 2331168,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/audio/fmodanthem/durango/PG_MAS_Ghibli_14.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/audio/fmodanthem/durango/PG_MAS_Ghibli_14.bank",
+          "sha256": "4dcb287ac82acfcf07ed929b80b67752e22c78d70df348d7d29d860a4cb858a7",
+          "bytes": 2562720,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/audio/fmodanthem/durango/PG_ROL_Dawn_16.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/audio/fmodanthem/durango/PG_ROL_Dawn_16.bank",
+          "sha256": "7e991479ed6c19cb476df6bddcda9afdf84f79692de826ee8789524a76f3fad6",
+          "bytes": 2277632,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/cars/ALF_Milano_92.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/cars/ALF_Milano_92.zip",
+          "sha256": "fdda62d42773a4e5546236f8613733bd9fa1c1d6f58be373237471d6440989c5",
+          "bytes": 20106374,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/cars/AUD_RS6_03.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/cars/AUD_RS6_03.zip",
+          "sha256": "bf247c0add31bedfa95549ff1c91df4636b592dcc787e5a593a9d639aeb15bbd",
+          "bytes": 21351726,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/cars/AUD_RS6_09.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/cars/AUD_RS6_09.zip",
+          "sha256": "0d6b86da609b38f1007cd927884f1d8b1884ca1e90e4fafe9677aad46255407d",
+          "bytes": 20177786,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/cars/BMW_323Sport_00.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/cars/BMW_323Sport_00.zip",
+          "sha256": "d4f76d7264481fe58d4427faa09f6940b427c11678fbccad794693a03bf38282",
+          "bytes": 21987945,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/cars/BMW_M635CSi_84.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/cars/BMW_M635CSi_84.zip",
+          "sha256": "4d93565c2c5ee53813fbfa01291e478bf2d0256ee6f41f378c4c4e519e626f97",
+          "bytes": 23821085,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/cars/INF_Q60_16.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/cars/INF_Q60_16.zip",
+          "sha256": "3fc673b769083181fbb74a6c307bfed061ae4f5a0f4f01d9246c225fbeacfd57",
+          "bytes": 16805802,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/cars/LEX_IS350_14.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/cars/LEX_IS350_14.zip",
+          "sha256": "b568709615728d68341f4475750089262818b8405f3d9626f63614e8740f10ab",
+          "bytes": 20368188,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/cars/MAS_Ghibli_14.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/cars/MAS_Ghibli_14.zip",
+          "sha256": "243ba7395396d68f6aa0fbcda0d9cb64fd984e8e51e753fe75af19e995bdb722",
+          "bytes": 21691924,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/cars/MAS_Ghibli_97.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/cars/MAS_Ghibli_97.zip",
+          "sha256": "38026c334887d557ad2de7fc6bb32b194857554116638947042c899f5c0eb89e",
+          "bytes": 18434715,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/cars/MER_C63AMGCoupe_16.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/cars/MER_C63AMGCoupe_16.zip",
+          "sha256": "09e1f070330a9d039a211b5ce5583c9cad8ed65e056c53b463095b8500303def",
+          "bytes": 20651385,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/cars/ROL_Dawn_16.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/cars/ROL_Dawn_16.zip",
+          "sha256": "5997ff482b3147b995f1e3dd21e908897222b8b5d3ec3d6794ce65fc3cb58415",
+          "bytes": 22617122,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_1184_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_1184_Big.swatchbin",
+          "sha256": "b4b824c05104bb24cc11ee92dea7146e2366bc039d4cbce4e94a4333e13421e2",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_1184_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_1184_Small.swatchbin",
+          "sha256": "90211363d2f6d11afdc751f5d74014285a6489edc2d6738c6cbdb99eae6b81a5",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_1290_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_1290_Big.swatchbin",
+          "sha256": "71a4649b7772b0d0069d5cea70bf443f9e781342263d4e4cc9fad821a59f4852",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_1290_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_1290_Small.swatchbin",
+          "sha256": "df8ba230dd78f6c6de87f5c67cc09495753016123b85b9115d7f3e8fa1047259",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_1513_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_1513_Big.swatchbin",
+          "sha256": "4e140ddb39637ef132a340b9b19ff25e83f42caf37716ac542b1fcb15d20c9c2",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_1513_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_1513_Small.swatchbin",
+          "sha256": "9a2a21567b4157b100b45dcad2ac09e2b7611686a596395607212547bd4b1ba6",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2051_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2051_Big.swatchbin",
+          "sha256": "8be2e2820c1167ca2f0d3077cfb01cfba095200312cb92d8bfbeeb42d362bdbc",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2051_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2051_Small.swatchbin",
+          "sha256": "f9e94bd9a62b9b780ced42f9881c5f446e7f6920d973ef93dd4306a1af80380a",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2097_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2097_Big.swatchbin",
+          "sha256": "efd3fb49c4e1f8591db75a2ade42b9d98b54d6f9fc86d7540a2d8dd084b91abe",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2097_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2097_Small.swatchbin",
+          "sha256": "ea4ee62af86eae8f0c70868a5fa96b7a5111786b8d664ffb7f8833d35f574578",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2190_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2190_Big.swatchbin",
+          "sha256": "07c6f8eea9d8cfa53c4501a47b1e8238aa5b968a6ab8e8b223463938a614a969",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2190_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2190_Small.swatchbin",
+          "sha256": "70ba11b72e9a92e9641ee4a46ec4d8659c7e899515995de85bdbdebf05758169",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2193_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2193_Big.swatchbin",
+          "sha256": "418bcc47796cfbd50e14cf979b8f8b64f9bf66dbca46739b0758b0969e0d57ad",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2193_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2193_Small.swatchbin",
+          "sha256": "829d715b8db31e4192949b67d9251370503fc91d300cbe1d954dd0342c2c4493",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2437_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2437_Big.swatchbin",
+          "sha256": "e1cacfa34cb7b97024c18e1797aaecacb426035e1df844812b1d5845748dbfee",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2437_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2437_Small.swatchbin",
+          "sha256": "7da801f8e5a79b6b89317f99000627371b3bf856fe96ab8b157b98761a250550",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2471_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2471_Big.swatchbin",
+          "sha256": "8783d701bd817d651051a15a722b4d9d0b2b20d020526ee6d1f1364a38d9970e",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2471_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2471_Small.swatchbin",
+          "sha256": "1336b6905acd3cd3e8b07e883e971d3626be198dd2585ba28935ab32a644a0e7",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2546_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2546_Big.swatchbin",
+          "sha256": "e095e74e2331acaba1f98120ce724a8a1e699f7cf4270ffbd63f0748ea953b43",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_2546_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_2546_Small.swatchbin",
+          "sha256": "c60dcce7db8d2f7c3b6eaaf2199ebcb9f0f0f3453862d9afd7bec5f0175e080b",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_420_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_420_Big.swatchbin",
+          "sha256": "904e6d78796c5e5e9bfde1a607407949447fae67c4fef1d93dc48f4ce84a9714",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/media/stripped/RC0/Thumbnail_420_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/media/stripped/RC0/Thumbnail_420_Small.swatchbin",
+          "sha256": "39743cd024408c699f5c35ed2f7575eb49df842767ddd8327fb334bf4c57ce18",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/mod.json",
+          "sha256": "ab98e923574cd3a3d54b81c5acc1c20b53b80f834cf134c6ba1a770f77f76350",
+          "bytes": 319,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Family Hauler Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-family-hauler-pack/strings.json",
+          "sha256": "59e9c4c5d90793afdad85fc33b96b1ffb47ae5b4e099d0d065dc9842c49a2418",
+          "bytes": 997,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "zs-fm6-zs-fm6-family-hauler-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

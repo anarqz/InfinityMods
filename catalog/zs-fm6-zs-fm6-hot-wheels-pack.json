@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 3,
+  "id": "zs-fm6-zs-fm6-hot-wheels-pack",
+  "version": "0.1.0",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS FM6 Hot Wheels Pack",
+        "pt-BR": "ZS FM6 Hot Wheels Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM6 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "zs-fm6-zs-fm6-common",
+        "versions": [
+          "0.1.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM6 Hot Wheels Pack/database.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hot-wheels-pack/database.json",
+          "sha256": "27726ca92c9e1e4679856ca958078a741deb249f331932ff7b5ecf3e300bf270",
+          "bytes": 80504,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Hot Wheels Pack/media/audio/fmodanthem/durango/PG_FOR_HotWheelsMustang_05.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hot-wheels-pack/media/audio/fmodanthem/durango/PG_FOR_HotWheelsMustang_05.bank",
+          "sha256": "4b8785a0207b8d34ba848b1b9f4c697c6ea973099ccffe65c0e0ac8fa8fb576d",
+          "bytes": 3068576,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Hot Wheels Pack/media/audio/fmodanthem/durango/PG_HOT_BoneShaker_11.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hot-wheels-pack/media/audio/fmodanthem/durango/PG_HOT_BoneShaker_11.bank",
+          "sha256": "094ceec2bdf8d050fb229c6d3ddcab35e2580da6db1a2281c0c19414a7165b04",
+          "bytes": 3066112,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Hot Wheels Pack/media/cars/FOR_HotWheelsMustang_05.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hot-wheels-pack/media/cars/FOR_HotWheelsMustang_05.zip",
+          "sha256": "919495b9f5057d0203c293083a3eac910ca80f55b0f8b7559d74342bd0bcb1e2",
+          "bytes": 20839244,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Hot Wheels Pack/media/cars/HOT_BoneShaker_11.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hot-wheels-pack/media/cars/HOT_BoneShaker_11.zip",
+          "sha256": "39a815ac00a9f45d7f9ac00969ed6b8c771b43099ed569db0f9f5fcb07297db7",
+          "bytes": 18901700,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Hot Wheels Pack/media/stripped/RC0/Thumbnail_2575_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hot-wheels-pack/media/stripped/RC0/Thumbnail_2575_Big.swatchbin",
+          "sha256": "c074096f635ddc4cebf33a9cea2ff56e388a12a39e9e555b2326be7369a9a1d7",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Hot Wheels Pack/media/stripped/RC0/Thumbnail_2575_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hot-wheels-pack/media/stripped/RC0/Thumbnail_2575_Small.swatchbin",
+          "sha256": "d9965590cfaf0a50fb724cde9805cd2670c423402af5a429fd22920e004ee1a9",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Hot Wheels Pack/media/stripped/RC0/Thumbnail_2576_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hot-wheels-pack/media/stripped/RC0/Thumbnail_2576_Big.swatchbin",
+          "sha256": "4f62ebb50b39fea33df2c973c8d8389b80745eacc83eafd9421c9ddd3f77aca2",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Hot Wheels Pack/media/stripped/RC0/Thumbnail_2576_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hot-wheels-pack/media/stripped/RC0/Thumbnail_2576_Small.swatchbin",
+          "sha256": "9d982f0a30c87d4846a6841a157fb746a94e775c15889f894a58a1ebee365964",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Hot Wheels Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hot-wheels-pack/mod.json",
+          "sha256": "0e5ffbfc1c7d5f5c5b4c151644228b4eed25b8f6ab63c942c775eae2215fe132",
+          "bytes": 312,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Hot Wheels Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hot-wheels-pack/strings.json",
+          "sha256": "0e63ce7ad3161025c90014f6660585a28030309bc5c3956449cd97245714180f",
+          "bytes": 340,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "zs-fm6-zs-fm6-hot-wheels-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

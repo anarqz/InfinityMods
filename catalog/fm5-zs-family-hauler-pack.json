@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 3,
+  "id": "fm5-zs-family-hauler-pack",
+  "version": "1.0.5",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS Family Hauler Pack",
+        "pt-BR": "ZS Family Hauler Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM5 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "fm5-zs-fm5-common",
+        "versions": [
+          "1.0.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/database.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/database.json",
+          "sha256": "f053bcba98377c2fc10ae5b48a39c24bec1fcf3eabf0bb133cba2fa96841b7ca",
+          "bytes": 401533,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/audio/fmodanthem/durango/PG_AUD_RS7_13.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/audio/fmodanthem/durango/PG_AUD_RS7_13.bank",
+          "sha256": "9c04ab23e9015b645b3076001c773449b86afcff46042c2ec8e5ac0af63a595c",
+          "bytes": 2424960,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/audio/fmodanthem/durango/PG_BMW_M5E39_03.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/audio/fmodanthem/durango/PG_BMW_M5E39_03.bank",
+          "sha256": "fcbbb9ba9b16c4c949639ff94d6b2e1ac5b4e1d1545be726ea018cd8695f3c19",
+          "bytes": 2018080,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/audio/fmodanthem/durango/PG_INF_Q50ER_14.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/audio/fmodanthem/durango/PG_INF_Q50ER_14.bank",
+          "sha256": "56592e867c897da2db581d2235cb715781af7799d3244e9c63273149d038e529",
+          "bytes": 2111744,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/audio/fmodanthem/durango/PG_INF_Q50_14.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/audio/fmodanthem/durango/PG_INF_Q50_14.bank",
+          "sha256": "9b09135e9ba54dfdc57a922196587254deee0eafe49942deb9401f8d844ac34c",
+          "bytes": 2314048,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/audio/fmodanthem/durango/PG_LEX_ISF_09.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/audio/fmodanthem/durango/PG_LEX_ISF_09.bank",
+          "sha256": "c430a55e57b656928bd8252032de94c1d4919b789cb523174149d8a191643671",
+          "bytes": 2588640,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/cars/AUD_RS7_13.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/cars/AUD_RS7_13.zip",
+          "sha256": "534ae415d201e67efca6786840f82cdb59e98cb3a11ed4091da86cc897570974",
+          "bytes": 17590489,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/cars/BMW_M5E39_03.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/cars/BMW_M5E39_03.zip",
+          "sha256": "d7ea355ed12c2836543ca1b65ed2c1506cf511939ffc4360676a0652a99f8960",
+          "bytes": 13628475,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/cars/INF_Q50ER_14.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/cars/INF_Q50ER_14.zip",
+          "sha256": "225ef24329a021934a7a854a2c5de5e9ac9f1307984007669fb253d22ad6f887",
+          "bytes": 18035739,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/cars/INF_Q50_14.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/cars/INF_Q50_14.zip",
+          "sha256": "c2afb32bba285416b2af9b15db8943849240bfa7f82d8f836529fede2c64f7bb",
+          "bytes": 19673354,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/cars/LEX_ISF_09.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/cars/LEX_ISF_09.zip",
+          "sha256": "42cd751db6c6cddd9b4e6d54a5abf3997357eee96df901e1a16ff48bdf798704",
+          "bytes": 13848004,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/stripped/RC0/Thumbnail_1071_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/stripped/RC0/Thumbnail_1071_Big.swatchbin",
+          "sha256": "d5f158152832fa2e70341ab91f1b165898ec45358353de4beaf61946b5ff593e",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/stripped/RC0/Thumbnail_1071_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/stripped/RC0/Thumbnail_1071_Small.swatchbin",
+          "sha256": "548f410a65e48e954d846849b94b947d1729c886f4d2f0e998c8e3140332ec0f",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/stripped/RC0/Thumbnail_1367_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/stripped/RC0/Thumbnail_1367_Big.swatchbin",
+          "sha256": "de020b89b7c514481cb4c2b925d4da40d99d77281974f8533906b04c833ecddc",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/stripped/RC0/Thumbnail_1367_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/stripped/RC0/Thumbnail_1367_Small.swatchbin",
+          "sha256": "de7f810d734ae7c3f378e5af520ff5535a6b1142ec636b2e36fa6a0f3a12045f",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/stripped/RC0/Thumbnail_2009_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/stripped/RC0/Thumbnail_2009_Big.swatchbin",
+          "sha256": "10552cda60184e1e593443bac32f296cb40b3af3f688b78b7fe0893a39d9ee77",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/stripped/RC0/Thumbnail_2009_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/stripped/RC0/Thumbnail_2009_Small.swatchbin",
+          "sha256": "42cbdfa8543dcfb94a38170697a46e03550d85855270b98cf90c99258daa2ba5",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/stripped/RC0/Thumbnail_2166_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/stripped/RC0/Thumbnail_2166_Big.swatchbin",
+          "sha256": "5a8b7ed7dc22103e58f64fb2cc42fb44949ef697fc440d1a8209fad77c2abd5c",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/stripped/RC0/Thumbnail_2166_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/stripped/RC0/Thumbnail_2166_Small.swatchbin",
+          "sha256": "6741a7971592f0986398ad1003c6c10c745ce5abdf026352015528e8594edd36",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/stripped/RC0/Thumbnail_2169_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/stripped/RC0/Thumbnail_2169_Big.swatchbin",
+          "sha256": "a609048bb4009ff9dae52fdc45353c42a41096d1bb4cbf9066adc28094088871",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/media/stripped/RC0/Thumbnail_2169_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/media/stripped/RC0/Thumbnail_2169_Small.swatchbin",
+          "sha256": "dcce71310f3d29332b589ac12fe49f79158de633143f9d5c34816d2080cb62b7",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/mod.json",
+          "sha256": "9a86b162f087bb7437798767a1416436c85198da3d600167e8f548668014e4e9",
+          "bytes": 434,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Family Hauler Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-family-hauler-pack/strings.json",
+          "sha256": "03cd82457ab9178c7ef5a4cbf9d9572ff550307371442bc7b2f32694b3dc0666",
+          "bytes": 486,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "fm5-zs-family-hauler-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

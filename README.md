@@ -41,21 +41,39 @@ mods/<id>/mod.json        build recipe: which upstream sources, which adapter (n
 mods/<id>/manifest.json   Infinity manifest (runtime standalone, files under mods/<game folder>/<id>/); the release fills hashes and the commit
 mods/<id>/extraoptions/   the package's own ExtraOptions mod.json (format_version 1; same id and version), database.json if any
 mods/<id>/LICENSE, NOTICE.md   the original licence and the attribution shipped in the package
-catalog.json              the official mod catalog the Infinity launcher reads from main
-schemas/                  JSON Schema of catalog.json
+catalog/index.json        the official mod catalog (schema 3): each mod's card (id, version, name, description, author) and its detail file's pin
+catalog/<id>.json         the rest of that mod's catalog entry (downloads, install); what you edit
+catalog.json              the same catalog as one schema-2 file, for launchers before schema 3: generated, never edited by hand
+schemas/                  JSON Schema of catalog/ (catalog-v3.schema.json) and of catalog.json (catalog.schema.json)
 tools/infmods.py          build, verify, release, check (Python 3.10+, standard library only)
 ```
 
 ## Catalog
 
-The Infinity launcher reads `catalog.json` straight from this repository's `main` branch
-(raw.githubusercontent.com), keeps a cached copy and falls back to a copy built into the launcher when
-offline. A change merged to `main` reaches every player at once, so only the owner (@anarqz,
-`.github/CODEOWNERS`) approves changes to it or to `schemas/`.
+The Infinity launcher reads the catalog straight from this repository's `main` branch
+(raw.githubusercontent.com) and keeps a cached copy for offline listing. A change merged to `main` reaches every
+player at once, so only the owner (@anarqz, `.github/CODEOWNERS`) approves changes to `catalog/`, `catalog.json`
+or `schemas/`.
+
+The catalog is split (schema 3, [`schemas/catalog-v3.schema.json`](schemas/catalog-v3.schema.json)):
+`catalog/index.json` lists every mod's card and pins its detail file `catalog/<id>.json` by `path`, `sha256` and
+`bytes`; the detail file repeats the mod's `id` and `version` and holds the rest of its entry (`download` or
+`externalSources`, `additionalDownloads`, `requires`, `install`). Launchers with schema 3 read only
+`catalog/index.json`, download only the detail files whose pin changed, and refuse one that differs from its pin.
+`catalog.json` is the same catalog as one schema-2 file for the launchers before schema 3 (they read only it); it
+is generated from `catalog/` and goes away once the launcher floor is past them.
+
+To change a mod's entry, edit `catalog/<id>.json` (card text and `version`: `catalog/index.json`; a version
+changes in both), then:
 
 ```sh
-python3 -I tools/infmods.py check      # schema, no duplicate ids, every file in its game's mods folder
+python3 -I tools/infmods.py catalog    # re-pin catalog/index.json, rewrite catalog.json, then check
+python3 -I tools/infmods.py check      # schemas, pins, no duplicate or unlisted ids, catalog.json up to date, every file in its game's mods folder
 ```
+
+Custom catalogs (the launcher's "Use a different catalog") may be either form: a schema-3 index whose `path`s are
+relative to the index's own URL (or absolute `https://`), or one schema-2 file. `check --catalog <file>` validates
+either.
 
 Each mod is offered for the games its manifest declares (`games`, FH2 when absent) and is either for both
 modes (its `multiplayer.impact` is `cosmetic`: nothing other players see, hear or race against) or for Noob
@@ -86,11 +104,12 @@ packages: the manifest downloads them from the original author's release and che
 One GitHub release per drop, one ZIP per mod (`<id>-<version>.zip`, deterministic).
 
 ```sh
-python3 -I tools/infmods.py release --zig /path/to/zig --tag <tag> --catalog catalog.json
+python3 -I tools/infmods.py release --zig /path/to/zig --tag <tag>
 ```
 
-writes `dist/assets/*.zip`, `dist/manifests/*.json`, `dist/catalog.json` and `dist/RELEASE.txt`.
-After the release's assets are uploaded, `dist/catalog.json` replaces `catalog.json` in a pull request.
+writes `dist/assets/*.zip`, `dist/manifests/*.json`, `dist/catalog/`, `dist/catalog.json` and `dist/RELEASE.txt`.
+After the release's assets are uploaded, `dist/catalog/` and `dist/catalog.json` replace `catalog/` and
+`catalog.json` in a pull request.
 No entry requires `infinity-mod-runtime`; the release drops that retired entry from the catalog it writes.
 A mod whose ZIP is byte-identical to the one its catalog entry already points to keeps that entry
 unchanged (old URL), so players get no update; its ZIP may still be attached to the new release.

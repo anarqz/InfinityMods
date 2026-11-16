@@ -3,9 +3,10 @@
 
   build   <mod> [--zig ZIG] [--out DIR]     compile the mod and its adapter
   verify  <mod> [--zig ZIG]                 build twice in separate folders: same bytes, sane PE, plugin exports
-  release [--zig ZIG] --tag TAG --catalog CURRENT.json [--out DIR] [--allow-dirty] [MOD ...]
-  check   [--catalog FILE]                  validate catalog.json (schemas/ + rules below)
-  external-packs <set folder>... --cars fh2-packs.json --out FILE   ZephyrSkies pack entries (OD-232), read from the ZIPs
+  release [--zig ZIG] --tag TAG [--catalog INDEX] [--out DIR] [--allow-dirty] [MOD ...]
+  catalog [--from V2.json]                  re-pin catalog/index.json and rewrite catalog.json (v2) from catalog/
+  check   [--catalog FILE]                  validate the catalog (schemas/ + rules below); FILE may be a v2 custom catalog
+  external-packs <set folder>... --cars fh2-packs.json --out DIR   ZephyrSkies pack entries (OD-232), read from the ZIPs
   sync    <mod> [--tag TAG] [--zip ZIP --url URL] [--write]   re-pin an FH2 Mod Platform mod to an upstream release
 
 An FH2 Mod Platform mod (adapter fh2-mod-platform-eo) is the author's own release DLL, never built here: the manifest
@@ -25,14 +26,21 @@ the manifest's `games`, FH2 when it declares none) and exports FH2PluginInitiali
 starts the original loader's entry point, or, for an ExtraOptions plugin itself (`adapter` null), the upstream source
 exports it. There is no Infinity mod runtime: no entry needs `infinity-mod-runtime`, and `release` drops that entry.
 
+The catalog is split (schema 3, schemas/catalog-v3.schema.json): catalog/index.json lists each mod's card details
+(id, version, name, description, author) and pins its detail file catalog/<id>.json (path, sha256, bytes); the
+detail file holds the rest of its schema-2 entry. catalog/ is what people edit; `catalog` re-pins the index after an
+edit and writes catalog.json, the full schema-2 file launchers before schema 3 read, generated, never edited by hand.
+
 `release` writes one ZIP per mod (<id>-<version>.zip), each mod's filled manifest and the merged
-catalog. A mod whose ZIP has the same SHA-256 as its current catalog entry keeps that entry
+catalog (dist/catalog/ and dist/catalog.json). A mod whose ZIP has the same SHA-256 as its current catalog entry keeps that entry
 unchanged (URL, version and source commit), so players see no update; a changed ZIP needs a new
 version. Nothing is uploaded or published.
 
-`check` validates the file the launcher reads from this repository's main branch: catalog.json against its schema
-in schemas/ (the subset of JSON Schema it uses), with no BOM, no duplicate JSON keys and the launcher's size limit,
-then its ids are unique and every installed file is in its game's mods folder. OD-233 retired the parity exemptions
+`check` validates what launchers read from this repository's main branch: catalog/index.json and every detail
+file against schemas/catalog-v3.schema.json (the subset of JSON Schema it uses), with no BOM, no duplicate JSON keys and
+the launcher's size limits, each pin matching its file, ids unique, no detail file left unlisted, every installed
+file in its game's mods folder; then catalog.json against schemas/catalog.schema.json and byte-for-byte equal to the
+schema-2 file `catalog` writes. OD-233 retired the parity exemptions
 (parity-non-required.json): a mod is either both modes (its multiplayer impact cosmetic) or Noob only.
 """
 import argparse
@@ -493,6 +501,87 @@ def catalog_entry(manifest):
     return entry
 
 
+CATALOG_DIR = ROOT / "catalog"
+INDEX_NAME = "index.json"
+CATALOG_V2 = "catalog.json"  # schema 2, for launchers before schema 3 (OD-166 address); generated from catalog/
+CARD_FIELDS = ("id", "version", "name", "description", "author")
+DETAIL_MAX_BYTES = 256 * 1024  # Infinity.Core: a schema-3 detail file's limit
+
+
+def dumps(value):
+    return (json.dumps(value, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
+
+
+def detail_of(entry):
+    """A schema-2 entry's detail file (schema 3): everything but the card text, with the entry's id and version."""
+    return {"schemaVersion": 3, "id": entry["id"], "version": entry["version"],
+            **{k: v for k, v in entry.items() if k not in CARD_FIELDS}}
+
+
+def entry_of(card, detail):
+    """The schema-2 entry an index card and its detail file stand for (the launcher rebuilds the same one)."""
+    return {**{k: card[k] for k in CARD_FIELDS}, **{k: v for k, v in detail.items() if k not in ("schemaVersion", "id", "version")}}
+
+
+def split_catalog(catalog):
+    """A schema-2 catalog as (index bytes, {file name: detail bytes}, schema-2 bytes)."""
+    details, cards = {}, []
+    for entry in catalog["mods"]:
+        raw = dumps(detail_of(entry))
+        name = f"{entry['id']}.json"
+        details[name] = raw
+        cards.append({**{k: entry[k] for k in CARD_FIELDS}, "path": name,
+                      "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)})
+    return dumps({"schemaVersion": 3, "mods": cards}), details, dumps(catalog)
+
+
+def write_catalog(catalog, out):
+    """Writes out/catalog/ (index and one detail file per mod, any other .json there removed) and out/catalog.json."""
+    index, details, v2 = split_catalog(catalog)
+    folder = out / "catalog"
+    folder.mkdir(parents=True, exist_ok=True)
+    for stale in folder.glob("*.json"):
+        if stale.name != INDEX_NAME and stale.name not in details:
+            stale.unlink()
+    for name, raw in details.items():
+        (folder / name).write_bytes(raw)
+    (folder / INDEX_NAME).write_bytes(index)
+    (out / CATALOG_V2).write_bytes(v2)
+    return len(index), len(v2)
+
+
+def load_catalog(path):
+    """A catalog as its schema-2 form: a v2 file as it is, a v3 index merged with its detail files (local paths only)."""
+    path = Path(path)
+    document = json.loads(path.read_text(encoding="utf-8"))
+    if document.get("schemaVersion") != 3:
+        return document
+    mods = []
+    for card in document["mods"]:
+        if card["path"].startswith("https://"):
+            sys.exit(f"{card['id']}: a remote detail file; the tool reads local catalogs only")
+        detail = json.loads((path.parent / card["path"]).read_text(encoding="utf-8"))
+        if (detail.get("id"), detail.get("version")) != (card["id"], card["version"]):
+            sys.exit(f"{card['path']}: id/version {detail.get('id')} {detail.get('version')} differ from the index's"
+                     f" {card['id']} {card['version']}; change both")
+        mods.append(entry_of(card, detail))
+    return {"schemaVersion": 2, "mods": mods}
+
+
+def catalog_command(from_v2):
+    """Re-pins catalog/index.json after an edit of catalog/ and rewrites catalog.json; --from splits a schema-2 file."""
+    catalog = json.loads(Path(from_v2).read_text(encoding="utf-8")) if from_v2 else load_catalog(CATALOG_DIR / INDEX_NAME)
+    if from_v2 is None:  # the index's card text wins; details come from the files as edited
+        index = json.loads((CATALOG_DIR / INDEX_NAME).read_text(encoding="utf-8"))
+        listed = {c["path"] for c in index["mods"]}
+        unlisted = sorted(p.name for p in CATALOG_DIR.glob("*.json") if p.name != INDEX_NAME and p.name not in listed)
+        if unlisted:
+            sys.exit("not in catalog/index.json (add a card for each, or delete them): " + ", ".join(unlisted))
+    index_bytes, v2_bytes = write_catalog(catalog, ROOT)
+    print(f"catalog/{INDEX_NAME} {index_bytes} bytes, {len(catalog['mods'])} detail files; {CATALOG_V2} {v2_bytes} bytes of {CATALOG_MAX_BYTES}")
+    return check(CATALOG_DIR / INDEX_NAME)
+
+
 def git(*args):
     # shutil.which finds a git.cmd shim too, which CreateProcess would not resolve by the bare name.
     executable = shutil.which("git") or sys.exit("git not found")
@@ -503,7 +592,7 @@ def release(names, zig, tag, catalog_path, out, allow_dirty):
     if git("status", "--porcelain") and not allow_dirty:
         sys.exit("working tree not clean: the manifests pin the commit the packages are built from")
     commit = git("rev-parse", "HEAD")
-    catalog = json.loads(Path(catalog_path).read_text(encoding="utf-8"))
+    catalog = load_catalog(catalog_path)
     report = []
     if any(m["id"] == RUNTIME_ID for m in catalog["mods"]):
         catalog["mods"] = [m for m in catalog["mods"] if m["id"] != RUNTIME_ID]
@@ -544,7 +633,7 @@ def release(names, zig, tag, catalog_path, out, allow_dirty):
         else:
             catalog["mods"].append(entry)
         report.append(f"{recipe['id']}: {'updated' if existing else 'new'} {recipe['version']} at {url}")
-    (out / "catalog.json").write_text(json.dumps(catalog, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    write_catalog(catalog, out)
     (out / "RELEASE.txt").write_text(f"tag {tag}\ncommit {commit}\n" + "\n".join(report) + "\n", encoding="utf-8", newline="\n")
     print("\n".join(report))
     return 0
@@ -627,33 +716,100 @@ def read_strict(path, limit):
     return json.loads(raw.decode("utf-8"), object_pairs_hook=pairs)
 
 
-def check(catalog_path):
-    problems = []
+def layout_problem(entry):
+    """OD-233: every file in its game's mods folder (the launcher still reads the old mods/<id>/ form, as its game's)."""
+    install = entry["install"]
+    folder = mod_folder({"id": entry["id"], **({"games": install["games"]} if "games" in install else {})})
+    for f in install.get("files", {}).get("azimuth", []):
+        if not f["destination"].startswith(folder):
+            return f"{f['destination']} is outside {folder}"
+    return None
+
+
+def check_v2(path, name, problems):
+    """A schema-2 catalog file (catalog.json, or a custom catalog): its schema, unique ids, layout. Returns it, or None."""
     schema = json.loads((ROOT / "schemas" / "catalog.schema.json").read_text(encoding="utf-8"))
-    catalog = None
     try:
-        document = read_strict(catalog_path, CATALOG_MAX_BYTES)
-        errors = schema_errors(document, schema, schema)
-        problems += [f"catalog.json: {e}" for e in errors]
-        if not errors:
-            catalog = document
+        document = read_strict(path, CATALOG_MAX_BYTES)
     except (OSError, ValueError) as error:
-        problems.append(f"catalog.json: {error}")
-    if catalog is not None:
-        ids = [m["id"] for m in catalog["mods"]]
-        problems += [f"catalog.json: id {i} listed more than once" for i in sorted(set(ids)) if ids.count(i) > 1]
-        for m in catalog["mods"]:
-            # OD-233: every file in its game's mods folder (the launcher still reads the old mods/<id>/ form, as its game's)
-            folder = mod_folder({"id": m["id"], **({"games": m["install"]["games"]} if "games" in m["install"] else {})})
-            for f in m["install"].get("files", {}).get("azimuth", []):
-                if not f["destination"].startswith(folder):
-                    problems.append(f"catalog.json: {m['id']}: {f['destination']} is outside {folder}")
-                    break
+        problems.append(f"{name}: {error}")
+        return None
+    if errors := schema_errors(document, schema, schema):
+        problems += [f"{name}: {e}" for e in errors]
+        return None
+    ids = [m["id"] for m in document["mods"]]
+    problems += [f"{name}: id {i} listed more than once" for i in sorted(set(ids)) if ids.count(i) > 1]
+    problems += [f"{name}: {m['id']}: {p}" for m in document["mods"] if (p := layout_problem(m))]
+    return document
+
+
+def check_v3(index_path, problems):
+    """A schema-3 index and its local detail files. Returns the schema-2 catalog they stand for, or None."""
+    schema = json.loads((ROOT / "schemas" / "catalog-v3.schema.json").read_text(encoding="utf-8"))
+    folder, name = index_path.parent, f"{index_path.parent.name}/{index_path.name}"
+    try:
+        index = read_strict(index_path, CATALOG_MAX_BYTES)
+    except (OSError, ValueError) as error:
+        problems.append(f"{name}: {error}")
+        return None
+    if errors := schema_errors(index, schema, schema):
+        problems += [f"{name}: {e}" for e in errors]
+        return None
+    ids = [c["id"] for c in index["mods"]]
+    problems += [f"{name}: id {i} listed more than once" for i in sorted(set(ids)) if ids.count(i) > 1]
+    mods, listed = [], set()
+    for card in index["mods"]:
+        where = f"{name}: {card['id']}"
+        if card["path"] != f"{card['id']}.json" or card["id"] == Path(INDEX_NAME).stem:
+            problems.append(f"{where}: path must be {card['id']}.json (and no mod is called {Path(INDEX_NAME).stem})")
+            continue
+        listed.add(card["path"])
+        detail_path = folder / card["path"]
+        try:
+            raw = detail_path.read_bytes()
+            detail = read_strict(detail_path, DETAIL_MAX_BYTES)
+        except (OSError, ValueError) as error:
+            problems.append(f"{where}: {card['path']}: {error}")
+            continue
+        if hashlib.sha256(raw).hexdigest() != card["sha256"] or len(raw) != card["bytes"]:
+            problems.append(f"{where}: {card['path']} does not match its pin (run: python3 -I tools/infmods.py catalog)")
+        if errors := schema_errors(detail, schema["$defs"]["mod"], schema):
+            problems += [f"{where}: {card['path']}: {e}" for e in errors]
+            continue
+        if (detail["id"], detail["version"]) != (card["id"], card["version"]):
+            problems.append(f"{where}: {card['path']} says {detail['id']} {detail['version']}, the index {card['id']} {card['version']}")
+            continue
+        entry = entry_of(card, detail)
+        if problem := layout_problem(entry):
+            problems.append(f"{where}: {problem}")
+        mods.append(entry)
+    problems += [f"{folder.name}/{p.name}: not listed in {name}" for p in sorted(folder.glob("*.json"))
+                 if p.name != INDEX_NAME and p.name not in listed]
+    return {"schemaVersion": 2, "mods": mods}
+
+
+def check(catalog_path):
+    """The official catalog (catalog/index.json, its detail files, the generated catalog.json), or any one catalog file."""
+    problems, catalog_path = [], Path(catalog_path)
+    try:
+        schema_version = json.loads(catalog_path.read_text(encoding="utf-8")).get("schemaVersion")
+    except (OSError, ValueError) as error:
+        print("FAIL", f"{catalog_path}: {error}")
+        return 1
+    if schema_version != 3:  # a schema-2 file: catalog.json alone, or a custom catalog
+        catalog = check_v2(catalog_path, catalog_path.name, problems)
+    else:
+        catalog = check_v3(catalog_path, problems)
+        v2_path = catalog_path.parent.parent / CATALOG_V2
+        if v2_path.exists() or catalog_path.resolve() == (CATALOG_DIR / INDEX_NAME).resolve():
+            if check_v2(v2_path, CATALOG_V2, problems) is not None and catalog is not None and v2_path.read_bytes() != dumps(catalog):
+                problems.append(f"{CATALOG_V2}: not the schema-2 file catalog/ stands for (run: python3 -I tools/infmods.py catalog)")
     for p in problems:
         print("FAIL", p)
     if not problems:
-        print(f"ok: catalog.json {len(catalog['mods'])} mods")
+        print(f"ok: {catalog_path.name} {len(catalog['mods'])} mods" + (f", {CATALOG_V2} up to date" if schema_version == 3 else ""))
     return 1 if problems else 0
+
 
 PACK_SETS = {
     # set folder name (the external source's hint, the launcher's group key) -> source game
@@ -775,7 +931,7 @@ def pack_entry(set_name, game, top, manifest, files, versions, cars, azimuth_ver
 
 def external_packs(set_dirs, cars_path, catalog_path, out):
     """OD-231/OD-232: catalog entries for the ZephyrSkies pack sets, from the player-side ZIPs (read only)."""
-    catalog = json.loads(Path(catalog_path).read_text(encoding="utf-8"))
+    catalog = load_catalog(catalog_path)
     nitro = next((m for m in catalog["mods"] if m["id"] == "nitrosystem"), None)
     azimuth_versions = nitro["install"]["compatibility"]["azimuthVersions"] if nitro else ["1.0.4"]
     cars = pack_cars(cars_path)
@@ -798,10 +954,9 @@ def external_packs(set_dirs, cars_path, catalog_path, out):
                           + (", load order first" if first else "") + (f", left out {', '.join(skipped)}" if skipped else ""))
     ids = {e["id"] for e in entries}
     catalog["mods"] = [m for m in catalog["mods"] if m["id"] not in ids] + entries
-    text = json.dumps(catalog, indent=2, ensure_ascii=False) + "\n"
-    Path(out).write_text(text, encoding="utf-8", newline="\n")
+    _, v2_bytes = write_catalog(catalog, Path(out))
     print("\n".join(report))
-    print(f"{len(entries)} entries; catalog {len(text.encode('utf-8'))} bytes of {CATALOG_MAX_BYTES} -> {out}")
+    print(f"{len(entries)} entries; {CATALOG_V2} {v2_bytes} bytes of {CATALOG_MAX_BYTES} -> {out}/catalog/, {out}/{CATALOG_V2}")
     return 0
 
 
@@ -984,16 +1139,18 @@ def main():
     r.add_argument("mods", nargs="*")
     r.add_argument("--zig", type=Path)
     r.add_argument("--tag", required=True)
-    r.add_argument("--catalog", required=True, help="the current official catalog.json (read only)")
+    r.add_argument("--catalog", type=Path, default=CATALOG_DIR / INDEX_NAME, help="the current catalog: catalog/index.json, or a v2 file (read only)")
     r.add_argument("--out", type=Path, default=ROOT / "dist")
     r.add_argument("--allow-dirty", action="store_true", help="development only: the commit pinned is HEAD, not the tree")
     c = sub.add_parser("check")
-    c.add_argument("--catalog", type=Path, default=ROOT / "catalog.json")
+    c.add_argument("--catalog", type=Path, default=CATALOG_DIR / INDEX_NAME)
+    g = sub.add_parser("catalog", help="re-pin catalog/index.json after editing catalog/, and rewrite catalog.json (v2)")
+    g.add_argument("--from", dest="from_v2", type=Path, help="split this schema-2 catalog into catalog/ instead")
     e = sub.add_parser("external-packs", help="catalog entries for the ZephyrSkies pack sets from their ZIPs (read only)")
     e.add_argument("sets", nargs="+", type=Path, help="a set folder of pack ZIPs, named as in PACK_SETS")
     e.add_argument("--cars", type=Path, required=True, help="the monorepo's crates/fi-gamedb/data/fh2-packs.json (OD-231)")
-    e.add_argument("--catalog", type=Path, default=ROOT / "catalog.json")
-    e.add_argument("--out", type=Path, required=True)
+    e.add_argument("--catalog", type=Path, default=CATALOG_DIR / INDEX_NAME)
+    e.add_argument("--out", type=Path, required=True, help="a folder: gets catalog/ and catalog.json")
     s = sub.add_parser("sync", help="re-pin an FH2 Mod Platform mod to an upstream release (report; --write to apply)")
     s.add_argument("mod")
     s.add_argument("--tag", help="the upstream release tag (default: its latest release)")
@@ -1003,6 +1160,8 @@ def main():
     args = parser.parse_args()
     if args.cmd == "check":
         return check(args.catalog)
+    if args.cmd == "catalog":
+        return catalog_command(args.from_v2)
     if args.cmd == "sync":
         return sync(args.mod, args.tag, args.zip, args.url, args.write)
     if args.cmd == "external-packs":

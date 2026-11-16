@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 3,
+  "id": "zs-fm6-zs-fm6-reasonable-hatch-pack",
+  "version": "0.1.0",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS FM6 Reasonable Hatch Pack",
+        "pt-BR": "ZS FM6 Reasonable Hatch Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM6 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "zs-fm6-zs-fm6-common",
+        "versions": [
+          "0.1.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/database.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/database.json",
+          "sha256": "b753c2b37493a62c4b1025d260619add8d8537ccf15995db5952a1cb147026f6",
+          "bytes": 179429,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/audio/cars/FOR_FocusRS_17.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/audio/cars/FOR_FocusRS_17.xml",
+          "sha256": "b938ba437869335f842805337c82299a81e17ebea096f625f6deb238fc816b04",
+          "bytes": 364,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/audio/fmodanthem/durango/PG_FIA_695Abarth_16.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/audio/fmodanthem/durango/PG_FIA_695Abarth_16.bank",
+          "sha256": "e0ce2c8d0db7482cfc499a59ac43928a67dde49affa2df9160d23de3be72c5a1",
+          "bytes": 2479776,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/audio/fmodanthem/durango/PG_FM6_REN_Clio200Cup_10.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/audio/fmodanthem/durango/PG_FM6_REN_Clio200Cup_10.bank",
+          "sha256": "561f0a591604d99992630c4f6f6fa37b98ffc50293cdced2ceff97d1eeedfaf9",
+          "bytes": 2624032,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/audio/fmodanthem/durango/PG_FOR_FocusRS_17.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/audio/fmodanthem/durango/PG_FOR_FocusRS_17.bank",
+          "sha256": "2559f865d1fada01b2fb65e98f13c9e04724f3700da3d9103adc4b149899534a",
+          "bytes": 2479744,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/cars/FIA_695Abarth_16.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/cars/FIA_695Abarth_16.zip",
+          "sha256": "5f4defa0e85f8f05397b8d6a7bc2d5273621bc50fdab579efd79525d25038397",
+          "bytes": 25617755,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/cars/FOR_FocusRS_17.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/cars/FOR_FocusRS_17.zip",
+          "sha256": "3b89e3621f15fb94448f78b3b4ec6806e98583afa683dddb0f76be90a0cd2403",
+          "bytes": 26843856,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/cars/REN_Clio200Cup_10.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/cars/REN_Clio200Cup_10.zip",
+          "sha256": "61ed52f692dc76c8c6788e4c7325f682ee7c3b0501fb9758aee495647d6fa94d",
+          "bytes": 18755048,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/cars/VW_GolfR_14.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/cars/VW_GolfR_14.zip",
+          "sha256": "3cf3bbf6d1c300b90a3f1a9c16307eea58bc23a3c56b2a909199ef2f0bc8e3b3",
+          "bytes": 20996880,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/stripped/RC0/Thumbnail_1264_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/stripped/RC0/Thumbnail_1264_Big.swatchbin",
+          "sha256": "71c9b56a0486582afe198758bfa5f956e3db2cf866a0ea18a5589b7586dcda26",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/stripped/RC0/Thumbnail_1264_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/stripped/RC0/Thumbnail_1264_Small.swatchbin",
+          "sha256": "859ef8cc42ad466cb54ff15971faebc41cd5bad7d6396c3b24c426f2966bdd8c",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/stripped/RC0/Thumbnail_2142_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/stripped/RC0/Thumbnail_2142_Big.swatchbin",
+          "sha256": "24ef3e8ac7bdd9d91042b1d4fbc1e176f629fcf41091a65458f171215c57d945",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/stripped/RC0/Thumbnail_2142_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/stripped/RC0/Thumbnail_2142_Small.swatchbin",
+          "sha256": "8b9f1d2b869a7ed394328edc20962af35ac8e7dcbce45ff23b2063a502d7718d",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/stripped/RC0/Thumbnail_2357_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/stripped/RC0/Thumbnail_2357_Big.swatchbin",
+          "sha256": "0e590b86dbf2ca5c5eb4a9eabde6e2573eafd04bed87e7481778e2dc7aea1ea3",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/stripped/RC0/Thumbnail_2357_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/stripped/RC0/Thumbnail_2357_Small.swatchbin",
+          "sha256": "57ea53f33e976f360e831e6fe8ad13aff69d41b3b83e2340932169066320bf2d",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/stripped/RC0/Thumbnail_2489_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/stripped/RC0/Thumbnail_2489_Big.swatchbin",
+          "sha256": "6c8c768caa19e59f25999b5a14984eccd74e6ed832b90645c4ff4b2f9de9179d",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/media/stripped/RC0/Thumbnail_2489_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/media/stripped/RC0/Thumbnail_2489_Small.swatchbin",
+          "sha256": "e723b86604a558b75ae8ef54286ff71acdc32a8a1ad49c4778b852201b957429",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/mod.json",
+          "sha256": "e3377e224e9d8eda90edf256d781f964059b6bd98d32f55fc5171289957fd54f",
+          "bytes": 324,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Reasonable Hatch Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-reasonable-hatch-pack/strings.json",
+          "sha256": "62da52401bd96714dd092d887984f4b7aa82f8bd5a44ed964584ca2b2893ebff",
+          "bytes": 373,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "zs-fm6-zs-fm6-reasonable-hatch-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

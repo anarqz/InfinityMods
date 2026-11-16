@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/anarqz/InfinityMods/main/schemas/catalog-v3.schema.json",
+  "title": "Infinity mod catalog index (schema 3)",
+  "description": "The catalog index the Infinity launcher reads (official: catalog/index.json on InfinityMods' main). Each entry carries a mod's card details and pins its detail file (path, sha256, bytes); the detail file ($defs/mod) holds the rest of the schema-2 entry. The launcher fetches each detail file, refuses one whose SHA-256 or size differs from the pin (a stale CDN copy reads as a mismatch: it uses its cached copy of that sha256, else the load fails as before), checks that its id and version equal the entry's, and rebuilds the schema-2 entry from both. path is a relative reference resolved against the index's own URL (no leading '/', no '..' segment, no query or fragment) or an absolute https URL; either way the resolved URL follows the download rules (https, default port, no userinfo or fragment). tools/infmods.py check also refuses duplicate ids. A schema-2 single file (catalog.schema.json) stays a valid custom catalog.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "mods"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 3
+    },
+    "mods": {
+      "type": "array",
+      "maxItems": 512,
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "name",
+        "description",
+        "author",
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "author": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "description": "The detail file: relative to the index's URL, or an absolute https URL.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^(https://[^/?#@:]+/[^#]*|(?!/)(?!(.*/)?\\.\\.(/|$))[^?#:\\\\]+)$"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 262144
+        }
+      }
+    },
+    "mod": {
+      "description": "A detail file: a schema-2 entry without name, description and author, with schemaVersion 3 and the entry's id and version.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "id",
+        "version",
+        "install"
+      ],
+      "oneOf": [
+        {
+          "required": [
+            "download"
+          ],
+          "not": {
+            "required": [
+              "externalSources"
+            ]
+          }
+        },
+        {
+          "required": [
+            "externalSources"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "download"
+                ]
+              },
+              {
+                "required": [
+                  "additionalDownloads"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 3
+        },
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "download": {
+          "$ref": "#/$defs/download"
+        },
+        "additionalDownloads": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/download"
+          }
+        },
+        "externalSources": {
+          "type": "array",
+          "minItems": 1
+        },
+        "requires": {
+          "type": "array",
+          "items": {
+            "const": "infinity-mod-runtime"
+          }
+        },
+        "install": {
+          "type": "object",
+          "properties": {
+            "countsAsModded": {
+              "description": "OD-236: false = the mod never makes a session modded and is the only kind Hardcore keeps on (spotify-radio, garage-revving, the ZS car packs). Absent = true. A JSON boolean only.",
+              "type": "boolean"
+            }
+          },
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "id"
+                ]
+              },
+              {
+                "required": [
+                  "version"
+                ]
+              },
+              {
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "required": [
+                  "description"
+                ]
+              },
+              {
+                "required": [
+                  "author"
+                ]
+              },
+              {
+                "required": [
+                  "package"
+                ]
+              },
+              {
+                "required": [
+                  "additionalPackages"
+                ]
+              },
+              {
+                "required": [
+                  "payload"
+                ]
+              },
+              {
+                "required": [
+                  "externalSources"
+                ]
+              },
+              {
+                "required": [
+                  "required"
+                ]
+              },
+              {
+                "required": [
+                  "availability"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,63}$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "text": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "pt-BR"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pt-BR": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "download": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "pattern": "^https://[^/?#@:]+/[^#]*$"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 67108864
+        }
+      }
+    }
+  }
+}

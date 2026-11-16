@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 3,
+  "id": "zs-fm6-zs-fm6-silver-age-supercars-pack",
+  "version": "0.1.0",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS FM6 Silver Age Supercars Pack",
+        "pt-BR": "ZS FM6 Silver Age Supercars Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM6 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "zs-fm6-zs-fm6-common",
+        "versions": [
+          "0.1.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/database.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/database.json",
+          "sha256": "aafe5812f26890e3f1abd26f57891505aef55de74f387432c5a91ad505ae8033",
+          "bytes": 181723,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/audio/fmodanthem/durango/PG_AUD_R8V10Plus_16.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/audio/fmodanthem/durango/PG_AUD_R8V10Plus_16.bank",
+          "sha256": "3c509cfe625ed5063b8ff744e0f1440c6ca3187f2cd7d44d243b31682e8408b1",
+          "bytes": 2353056,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/audio/fmodanthem/durango/PG_FER_488GTB_16.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/audio/fmodanthem/durango/PG_FER_488GTB_16.bank",
+          "sha256": "c2af1e43296d20df9782e13aaeb10dbb4753fbf5dd3966ff33f0ca0ec73084df",
+          "bytes": 2571840,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/audio/fmodanthem/durango/PG_FOR_Phoenix_16.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/audio/fmodanthem/durango/PG_FOR_Phoenix_16.bank",
+          "sha256": "d13c054edfabcfb75f8bd43cc3571b85b8d737d67b8b2764bf73b8a37cb1c3f7",
+          "bytes": 2973824,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/audio/fmodanthem/durango/PG_MCL_570S_16.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/audio/fmodanthem/durango/PG_MCL_570S_16.bank",
+          "sha256": "bd8916bc37f980c7559c96eadc96125cf22f49229192a9364258f0a09da3158a",
+          "bytes": 2748896,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/cars/AUD_R8V10Plus_16.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/cars/AUD_R8V10Plus_16.zip",
+          "sha256": "2284e3bcfeba960f099ec9b722a5441875221a429b4854992bc4affbdafbcfc2",
+          "bytes": 21999123,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/cars/FER_488GTB_16.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/cars/FER_488GTB_16.zip",
+          "sha256": "54e24cc9fa19d6abb70e6797b8c257a3a11f56379f6f7e0d1a51faf87acdfc8c",
+          "bytes": 21240355,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/cars/FOR_GTNutriGrain_17.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/cars/FOR_GTNutriGrain_17.zip",
+          "sha256": "94db6f4accff63f29ee67f11db4f72937c5e196967ed6cb6583dd730c0238c31",
+          "bytes": 20945822,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/cars/FOR_Phoenix_16.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/cars/FOR_Phoenix_16.zip",
+          "sha256": "28fd167fb6c7224874ab149c150313b5e91c3f16273dc731a05ddf6d1857aab3",
+          "bytes": 20092117,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/cars/MCL_570S_16.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/cars/MCL_570S_16.zip",
+          "sha256": "50c812ebd5090d8292cdd77d0cd1425f9943a844192d9beb5e6700a5d91311f3",
+          "bytes": 17973105,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/stripped/RC0/Thumbnail_2363_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/stripped/RC0/Thumbnail_2363_Big.swatchbin",
+          "sha256": "ae0bffcd117aca838e99fba1e709f1b5247e84f58f413c0c5886905b0c57a026",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/stripped/RC0/Thumbnail_2363_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/stripped/RC0/Thumbnail_2363_Small.swatchbin",
+          "sha256": "0380354ed416dec25d1f54e417334dade58882dfc61bf6b12a98e728f1bb6cdf",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/stripped/RC0/Thumbnail_2467_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/stripped/RC0/Thumbnail_2467_Big.swatchbin",
+          "sha256": "3d62926f2298da77475c152290b4f8480638538eea432ad61dbf6e85de95dd8a",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/stripped/RC0/Thumbnail_2467_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/stripped/RC0/Thumbnail_2467_Small.swatchbin",
+          "sha256": "d1499b3e7e6f24b0a5fa9e7ac6efba52456f484f6699a34dd6d26a82bd888622",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/stripped/RC0/Thumbnail_2472_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/stripped/RC0/Thumbnail_2472_Big.swatchbin",
+          "sha256": "78d846d2c5a1c280558184de86756f500fbe7772be76736f1dd7947db7a66b3e",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/stripped/RC0/Thumbnail_2472_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/stripped/RC0/Thumbnail_2472_Small.swatchbin",
+          "sha256": "3108d13582bbe6c1a0c044899dd95c8e37aeb396433fcc6310fed4971ad5b376",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/stripped/RC0/Thumbnail_2473_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/stripped/RC0/Thumbnail_2473_Big.swatchbin",
+          "sha256": "bf80708d13cc099881323b6634e34c36d58bf498c471bfdbac503db3e97ffeb4",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/stripped/RC0/Thumbnail_2473_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/stripped/RC0/Thumbnail_2473_Small.swatchbin",
+          "sha256": "f71525091d333156711a320fee9f33c3a33f218e7172198e2df3bb0fe0e19762",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/stripped/RC0/Thumbnail_2578_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/stripped/RC0/Thumbnail_2578_Big.swatchbin",
+          "sha256": "155305f6cca217a30503df1d8edda536d49c1bfd645d01c2abbf2f885bd08b7e",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/media/stripped/RC0/Thumbnail_2578_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/media/stripped/RC0/Thumbnail_2578_Small.swatchbin",
+          "sha256": "ddd6b79b6f45b117e5805b07aff1bfce3d2b6853b37fc65ba7a9b6d464b3550c",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/mod.json",
+          "sha256": "9f7effd6943e20530deba3fbe6c2c1ec8258905fbedea4af6c0ec6db5c2d210b",
+          "bytes": 332,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Silver Age Supercars Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-silver-age-supercars-pack/strings.json",
+          "sha256": "8cf1c009102c0a5dceecdf65539adee79d91ea6b8e4ec2fb6905c05d7530bb95",
+          "bytes": 453,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "zs-fm6-zs-fm6-silver-age-supercars-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

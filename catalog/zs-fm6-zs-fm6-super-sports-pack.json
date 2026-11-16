@@ -1,0 +1,536 @@
+{
+  "schemaVersion": 3,
+  "id": "zs-fm6-zs-fm6-super-sports-pack",
+  "version": "0.1.0",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS FM6 Super Sports Pack",
+        "pt-BR": "ZS FM6 Super Sports Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM6 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "zs-fm6-zs-fm6-common",
+        "versions": [
+          "0.1.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/database.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/database.json",
+          "sha256": "84827aee75a9a235159d71e2ea860f0992dbc967d4b0133faec5e5d4a6df4f35",
+          "bytes": 598334,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/cars/FER_CaliforniaT_15.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/cars/FER_CaliforniaT_15.xml",
+          "sha256": "58c9a42a49bd60ea6bbd74194a7147b0b47a3499f47f39e05d1f33f2d1243ce6",
+          "bytes": 812,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/cars/HOL_CommodoreVL_88.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/cars/HOL_CommodoreVL_88.xml",
+          "sha256": "e54888d893174040f7d831ed0e880afb6f9c58df4906bdc3db6d87f2d4980fbc",
+          "bytes": 364,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/cars/JAG_FTypeProject7_16.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/cars/JAG_FTypeProject7_16.xml",
+          "sha256": "7bea668a0e5e80f8c21b2a8d211d12a347c530e9c28a05ec96b99589500f535a",
+          "bytes": 364,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/cars/MER_AMGGT_15.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/cars/MER_AMGGT_15.xml",
+          "sha256": "0cde2b9aff988a7c1ea460c71ca3e06f3cd9dbb0eb5159721437dbef4cf7eb25",
+          "bytes": 364,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/fmodanthem/durango/PG_AST_V8Vantage_77.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/fmodanthem/durango/PG_AST_V8Vantage_77.bank",
+          "sha256": "9122c2babc7f6f713ce551e01ce0915ca05b609e6c9455ad513cc8b6b30511e8",
+          "bytes": 2688512,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/fmodanthem/durango/PG_FER_CaliforniaT_15.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/fmodanthem/durango/PG_FER_CaliforniaT_15.bank",
+          "sha256": "0135dae0534d7cf6e996e30117a424d8f5742a8dcc614a519808d8c7f0aac053",
+          "bytes": 2544576,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/fmodanthem/durango/PG_FM6_AST_DBS_09.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/fmodanthem/durango/PG_FM6_AST_DBS_09.bank",
+          "sha256": "4e51ca96d358ae316d9fb65d0eabf02b904842a2fd67337717bd8e9da78c4b09",
+          "bytes": 2798656,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/fmodanthem/durango/PG_FM6_AUD_S3Sedan_15.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/fmodanthem/durango/PG_FM6_AUD_S3Sedan_15.bank",
+          "sha256": "05fd1de9fedf5bed887f0a6b44d7453dd8925418c3710a1a62dcca2bbb96f5ec",
+          "bytes": 2749568,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/fmodanthem/durango/PG_FM6_LOT_Elise_99.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/fmodanthem/durango/PG_FM6_LOT_Elise_99.bank",
+          "sha256": "fa16e7ae41bab89a56987fecbc4d7d8b4cbefeba66c8a7bfd206dcd34fd4726a",
+          "bytes": 2446336,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/fmodanthem/durango/PG_FM6_POR_996GT3_04.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/fmodanthem/durango/PG_FM6_POR_996GT3_04.bank",
+          "sha256": "e88fd9ed5a89c5dab115616462bdbe549d923c6ec21e11e99d8939ec8c8fdef5",
+          "bytes": 2757760,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/fmodanthem/durango/PG_HOL_CommodoreVL_88.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/fmodanthem/durango/PG_HOL_CommodoreVL_88.bank",
+          "sha256": "a7ea79a3db8270f6e8476406ac5b61fbee9bfdb762f4ac90a696a854499a515c",
+          "bytes": 2597792,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/fmodanthem/durango/PG_JAG_FTypeProject7_16.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/fmodanthem/durango/PG_JAG_FTypeProject7_16.bank",
+          "sha256": "5ae3d700a6c7a6c79f84e8d26def637ef72d629ee6c0c08d8076a13fd0cbb239",
+          "bytes": 2873696,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/fmodanthem/durango/PG_JAG_XJS_90.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/fmodanthem/durango/PG_JAG_XJS_90.bank",
+          "sha256": "3d65a6bdf40673f8841c21acc7d9a395d763d69a591dab9cb85de74fee7cde70",
+          "bytes": 2236320,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/audio/fmodanthem/durango/PG_SUB_SVX_96.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/audio/fmodanthem/durango/PG_SUB_SVX_96.bank",
+          "sha256": "816c41dfea3ecd6de167c06d83a234c0e1f99b6faa7d734376cbdee358c7f495",
+          "bytes": 3097216,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/AST_V12ZagatoRoad_12.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/AST_V12ZagatoRoad_12.zip",
+          "sha256": "0f386d22cbe2610db15dd522fcfe491dcf8d3d661d69d09756484031b4f4ffb9",
+          "bytes": 20522911,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/AST_V8Vantage_77.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/AST_V8Vantage_77.zip",
+          "sha256": "9944088a82cbdfed5ec608bc574749dddf7ad6eb4f5587307eb91fd2b2cc4f47",
+          "bytes": 21212697,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/AUD_TTSTF_15.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/AUD_TTSTF_15.zip",
+          "sha256": "282f1f7700b074e62a2e30a3b2d985ec68cde9aeb518a6c811a1912f815f9c46",
+          "bytes": 24224062,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/BMW_M4TF_15.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/BMW_M4TF_15.zip",
+          "sha256": "c72eabb669198a6e2a99a2ad0b3301608a2fb563d545f1441c4ab8eb7435c40d",
+          "bytes": 24206845,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/FER_CaliforniaT_15.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/FER_CaliforniaT_15.zip",
+          "sha256": "ff5c2577a61e9168a165836f35ca67f19d91207e0295cde9f6fe674984dac00a",
+          "bytes": 22403241,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/HOL_CommodoreVL_88.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/HOL_CommodoreVL_88.zip",
+          "sha256": "fc72a336325512742208299a491ba9361c93a2fd87f4dfe430efe599dca296fc",
+          "bytes": 16828926,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/JAG_FTypeProject7_16.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/JAG_FTypeProject7_16.zip",
+          "sha256": "ccf54c6e29ed18dd6157d4b82ccc5dab6c7d496c9ad7ba4eb1041a433497f6ca",
+          "bytes": 21690171,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/JAG_XJS_90.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/JAG_XJS_90.zip",
+          "sha256": "3ae5dd2079653f0e80938ecb6189b7af067dde3a805734963abb4f95ad936d81",
+          "bytes": 21523776,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/JAG_XKRSGT_15.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/JAG_XKRSGT_15.zip",
+          "sha256": "8b9248c74374766d3304ad006b89ba8d72bb2503cf9e32ddfa1ad94279658032",
+          "bytes": 23882598,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/LOT_Elise111S_05.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/LOT_Elise111S_05.zip",
+          "sha256": "2dcc436c6558e43ff12d09b20895d7826e50e7af2af82fff1a32e6af378852a6",
+          "bytes": 23124553,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/MAZ_MX5TF_16.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/MAZ_MX5TF_16.zip",
+          "sha256": "9a51f89440084d9b800f71e86a73ddb32a616b579b030a4f54876642a32b249f",
+          "bytes": 18656340,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/MER_AMGGT_15.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/MER_AMGGT_15.zip",
+          "sha256": "78bbdddcc478b8715e787f273acdfaaf2b23ea23032a231db699bb0fa175921b",
+          "bytes": 21698137,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/POR_996GT3_04.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/POR_996GT3_04.zip",
+          "sha256": "092da28a3a131deeafe2dc0a6a52a642b3f9c96a6abe384005571799403a801d",
+          "bytes": 19436365,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/cars/SUB_SVX_96.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/cars/SUB_SVX_96.zip",
+          "sha256": "b818dc562e4d6fb77d68e6a65aa58c3283639fcc76186c85add71ed6338bfac6",
+          "bytes": 20528704,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_1326_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_1326_Big.swatchbin",
+          "sha256": "8b69d4c96f5bacf8aa06e530a262543b340911f481ce539d31f140ec52ccc84e",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_1326_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_1326_Small.swatchbin",
+          "sha256": "fa4e75dfa9d19181d73cc85e747426775f6907b1e76b8ddf2f2052f2b249b365",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_1534_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_1534_Big.swatchbin",
+          "sha256": "28cc38b4dc6dfbdf5dee76018d5dbbc28932c82e3f37bd3077473fc1446a82ab",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_1534_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_1534_Small.swatchbin",
+          "sha256": "09bb76a7d231809b274aeccfe0faa5b3873fbcffb44ddef2668760eb23c610af",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2194_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2194_Big.swatchbin",
+          "sha256": "6913742f8a99c2d60c7c435fb1d1735565a1b85e46d284e5c8efbc58c9bba42c",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2194_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2194_Small.swatchbin",
+          "sha256": "2bfa489f2fcb98653870336665c28a72434472665a209717649ee7601cba105b",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2203_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2203_Big.swatchbin",
+          "sha256": "8070681daed49ba66bdf758bd26914b2ce7a067c01c886c4e87ee2d88885c5d7",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2203_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2203_Small.swatchbin",
+          "sha256": "f4896a8610b5ea2d082b26002c0df283996ef039cf0b21f808715c89c174e5a8",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2217_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2217_Big.swatchbin",
+          "sha256": "eb7fa71b66a9fffcf5955ceeafe2dab3f7bdf987d06bb925489e14d007b4a53d",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2217_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2217_Small.swatchbin",
+          "sha256": "b2e4f55dbb9357789d173a1bf11a90c1e93ac1867b7c24e6119e31858b7642dd",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2235_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2235_Big.swatchbin",
+          "sha256": "67462ee85e5dd2a052ace83199da2e4408c3679189c990795d3b756605adbbba",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2235_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2235_Small.swatchbin",
+          "sha256": "a5a6a85dd577316b62ed971901c3c6a4e981d8b3d26575d0eff4c67989846c0f",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2242_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2242_Big.swatchbin",
+          "sha256": "e67fa95615afde3e25e90b31fb02e5b3badfd6c81b721c8992d18adb614a921f",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2242_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2242_Small.swatchbin",
+          "sha256": "0f64df36c0e25439ff0cb45a66f96b7c498e72d1e0277ab62918170334e3979e",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2378_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2378_Big.swatchbin",
+          "sha256": "30dceba05f11581cbfafd6492ac974e35e9d2d335221f5b637a96503ef081198",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2378_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2378_Small.swatchbin",
+          "sha256": "00b4bb3d534f34f55507149dee7fc69d9e7050512dbd89a1f26684a77496dd64",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2449_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2449_Big.swatchbin",
+          "sha256": "d7f453eadd1728c7563a24ac57a7b29a551f6311b16a1c17c3aa2961c59b2e3c",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2449_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2449_Small.swatchbin",
+          "sha256": "7bb5b17678db3cd4782f2f76f649d5245e8dc9edc47ccd97c529bf1a02894617",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2450_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2450_Big.swatchbin",
+          "sha256": "a623e642683bc26bb1c0f7f60a5ee39a18f7ecf1c98156af1fe27d3025855314",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2450_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2450_Small.swatchbin",
+          "sha256": "4f9e1a296fcd5c84a9cee85fbba06ba815909d451442eee586f4e28b93f9e259",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2453_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2453_Big.swatchbin",
+          "sha256": "e84f263499cc82dee292af112bc903f9b9f537797ffc5da3c6a53f18b8353bf2",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2453_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2453_Small.swatchbin",
+          "sha256": "3556c76fee36ac2dad94671436fb699e49038c1317f99f22b8c7fd262a51654c",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2492_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2492_Big.swatchbin",
+          "sha256": "1a21bad05406f7c11222f7ee6c37c354b0ce780e43abe06584de857672f1fb31",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_2492_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_2492_Small.swatchbin",
+          "sha256": "a8389bc0ec6e17b55e42f4bef8e88b8c1040a30c83d04f69a7e82514568ab4c6",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_262_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_262_Big.swatchbin",
+          "sha256": "64d6d6c970ba96fe6ba54c0f769fb9d3b670d220ec1d9985b2cd4246ee12dc8c",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_262_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_262_Small.swatchbin",
+          "sha256": "56be60369f9d19a35310e087ed766bf9b2bf8e11af86ceee17768226d23426a8",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_331_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_331_Big.swatchbin",
+          "sha256": "70bba766c499040b2c3c8f211e9e63ee7d54584013e064bcad71d7ca13251191",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/media/stripped/RC0/Thumbnail_331_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/media/stripped/RC0/Thumbnail_331_Small.swatchbin",
+          "sha256": "6c2441c4a54ad54d7ce2a332dde7011a3b175f63366af1a4e7993db2d13d805d",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/mod.json",
+          "sha256": "c1c8d5d4b38f4015eafad79609817152449c855951819dac43c01089f969422c",
+          "bytes": 317,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Super Sports Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-super-sports-pack/strings.json",
+          "sha256": "358c6bbb7694d5b97e17cbab98ce183036e95e243abacb70db5405842c375adf",
+          "bytes": 1087,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "zs-fm6-zs-fm6-super-sports-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

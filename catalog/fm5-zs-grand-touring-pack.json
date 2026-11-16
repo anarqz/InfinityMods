@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 3,
+  "id": "fm5-zs-grand-touring-pack",
+  "version": "1.0.5",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS Grand Touring Pack",
+        "pt-BR": "ZS Grand Touring Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM5 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "fm5-zs-fm5-common",
+        "versions": [
+          "1.0.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/database.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/database.json",
+          "sha256": "f6613e670802b9220c8f9ba50564d2448a6c23a2c289cb7a7aafb32e46b8959f",
+          "bytes": 359469,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/audio/cars/AST_VanquishLCE_13.xml",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/audio/cars/AST_VanquishLCE_13.xml",
+          "sha256": "cef0e6be4620b5383659dc7cb6baa5593a03b3c35e361eef27befab357500bd7",
+          "bytes": 364,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/audio/fmodanthem/durango/PG_AST_DBS_09.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/audio/fmodanthem/durango/PG_AST_DBS_09.bank",
+          "sha256": "c24390f716c4d1f670df2c566b5f74096857e32211b5d986f137324a5217974a",
+          "bytes": 2578432,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/audio/fmodanthem/durango/PG_AST_VanquishLCE_13.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/audio/fmodanthem/durango/PG_AST_VanquishLCE_13.bank",
+          "sha256": "5e97d967c9429916636b2cf1f4f44cbacb675d8cb8a7a004b356d3aaa653a4a2",
+          "bytes": 2579744,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/audio/fmodanthem/durango/PG_FER_599GTO_11.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/audio/fmodanthem/durango/PG_FER_599GTO_11.bank",
+          "sha256": "2cb632dc6f698a3f7f5c31cd9f4537621942cc59c640c689e7136affe397f3f5",
+          "bytes": 2452864,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/audio/fmodanthem/durango/PG_FER_F151_11.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/audio/fmodanthem/durango/PG_FER_F151_11.bank",
+          "sha256": "3909df68cea052fa72c9714302a4a404bcb1e4e3d567ac092e34b004ec67e591",
+          "bytes": 2089504,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/audio/fmodanthem/durango/PG_ROL_Wraith_14.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/audio/fmodanthem/durango/PG_ROL_Wraith_14.bank",
+          "sha256": "9e044d656f0be6d6e2d4a36e6306c355285d513ff30201708f538a75f47a0a76",
+          "bytes": 2223456,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/cars/AST_DBS_09.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/cars/AST_DBS_09.zip",
+          "sha256": "49b86d1f3f76858823e52478fe007ae3d130a30ae6cf19b19f115ffc1c3b451d",
+          "bytes": 11010772,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/cars/AST_VanquishLCE_13.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/cars/AST_VanquishLCE_13.zip",
+          "sha256": "6a184ec2059d1643fd5d0cd960c360ae4482f4b578d8e04aefd71253d84383ac",
+          "bytes": 18360910,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/cars/FER_599GTO_11.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/cars/FER_599GTO_11.zip",
+          "sha256": "5da6069c3c0c053bc6f20f0417978bba15dddc5cd378b47505e4e3b3d6ca3efa",
+          "bytes": 14287393,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/cars/FER_F151_11.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/cars/FER_F151_11.zip",
+          "sha256": "9481e9e7f03861f6ba5b0a5fea9b4510f417f33e61f5733d63e26d950f2832ed",
+          "bytes": 13868633,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/cars/ROL_Wraith_14.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/cars/ROL_Wraith_14.zip",
+          "sha256": "a1f985883554188b88f1552e135915ab265592601d29cf9f25d1554672869777",
+          "bytes": 21151901,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/stripped/RC0/L_Manu_Logo_ROL.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/stripped/RC0/L_Manu_Logo_ROL.swatchbin",
+          "sha256": "98b39629b7cad60c91c802654fd02c4a8d9ae4932d89033acaa55a8a2a6e8a86",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/stripped/RC0/Manu_Logo_ROL.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/stripped/RC0/Manu_Logo_ROL.swatchbin",
+          "sha256": "4ac4613a72bf6f9a077d0afbf1e4b99b6e5260a962afc9fba27002a4362867dd",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/stripped/RC0/Thumbnail_1081_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/stripped/RC0/Thumbnail_1081_Big.swatchbin",
+          "sha256": "2834e3c178ee8b8363094a3d4122bc4a012e544d5de916546c76c11ce9018fb5",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/stripped/RC0/Thumbnail_1081_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/stripped/RC0/Thumbnail_1081_Small.swatchbin",
+          "sha256": "887d4920ddedc4eff74854cbb9be28d076f1ccf3f2f27321742982958ae4ad15",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/stripped/RC0/Thumbnail_1319_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/stripped/RC0/Thumbnail_1319_Big.swatchbin",
+          "sha256": "c4c6dfdb05e6905ac9b69d9003b77df51010482e82508832c24f106656b6be97",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/stripped/RC0/Thumbnail_1319_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/stripped/RC0/Thumbnail_1319_Small.swatchbin",
+          "sha256": "7fdf5b9b10b78b5855f3a8fd2e1bf117d8cddc368d645d65cd8e9558fd9d342d",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/stripped/RC0/Thumbnail_1389_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/stripped/RC0/Thumbnail_1389_Big.swatchbin",
+          "sha256": "a9aa9341964bdcd4d928f15eabd7c1d1f308116dbe3f1e5ba870beb7c57b36ad",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/stripped/RC0/Thumbnail_1389_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/stripped/RC0/Thumbnail_1389_Small.swatchbin",
+          "sha256": "f49b8d61dd8d0a86677135d1619a99bffaa036beea75a0662b4dcd46f138d5c4",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/stripped/RC0/Thumbnail_2044_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/stripped/RC0/Thumbnail_2044_Big.swatchbin",
+          "sha256": "f7f9cd3497ac6c04ee7463263f8820805b588734887426c8e3ef0b2cff81f789",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/stripped/RC0/Thumbnail_2044_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/stripped/RC0/Thumbnail_2044_Small.swatchbin",
+          "sha256": "36be6ddcc69b803df317e9b2832886e5dd42afd1d853d30e2d5ee73604f4033c",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/stripped/RC0/Thumbnail_2114_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/stripped/RC0/Thumbnail_2114_Big.swatchbin",
+          "sha256": "3dd4cdb078c5be91db2a8fc6df3a1aaa99c32e981c8de5e45cfe607c24dba888",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/media/stripped/RC0/Thumbnail_2114_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/media/stripped/RC0/Thumbnail_2114_Small.swatchbin",
+          "sha256": "f988c069a45ab651f88a1bb0ac5f65694aa23e94232b12b974483a0779fcedef",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/mod.json",
+          "sha256": "81ac3c03f8342345021592fa74699bc76d5b256ae72e3b6b7500888d887ae146",
+          "bytes": 470,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Grand Touring Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-grand-touring-pack/strings.json",
+          "sha256": "5d0e970b028cb255244988a000cdf70b4b6913c1b3479ea05476ed3c2a64c786",
+          "bytes": 527,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "fm5-zs-grand-touring-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

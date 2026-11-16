@@ -1,2 +1,5 @@
 # Patches apply to LF trees (git archive with core.eol=lf, tools/infmods.py): keep them LF on every checkout.
 *.patch text eol=lf
+# catalog/index.json pins each detail file by SHA-256 of its bytes, and catalog.json is compared byte for byte: LF everywhere.
+/catalog.json text eol=lf
+/catalog/*.json text eol=lf

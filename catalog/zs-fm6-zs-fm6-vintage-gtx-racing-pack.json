@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 3,
+  "id": "zs-fm6-zs-fm6-vintage-gtx-racing-pack",
+  "version": "0.1.0",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS FM6 Vintage GTX Racing Pack",
+        "pt-BR": "ZS FM6 Vintage GTX Racing Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM6 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "zs-fm6-zs-fm6-common",
+        "versions": [
+          "0.1.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/database.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/database.json",
+          "sha256": "67011c59048efb50bdee961dfa0563cbb4382413767b440f581846d2a019d9da",
+          "bytes": 282846,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/audio/cars/BMW_6_M1_79.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/audio/cars/BMW_6_M1_79.xml",
+          "sha256": "cad58c7a24c80c06f415f70e9eed62bf1b5c281e5e815fcd63b644b28096f17b",
+          "bytes": 1610,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/audio/cars/MRC_15_XR7_90.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/audio/cars/MRC_15_XR7_90.xml",
+          "sha256": "398f0a2895e618a53857379740421a688cbeaea55c7daf1d534a32727e2106d7",
+          "bytes": 1075,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/audio/cars/NIS_78_300ZX_94.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/audio/cars/NIS_78_300ZX_94.xml",
+          "sha256": "d8ff24c6f70c1266104fc1cbd23b59f93bd3cc11029fe0c976f89490b8827778",
+          "bytes": 1206,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/audio/cars/POR_26_GT1_98.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/audio/cars/POR_26_GT1_98.xml",
+          "sha256": "f1d6cd0bf7909cdcca980029a4bd905ad1d65f63c162bdc46ddc10041c6261e7",
+          "bytes": 1484,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/audio/fmodanthem/durango/PG_BMW_6_M1_79.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/audio/fmodanthem/durango/PG_BMW_6_M1_79.bank",
+          "sha256": "6a1f8375f3ea99191ca6432a84eae1afd141a9c5128b65c3814a0346d681b54d",
+          "bytes": 2512608,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/audio/fmodanthem/durango/PG_FER_512BBLM_78.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/audio/fmodanthem/durango/PG_FER_512BBLM_78.bank",
+          "sha256": "994a921f88cfafd81022ce3f5a7b614d4d4de866a0a35264ddecc1d967930453",
+          "bytes": 2537024,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/audio/fmodanthem/durango/PG_FOR_2_CapriTurbo_81.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/audio/fmodanthem/durango/PG_FOR_2_CapriTurbo_81.bank",
+          "sha256": "2192a171093f10572711a679c75fb173d68e551fc30e673c379dbeefc83870df",
+          "bytes": 2798880,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/audio/fmodanthem/durango/PG_MAZ_62_RX7_91.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/audio/fmodanthem/durango/PG_MAZ_62_RX7_91.bank",
+          "sha256": "8262a61699cba12c9f1dd8625747dfa3bd77f27c886f1efda15ef86493da9bbc",
+          "bytes": 2674400,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/audio/fmodanthem/durango/PG_MRC_15_XR7_90.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/audio/fmodanthem/durango/PG_MRC_15_XR7_90.bank",
+          "sha256": "2782e808138599ba8d94d684aadcc64698e7bca13f4e5e14651d06fb0955b94b",
+          "bytes": 2959200,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/audio/fmodanthem/durango/PG_NIS_78_300ZX_94.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/audio/fmodanthem/durango/PG_NIS_78_300ZX_94.bank",
+          "sha256": "9222c3c0d8f48a21971e74dc4beea6c72d910bf3380edc23769f5af5c7a7104b",
+          "bytes": 2746912,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/audio/fmodanthem/durango/PG_POR_26_GT1_98.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/audio/fmodanthem/durango/PG_POR_26_GT1_98.bank",
+          "sha256": "cf0704e359674e0eb3efd7ef7bc06726cd7dfd792142a7e80198bb4a0e47ea5a",
+          "bytes": 2925376,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/cars/BMW_6_M1_79.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/cars/BMW_6_M1_79.zip",
+          "sha256": "7649cc24e410606e3d38caf06bca65d8afe90bcd3042620b5fe15fca1976a3ab",
+          "bytes": 24361627,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/cars/BMW_93_30CSL_75.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/cars/BMW_93_30CSL_75.zip",
+          "sha256": "3b7af1b9bcbcbf624dca7a40af21f88c8bd1a77d4db970805f6760618417efe9",
+          "bytes": 20663654,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/cars/DAT_33_280ZX_79.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/cars/DAT_33_280ZX_79.zip",
+          "sha256": "7f63a9da8e400fbdaf7c2d7d57a7037b6887d899ca16ba6b179f4ef9443302eb",
+          "bytes": 23029564,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/cars/FER_71_512BBLM_82.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/cars/FER_71_512BBLM_82.zip",
+          "sha256": "baa1ac57fad4ed47a161689f32a3a6e604ce3116b875de699583ad081e4103f9",
+          "bytes": 22230948,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/cars/FER_72_512BBLM_82.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/cars/FER_72_512BBLM_82.zip",
+          "sha256": "7e289409dc42c4c18ecf24ad95f05874031429bf79467cc6eb40cf2b9e432c37",
+          "bytes": 21920545,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/cars/FOR_2_CapriTurbo_81.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/cars/FOR_2_CapriTurbo_81.zip",
+          "sha256": "96ca49f7793e320609686e7d555b630d35873da1b90b54172295148c62b84cce",
+          "bytes": 20116134,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/cars/FOR_55_CapriTurbo_81.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/cars/FOR_55_CapriTurbo_81.zip",
+          "sha256": "1614202db0c9002f9e51131f7fed410ca2d30f91cdce83a7ad112c758acef4cf",
+          "bytes": 20549853,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/cars/LAN_31_BetaMontecarlo_81.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/cars/LAN_31_BetaMontecarlo_81.zip",
+          "sha256": "73ea29b65cb5b1d4d400049a08df48b6cf29adae341c5469429a7a3696596492",
+          "bytes": 21244332,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/cars/MAZ_62_RX7_91.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/cars/MAZ_62_RX7_91.zip",
+          "sha256": "c42b12e9b5c6cbdfdf0e41ff7660f6a52272ad2fcbe0e21670e7694ab708d4eb",
+          "bytes": 23754830,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/cars/MRC_15_XR7_90.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/cars/MRC_15_XR7_90.zip",
+          "sha256": "352a446bfe15dd423bf529571d78640c8e47dc0d526a5d67b46d447e835f6ada",
+          "bytes": 21754526,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/cars/NIS_78_300ZX_94.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/cars/NIS_78_300ZX_94.zip",
+          "sha256": "6217f38ca70073a283a281aacb41f23c05dbeaa255feda930910b9259c8ff791",
+          "bytes": 19867723,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/cars/POR_26_GT1_98.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/cars/POR_26_GT1_98.zip",
+          "sha256": "2e2b21a0279ff9c73966d45ed4bb150c873b9f6efec1f673ce5a5cfed36ea563",
+          "bytes": 21162865,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2099_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2099_Big.swatchbin",
+          "sha256": "99ca694b69441a8af5b65d0f88bd0389522e1c6bc860fdbe5bf12dd6df0af028",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2099_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2099_Small.swatchbin",
+          "sha256": "61ba1a21b6bb10cdbdd7a91942a03f33884800bf8aa3d1cf0613a927e8e73885",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2103_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2103_Big.swatchbin",
+          "sha256": "95383e8aad9f26d9e5646ea6408435d0888c6635951315d67d04832f75dcf29e",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2103_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2103_Small.swatchbin",
+          "sha256": "e02d7cb5714327d3a21e7ae180745ea16e58f6868655983603f3776d1dd5b4ca",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2125_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2125_Big.swatchbin",
+          "sha256": "0f420a4e0d3202256f63c8562c746fa394db719daf0ee2351d168661165acf79",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2125_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2125_Small.swatchbin",
+          "sha256": "e0e8c65f302f16c2e93800c3ec253ec3d4c6a02155faf9f48d4a97dcc9362346",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2305_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2305_Big.swatchbin",
+          "sha256": "1593b15c005d06c823d1306d88ab34968040d3c4f4b1e630efaddbb2693336b7",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2305_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2305_Small.swatchbin",
+          "sha256": "2a09853b8155ffb3c2f5fa4df15cb1222997170935a1b832d6d992ab5ac4f113",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2309_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2309_Big.swatchbin",
+          "sha256": "1334ef3c8c57ec41e9eb3a171bc69bdad33ee9773d3ec7a5bfedafe7f0d935e5",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2309_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2309_Small.swatchbin",
+          "sha256": "303fb61aef41849f9110f574a03352eb3d91943b4575e92f085fab7f0de8974f",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2315_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2315_Big.swatchbin",
+          "sha256": "fec894ed58ce7fba9c9c00850e57cab1f47b500adebe5bcf204e87fed70e6ebb",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2315_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2315_Small.swatchbin",
+          "sha256": "bb45704fc011e09c9e18f832ad8ffbd4ed53665d9368324c041d2ad848f65637",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2333_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2333_Big.swatchbin",
+          "sha256": "773fbf9a7da49fccb9dc31facb43a757cb522daa1986cfc44099323df294953b",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2333_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2333_Small.swatchbin",
+          "sha256": "5aa5d133f6fe39719fbb34262d1c2465e4f2f2bb3554e9b1b2eece77811aa169",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2334_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2334_Big.swatchbin",
+          "sha256": "ac1704423279b6fc8f0d739acb5c08afc41c520fed86ced40ac2aa23f5218f66",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2334_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2334_Small.swatchbin",
+          "sha256": "00c5225383e94c4a484caec199746f9a2cd6fcfaaea0a5dbfe118351a6fd7131",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2366_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2366_Big.swatchbin",
+          "sha256": "da17764c1579ca204bdfba7670e4c2511cc80a90b0383f38cfbe90d2e851bef2",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2366_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2366_Small.swatchbin",
+          "sha256": "a8106bbde788a3c8fc06c2ab6ba3b66c08b98b06165e07a9a72acf8e4ff15817",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2406_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2406_Big.swatchbin",
+          "sha256": "6a8d90e009a9cbfff9cf76d91a33ab87bab40c12c68c7e916808e3681214bf43",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2406_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2406_Small.swatchbin",
+          "sha256": "bb05d51710dc3719ffd642806cd11aacede0719e37ad24115b705f8dffd34698",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2488_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2488_Big.swatchbin",
+          "sha256": "4572f6d2b54482534f15e2bf9a26712092143b435e25262452630ccb5ba960d8",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_2488_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_2488_Small.swatchbin",
+          "sha256": "6f33f7edf73c94722cdc56557289c7f573b8a860757a552aef2779ffae0bdd45",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_531_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_531_Big.swatchbin",
+          "sha256": "488a8f2216a016fa12f629b6b3cf216b07a381aed3cabbb416ce86c25b91a7d4",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/media/stripped/RC0/Thumbnail_531_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/media/stripped/RC0/Thumbnail_531_Small.swatchbin",
+          "sha256": "a5cec2c1b83887b837f6e38ba2d26a5479dd95585f8debf9ccbb76bf8fa62d25",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/mod.json",
+          "sha256": "ba7dee237e565f4a914e994284ccbf5fb3708c2cbb8f14d1dd4b978b3f2b4d70",
+          "bytes": 329,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Vintage GTX Racing Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-vintage-gtx-racing-pack/strings.json",
+          "sha256": "e29e8e1248f95c9b2c075722560533fc58a2929a6ef7c181afcf1d5c6eba8cc6",
+          "bytes": 1154,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "zs-fm6-zs-fm6-vintage-gtx-racing-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

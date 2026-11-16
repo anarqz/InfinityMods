@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 3,
+  "id": "zs-fm6-zs-fm6-modern-formula-racing-pack",
+  "version": "0.1.0",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS FM6 Modern Formula Racing Pack",
+        "pt-BR": "ZS FM6 Modern Formula Racing Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM6 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "zs-fm6-zs-fm6-common",
+        "versions": [
+          "0.1.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/database.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/database.json",
+          "sha256": "de600c199f4ce02233b63741664fb2e60a905f0f599771ff24ac8b755da51b7f",
+          "bytes": 76804,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/media/audio/cars/CAP_T1_13.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/media/audio/cars/CAP_T1_13.xml",
+          "sha256": "e5c1f2c97c4651ca9673ecd62d8fab7e139ee96479937027bfe632fa6447f39e",
+          "bytes": 1863,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/media/audio/cars/LOT_8_E23_15.xml",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/media/audio/cars/LOT_8_E23_15.xml",
+          "sha256": "d02e02eafeab1b35908ef82c01f823a885d686d45d009fa6c789861adf219b3a",
+          "bytes": 1972,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/media/audio/fmodanthem/durango/PG_LOT_8_E23_15.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/media/audio/fmodanthem/durango/PG_LOT_8_E23_15.bank",
+          "sha256": "600a9dcfa9b77943666768a443606803055d19cc069f2e540a7eea59f0f34d93",
+          "bytes": 2574496,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/media/cars/CAP_T1_13.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/media/cars/CAP_T1_13.zip",
+          "sha256": "65dda3413bfc7b6fa638c2cb9db8de11542c00599a44f0d5fcd86df16c5550ea",
+          "bytes": 19610394,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/media/cars/LOT_8_E23_15.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/media/cars/LOT_8_E23_15.zip",
+          "sha256": "00dfc3dc2501052629ca37cd047dc8cea7250cf5a53836c6c93cb14bb17665f0",
+          "bytes": 16624193,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/media/cars/MAZ_FormulaMazda_13.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/media/cars/MAZ_FormulaMazda_13.zip",
+          "sha256": "48307bc562f1acfa020478e83f128f5d281663340881b1fceae2e386ef92df8d",
+          "bytes": 18846299,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/media/stripped/RC0/Thumbnail_2083_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/media/stripped/RC0/Thumbnail_2083_Big.swatchbin",
+          "sha256": "e3f727734b22f8ace6ccd71111da96b8ea1086c73f968bb9b2003f0721b5dd37",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/media/stripped/RC0/Thumbnail_2083_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/media/stripped/RC0/Thumbnail_2083_Small.swatchbin",
+          "sha256": "3ef69c080aee8bfa67ff24d595cdd69cf4ecc1cf2a92977f76935392fdc2dc9f",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/media/stripped/RC0/Thumbnail_2129_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/media/stripped/RC0/Thumbnail_2129_Big.swatchbin",
+          "sha256": "498207aada4095f1fcf737e0e35f246d2e8953dd2113811fe2fb7e8512f739f9",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/media/stripped/RC0/Thumbnail_2129_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/media/stripped/RC0/Thumbnail_2129_Small.swatchbin",
+          "sha256": "1d528bb46d3c115c03c5c037865fe734041bf8a6c0e77096b8f97dc8a9a65abd",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/media/stripped/RC0/Thumbnail_2465_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/media/stripped/RC0/Thumbnail_2465_Big.swatchbin",
+          "sha256": "6c8439c8307491ef8a62da6cb754bca3dfe652b14e1cbb5e2b59a9ec76deb679",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/media/stripped/RC0/Thumbnail_2465_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/media/stripped/RC0/Thumbnail_2465_Small.swatchbin",
+          "sha256": "c75625600d648c68df740b9c252608626c46e262be479a47e6869ae4a9ec5233",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/mod.json",
+          "sha256": "beda4502e3d98bd0f6f02706c0ef13f4043f6be4d64356a608740433f2ea0067",
+          "bytes": 334,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Modern Formula Racing Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-formula-racing-pack/strings.json",
+          "sha256": "b3927787199dce0b194147f79b4c4a4ae11f891ae395033119a294c5aca57c68",
+          "bytes": 377,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "zs-fm6-zs-fm6-modern-formula-racing-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

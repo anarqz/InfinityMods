@@ -1,0 +1,586 @@
+{
+  "schemaVersion": 3,
+  "id": "zs-fm6-zs-fm6-common",
+  "version": "0.1.0",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS FM6 Common",
+        "pt-BR": "ZS FM6 Common"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM6 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM6 Common/database.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/database.json",
+          "sha256": "4289b21f0ea1e1eafe773ed7d4c9173ff603920b913e0378af63a511c1dfd1c4",
+          "bytes": 64588,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/audio/fmodanthem/durango/PG_FM6_BMW_E46M3_05.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/audio/fmodanthem/durango/PG_FM6_BMW_E46M3_05.bank",
+          "sha256": "8b3d164c956710571728832d8f1a25c474bde645d942dd8ccd3fc40cc106440f",
+          "bytes": 3057632,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/audio/fmodanthem/durango/PG_FM6_CAP_T1_13.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/audio/fmodanthem/durango/PG_FM6_CAP_T1_13.bank",
+          "sha256": "50940300adcc11d35b41c4daa332970f9ffabe1eeb2c415729f46e9f9c1579ab",
+          "bytes": 2934400,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/audio/fmodanthem/durango/PG_FM6_CHE_Camaro35thAnniversary_02.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/audio/fmodanthem/durango/PG_FM6_CHE_Camaro35thAnniversary_02.bank",
+          "sha256": "3d21e5c8c40e13b3124b041537cbb6b2c98455c79b2c80fa2305c7a8f248f527",
+          "bytes": 3018304,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/audio/fmodanthem/durango/PG_FM6_LEX_IS350_14.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/audio/fmodanthem/durango/PG_FM6_LEX_IS350_14.bank",
+          "sha256": "84d6e808b300560b27d8fc99da056f8b18e67089a6b2edeb3b275e24b6673912",
+          "bytes": 2363200,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/audio/fmodanthem/durango/PG_FM6_SUB_H6Engine_12_EN.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/audio/fmodanthem/durango/PG_FM6_SUB_H6Engine_12_EN.bank",
+          "sha256": "8bfb59322b2db7a8cdef8ef113eb08bd9e108c3ce62521709b18082d32846284",
+          "bytes": 3128544,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/audio/fmodanthem/durango/PG_FOR_55_GTLM_16.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/audio/fmodanthem/durango/PG_FOR_55_GTLM_16.bank",
+          "sha256": "cf386871607a99b7f118e655da82b9afeee078dccfabb336d3545c2ddbe6981c",
+          "bytes": 2781248,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/audio/fmodanthem/durango/PG_MER_4_E63AMG_15.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/audio/fmodanthem/durango/PG_MER_4_E63AMG_15.bank",
+          "sha256": "2b73c441efaa2bd39c972afff2c2f239f6391ea20488900bdc5cbd9e77b8d78b",
+          "bytes": 2905600,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/audio/fmodanthem/durango/PG_MER_AMGGT_15.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/audio/fmodanthem/durango/PG_MER_AMGGT_15.bank",
+          "sha256": "03e6e7a53c14892cbdff0ab6fd876d08dd1c0de33a9018a6fbfdc3348b68cdd3",
+          "bytes": 2545408,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/audio/fmodanthem/durango/PG_NIS_23_GTRLM_15.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/audio/fmodanthem/durango/PG_NIS_23_GTRLM_15.bank",
+          "sha256": "c07ceb5f212cdc1ce431f44222ddf7d2a6cef8ea1ab30d9f9640a232a7549bdf",
+          "bytes": 2866944,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_AUT.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_AUT.swatchbin",
+          "sha256": "b59acee2a4d2fe84d3d15201d0371138d8edd40b9e82a3855aefa75ff24d9778",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_BAC.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_BAC.swatchbin",
+          "sha256": "202a56e8f3a1ad1bf3a2e06b86d11c27f189bff507cf34b5233673bb61342094",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_BRA.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_BRA.swatchbin",
+          "sha256": "07a4846216744072c7faba777700acf7874f8a6c8425afa29f0759cb645af291",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_CAP.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_CAP.swatchbin",
+          "sha256": "b75e507f5b0390d489ff37abab3f3eb31a35ac1c506e5afe5cc87c0a8ef9bf63",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_CHA.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_CHA.swatchbin",
+          "sha256": "2e47ec43b9e47e3b7415a1e3eaaaa44d09a32375ff311e61775caeca154aa104",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_CHR.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_CHR.swatchbin",
+          "sha256": "a3f640be6bbf2ddc5a38212b94768430978b525ea3b3c8408324a8bd822336a0",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_DAT.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_DAT.swatchbin",
+          "sha256": "daed0f1f34e5b5011b9c30edf97bcd902ce3d3a4d2066974a7021e8df62d5e4b",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_EAG.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_EAG.swatchbin",
+          "sha256": "642cd57ce55606df02d3ad9b48e455b89de7b51227baff28b2d95d351e069eba",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_EW.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_EW.swatchbin",
+          "sha256": "f41ebb99fd53ca4ad7ea3bc0e13e0f95e45ae2062d67da49ff6d8809838ad180",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_FAL.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_FAL.swatchbin",
+          "sha256": "6fb0a428b9934a41757e3b772136ae1a92b9c777e86f229ce3b22bfe33c16be8",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_FE.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_FE.swatchbin",
+          "sha256": "a8ec8ba35643b232f4ac48b3836e678379fefd4769b7b9112e25f3e8fbac6fef",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_GMC.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_GMC.swatchbin",
+          "sha256": "9db5a2d0b287c2556c328cfafc3995739c19e57ebf249eaaeb3a60da81921be8",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_HOL.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_HOL.swatchbin",
+          "sha256": "5e12164757525e1f06644b14c8eb786c659c943b7bdeb89cebf59010c549c67d",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_HOT.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_HOT.swatchbin",
+          "sha256": "492122cec1e022a7aaf21b66fbefe4d5bb7c123d51eb99a95193efa11e156536",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_HSV.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_HSV.swatchbin",
+          "sha256": "31b296b8333dd56664050ee1486aaf14bdc333ad588567b9f7dba093d45a5d45",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_INF.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_INF.swatchbin",
+          "sha256": "d315fb0d639c96348ff9bb46e6e136ba82323a52c1638f57253adc3fa6db2648",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_LOL.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_LOL.swatchbin",
+          "sha256": "6d37330554388311ec4e3f197cf5d194c9da1d5993e5c7b8baa019969059b9a4",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_MA.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_MA.swatchbin",
+          "sha256": "2731610c9633e169572def35defa058e0af870d6e5179a9f77a3ddb2ebaaf84d",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_OPE.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_OPE.swatchbin",
+          "sha256": "96a36278f202defda9dc904436a9ef067a8bca860331f69d8cf79d115652fcbc",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_PEU.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_PEU.swatchbin",
+          "sha256": "9afa2af48007d5e189abf7042f4bce6aaf524abfb0cdf568187bf30ba7c03115",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_RAD.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_RAD.swatchbin",
+          "sha256": "b40bb4c9ec3ab153081a7a4eb342540aa1f3c7fc3eb8fe1695ce07abc28f6667",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_ROL.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_ROL.swatchbin",
+          "sha256": "96991835c1118a7f19d10072b9d234095e8f739029b7a342e8fc625e6de8e3a2",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_SAL.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_SAL.swatchbin",
+          "sha256": "37b073d71903c3de8d277a81d4299e6bcac312fbe6bd47075cc08b29ec39342d",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_SCI.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_SCI.swatchbin",
+          "sha256": "e19cb22161dff0afb285a04bb90c6cbc403dda520674f17257f3f1f93449b738",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_SUN.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_SUN.swatchbin",
+          "sha256": "7885f525e885082276f5e43eda85563976e63c6661456b79a4f95005b3a6545a",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_WAT.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_WAT.swatchbin",
+          "sha256": "c3d90a8718247089dff3bedebeea696652818d39a90bfcd199f041d9a4f7bc09",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/L_Manu_Logo_WM.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/L_Manu_Logo_WM.swatchbin",
+          "sha256": "a61f55e9a8e3f36fc8d45973cea0baae50d1c4c09d1a868ae0d385c0bdb48a2d",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_AUT.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_AUT.swatchbin",
+          "sha256": "8789d15b5f61637c96f9fe3826daa9660ef5b943f37060fcd09a8f5fa23494cf",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_BAC.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_BAC.swatchbin",
+          "sha256": "24f94b4c6542dba92a58a36bcd5d84d5c45705e9e255e816ef792bf4691650db",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_BRA.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_BRA.swatchbin",
+          "sha256": "3271a3046c7a39b070c440928e916d9b52b2fb2109b5df6b72532ecc5b70eb26",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_CAP.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_CAP.swatchbin",
+          "sha256": "b48015571ce37f9a6557c96e239fa9c54275608e3a98d831df43dc40b9cd8ba4",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_CHA.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_CHA.swatchbin",
+          "sha256": "90eb4dfea2dd26c9e11db6b5a705896e79c2988f530129a38f462d95a1a97c2f",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_CHR.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_CHR.swatchbin",
+          "sha256": "1e150ca36721299c63cfbd39c5fdd389cd478bae1492eddd8a2bfb25d5c69cfa",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_DAT.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_DAT.swatchbin",
+          "sha256": "e8814fcf4a7a15c253158b8f426e4e410af220c299efc940a46177f33ea7b8b9",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_EAG.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_EAG.swatchbin",
+          "sha256": "a82dffcff9b27b96055c7c760ddf7d03c62cfffa2e800fc5b64b2699a58828c0",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_EW.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_EW.swatchbin",
+          "sha256": "203a1ffb394e42a0e4a768b17e132e0f8097f4fe4f7c591b65cd7bd09b558fab",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_FAL.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_FAL.swatchbin",
+          "sha256": "c493948c3d38e985e8b62af7ff529be49fdf736e43f124fbb12de65b7b2d34ee",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_FE.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_FE.swatchbin",
+          "sha256": "92d29b842a6a7c02c54e6997a24146682fe1c864af8eea1a00dc15ef9c917659",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_GMC.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_GMC.swatchbin",
+          "sha256": "966bc7e55eed509a7ce137b8bbc7b7ad8102a46285232b82895d8b4c2d6188ac",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_HOL.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_HOL.swatchbin",
+          "sha256": "f1b1074b4a4e830805e6cb403f0c424337494290ad428fe977e9355ff7797c37",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_HOT.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_HOT.swatchbin",
+          "sha256": "4c542d52f407a5d37979190cfb96720868fdcb3e6b927391bc05262b2b138028",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_HSV.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_HSV.swatchbin",
+          "sha256": "7c1c540dd99677d59ff96734240c908fe91f320ad665e41c3dc58fb102cf2fd9",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_INF.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_INF.swatchbin",
+          "sha256": "a7cafe826c3b9ecc2967d2ff00d2c9d765cae78113395d25b6d4ae482f3e67bc",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_LOL.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_LOL.swatchbin",
+          "sha256": "28466c81f0d24a0ec1a46e2f0593fec9335aae072c298e4bdc48b2a41c0d1999",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_MA.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_MA.swatchbin",
+          "sha256": "58209dc0c13fb4229cd079c58580d912f1d1a1f87faf11b6d967096435647924",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_OPE.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_OPE.swatchbin",
+          "sha256": "0386fe94650054040cc170e7b895f6ded54c48283e506ea5ea601f38c8b61e42",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_PEU.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_PEU.swatchbin",
+          "sha256": "a0c008294b49d79a6bf7bd20cdecefb80f61992c8b172fabefead6e45bd0021a",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_RAD.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_RAD.swatchbin",
+          "sha256": "b5e54c8be51247c8159f0d7ffe4af2f1a09370db6a881d8313c1946ceec64c9d",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_ROL.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_ROL.swatchbin",
+          "sha256": "0982aa35ea21ef349b97f61db8a4b53196ecd76e01b761822d234cc679816954",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_SAL.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_SAL.swatchbin",
+          "sha256": "4e130c26f2d115c9e6fcee79040a042d38a8b6415e5f5880821780f50c181069",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_SCI.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_SCI.swatchbin",
+          "sha256": "0c9a2f78dbdfc8243c359f23f799b8a31f820785af0dea7de2fbc835acb207af",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_SUN.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_SUN.swatchbin",
+          "sha256": "d7dddec52a8eb89c139d155ebab45072b74e806703afa4743dcf4e4f9c8c10ed",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_WAT.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_WAT.swatchbin",
+          "sha256": "f9221057ba01bc4145a5846de56e18388b4adf9e95fe3eb2aaaad1a6313893dd",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/media/stripped/RC0/Manu_Logo_WM.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/media/stripped/RC0/Manu_Logo_WM.swatchbin",
+          "sha256": "377dd896aad43089df57c6b5250130727667b83eb2a67b0c93b99fb084315269",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/mod.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/mod.json",
+          "sha256": "a4c4eacc2c264ab41ab59f9723f4afaa55b6c3d89ccf08c407eb513c8632dff9",
+          "bytes": 270,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Common/strings.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-common/strings.json",
+          "sha256": "45f444f423db2f26c66bec94bbaf0db858a554ac6e53b19bd6256ae8fcbff002",
+          "bytes": 3217,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "zs-fm6-zs-fm6-common",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false,
+    "loadOrder": "first"
+  }
+}

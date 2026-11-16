@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 3,
+  "id": "fm5-zs-hills-and-trails-pack",
+  "version": "1.0.5",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS Hills and Trails Pack",
+        "pt-BR": "ZS Hills and Trails Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM5 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "fm5-zs-fm5-common",
+        "versions": [
+          "1.0.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/database.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/database.json",
+          "sha256": "f22a26de21042f70456b907b5b8d2f32327f1db11a66f469c02b8e9ceb5c0c30",
+          "bytes": 370197,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/audio/fmodanthem/durango/PG_CHE_2_MonteCarloSS_11_EN.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/audio/fmodanthem/durango/PG_CHE_2_MonteCarloSS_11_EN.bank",
+          "sha256": "da3cb2af7b79abdfcffa25634c509b6256803d110d485c6c7f3e0977ef6feb6c",
+          "bytes": 2286432,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
+          "sha256": "500e70b54c45960abe221757c9e8b4cc7a398bc4afb15b8eba006b3c44e197eb",
+          "bytes": 2583296,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/audio/fmodanthem/durango/PG_CHR_JeepGCSRT8_09.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/audio/fmodanthem/durango/PG_CHR_JeepGCSRT8_09.bank",
+          "sha256": "4b4ec85e027088c1ef5d9befb23bdfa32e9f1d97a724897e61fd96a339bfb25d",
+          "bytes": 2280352,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/audio/fmodanthem/durango/PG_GMC_Syclone_92.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/audio/fmodanthem/durango/PG_GMC_Syclone_92.bank",
+          "sha256": "a5ec7999391de3d65682a7bff4dc21b7836418de290b6f00d48135b8ae243332",
+          "bytes": 2478144,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/audio/fmodanthem/durango/PG_GMC_Vandura_83.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/audio/fmodanthem/durango/PG_GMC_Vandura_83.bank",
+          "sha256": "a541a78cf817d04ad2109dac966d8f5ae589eb5661a97bef15e9cd985e4b9fb4",
+          "bytes": 2376640,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/audio/fmodanthem/durango/PG_LR_RangeRover_12.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/audio/fmodanthem/durango/PG_LR_RangeRover_12.bank",
+          "sha256": "ab68a11f437bd78af311de54f86beaabde93aec28f972f8893e1d03a0d5582d1",
+          "bytes": 2554496,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/cars/CHR_JeepGCSRT8_09.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/cars/CHR_JeepGCSRT8_09.zip",
+          "sha256": "0ddaecaac6ffc6200736a48d497eb3a6e606425dd495de4d98b105618ec4ccce",
+          "bytes": 36731250,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/cars/GMC_Syclone_92.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/cars/GMC_Syclone_92.zip",
+          "sha256": "5efc7bbca8605b0604af036f03a68eb528e7e6bc09a9a7254c07e5ecded4ea79",
+          "bytes": 15161408,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/cars/GMC_Vandura_83.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/cars/GMC_Vandura_83.zip",
+          "sha256": "bfc30942161832c9dac9d638a4e9f7417a6bbf0e63fdc08031c98232bdfc2c6e",
+          "bytes": 16697529,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/cars/LR_RangeRover_12.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/cars/LR_RangeRover_12.zip",
+          "sha256": "c18fdee9401faeaff7f65c8c6964941601f191c5597c6613343ada0c729d3d33",
+          "bytes": 13071160,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/stripped/RC0/L_Manu_Logo_GMC.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/stripped/RC0/L_Manu_Logo_GMC.swatchbin",
+          "sha256": "d521d112089d78b701a409dc3e1d29b8555e29f1eba844908ac288f94d672766",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/stripped/RC0/Manu_Logo_GMC.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/stripped/RC0/Manu_Logo_GMC.swatchbin",
+          "sha256": "12491f1d7e668ff27855f4efdb6c057f2ceb6a2bb8b2b8940108529fdb3d54d3",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/stripped/RC0/Thumbnail_1256_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/stripped/RC0/Thumbnail_1256_Big.swatchbin",
+          "sha256": "3337f143b36d79bb778ea895ff0f8c53fe30976546a999b1768e43ec6044c999",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/stripped/RC0/Thumbnail_1256_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/stripped/RC0/Thumbnail_1256_Small.swatchbin",
+          "sha256": "cc09efae85a5a59f6e62db89b0b2da03dd1f17f0844c44af48f328baf1205ae5",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/stripped/RC0/Thumbnail_1294_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/stripped/RC0/Thumbnail_1294_Big.swatchbin",
+          "sha256": "68dfffc1293f84b5ad8e8bdd55c442368027e01f332303013727d00fc2b4ae0b",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/stripped/RC0/Thumbnail_1294_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/stripped/RC0/Thumbnail_1294_Small.swatchbin",
+          "sha256": "d78975c8a2b33a723a4a62b86897b25654bf1254a0bb3e689edeffd0fca01e09",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/stripped/RC0/Thumbnail_1531_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/stripped/RC0/Thumbnail_1531_Big.swatchbin",
+          "sha256": "1388e3d18fe26519b5ac758c472ae268d4440e44dcd71fee11f0ef756ebae44f",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/stripped/RC0/Thumbnail_1531_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/stripped/RC0/Thumbnail_1531_Small.swatchbin",
+          "sha256": "d81c223af3359d7f44463ffa1257b8f2b230595b1a36d6b376386c928507635c",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/stripped/RC0/Thumbnail_1664_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/stripped/RC0/Thumbnail_1664_Big.swatchbin",
+          "sha256": "92ae8c431c08d834d087808c1683a1b5ac68bb71725a02b63baf7771b5a2c6fb",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/media/stripped/RC0/Thumbnail_1664_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/media/stripped/RC0/Thumbnail_1664_Small.swatchbin",
+          "sha256": "93b35332aa150529c43d36ee808d3678d5f9be98311fd26a69a22e72af4e8efe",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/mod.json",
+          "sha256": "a15db55cb47692f039f1f43383b938b02e5e58d91c59940dfbbb0971cd020d8c",
+          "bytes": 449,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Hills and Trails Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-hills-and-trails-pack/strings.json",
+          "sha256": "fb0aba3950ca69ad76b9f03f9184477a0626ac1f6d1842a789f2e855974c9eb5",
+          "bytes": 1747,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "fm5-zs-hills-and-trails-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

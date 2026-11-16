@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 3,
+  "id": "fm5-zs-fm5-common",
+  "version": "1.0.0",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS FM5 Common",
+        "pt-BR": "ZS FM5 Common"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM5 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM5 Common/database.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-fm5-common/database.json",
+          "sha256": "08b5c99b9f327dadb3ec7ff4990ddf25c1f68537e75999b06f5917363056735c",
+          "bytes": 53548,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Common/media/stripped/RC0/L_Manu_Logo_HOL.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-fm5-common/media/stripped/RC0/L_Manu_Logo_HOL.swatchbin",
+          "sha256": "c08dddf5949be06e27c3984ee5182db8a3ad736e8d109920096f5c0827001266",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Common/media/stripped/RC0/L_Manu_Logo_INF.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-fm5-common/media/stripped/RC0/L_Manu_Logo_INF.swatchbin",
+          "sha256": "c8afe2da0a26c3bf64a17f32751803b70555b8d8704270fa9b81aa068d8c0f78",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Common/media/stripped/RC0/L_Manu_Logo_PEU.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-fm5-common/media/stripped/RC0/L_Manu_Logo_PEU.swatchbin",
+          "sha256": "45e515a7f3d8bed7aa8650e65c8c037e9ea010006764198321d6e30b12cec91c",
+          "bytes": 196692,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Common/media/stripped/RC0/Manu_Logo_HOL.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-fm5-common/media/stripped/RC0/Manu_Logo_HOL.swatchbin",
+          "sha256": "5332bc0ad4b351b748f648190c8b27e2e2ea3b16c21fe494f7c5e6ec388745fc",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Common/media/stripped/RC0/Manu_Logo_INF.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-fm5-common/media/stripped/RC0/Manu_Logo_INF.swatchbin",
+          "sha256": "6e5961ffe7302b48a8c365fa0df5f4c08f053804eeca55a8e08fda62827266a9",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Common/media/stripped/RC0/Manu_Logo_PEU.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-fm5-common/media/stripped/RC0/Manu_Logo_PEU.swatchbin",
+          "sha256": "edb98242c376cad482eaf40e5f3836346651ff9fb278fbc40cc65ee4c53511a6",
+          "bytes": 65620,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Common/mod.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-fm5-common/mod.json",
+          "sha256": "a22fba0d3cf5385b754d0b8eb38166dd736151ba57d8a87edf829521a0e6f087",
+          "bytes": 324,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Common/strings.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-fm5-common/strings.json",
+          "sha256": "0fc4809c382e456833d59594734136bca5cace3e5766821d33b43132a44a2833",
+          "bytes": 3121,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "fm5-zs-fm5-common",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false,
+    "loadOrder": "first"
+  }
+}

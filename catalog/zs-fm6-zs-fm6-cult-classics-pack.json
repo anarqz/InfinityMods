@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 3,
+  "id": "zs-fm6-zs-fm6-cult-classics-pack",
+  "version": "0.1.0",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS FM6 Cult Classics Pack",
+        "pt-BR": "ZS FM6 Cult Classics Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM6 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "zs-fm6-zs-fm6-common",
+        "versions": [
+          "0.1.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/database.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/database.json",
+          "sha256": "9c2a7e62f34720dc4199f441102b24c24e7fb90a48512bb383fd73134453e777",
+          "bytes": 250889,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/audio/fmodanthem/durango/PG_FOR_FalconXY_71.bank",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/audio/fmodanthem/durango/PG_FOR_FalconXY_71.bank",
+          "sha256": "23396b73ac92edcf31f2455ddfca6cd6184655659a7d45fadda37c89f89ebff3",
+          "bytes": 2424576,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/cars/FAL_Atom_77.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/cars/FAL_Atom_77.zip",
+          "sha256": "a6f72a92e41528b301e9b3745fa395726d59aafced0ba9be6d33d795d0b6659e",
+          "bytes": 26741487,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/cars/FOR_FalconXY_71.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/cars/FOR_FalconXY_71.zip",
+          "sha256": "e6d44acf0f9d03433bbfa536bd0a008bb7d464212f4514ccf88e528233fbe100",
+          "bytes": 23047775,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/cars/HOL_MonaroGTS_73.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/cars/HOL_MonaroGTS_73.zip",
+          "sha256": "2d13b6bf1032f014e80a45ae88497c864c903b148443e71db5b3aa35a8177096",
+          "bytes": 20307037,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/cars/PLY_Fury_58.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/cars/PLY_Fury_58.zip",
+          "sha256": "01549dcf5d4407c417bc7342be3e64e4f75be3a34a8fd9135d6b65c378a20b23",
+          "bytes": 19885826,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/cars/PLY_Prowler_00.zip",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/cars/PLY_Prowler_00.zip",
+          "sha256": "5463a0aa08b21d40f7bbae901e53b4ea51502968ebe89805fc95c461281edc4d",
+          "bytes": 21458078,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/stripped/RC0/Thumbnail_1616_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/stripped/RC0/Thumbnail_1616_Big.swatchbin",
+          "sha256": "54eb773a86fcacd49113c2e3f84d3034735fd2455f22cf9fd9d1883104a5b30c",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/stripped/RC0/Thumbnail_1616_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/stripped/RC0/Thumbnail_1616_Small.swatchbin",
+          "sha256": "1d0f6248fc83881dcf06a1708445587d2f7419669cad107b5e19cdb424f727ab",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/stripped/RC0/Thumbnail_2137_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/stripped/RC0/Thumbnail_2137_Big.swatchbin",
+          "sha256": "8677ea91b4ddd13cd38e881a303989076ab29d8b9e788b77755a31f42bd2a4ed",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/stripped/RC0/Thumbnail_2137_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/stripped/RC0/Thumbnail_2137_Small.swatchbin",
+          "sha256": "e26748e455bb672a16ffe7a42c9d22e44c2258f9642b598fc61c56d75df1581f",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/stripped/RC0/Thumbnail_2216_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/stripped/RC0/Thumbnail_2216_Big.swatchbin",
+          "sha256": "250c47a3fa738a0c2c20e00a7ef8529d1de25ce4cc59808b60d9bfe65298e990",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/stripped/RC0/Thumbnail_2216_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/stripped/RC0/Thumbnail_2216_Small.swatchbin",
+          "sha256": "0bb066ab937a5fa30430d7cdcc09c80817d740a6645c55b732fe6169d2f77821",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/stripped/RC0/Thumbnail_2417_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/stripped/RC0/Thumbnail_2417_Big.swatchbin",
+          "sha256": "dcec7ec44e9a16071caf1e824ae02e4ab17288a37c465e6c98c1f1a90bd7f483",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/stripped/RC0/Thumbnail_2417_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/stripped/RC0/Thumbnail_2417_Small.swatchbin",
+          "sha256": "b415a68d09773623a8614bdfdbad4e0ba6864d91f8275d66bd14e437f8f5993e",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/stripped/RC0/Thumbnail_2553_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/stripped/RC0/Thumbnail_2553_Big.swatchbin",
+          "sha256": "f9cb256cdc313861787c0535298ddfd44cc3c90f4c512d314b8183e5e77aed28",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/media/stripped/RC0/Thumbnail_2553_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/media/stripped/RC0/Thumbnail_2553_Small.swatchbin",
+          "sha256": "2155d71d7acb8f1f30dc1d1fdc1825c972a21d6e3579e435ae91d89e9725dba4",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/mod.json",
+          "sha256": "4d90da47d18954da7b98fa3934540eccc0dc8908037bd59fe9b2d3d220fc5582",
+          "bytes": 318,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM6 Cult Classics Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-cult-classics-pack/strings.json",
+          "sha256": "9cccae4e173c063bcf58f3ceb7fe5670d1fff188466d0d9d4cc6d27d93d71fba",
+          "bytes": 547,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "zs-fm6-zs-fm6-cult-classics-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}

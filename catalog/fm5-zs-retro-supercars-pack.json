@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 3,
+  "id": "fm5-zs-retro-supercars-pack",
+  "version": "1.0.5",
+  "externalSources": [
+    {
+      "id": "pack",
+      "kind": "either",
+      "label": {
+        "en": "ZS Retro Supercars Pack",
+        "pt-BR": "ZS Retro Supercars Pack"
+      },
+      "help": {
+        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM5 Addon Packs"
+    }
+  ],
+  "install": {
+    "schemaVersion": 1,
+    "kind": "mod",
+    "license": "Unknown. Player-supplied files; Infinity never distributes them.",
+    "runtime": "standalone",
+    "review": {
+      "status": "reviewed",
+      "blockers": []
+    },
+    "compatibility": {
+      "azimuthVersions": [
+        "1.0.4"
+      ],
+      "gameBuilds": [],
+      "verification": "unverified"
+    },
+    "dependencies": [
+      {
+        "id": "fm5-zs-fm5-common",
+        "versions": [
+          "1.0.0"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "files": {
+      "game": [],
+      "azimuth": [
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/database.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/database.json",
+          "sha256": "bacb21deb86751811e05912b51792ddb1102477f35843496c549d4e6aae3b9f3",
+          "bytes": 203899,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/media/audio/fmodanthem/durango/PG_FER_512TR_91.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/media/audio/fmodanthem/durango/PG_FER_512TR_91.bank",
+          "sha256": "3164cc7142ebc02ed82db0ca82b6fc504c8b5bccc12177e499c0a05b39c9cf12",
+          "bytes": 2509120,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/media/audio/fmodanthem/durango/PG_MER_CLKGTR_98.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/media/audio/fmodanthem/durango/PG_MER_CLKGTR_98.bank",
+          "sha256": "aa9c80090c6cf5fe4ccd80d8f3ecb9395e8c3a32e0a9ddd1f5de4e63a49c3b42",
+          "bytes": 2132960,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/media/audio/fmodanthem/durango/PG_NIS_R390_98.bank",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/media/audio/fmodanthem/durango/PG_NIS_R390_98.bank",
+          "sha256": "6dad32215cae36eb7c97ac4994e8c5a154424dbb9ab06a02963dffa9e601c565",
+          "bytes": 2167104,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/media/cars/FER_512TR_91.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/media/cars/FER_512TR_91.zip",
+          "sha256": "c27e701c06d0ae65522764ed8270143f6facee1ba10955c585fb9e876ff135b3",
+          "bytes": 15699983,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/media/cars/MER_CLKGTR_98.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/media/cars/MER_CLKGTR_98.zip",
+          "sha256": "d7f78d584d82d59280668911ace32a4cbfc5545106e6d0a681e99b338a2a28a5",
+          "bytes": 18667331,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/media/cars/NIS_R390_98.zip",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/media/cars/NIS_R390_98.zip",
+          "sha256": "9f126f5f8a1b1fec70b25b191eb233ba54d5afc4052fbe940a0b1790905db7a5",
+          "bytes": 16025071,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/media/stripped/RC0/Thumbnail_255_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/media/stripped/RC0/Thumbnail_255_Big.swatchbin",
+          "sha256": "26bd3d085598853a4c8879263d5b3301a66dfe6c819f6ec044fd8d53ba6c8824",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/media/stripped/RC0/Thumbnail_255_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/media/stripped/RC0/Thumbnail_255_Small.swatchbin",
+          "sha256": "f6bc1f776008f9d5867ac084849c8fdaf988205846ae4da3fa6186bebf64e8ad",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/media/stripped/RC0/Thumbnail_567_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/media/stripped/RC0/Thumbnail_567_Big.swatchbin",
+          "sha256": "520586e1cbef8e0482a69c6de9e7beafc0cb1f365cd03ce1ff41f16df1d0790b",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/media/stripped/RC0/Thumbnail_567_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/media/stripped/RC0/Thumbnail_567_Small.swatchbin",
+          "sha256": "ab96e8d5faefa57dc389e92065a0891d5da3c9871bc775d4a0f237845d52379b",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/media/stripped/RC0/Thumbnail_568_Big.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/media/stripped/RC0/Thumbnail_568_Big.swatchbin",
+          "sha256": "53b0fe62e5312f05a0ec9730f74e0cf100ed529d4c269a553ca1e6ace7235ddf",
+          "bytes": 524372,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/media/stripped/RC0/Thumbnail_568_Small.swatchbin",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/media/stripped/RC0/Thumbnail_568_Small.swatchbin",
+          "sha256": "3005343ac57a458a0bc8e865009556d580535805632f407a4e37cf3a00b7474c",
+          "bytes": 32852,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/mod.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/mod.json",
+          "sha256": "e2391763da76f380ed0c7df030ab3be86f9e305bb5afbccdbfacdceb4d0ee169",
+          "bytes": 409,
+          "role": "asset",
+          "mode": "add-or-replace"
+        },
+        {
+          "source": "pack:ZS FM5 Retro Supercars Pack/strings.json",
+          "destination": "mods/Forza Horizon 2/fm5-zs-retro-supercars-pack/strings.json",
+          "sha256": "73cbb4b3be9b29f4c942fb29e06eb7fc666e10c819312389b590fb5521850c16",
+          "bytes": 318,
+          "role": "asset",
+          "mode": "add-or-replace"
+        }
+      ]
+    },
+    "config": null,
+    "runtimeOutputs": [],
+    "excludedArchiveEntries": [],
+    "databaseMigrations": [],
+    "multiplayer": {
+      "schemaVersion": 1,
+      "impact": "gameplay",
+      "compatibilityId": "fm5-zs-retro-supercars-pack",
+      "revision": 1,
+      "match": "exact",
+      "settings": []
+    },
+    "countsAsModded": false
+  }
+}
