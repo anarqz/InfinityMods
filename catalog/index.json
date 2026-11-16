@@ -707,35 +707,35 @@
     },
     {
       "id": "extraoptions-garagerevving",
-      "version": "1.0.3-infinity.1",
+      "version": "1.0.0",
       "name": {
         "en": "Garage Revving",
         "pt-BR": "Ronco na Garagem"
       },
       "description": {
-        "en": "Hold RT in the garage to hear the car's engine rev. From Extra Options by Arthur (RokkuDayo), built from its source. Garage only: nothing other players see, hear or race against, so it plays in every mode.",
-        "pt-BR": "Segure RT na garagem para ouvir o motor do carro roncar. Do Extra Options, de Arthur (RokkuDayo), compilado a partir do código-fonte. Só na garagem: nada que outros jogadores vejam, ouçam ou enfrentem numa corrida, então funciona em todos os modos."
+        "en": "Hold RT in the garage to hear the car's engine rev. From Extra Options by Arthur (RokkuDayo): the author's own files from Extra Options 0.6.1. Garage only: nothing other players see, hear or race against, so it plays in every mode.",
+        "pt-BR": "Segure RT na garagem para ouvir o motor do carro roncar. Do Extra Options, de Arthur (RokkuDayo): os arquivos do próprio autor, do Extra Options 0.6.1. Só na garagem: nada que outros jogadores vejam, ouçam ou enfrentem numa corrida, então funciona em todos os modos."
       },
-      "author": "Arthur (RokkuDayo); Infinity build by anarqz",
+      "author": "Arthur (RokkuDayo)",
       "path": "extraoptions-garagerevving.json",
-      "sha256": "efaba2bacd2fa6e2bcbf67c104e51f88e09197ef5c6bf36c080e2256590c21bd",
-      "bytes": 3835
+      "sha256": "1bbc96cfbab75f05e2ce1dcbcf4f58c2ab2af9b2ba93c3642fa45474f46de0a9",
+      "bytes": 3426
     },
     {
       "id": "extraoptions-weathercontrol",
-      "version": "1.0.4-infinity.1",
+      "version": "1.1.0",
       "name": {
         "en": "Weather Control",
         "pt-BR": "Controle do Clima"
       },
       "description": {
-        "en": "Time and weather in the free-roam pause menu: press Y to lock the hour and pick sunny, wet, rain or storm. From Extra Options, built from its source. It changes the world you race in, so it plays in Noob only.",
-        "pt-BR": "Hora e clima no menu de pausa do free roam: aperte Y para travar a hora e escolher sol, pista molhada, chuva ou tempestade. Do Extra Options, compilado a partir do código-fonte. Muda o mundo em que você corre, então funciona só no Noob."
+        "en": "Time and weather in the free-roam pause menu: press Y to lock the hour and pick sunny, wet, rain or storm. From Extra Options: the author's own files from Extra Options 0.6.1. It changes the world you race in, so it plays in Noob only.",
+        "pt-BR": "Hora e clima no menu de pausa do free roam: aperte Y para travar a hora e escolher sol, pista molhada, chuva ou tempestade. Do Extra Options: os arquivos do próprio autor, do Extra Options 0.6.1. Muda o mundo em que você corre, então funciona só no Noob."
       },
-      "author": "BlackPanthaa (from Pantsedit's Set Time & Weather FH2), Extra Options integration by Arthur (RokkuDayo); Infinity build by anarqz",
+      "author": "BlackPanthaa (from Pantsedit's Set Time & Weather FH2), Extra Options integration by Arthur (RokkuDayo)",
       "path": "extraoptions-weathercontrol.json",
-      "sha256": "c71b006937de40f9037172f0ecc6158db9662b6231f281d716b457eacc7d653a",
-      "bytes": 9942
+      "sha256": "414e4f41663c83f9d4424229f981e535909dd9b6499c9bf0218f362f461c4c42",
+      "bytes": 10555
     },
     {
       "id": "spotifyradio",

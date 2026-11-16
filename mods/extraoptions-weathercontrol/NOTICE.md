@@ -1,13 +1,13 @@
 # Extra Options - Weather Control: attribution and scope
 
 Weather Control: BlackPanthaa, adapted from Set Time & Weather FH2 by Pantsedit (GPL-3.0), with Extra Options
-integration by Arthur (RokkuDayo), https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions, GPL-3.0
-(LICENSE.txt; CREDITS.md is upstream's). Built unchanged from upstream's source (`fh2/plugins/weather-control`),
-at the exact commit of the `upstream/extraoptions` submodule of https://github.com/anarqz/InfinityMods at the
-commit this package was built from, with Zig's Clang, the flags of upstream's own `build.py` and its native
-pages generated from its `translations.json` and `weather_page.template.xaml` the same way; only the version
-resource is Infinity's.
+integration by Arthur (RokkuDayo), https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions, GPL-3.0.
 
-ExtraOptions' mod loader (built into Infinity as ExtraOptions.Infinity) loads `plugins\EO_WeatherControl.dll`
-from this folder (`<Azimuth>\mods\Forza Horizon 2\extraoptions-weathercontrol\`). It changes the time and the
-weather of the world you drive in, so Infinity offers it to Noob profiles only.
+Nothing is built or packaged here (owner, 2026-11-16): Infinity downloads the author's own Extra Options 0.6.1
+release ZIP (`Forza_XB1_Extra_Options_0.6.1-Azimuth.zip`, release `Azimuth_v1.0.4`), checks it by SHA-256 and
+installs only the author's `Extra Options - Weather Control` files from it (`mod.json`, `plugins\EO_WeatherControl.dll`,
+its `.ini` and its native pages), each checked by SHA-256, into
+`<Azimuth>\mods\Forza Horizon 2\extraoptions-weathercontrol\`. Version 1.1.0 has the author's fixes the last
+published source (1.0.4) lacks, such as time staying locked. Nothing else in that ZIP is installed.
+
+It changes the time and the weather of the world you drive in, so Infinity offers it to Noob profiles only.

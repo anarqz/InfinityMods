@@ -8,6 +8,7 @@
   check   [--catalog FILE]                  validate the catalog (schemas/ + rules below); FILE may be a v2 custom catalog
   external-packs <set folder>... --cars fh2-packs.json --out DIR   ZephyrSkies pack entries (OD-232), read from the ZIPs
   sync    <mod> [--tag TAG] [--zip ZIP --url URL] [--write]   re-pin an FH2 Mod Platform mod to an upstream release
+  pin-author <mod> [--zip ZIP] [--write]    re-pin an authorPackage mod to its author's release ZIP
 
 An FH2 Mod Platform mod (adapter fh2-mod-platform-eo) is the author's own release DLL, never built here: the manifest
 takes it (adapterConfig.modDll) from the author's release ZIP (additionalPackages.upstream-assets, pinned by SHA-256),
@@ -16,6 +17,11 @@ upstreamRelease names (.claude/skills/upstream-sync/SKILL.md). The exception is 
 owner exception to the no-game-material rule for its camera_presets.h): the mod's DLL is built here from the pinned
 submodule commit with the recipe's patches applied (`git apply`, never in the submodule itself), and shipped in the
 package at adapterConfig.modDll.
+
+A recipe with `authorPackage` (Garage Revving and Weather Control, owner 2026-11-16) is the author's own release
+files, neither built nor packaged here: its catalog download IS the author's release ZIP (authorPackage.repository,
+.tag, .asset), pinned by SHA-256, and every installed file, the author's mod.json included, is an entry of that ZIP,
+pinned too. `pin-author` re-pins it after the author replaces the asset; `release` takes its manifest as it is.
 
 A recipe's `toolchain` is `zig` (Zig 0.15.2, any host; --zig) or `msvc` (Windows with Visual Studio
 C++ x64 tools, for sources that need MSVC, such as `__try`).
@@ -134,6 +140,8 @@ def version_resource(zig, work, recipe):
 
 def build(name, zig, out):
     _, recipe, _ = load_mod(name)
+    if recipe.get("authorPackage"):
+        sys.exit(f"{name}: the author's own release files (authorPackage), nothing to build; see pin-author")
     if recipe["toolchain"] == "msvc":
         return build_msvc(recipe, out)
     if zig is None:
@@ -341,6 +349,15 @@ def layout_problems(recipe, manifest):
             problems.append(f"{path} is outside {folder}")
         if path.rsplit("/", 1)[-1].lower() in reserved:
             problems.append(f"{path} would replace ExtraOptions.Infinity's own file")
+    if recipe.get("authorPackage"):  # every file is the author's ZIP's; pin-author checks their mod.json against it
+        binaries = [f["destination"] for f in files["azimuth"] if f["role"] == "binary"]
+        if binaries != [f"{folder}plugins/{recipe['dll']}"]:
+            problems.append(f"the one binary must be {folder}plugins/{recipe['dll']}, found {binaries}")
+        if any("package" in f for f in files["azimuth"]) or manifest.get("additionalPackages"):
+            problems.append("an authorPackage mod installs from the author's ZIP alone (no additional packages)")
+        if not any(f["destination"] == f"{folder}mod.json" for f in files["azimuth"]):
+            problems.append(f"{folder}mod.json is not installed")
+        return problems
     binaries = [f["destination"] for f in files["azimuth"] if f["role"] == "binary" and "package" not in f]
     mod_dll = recipe.get("adapterConfig", {}).get("modDll")
     built = recipe.get("modBuild")
@@ -372,6 +389,8 @@ def layout_problems(recipe, manifest):
 
 def verify(name, zig):
     _, recipe, manifest = load_mod(name)
+    if recipe.get("authorPackage"):
+        sys.exit(f"{name}: the author's own release files (authorPackage), nothing to build; see pin-author")
     layout = layout_problems(recipe, manifest)
     with tempfile.TemporaryDirectory(prefix="infmods-a-") as a, tempfile.TemporaryDirectory(prefix="infmods-b-") as b:
         first, second = build(name, zig, Path(a)), build(name, zig, Path(b))
@@ -612,12 +631,27 @@ def release(names, zig, tag, catalog_path, out, allow_dirty):
         _, recipe, manifest = load_mod(name)
         if problems := layout_problems(recipe, manifest):
             sys.exit(f"{name}: " + "; ".join(problems))
+        existing = current.get(recipe["id"])
+        if recipe.get("authorPackage"):  # the author's ZIP, pinned by pin-author: nothing built, nothing to attach
+            if not manifest["package"]["sha256"] or any(not f.get("sha256") for f in manifest["files"]["azimuth"]):
+                sys.exit(f"{name}: not pinned; run pin-author {name} --write")
+            entry = catalog_entry(manifest)
+            if existing == entry:
+                report.append(f"{recipe['id']}: unchanged, keeps {existing['download']['url']}")
+                continue
+            if existing and existing.get("version") == recipe["version"] and existing.get("download") != entry["download"]:
+                sys.exit(f"{recipe['id']}: the author's package changed but version {recipe['version']} did not; bump it")
+            if existing:
+                catalog["mods"][catalog["mods"].index(existing)] = entry
+            else:
+                catalog["mods"].append(entry)
+            report.append(f"{recipe['id']}: {'updated' if existing else 'new'} {recipe['version']}, the author's {manifest['package']['url']}")
+            continue
         with tempfile.TemporaryDirectory(prefix="infmods-") as temporary:
             dll = build(name, zig, Path(temporary))
             mod_dll = build_mod(recipe, Path(temporary) / "mod") if recipe.get("modBuild") else None
             zip_path, contents = package(recipe, dll, out / "assets", mod_dll)
         digest = hashlib.sha256(zip_path.read_bytes()).hexdigest()
-        existing = current.get(recipe["id"])
         if existing and existing.get("download", {}).get("sha256") == digest:
             report.append(f"{recipe['id']}: unchanged, keeps {existing['download']['url']}")
             continue  # the entry stays byte-for-byte; the asset is re-attached to this release only for completeness
@@ -960,6 +994,50 @@ def external_packs(set_dirs, cars_path, catalog_path, out):
     return 0
 
 
+def pin_author(name, zip_path, write):
+    """An authorPackage mod: pins its download (the author's release ZIP) and every file it installs from that ZIP,
+    checks the author's mod.json (id, version, dependencies) and DLL (FH2PluginInitialize, allowed imports)."""
+    folder, recipe, manifest = load_mod(name)
+    author = recipe.get("authorPackage") or sys.exit(f"{name}: not an authorPackage mod")
+    url = f"https://github.com/{author['repository']}/releases/download/{author['tag']}/{author['asset']}"
+    data = Path(zip_path).read_bytes() if zip_path else download(url)
+    problems = layout_problems(recipe, manifest)
+    filled = copy.deepcopy(manifest)
+    filled["package"] = {"url": url, "sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data), "format": "zip"}
+    with zipfile.ZipFile(io.BytesIO(data)) as archive:
+        names = set(archive.namelist())
+        for file in filled["files"]["azimuth"]:
+            if file["source"] not in names:
+                problems.append(f"{file['source']} is not in {author['asset']}")
+                continue
+            body = archive.read(file["source"])
+            file["sha256"], file["bytes"] = hashlib.sha256(body).hexdigest(), len(body)
+            if file["destination"].endswith("/mod.json"):
+                own = json.loads(body.decode("utf-8-sig"))
+                wanted = {d["id"] for d in manifest.get("dependencies", []) if d["id"] != "extraoptions"}
+                if own.get("format_version") != 1 or own.get("id") != manifest["id"] or own.get("version") != manifest["version"]:
+                    problems.append(f"the author's mod.json is {own.get('id')} {own.get('version')}: the manifest must say the same")
+                if set(own.get("dependencies", [])) != wanted:
+                    problems.append("the author's mod.json declares other dependencies than the manifest")
+            if file["role"] == "binary":
+                machine, exports, imports = pe_report_bytes(body)
+                if "FH2PluginInitialize" not in exports:
+                    problems.append(f"{file['source']}: FH2PluginInitialize not exported")
+                if extra := sorted({i.upper() for i in imports} - {i.upper() for i in recipe.get("allowedImports", [])}):
+                    problems.append(f"{file['source']}: imports {extra} beyond allowedImports")
+    changed = filled != manifest
+    for p in problems:
+        print("FAIL", p)
+    print(f"{name}: {url} sha256 {filled['package']['sha256']} ({len(data)} bytes)"
+          + (": pins changed" if changed else ": already pinned"))
+    if problems:
+        return 1
+    if changed and write:
+        (folder / "manifest.json").write_text(json.dumps(filled, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+        print(f"wrote mods/{name}/manifest.json; then release (or catalog --from) carries it into catalog/")
+    return 0
+
+
 ADAPTER_SOURCE = ROOT / "adapters" / "fh2-mod-platform-eo" / "fh2_mod_platform_eo_adapter.cpp"
 UPSTREAM_ZIP_MAX = 256 * 1024 * 1024
 SEMVER = re.compile(r"\d+\.\d+\.\d+")
@@ -1151,6 +1229,10 @@ def main():
     e.add_argument("--cars", type=Path, required=True, help="the monorepo's crates/fi-gamedb/data/fh2-packs.json (OD-231)")
     e.add_argument("--catalog", type=Path, default=CATALOG_DIR / INDEX_NAME)
     e.add_argument("--out", type=Path, required=True, help="a folder: gets catalog/ and catalog.json")
+    a = sub.add_parser("pin-author", help="re-pin an authorPackage mod to its author's release ZIP (report; --write to apply)")
+    a.add_argument("mod")
+    a.add_argument("--zip", type=Path, help="the author's ZIP, already downloaded from its release URL")
+    a.add_argument("--write", action="store_true")
     s = sub.add_parser("sync", help="re-pin an FH2 Mod Platform mod to an upstream release (report; --write to apply)")
     s.add_argument("mod")
     s.add_argument("--tag", help="the upstream release tag (default: its latest release)")
@@ -1162,6 +1244,8 @@ def main():
         return check(args.catalog)
     if args.cmd == "catalog":
         return catalog_command(args.from_v2)
+    if args.cmd == "pin-author":
+        return pin_author(args.mod, args.zip, args.write)
     if args.cmd == "sync":
         return sync(args.mod, args.tag, args.zip, args.url, args.write)
     if args.cmd == "external-packs":

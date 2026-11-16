@@ -1,23 +1,25 @@
 {
   "schemaVersion": 1,
   "id": "extraoptions-garagerevving",
-  "version": "1.0.3-infinity.1",
+  "version": "1.0.0",
   "kind": "mod",
   "name": {
     "en": "Garage Revving",
     "pt-BR": "Ronco na Garagem"
   },
-  "author": "Arthur (RokkuDayo); Infinity build by anarqz",
+  "author": "Arthur (RokkuDayo)",
   "license": "GPL-3.0",
-  "homepage": "https://github.com/anarqz/InfinityMods",
+  "homepage": "https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions",
   "description": {
-    "en": "Hold RT in the garage to hear the car's engine rev. From Extra Options by Arthur (RokkuDayo), built from its source. Garage only: nothing other players see, hear or race against, so it plays in every mode.",
-    "pt-BR": "Segure RT na garagem para ouvir o motor do carro roncar. Do Extra Options, de Arthur (RokkuDayo), compilado a partir do código-fonte. Só na garagem: nada que outros jogadores vejam, ouçam ou enfrentem numa corrida, então funciona em todos os modos."
+    "en": "Hold RT in the garage to hear the car's engine rev. From Extra Options by Arthur (RokkuDayo): the author's own files from Extra Options 0.6.1. Garage only: nothing other players see, hear or race against, so it plays in every mode.",
+    "pt-BR": "Segure RT na garagem para ouvir o motor do carro roncar. Do Extra Options, de Arthur (RokkuDayo): os arquivos do próprio autor, do Extra Options 0.6.1. Só na garagem: nada que outros jogadores vejam, ouçam ou enfrentem numa corrida, então funciona em todos os modos."
   },
   "runtime": "standalone",
   "review": {
-    "status": "reviewed",
-    "blockers": []
+    "status": "pending",
+    "blockers": [
+      "native check of the author's Extra Options 0.6.1 files (SAURON, Proton)"
+    ]
   },
   "compatibility": {
     "azimuthVersions": [
@@ -27,9 +29,9 @@
     "verification": "unverified"
   },
   "package": {
-    "url": "",
-    "sha256": "",
-    "bytes": 0,
+    "url": "https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions/releases/download/Azimuth_v1.0.4/Forza_XB1_Extra_Options_0.6.1-Azimuth.zip",
+    "sha256": "63f524843a0b332752eccfe737ce3892f4c84f1d69288552855003d23524efd9",
+    "bytes": 1305861,
     "format": "zip"
   },
   "dependencies": [],
@@ -38,34 +40,28 @@
     "game": [],
     "azimuth": [
       {
-        "source": "EO_GarageEngineRev.dll",
+        "source": "mods/Forza Horizon 2/Extra Options - Garage Revving/plugins/EO_GarageEngineRev.dll",
         "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/plugins/EO_GarageEngineRev.dll",
         "role": "binary",
-        "mode": "add-or-replace"
+        "mode": "add-or-replace",
+        "sha256": "ba6b6df6446c1c0d9f6045759b57e215ba00fe26b9d40e075907dffd56e98031",
+        "bytes": 13824
       },
       {
-        "source": "EO_GarageEngineRev.ini",
+        "source": "mods/Forza Horizon 2/Extra Options - Garage Revving/plugins/EO_GarageEngineRev.ini",
         "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/plugins/EO_GarageEngineRev.ini",
         "role": "config",
-        "mode": "seed"
+        "mode": "seed",
+        "sha256": "10df73d3328978a2d19a4b238b4d8552ef484e0a408f4dd4bf859df7551e1bff",
+        "bytes": 77
       },
       {
-        "source": "mod.json",
+        "source": "mods/Forza Horizon 2/Extra Options - Garage Revving/mod.json",
         "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/mod.json",
         "role": "asset",
-        "mode": "add-or-replace"
-      },
-      {
-        "source": "LICENSE.txt",
-        "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/LICENSE.txt",
-        "role": "license",
-        "mode": "add-or-replace"
-      },
-      {
-        "source": "NOTICE.md",
-        "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/NOTICE.md",
-        "role": "license",
-        "mode": "add-or-replace"
+        "mode": "add-or-replace",
+        "sha256": "4f70c5538490f61011f854c7afcdcea91658417aa54bafad98c5e61ea28af00f",
+        "bytes": 262
       }
     ]
   },
@@ -99,14 +95,14 @@
   "excludedArchiveEntries": [],
   "databaseMigrations": [],
   "source": {
-    "repository": "https://github.com/anarqz/InfinityMods",
+    "repository": "https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions",
     "commit": ""
   },
   "multiplayer": {
     "schemaVersion": 1,
     "impact": "cosmetic",
     "compatibilityId": "extraoptions-garagerevving",
-    "revision": 1,
+    "revision": 2,
     "match": "exact",
     "settings": []
   }

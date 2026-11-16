@@ -17,14 +17,18 @@ Their authors release often: `tools/infmods.py sync` and the skill in `.claude/s
 Underglow is the one exception (owner, 2026-11-12): its DLL is built here from the pinned source with
 `mods/underglow/patches/` applied, so it coexists with the Infinity hook, and shipped in its package with the
 author's camera_presets.h compiled in (his edited copy of the game's garage camera shots; nothing else game-derived).
+Garage Revving and Weather Control are the author's own files too (owner, 2026-11-16): their catalog download is
+RokkuDayo's Extra Options 0.6.1 release ZIP itself, pinned by SHA-256, and Infinity installs only those mods' files
+from it (recipe `authorPackage`). Nothing of theirs is built or released here. The author has replaced that release's
+assets before; if the ZIP changes, installs refuse it until `tools/infmods.py pin-author <id> --write` re-pins it.
 
 | Mod | Original | Adapter | Licence | Modes |
 |---|---|---|---|---|
 | [Nitro System](mods/nitrosystem) | [qiangqiang101/FH2-NitroSystem](https://github.com/qiangqiang101/FH2-NitroSystem) (its release DLL) | [FH2 Mod Platform for ExtraOptions](adapters/fh2-mod-platform-eo) | MIT | Noob |
 | [FH2 ANNA](mods/fh2-anna) | [qiangqiang101/FH2-ANNA](https://github.com/qiangqiang101/FH2-ANNA) (its release DLL) | [FH2 Mod Platform for ExtraOptions](adapters/fh2-mod-platform-eo) | MIT | Noob |
 | [Underglow](mods/underglow) | [qiangqiang101/FH2-Underglow](https://github.com/qiangqiang101/FH2-Underglow) (built from its source, patched to coexist with the Infinity hook) | [FH2 Mod Platform for ExtraOptions](adapters/fh2-mod-platform-eo) | MIT | Noob |
-| [Garage Revving](mods/extraoptions-garagerevving) | [Extra Options](https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions) `fh2/plugins/garage-engine-rev` | none (an ExtraOptions plugin) | GPL-3.0 | both |
-| [Weather Control](mods/extraoptions-weathercontrol) | [Extra Options](https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions) `fh2/plugins/weather-control` | none (an ExtraOptions plugin) | GPL-3.0 | Noob |
+| [Garage Revving](mods/extraoptions-garagerevving) | [Extra Options](https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions) 0.6.1 (the author's release files, 1.0.0) | none (an ExtraOptions plugin) | GPL-3.0 | both |
+| [Weather Control](mods/extraoptions-weathercontrol) | [Extra Options](https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions) 0.6.1 (the author's release files, 1.1.0) | none (an ExtraOptions plugin) | GPL-3.0 | Noob |
 | [Spotify Radio](mods/spotifyradio) | [Bullet4fun/FH_ModsCollection](https://github.com/Bullet4fun/FH_ModsCollection) `spotify-radio` (an Azimuth Mod Loader mod) | none: a fork whose `INFINITY_EO` build is an ExtraOptions plugin (`upstream/fh-mods-collection/infinity/README.md`) | GPL-3.0-or-later | both |
 | [Camera Mods](mods/camera-mods) | [Deuquan/FH2-CameraMods](https://github.com/Deuquan/FH2-CameraMods) `plugin/` | none (an ExtraOptions plugin) | GPL-3.0 | Noob |
 
@@ -92,8 +96,7 @@ python3 -I tools/infmods.py verify nitrosystem                      # Windows (M
 python3 -I tools/infmods.py verify underglow                        # Windows (MSVC)
 python3 -I tools/infmods.py verify fh2-anna                         # Windows (MSVC)
 python3 -I tools/infmods.py sync   underglow                        # any OS: report a newer upstream release (--write to re-pin)
-python3 -I tools/infmods.py verify extraoptions-garagerevving --zig /path/to/zig
-python3 -I tools/infmods.py verify extraoptions-weathercontrol --zig /path/to/zig   # Windows (its systemImports)
+python3 -I tools/infmods.py pin-author extraoptions-weathercontrol  # any OS: re-pin an authorPackage mod (--write)
 ```
 
 The game files a mod needs (HUD, particles, shaders, sounds) are never in this repository or in its
