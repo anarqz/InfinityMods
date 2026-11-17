@@ -1222,7 +1222,9 @@ SESSION_PATTERN = re.compile(
 
 def messages(revs):
     """Fail when a commit in `revs` (git rev-list arguments) names an assistant session."""
-    log = subprocess.run(["git", "-C", str(ROOT), "log", "--format=%H%x00%B%x01", *revs],
+    # shutil.which finds a git.cmd shim too, which CreateProcess would not resolve by the bare name.
+    git = shutil.which("git") or sys.exit("git not found")
+    log = subprocess.run([git, "-C", str(ROOT), "log", "--format=%H%x00%B%x01", *revs],
                          check=True, capture_output=True, text=True).stdout
     bad = [sha for sha, _, body in (e.strip().partition("\0") for e in log.split("\x01"))
            if sha and SESSION_PATTERN.search(body)]
