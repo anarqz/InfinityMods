@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "nitrosystem",
-  "version": "2.0.0-infinity.3",
+  "version": "2.0.1-infinity.1",
   "kind": "mod",
   "name": {
     "en": "Nitro System",
@@ -16,8 +16,10 @@
   },
   "runtime": "standalone",
   "review": {
-    "status": "reviewed",
-    "blockers": []
+    "status": "draft",
+    "blockers": [
+      "the adapter build for FH2 Mod Platform API 10 (WINDOWS, MSVC) and a native game check through the Infinity launcher are pending"
+    ]
   },
   "compatibility": {
     "azimuthVersions": [
@@ -38,16 +40,16 @@
     "game": [],
     "azimuth": [
       {
-        "source": "FnFNitro-2.0.0/azimuth-windows/fh2-mods/FnFNitro.dll",
+        "source": "FnFNitro-2.0.1/azimuth-windows/fh2-mods/FnFNitro.dll",
         "destination": "mods/Forza Horizon 2/nitrosystem/fh2-mods/FnFNitro.dll",
-        "sha256": "a695c4a858e949001fab185db56e5f0365d14061dd3bcb6dfe0a5b3179c37325",
-        "bytes": 2603520,
+        "sha256": "89fd76102054e433a727803a152242cbb3fff9dd0db265a2d2bede7b28f6f93b",
+        "bytes": 2655744,
         "role": "binary",
         "mode": "add-or-replace",
         "package": "upstream-assets"
       },
       {
-        "source": "FnFNitro-2.0.0/licenses/LICENSE-NitroSystem.txt",
+        "source": "FnFNitro-2.0.1/licenses/LICENSE-NitroSystem.txt",
         "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE.txt",
         "sha256": "be4891b23bcb10c0f757f2385d89709057d929a75299aeb2eed296ccee01b33b",
         "bytes": 1092,
@@ -654,11 +656,11 @@
   },
   "runtimeOutputs": [],
   "excludedArchiveEntries": [
-    "FnFNitro-2.0.0/INSTALL.txt",
-    "FnFNitro-2.0.0/README.md",
-    "FnFNitro-2.0.0/azimuth-windows/DWrite.dll",
-    "FnFNitro-2.0.0/licenses/LICENSE-FH2-Mod-Platform.txt",
-    "FnFNitro-2.0.0/licenses/LICENSE-MinHook.txt"
+    "FnFNitro-2.0.1/INSTALL.txt",
+    "FnFNitro-2.0.1/README.md",
+    "FnFNitro-2.0.1/azimuth-windows/DWrite.dll",
+    "FnFNitro-2.0.1/licenses/LICENSE-FH2-Mod-Platform.txt",
+    "FnFNitro-2.0.1/licenses/LICENSE-MinHook.txt"
   ],
   "databaseMigrations": [],
   "source": {
@@ -667,9 +669,9 @@
   },
   "additionalPackages": {
     "upstream-assets": {
-      "url": "https://github.com/qiangqiang101/FH2-NitroSystem/releases/download/2.0.0/FnFNitro-2.0.0.zip",
-      "sha256": "24ad49c4472387b61ec9ad638f8e4f0b5cfd7ceedf2fecb0948aa9e7fb5ea7af",
-      "bytes": 2573107,
+      "url": "https://github.com/qiangqiang101/FH2-NitroSystem/releases/download/2.0.1/FnFNitro-2.0.1.zip",
+      "sha256": "37f79a2bf50ca4a76b20496a1ef208ebebd226f1ffee9353f3f090e38e2dcd4b",
+      "bytes": 3445475,
       "format": "zip"
     }
   },

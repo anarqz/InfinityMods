@@ -1,6 +1,6 @@
 {
   "id": "nitrosystem",
-  "version": "2.0.0-infinity.3",
+  "version": "2.0.1-infinity.1",
   "folder": "nitrosystem",
   "dll": "NitroSystem.Infinity.dll",
   "adapter": "fh2-mod-platform-eo",
@@ -11,7 +11,7 @@
   "upstream": {
     "submodule": "upstream/nitrosystem",
     "repository": "https://github.com/qiangqiang101/FH2-NitroSystem",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "sources": [
       "platform/third_party/minhook/src/hook.c",
       "platform/third_party/minhook/src/buffer.c",
