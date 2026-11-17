@@ -1,6 +1,6 @@
 # FH2 Mod Platform adapter for ExtraOptions
 
-Runs a mod written for [FH2 Mod Platform](https://github.com/Trinculo54/fh2-mod-platform) (API 9, platform 2.8.0,
+Runs a mod written for [FH2 Mod Platform](https://github.com/Trinculo54/fh2-mod-platform) (API 10, platform 2.9.0,
 `include/fh2mod.h`) as a plugin of ExtraOptions' mod loader (ExtraOptions 0.6.0 on Azimuth 1.0.4, built into Infinity
 as ExtraOptions.Infinity, OD-126/OD-127; the plugin ABI, its 64-byte context and the database frame are unchanged
 since 0.3.2), without the platform (`DWrite.dll`, `fh2-mods\`) and without the Infinity mod runtime.
@@ -35,11 +35,14 @@ release was built from) are compiled with MSVC (`toolchain: msvc`) against the m
 | `add_setting`, sliders, `set_setting` | accepted, never shown: the launcher's form owns the INI, so `on_change` never runs; `get_setting` is -1 |
 | `publish_interface`, `get_interface`, `wait_for_mods` | the broker keeps the interfaces every adapter's mod publishes (64; a name already taken is refused), so FH2 ANNA's menu and NitroSystem's control work between the mods' folders; `get_interface` gives one whose version is at least the one asked for. `wait_for_mods` waits until every adapter has started its mod (3 s after the last `fh2mod_init` returned, 30 s at most), up to its timeout; from inside `fh2mod_init` it returns 0 at once. ExtraOptions starts the mods in load order, so a mod that looks an interface up in its `fh2mod_init` finds it when the publisher loads first (a manifest dependency: Underglow on `fh2-anna`) |
 | string tables, notices, Mods pages, title entries, hotkeys, commands, session logs, save snapshots, dump ranges | not provided: each reports "not added" (0 / `nullptr`) |
-| `playing_online` | 0 (Infinity decides where a mod may run: a mod whose impact is not cosmetic is Noob only) |
+| `playing_online` | 0 (Infinity decides where a mod may run: a mod whose impact is not cosmetic is Noob only). The platform's `FH2Platform.Online` interface (`going_online`) is not published, so `get_interface` gives `nullptr`, as on a platform before 2.9.0 |
+| translations (API 10): `language`, `game_language`, `add_translation`, `tr`, `tr_plural`, `set_string_tr`, `format_number`, `format_date` | not provided; each answers as a platform before API 10 does through `fh2mod_l10n.h`'s fallbacks, so the mod shows its **English** text: `language` is `"en"`, `game_language` 0 (no language yet), `tr` / `tr_plural` give the English back, `add_translation` takes nothing, `format_number` / `format_date` 0 with `""` (the mod writes the number itself), `set_string_tr` is ignored like `set_string`. NitroSystem from 2.0.1 and Underglow from 1.1.1 moved their own translations (pt-BR among them) into the platform, so under this adapter their garage texts and Underglow's entries in FH2 ANNA's menu (Car > Lights, Car > Underglow) are English, while ANNA's own menus keep its translations |
+| `set_setting_text`, `set_mod_description` (API 10) | accepted, never shown (like the rows) |
+| UI templates (API 10): `ui_status`, `ui_uses`, `play_ui_sound`, pop-ups, tips, message boxes, page help and hints | not provided: `ui_status` 0 (nothing works), each call 0 ("not shown"); `clear_toast` and `set_tip_seen` do nothing |
 
 `FH2PluginInitialize` returns FALSE (ExtraOptions logs it and keeps the DLL loaded without callbacks) when the context
 is not ABI 1 for Azimuth, the DLL is not in `plugins\`, MinHook cannot start, the mod's DLL is missing or has no
-`fh2mod_init`, or `fh2mod_init` fails (its hooks are then switched off and its files removed). Underglow checks `ForzaCar::Update`'s stock bytes before hooking it and stays off ("this isn't the FH2 build Underglow knows") when anything has patched it first: NitroSystem's hook when Nitro starts earlier, and online the Infinity hook's headlight and roof sync (its 14-byte detour there, CARSTATE). That check is Underglow's own; the adapter cannot change it. A mod built against another platform API than 9 does not compile here
+`fh2mod_init`, or `fh2mod_init` fails (its hooks are then switched off and its files removed). Underglow checks `ForzaCar::Update`'s stock bytes before hooking it and stays off ("this isn't the FH2 build Underglow knows") when anything has patched it first: NitroSystem's hook when Nitro starts earlier, and online the Infinity hook's headlight and roof sync (its 14-byte detour there, CARSTATE). That check is Underglow's own; the adapter cannot change it. A mod built against another platform API than 10 does not compile here
 (`static_assert`): `tools/infmods.py sync` reports it, and the table must be updated for the new header first.
 
 ExtraOptions activates a mod's private media only when its ordinary `media` folder exists at startup, so every package

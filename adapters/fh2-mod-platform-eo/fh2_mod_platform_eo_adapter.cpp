@@ -1,4 +1,4 @@
-// MIT; see LICENSE. Runs an FH2 Mod Platform (API 9) mod as an ExtraOptions plugin (OD-126).
+// MIT; see LICENSE. Runs an FH2 Mod Platform (API 10) mod as an ExtraOptions plugin (OD-126).
 // This DLL is the plugin ExtraOptions loads (<mod>\plugins\): it exports FH2PluginInitialize (called once,
 // after DllMain, on ExtraOptions' loader worker), FH2PluginMediaDirectory and FH2PluginDatabaseUpdate, loads
 // the mod's own unchanged release DLL (FH2MP_EO_MOD_DLL, relative to the mod folder, outside plugins\ so
@@ -15,7 +15,7 @@
 #include <cstring>
 #include <cwchar>
 
-static_assert(FH2MOD_API_VERSION == 9, "the adapter implements FH2 Mod Platform API 9 exactly: update it with the header");
+static_assert(FH2MOD_API_VERSION == 10, "the adapter implements FH2 Mod Platform API 10 exactly: update it with the header");
 
 namespace {
 // ExtraOptions' plugin ABI, version 1 (its fh2/tools/PLUGIN_API.md and fh2_plugin.h): the 64-byte initializer
@@ -697,6 +697,34 @@ int request_save_snapshot(FH2Mod*, const char*, uint32_t) { return 0; }
 void add_dump_memory(FH2Mod*, const void*, size_t) {}
 int add_hotkey(FH2Mod*, const FH2Hotkey*) { return 0; }
 int add_command(FH2Mod*, const char*, const char*, FH2CommandFn, void*) { return 0; }
+// API 10 (platform 2.9.0). The platform's translations (PO catalogues, the game's language) are not here: every
+// call answers as a platform before API 10 would through fh2mod_l10n.h's fallbacks, so a mod shows its English text.
+// game_language has no language yet (0), language is "en", tr and tr_plural give the English back, and
+// format_number / format_date report "not usable" (0, "" in `out`) so the mod writes the number itself.
+// The UI templates (pop-ups, tips, message boxes, page help) draw in the platform's own pages and HUD, which do not
+// exist here: each reports "not shown" (0). Text changes to setting rows are accepted and, like the rows, never shown.
+int game_language(char* code, size_t size) { if (code && size) code[0] = 0; return 0; }
+int set_setting_text(FH2Mod*, const char*, const char*, const char*, const char* const*, uint32_t) { return 1; }
+void set_mod_description(FH2Mod*, const char*) {}
+const char* language() { return "en"; }
+int add_translation(FH2Mod*, const char*, const char*, size_t) { return 0; }
+const char* tr(FH2Mod*, const char*, const char* english) { return english; }
+const char* tr_plural(FH2Mod*, const char*, const char* one, const char* other, int64_t n) { return n == 1 ? one : other; }
+void set_string_tr(FH2Mod*, const char*, uint16_t, const char*, const wchar_t*) { ignored("string tables are not supported; ignored."); }
+int format_number(double, int, char* out, size_t n) { if (out && n) out[0] = 0; return 0; }
+int format_date(int, int, int, char* out, size_t n) { if (out && n) out[0] = 0; return 0; }
+uint32_t ui_status(FH2Mod*) { return 0; }
+int ui_uses(FH2Mod*, uint32_t) { return 0; }
+int play_ui_sound(FH2Mod*, uint32_t) { return 0; }
+int show_toast(FH2Mod*, const FH2Toast*) { return 0; }
+void clear_toast(FH2Mod*, const char*) {}
+int show_tip(FH2Mod*, const FH2Tip*) { return 0; }
+int tip_seen(FH2Mod*, const char*) { return 0; }
+void set_tip_seen(FH2Mod*, const char*, int) {}
+int show_message_box(FH2Mod*, const FH2MessageBox*) { return 0; }
+int set_page_help(FH2Mod*, const char*, const FH2Prompt*, uint32_t) { return 0; }
+int set_page_hints(FH2Mod*, const char*, const char* const*, uint32_t) { return 0; }
+int show_page_hint(FH2Mod*, const char*, int, uint32_t) { return 0; }
 
 // azimuth_dir is the mod's own folder (<Azimuth>\mods\<game folder>\<mod> since ExtraOptions 0.6.0, the parent of plugins\,
 // derived from the plugins path itself, so the depth does not matter): the paths the mod
@@ -716,7 +744,7 @@ bool derive_mod_dir(const wchar_t* plugins) {
 void fill_table() {
     table.size = sizeof table;
     table.api_version = FH2MOD_API_VERSION;
-    table.platform_version = "2.8.0";
+    table.platform_version = "2.9.0";
     table.azimuth_dir = mod_dir;
     table.game_dir = L"";
     table.register_mod = register_mod; table.log = log_line;
@@ -740,6 +768,15 @@ void fill_table() {
     table.playing_online = playing_online; table.session_id = session_id;
     table.session_log_path = session_log_path; table.request_save_snapshot = request_save_snapshot;
     table.add_dump_memory = add_dump_memory; table.add_hotkey = add_hotkey; table.add_command = add_command;
+    table.game_language = game_language; table.set_setting_text = set_setting_text;
+    table.set_mod_description = set_mod_description;
+    table.language = language; table.add_translation = add_translation; table.tr = tr; table.tr_plural = tr_plural;
+    table.set_string_tr = set_string_tr; table.format_number = format_number; table.format_date = format_date;
+    table.ui_status = ui_status; table.ui_uses = ui_uses; table.play_ui_sound = play_ui_sound;
+    table.show_toast = show_toast; table.clear_toast = clear_toast;
+    table.show_tip = show_tip; table.tip_seen = tip_seen; table.set_tip_seen = set_tip_seen;
+    table.show_message_box = show_message_box;
+    table.set_page_help = set_page_help; table.set_page_hints = set_page_hints; table.show_page_hint = show_page_hint;
 }
 
 using InitFn = int (*)(const FH2ModApi*);
