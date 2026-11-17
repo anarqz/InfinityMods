@@ -7,11 +7,14 @@ original repository's licence). FH2 Mod Platform header: Trinculo54, https://git
 this package was built from.
 
 **Patched to coexist with the Infinity hook.** `fh2-mods\Underglow.dll` in this package is built by Infinity Mods from
-the author's source at the pinned commit with one patch (`mods/underglow/patches/0001-accept-a-hook-at-forzacar-update.patch`
-in InfinityMods): Underglow checks the stock bytes of the game's car update before hooking it, and the Infinity hook
+the author's source at the pinned commit with two patches (`mods/underglow/patches/` in InfinityMods). 0001: Underglow checks the stock bytes of the game's car update before hooking it, and the Infinity hook
 (online headlight and roof sync) and NitroSystem hook that function too, so the original stayed off under Infinity.
-The patched check also accepts another hook's jump there (E9 rel32, or FF 25 with its address) and hooks over it;
-everything else is the author's code, unchanged. That DLL contains the author's `camera_presets.h`, his edited copy of
+The patched check also accepts another hook's jump there (E9 rel32, or FF 25 with its address) and hooks over it.
+0002 (online, under Infinity only): Underglow finds the Infinity hook's car-state sync (`InfinityCarSync_*`, looked up
+with GetProcAddress), gives it this car's look as a 40-byte blob (on/off, parts, LED level, colors, effects, shape) and
+shows the neon of the other players in the same world who have Underglow too: the 8 nearest within 150 m, at most 32
+lights each, audio effects as a steady glow. Nothing else is sent. Without the Infinity hook it does nothing. Everything
+else is the author's code, unchanged. That DLL contains the author's `camera_presets.h`, his edited copy of
 the game's garage camera shots with his five Underglow shots, shipped here by the owner's decision (Alex, 2026-11-12,
 an exception to the rule that no game-derived material ships; nothing else game-derived is included).
 

@@ -1,0 +1,869 @@
+Fromdiff --git a/src/neon_mod.cpp b/src/neon_mod.cpp
+index 61c0dd7..c62904b 100644
+--- a/src/neon_mod.cpp
++++ b/src/neon_mod.cpp
+@@ -51,6 +51,9 @@
+ #include "neon_text.h"
+ #include "ug_upgrade.h"
+ #include "car_sizes.h"
++#include "ug_remote.h"   // Infinity: the other players' neon (CR-L53)
++
++#include <psapi.h>       // K32EnumProcessModules (kernel32), to find the Infinity hook's car-state sync
+ 
+ #ifndef UNDERGLOW_VERSION
+ #define UNDERGLOW_VERSION "0.0.0"
+@@ -847,12 +850,206 @@ bool set_car_style(int which, int color, int zone, int effect) {
+     return true;
+ }
+ 
++// ---- Infinity: the other players' neon, through the Infinity hook's car-state sync (CR-L53, OD-248) -------------
++//
++// In an online free-roam world under Infinity, the hook (azimuth-tls.dll, or ExtraOptions.Infinity's winmm.dll)
++// exports InfinityCarSync_*: Underglow gives it the local car's look as one 40-byte blob (ug_remote.h) and reads back
++// the blobs of the other players' cars that have Underglow too (the hook and the world pass a blob only between two
++// players who both have it). Found at run time with GetProcAddress only: without the hook, or with another version of
++// its API, nothing here runs and Underglow is what it always was.
++
++using CsVersionFn = uint32_t (*)(void);
++struct CsInfo {
++    uint32_t size, version, blob_max, mods_max, flags;   // flags bit 0: the sync runs now
++};
++using CsInfoFn = int32_t (*)(CsInfo* info);
++using CsRegisterFn = int32_t (*)(uint32_t abi_version, uint8_t sync_id, uint8_t blob_version);
++using CsPublishFn = int32_t (*)(uint8_t sync_id, const void* bytes, uint32_t length);
++using CsGetFn = int32_t (*)(const void* car, uint8_t sync_id, void* out, uint32_t capacity, uint8_t* blob_version);
++struct CarSyncApi {
++    CsVersionFn version = nullptr;
++    CsInfoFn info = nullptr;
++    CsRegisterFn reg = nullptr;
++    CsPublishFn publish = nullptr;
++    CsGetFn get = nullptr;
++};
++const uint32_t kCarSyncAbi = 1;      // INFINITY_CARSYNC_VERSION
++const uint8_t kCarSyncId = 1;        // the registry's id of Underglow (MATCHMAKING_API §5f)
++const int32_t kCarSyncOk = 1;
++const int kCarSyncTries = 12;        // looked for when the player's car first drives, then every 5 s for a minute
++CarSyncApi g_cs;                     // written once, before g_cs_on
++std::atomic<bool> g_cs_on{false};
++SRWLOCK g_cs_game_lock = SRWLOCK_INIT;   // the player's side below (resolve, publish): one thread at a time
++
++bool cs_resolve_from(HMODULE module, CarSyncApi* api) {
++    CarSyncApi a;
++    a.version = reinterpret_cast<CsVersionFn>(reinterpret_cast<void*>(GetProcAddress(module, "InfinityCarSync_Version")));
++    a.info = reinterpret_cast<CsInfoFn>(reinterpret_cast<void*>(GetProcAddress(module, "InfinityCarSync_Info")));
++    a.reg = reinterpret_cast<CsRegisterFn>(reinterpret_cast<void*>(GetProcAddress(module, "InfinityCarSync_Register")));
++    a.publish = reinterpret_cast<CsPublishFn>(reinterpret_cast<void*>(GetProcAddress(module, "InfinityCarSync_Publish")));
++    a.get = reinterpret_cast<CsGetFn>(reinterpret_cast<void*>(GetProcAddress(module, "InfinityCarSync_Get")));
++    if (!a.version || !a.info || !a.reg || !a.publish || !a.get || a.version() != kCarSyncAbi) return false;
++    *api = a;
++    return true;
++}
++
++// The standalone hook by name, then every module (ExtraOptions.Infinity's winmm.dll shares System32's name).
++bool cs_resolve(CarSyncApi* api) {
++    if (HMODULE hook = GetModuleHandleW(L"azimuth-tls.dll"); hook && cs_resolve_from(hook, api)) return true;
++    static HMODULE modules[1024];   // only under g_cs_game_lock
++    DWORD needed = 0;
++    if (!K32EnumProcessModules(GetCurrentProcess(), modules, sizeof modules, &needed)) return false;
++    const DWORD count = needed / sizeof(HMODULE);
++    for (DWORD i = 0; i < count && i < sizeof modules / sizeof modules[0]; ++i)
++        if (cs_resolve_from(modules[i], api)) return true;
++    return false;
++}
++
++// An audio effect on another player's car: the receiver's radio isn't the sender's, so it shows a steady glow.
++bool effect_is_audio(int effect) {
++    for (const auto& e : kEffectOrder)
++        if (e.effect == effect) return e.group == kGroupAudio;
++    return false;
++}
++
++uint8_t rgb8(float x) { return uint8_t(std::lround(double(clamp01(x)) * 255.0)); }
++
++// The local car's look now, as the neon_frame shows it: the parts switched on and on its kit, its LED level, the
++// colors and effects of the car being driven.
++ugr::Style local_style() {
++    const Config c = car_config();
++    const int kit = kit_parts(c);
++    ugr::Style s;
++    s.on = c.neon;
++    s.parts = 0;
++    for (int z = 0; z < kZoneCount; ++z)
++        if (c.part[z] && kit_has(kit, z)) s.parts |= uint8_t(1u << z);
++    s.led = uint8_t(led_level(c));
++    float rgb[3];
++    for (int which = 0; which < 2; ++which) {
++        color_rgb(c, which ? c.color2 : c.color, rgb);
++        for (int k = 0; k < 3; ++k) s.rgb[which][k] = rgb8(rgb[k]);
++    }
++    for (int z = 0; z < kZoneCount; ++z) s.effect[z] = uint8_t(c.effect[z]);
++    s.brightness = c.brightness;
++    s.speed = c.speed;
++    s.side = c.shape.side;
++    s.front = c.shape.front;
++    s.rear = c.shape.rear;
++    s.height = c.shape.height;
++    s.front_inset = c.shape.front_inset;
++    s.rear_inset = c.shape.rear_inset;
++    s.side_offset = c.shape.side_offset;
++    s.side_trim = c.shape.side_trim;
++    s.range = c.shape.range;
++    s.power = c.shape.power;
++    s.inner = c.shape.inner;
++    s.outer = c.shape.outer;
++    return s;
++}
++
++// The player's car's update (the game's thread): find the API, then hand the hook the look whenever it changed (looked
++// at every 100 ms; the hook sends at most 10 a second and drops an unchanged blob anyway).
++void cs_player_car() {
++    static int tries = 0;               // all of these under g_cs_game_lock
++    static uint64_t next_try = 0, next_look = 0;
++    static uint8_t last[ugr::kBlobSize];
++    static bool published = false;
++    if (!TryAcquireSRWLockExclusive(&g_cs_game_lock)) return;
++    const uint64_t now = GetTickCount64();
++    if (!g_cs_on.load(std::memory_order_acquire) && tries < kCarSyncTries && now >= next_try) {
++        ++tries;
++        next_try = now + 5000;
++        CarSyncApi api;
++        if (cs_resolve(&api)) {
++            const int32_t r = api.reg(kCarSyncAbi, kCarSyncId, ugr::kBlobVersion);
++            tries = kCarSyncTries;   // found: no more looking, whatever Register says
++            if (r == kCarSyncOk) {
++                // An "off" blob at once, and a blob always after it (never withdrawn): the world passes the other
++                // players' blobs only to a hook that sends one itself, so a car with its neon off still sees theirs.
++                uint8_t off[ugr::kBlobSize];
++                ugr::Style none;
++                none.on = false;
++                none.parts = 0;
++                ugr::encode(none, off);
++                api.publish(kCarSyncId, off, sizeof off);
++                g_cs = api;
++                g_cs_on.store(true, std::memory_order_release);
++                g_api->log(g_mod, "the Infinity hook's car-state sync is here: the other players' Underglow shows on "
++                                  "their cars, and this car's on theirs");
++            } else {
++                char msg[128];
++                snprintf(msg, sizeof msg, "the Infinity hook's car-state sync refused Underglow (%d): this car only",
++                         int(r));
++                g_api->log(g_mod, msg);
++            }
++        }
++    }
++    if (g_cs_on.load(std::memory_order_acquire) && now >= next_look) {
++        next_look = now + 100;
++        uint8_t blob[ugr::kBlobSize];
++        ugr::encode(local_style(), blob);
++        if ((!published || memcmp(blob, last, sizeof blob)) && g_cs.publish(kCarSyncId, blob, sizeof blob) == kCarSyncOk) {
++            memcpy(last, blob, sizeof blob);
++            published = true;
++        }
++    }
++    ReleaseSRWLockExclusive(&g_cs_game_lock);
++}
++
++// The other players' cars (ForzaCar kind 2 or 5) the game updates, with the look the hook has for each: read by the
++// neon on the light thread.
++struct RemoteCar {
++    uintptr_t car = 0, pres = 0;
++    long ordinal = 0;      // Data_Car.Id (car_sizes.h)
++    uint64_t seen = 0;     // its last update
++    bool has = false;      // a blob that checked out
++    ugr::Style style;
++};
++const int kMaxRemoteCars = 32;
++SRWLOCK g_rc_lock = SRWLOCK_INIT;
++RemoteCar g_rc[kMaxRemoteCars];
++
++void cs_remote_car(uintptr_t c) {
++    uintptr_t pres = 0;
++    if (!rdp(c + kForzaCarPresOffset, &pres)) return;
++    if (vtable_is(pres, &kDeferredPresVtable, 1) && !rdp(pres + kDeferredPresOffset, &pres)) return;
++    if (!vtable_is(pres, kCarPresVtables, 2)) return;
++    uint8_t buf[64];
++    uint8_t version = 0;
++    const int32_t n = g_cs.get(reinterpret_cast<const void*>(c), kCarSyncId, buf, sizeof buf, &version);
++    RemoteCar r;
++    r.car = c;
++    r.pres = pres;
++    int id = 0;
++    if (rd(c + kForzaCarIdOffset, &id, 4) && id > 0 && id < 100000) r.ordinal = id;
++    r.seen = GetTickCount64();
++    r.has = n > 0 && ugr::decode(buf, int(n), version, kEffectCount, &r.style);
++    AcquireSRWLockExclusive(&g_rc_lock);
++    int at = -1, oldest = 0;
++    for (int i = 0; i < kMaxRemoteCars && at < 0; ++i)
++        if (g_rc[i].car == c) at = i;
++    for (int i = 0; i < kMaxRemoteCars && at < 0; ++i)
++        if (g_rc[i].seen < g_rc[oldest].seen) oldest = i;
++    g_rc[at >= 0 ? at : oldest] = r;
++    ReleaseSRWLockExclusive(&g_rc_lock);
++}
++
++void cs_car(void* car) {
++    const uintptr_t c = reinterpret_cast<uintptr_t>(car);
++    int kind = -1;
++    if (!rd(c + kForzaCarKindOffset, &kind, 4)) return;
++    if (kind == 0) cs_player_car();
++    else if ((kind == 2 || kind == 5) && g_cs_on.load(std::memory_order_acquire)) cs_remote_car(c);
++}
++
+ void detour_car_update(void* car, float dt, float b, uint32_t flag) {
+     g_orig_car_update(car, dt, b, flag);
+     if (note_car(car) && dt > 0.0f && dt < 0.25f) {
+         g_game_us.fetch_add(uint64_t(double(dt) * 1e6), std::memory_order_relaxed);
+         g_game_moved.store(GetTickCount64(), std::memory_order_relaxed);
+     }
++    cs_car(car);
+ }
+ 
+ struct PlayerLight {
+@@ -981,6 +1178,8 @@ void remember_player(const Resolved& r, uintptr_t beams) {
+ std::atomic<bool> g_neon_build{false};   // the neon wants lights made (on the creating thread)
+ SRWLOCK g_neon_lock = SRWLOCK_INIT;      // the neon is only touched by whoever holds it
+ void neon_build(const Reference& ref);
++std::atomic<bool> g_remote_build{false};   // Infinity: the other players' neon wants lights made (detour_create)
++void remote_build(const Reference& ref);
+ 
+ // ---- CreateLight: remember each handle's key and index --------------------------------------------------------
+ 
+@@ -1009,6 +1208,17 @@ uint32_t* detour_create(void* mgr, uint32_t* handle, uint32_t key, uint32_t inde
+         }
+         ReleaseSRWLockExclusive(&g_neon_lock);
+     }
++    if (g_remote_build.load() && TryAcquireSRWLockExclusive(&g_neon_lock)) {
++        static Reference ref;   // only used under g_neon_lock
++        AcquireSRWLockShared(&g_ref_lock);
++        ref = g_ref;
++        ReleaseSRWLockShared(&g_ref_lock);
++        if (ref.valid && ref.manager == reinterpret_cast<uintptr_t>(mgr)) {
++            g_remote_build.store(false);
++            remote_build(ref);
++        }
++        ReleaseSRWLockExclusive(&g_neon_lock);
++    }
+     return r;
+ }
+ 
+@@ -2155,6 +2365,395 @@ void neon_frame(const Reference& ref) {
+     g_neon.problem[0] = 0;
+ }
+ 
++// ---- Infinity: the other players' neon (CR-L53, OD-248) ------------------------------------------------------
++//
++// At most ugr::kMaxCars of the other players' cars, the nearest within ugr::kMaxDistance meters of the player's,
++// each with at most ugr::kMaxLights lights. Their lights come from the one light manager the player's car is in, made
++// like the player's neon (detour_create, the tail light's key, a preset of our own each), so the beam presets used are
++// at most kMaxCars * kMaxLights on top of the player's neon, whatever the world holds. The game has no call to give a
++// light back that we know of, so a car that leaves range, whose blob is gone (the hook forgets it 5 s after its owner
++// stopped sending) or when the sync stops: its lights go dark and wait in its slot for the next car.
++
++struct RemoteNeon {
++    uintptr_t car = 0, pres = 0;   // the car shown (0: a free slot)
++    Reference ref;                  // its shape on the car, the player's light manager
++    uint64_t geo_tick = 0;
++    int want = 0;                   // lights its shape needs (at most ugr::kMaxLights)
++    int count = 0;                  // lights made (kept when the slot changes car)
++    uint32_t handle[ugr::kMaxLights];
++    uint32_t preset[ugr::kMaxLights];
++    float rgb[ugr::kMaxLights][3];
++    uint64_t shape_sig = 0;
++    bool lit = false;
++    Shape placed;
++    int placed_n = 0;
++};
++struct RemotePool {
++    uintptr_t manager = 0, beams = 0, glows = 0;
++    RemoteNeon slot[ugr::kMaxCars];
++    uint32_t spare = ~0u;
++    uint64_t last_frame = 0, info_tick = 0;
++    bool sync = false;   // the hook's sync runs (Info flags bit 0)
++};
++RemotePool g_rn;   // only under g_neon_lock
++
++bool remote_light_ok(const RemoteNeon& s, int i) {
++    uint32_t beam, glow, preset = ~0u;
++    uintptr_t rec;
++    return mapping_of(g_rn.manager, s.handle[i], &beam, &glow) && (rec = beam_record(g_rn.beams, beam)) &&
++           rd(rec + kRecPreset, &preset, 4) && preset == s.preset[i];
++}
++
++void remote_dark(RemoteNeon& s) {
++    for (int i = 0; i < s.count; ++i) g_orig_set_int(reinterpret_cast<void*>(g_rn.manager), s.handle[i], 0.0f);
++    s.lit = false;
++}
++
++void remote_release(RemoteNeon& s) {
++    if (s.lit) remote_dark(s);
++    s.car = s.pres = 0;
++    s.placed_n = 0;
++    s.geo_tick = 0;
++    s.shape_sig = 0;
++}
++
++// write_preset's, on the pool's beam system.
++bool remote_write_preset(const Shape& sh, uint32_t preset, uint32_t template_preset, const float rgb[3]) {
++    uintptr_t ours = beam_preset(g_rn.beams, preset);
++    uintptr_t tmpl = beam_preset(g_rn.beams, template_preset);
++    uint8_t b[kBeamPresetStride], keep[8];
++    if (!ours || !tmpl || !rd(tmpl, b, sizeof b) || !rd(ours + kPreUsers, keep, 8)) return false;
++    const float zero[2] = {0.0f, 0.0f};
++    memcpy(b + kPreUsers, keep, 8);
++    memcpy(b + kPreRgb, rgb, 12);
++    memcpy(b + kPreRange, &sh.range, 4);
++    memcpy(b + kPrePower, &sh.power, 4);
++    memcpy(b + kPreInner, &sh.inner, 4);
++    memcpy(b + kPreOuter, &sh.outer, 4);
++    memcpy(b + kPreThreshold, zero, 8);
++    return wr(ours + 0x10, b + 0x10, sizeof b - 0x10);
++}
++
++// Another player's look as the neon's settings: its colors as two custom colors, audio effects a steady glow, its
++// shape at its LED level, cut to ugr::kMaxLights.
++Config remote_config(const ugr::Style& s) {
++    Config c;
++    c.neon = s.on;
++    for (int k = 0; k < 3; ++k) {
++        c.custom[0][k] = float(s.rgb[0][k]) / 255.0f;
++        c.custom[1][k] = float(s.rgb[1][k]) / 255.0f;
++    }
++    c.color = kColorCount;
++    c.color2 = kColorCount + 1;
++    c.brightness = s.brightness;
++    c.speed = s.speed;
++    for (int z = 0; z < kZoneCount; ++z) {
++        const int e = s.effect[z] < kEffectCount ? s.effect[z] : kEffectStatic;
++        c.effect[z] = effect_is_audio(e) ? kEffectStatic : e;
++        c.part[z] = (s.parts >> z) & 1u;
++    }
++    Shape& sh = c.shape;
++    sh.side = s.side;
++    sh.front = s.front;
++    sh.rear = s.rear;
++    sh.height = s.height;
++    sh.front_inset = s.front_inset;
++    sh.rear_inset = s.rear_inset;
++    sh.side_offset = s.side_offset;
++    sh.side_trim = s.side_trim;
++    sh.range = s.range;
++    sh.power = s.power;
++    sh.inner = s.inner;
++    sh.outer = s.outer;
++    clamp_shape(sh);
++    scale_shape(sh, s.led);
++    ugr::cap_lights(&sh.side, &sh.front, &sh.rear, ugr::kMaxLights);
++    return c;
++}
++
++// A remote car's shape on the car, from its own lights (as remember_player does for the player's), or the game's
++// data for its model; false when it isn't in the player's light manager.
++bool remote_geometry(const Reference& player, uintptr_t pres, long ordinal, Reference* out) {
++    Reference r;
++    uintptr_t context = 0, manager = 0, asset = 0;
++    Vec inst;
++    size_t n = 0;
++    if (!vtable_is(pres, kCarPresVtables, 2) || !rdp(pres + kPresContext, &context) ||
++        !rdp(context + kContextManager, &manager) || manager != player.manager || !rdp(pres + kPresAsset, &asset) ||
++        !read_vec(asset + kAssetInstances, 8, 512, &inst, &n))
++        return false;
++    r.pres = pres;
++    r.manager = player.manager;
++    r.beams = player.beams;
++    r.glows = player.glows;
++    r.template_handle = player.template_handle;
++    r.template_preset = player.template_preset;
++    int seen = 0;
++    for (size_t i = 0; i < n; ++i) {
++        uintptr_t instance = 0;
++        float lp[3];
++        if (!rdp(inst.begin + i * 8, &instance) || !rd(instance + 0x10, lp, 12) || !finite(lp, 3)) continue;
++        if (!seen || std::fabs(lp[0]) > r.half_width) r.half_width = std::fabs(lp[0]);
++        if (!seen || lp[2] > r.front) r.front = lp[2];
++        if (!seen || lp[2] < r.rear) r.rear = lp[2];
++        ++seen;
++    }
++    if (const CarSize* size = car_size(ordinal)) {
++        if (!seen || r.front - r.rear < 0.6f * size->wheelbase) {
++            r.front = size->wheelbase * 0.5f;
++            r.rear = -size->wheelbase * 0.5f;
++            r.db_length = true;
++        }
++        if (!seen || r.half_width < 0.45f) {
++            r.half_width = (size->front_track < size->rear_track ? size->front_track : size->rear_track) * 0.5f - 0.15f;
++            r.db_width = true;
++        }
++    }
++    r.valid = true;
++    r.tick = GetTickCount64();
++    *out = r;
++    return true;
++}
++
++// Makes the lights the shown cars still need (detour_create: the game's light-creating thread, g_neon_lock held).
++void remote_build(const Reference& ref) {
++    if (g_rn.manager != ref.manager || g_rn.beams != ref.beams) return;
++    if (ref.template_handle >= kMaxHandles || g_handle_manager[ref.template_handle] != ref.manager) return;
++    void* mgr = reinterpret_cast<void*>(ref.manager);
++    const float rgb[3] = {0.0f, 0.0f, 0.0f};
++    const Shape sh;
++    bool made = false;
++    for (RemoteNeon& s : g_rn.slot) {
++        if (!s.car) continue;
++        while (s.count < s.want && s.count < ugr::kMaxLights) {
++            uint32_t p = g_rn.spare;
++            g_rn.spare = ~0u;
++            if (p == ~0u) {
++                p = reinterpret_cast<AllocPresetFn>(g_base + kAllocBeamPreset)(
++                    reinterpret_cast<void*>(ref.beams + kBeamPresetPool));
++                if (p == ~0u || !beam_preset(ref.beams, p)) return;   // the pool is used up: what's made stays
++                const uint32_t no_users[2] = {0, 0};
++                wr(beam_preset(ref.beams, p) + kPreUsers, no_users, 8);
++            }
++            if (!remote_write_preset(sh, p, ref.template_preset, rgb)) {
++                g_rn.spare = p;
++                return;
++            }
++            uint32_t h = ~0u, beam, glow;
++            g_orig_create(mgr, &h, g_handle_key[ref.template_handle], g_handle_index[ref.template_handle]);
++            if (h == ~0u || !mapping_of(ref.manager, h, &beam, &glow) || beam == ~0u) {
++                g_rn.spare = p;
++                return;
++            }
++            reinterpret_cast<AttachPresetFn>(g_base + kAttachPreset)(reinterpret_cast<void*>(ref.beams), beam, p);
++            g_orig_set_int(mgr, h, 0.0f);   // dark until its car's frame places it
++            const int i = s.count++;
++            s.handle[i] = h;
++            s.preset[i] = p;
++            memcpy(s.rgb[i], rgb, sizeof rgb);
++            s.shape_sig = 0;   // its preset gets the car's shape at the next frame
++            made = true;
++        }
++    }
++    if (made) {
++        const uint8_t one = 1;
++        wr(g_rn.beams + kBeamDirty, &one, 1);
++    }
++}
++
++bool car_rotation(uintptr_t pres, float world[16], float car_rot[4]) {
++    if (!vtable_is(pres, kCarPresVtables, 2) || !rd(pres + kPresWorld, world, 16 * sizeof(float)) || !finite(world, 16))
++        return false;
++    alignas(16) float q[4];
++    _mm_store_ps(q, reinterpret_cast<MatrixToQuatFn>(g_base + kMatrixToQuat)(world));
++    if (!finite(q, 4)) return false;
++    memcpy(car_rot, q, sizeof q);
++    return true;
++}
++
++void remote_glow_off(uint32_t handle) {
++    uint32_t beam, glow;
++    if (g_rn.glows && mapping_of(g_rn.manager, handle, &beam, &glow) && glow != ~0u)
++        reinterpret_cast<GlowIntensityFn>(g_base + kGlowSetIntensity)(reinterpret_cast<void*>(g_rn.glows), glow, 0.0f);
++}
++
++// One shown car's neon this frame (light thread, g_neon_lock held).
++void remote_car_frame(RemoteNeon& s, const ugr::Style& style, double secs) {
++    void* mgr = reinterpret_cast<void*>(g_rn.manager);
++    int kept = 0;   // lights the game took back are forgotten
++    for (int i = 0; i < s.count; ++i) {
++        if (remote_light_ok(s, i)) {
++            s.handle[kept] = s.handle[i];
++            s.preset[kept] = s.preset[i];
++            memcpy(s.rgb[kept], s.rgb[i], 12);
++            ++kept;
++        }
++    }
++    s.count = kept;
++    const Config c = remote_config(style);
++    const int want = total_lights(c.shape);
++    s.want = want;
++    if (s.count < want) g_remote_build.store(true);
++    if (!s.count) return;
++    alignas(16) float world[16], car_rot[4];
++    if (!car_rotation(s.pres, world, car_rot)) return;
++    const uint64_t shape_sig = fnv(&c.shape, sizeof c.shape);
++    const bool reshape = shape_sig != s.shape_sig;
++    bool dirty = false;
++    const float down[4] = {0.70710678f, 0.0f, 0.0f, 0.70710678f};
++    alignas(16) float rot[4];
++    qmul(car_rot, down, rot);
++    const int n = s.count < want ? s.count : want;
++    static Pixel px[ugr::kMaxLights];
++    int group_count[kEffectCount] = {};
++    for (int i = 0; i < n; ++i) {
++        zone_of(c.shape, i, &px[i]);
++        px[i].id = i;
++        px[i].gi = c.part[px[i].zone] ? group_count[c.effect[px[i].zone]]++ : 0;
++    }
++    for (int i = 0; i < n; ++i) {
++        const int gn = group_count[c.effect[px[i].zone]];
++        px[i].gn = gn > 0 ? gn : 1;
++        px[i].ring = (float(px[i].gi) + 0.5f) / float(px[i].gn);
++    }
++    for (int i = 0; i < s.count; ++i) {
++        const uint32_t h = s.handle[i];
++        if (i >= n) {
++            g_orig_set_int(mgr, h, 0.0f);
++            continue;
++        }
++        float rgb[3], level;
++        effect_now(c, c.effect[px[i].zone], px[i], secs, rgb, &level);
++        if (!c.part[px[i].zone]) level = 0.0f;
++        const float intensity = level > 0.01f ? c.brightness * level : 0.0f;
++        if (intensity == 0.0f && !reshape) memcpy(rgb, s.rgb[i], 12);
++        if (reshape) {
++            dirty |= remote_write_preset(c.shape, s.preset[i], s.ref.template_preset, rgb);
++            memcpy(s.rgb[i], rgb, 12);
++        } else if (std::fabs(rgb[0] - s.rgb[i][0]) + std::fabs(rgb[1] - s.rgb[i][1]) + std::fabs(rgb[2] - s.rgb[i][2]) >
++                   0.002f) {
++            uintptr_t p = beam_preset(g_rn.beams, s.preset[i]);
++            if (p && wr(p + kPreRgb, rgb, 12)) dirty = true;
++            memcpy(s.rgb[i], rgb, 12);
++        }
++        float local[3], w[3];
++        edge_point(s.ref, c.shape, i, local);
++        qrot(car_rot, local, w);
++        alignas(16) const float pos[4] = {world[12] + w[0], world[13] + w[1], world[14] + w[2], 1.0f};
++        g_orig_set_pos(mgr, h, pos);
++        g_orig_set_dir(mgr, h, rot);
++        g_orig_set_int(mgr, h, intensity);
++        remote_glow_off(h);
++    }
++    if (reshape) s.shape_sig = shape_sig;
++    if (dirty) {
++        const uint8_t one = 1;
++        wr(g_rn.beams + kBeamDirty, &one, 1);
++    }
++    s.placed = c.shape;
++    s.placed_n = n;
++    s.lit = true;
++}
++
++// Once a frame on the light thread, after the player's neon (g_neon_lock held): which cars to show, then each.
++void remote_frame(const Reference& ref) {
++    if (!g_cs_on.load(std::memory_order_acquire)) return;
++    const uint64_t now = GetTickCount64();
++    if (g_rn.manager != ref.manager || g_rn.beams != ref.beams) {   // another light manager: start over
++        g_rn = RemotePool{};
++        g_rn.manager = ref.manager;
++        g_rn.beams = ref.beams;
++        g_rn.glows = ref.glows;
++    }
++    g_rn.last_frame = now;
++    if (now - g_rn.info_tick >= 1000) {
++        CsInfo info{};
++        info.size = sizeof info;
++        g_rn.sync = g_cs.info(&info) > 0 && (info.flags & 1u);
++        g_rn.info_tick = now;
++    }
++    static RemoteCar cars[kMaxRemoteCars];
++    AcquireSRWLockShared(&g_rc_lock);
++    memcpy(cars, g_rc, sizeof cars);
++    ReleaseSRWLockShared(&g_rc_lock);
++
++    ugr::Candidate cand[kMaxRemoteCars];
++    int of[kMaxRemoteCars], nc = 0;
++    alignas(16) float world[16] = {}, me_rot[4];
++    const bool me = g_rn.sync && car_rotation(ref.pres, world, me_rot);
++    const float my_pos[3] = {world[12], world[13], world[14]};
++    for (int i = 0; me && i < kMaxRemoteCars; ++i) {
++        const RemoteCar& r = cars[i];
++        alignas(16) float w[16], q[4];
++        if (!r.car || !r.has || !r.style.on || !r.style.parts || now - r.seen > 250 || !car_rotation(r.pres, w, q))
++            continue;
++        cand[nc] = {r.car, {w[12], w[13], w[14]}};
++        of[nc++] = i;
++    }
++    int chosen[ugr::kMaxCars];
++    const int k = me ? ugr::select_nearest(cand, nc, my_pos, ugr::kMaxDistance, ugr::kMaxCars, chosen) : 0;
++
++    // Cars no longer chosen go dark and free their slot; the newly chosen take free ones.
++    for (RemoteNeon& s : g_rn.slot) {
++        bool keep = false;
++        for (int j = 0; j < k && s.car; ++j) keep |= cars[of[chosen[j]]].car == s.car && cars[of[chosen[j]]].pres == s.pres;
++        if (s.car && !keep) remote_release(s);
++    }
++    const double secs = double(g_game_us.load(std::memory_order_relaxed) % 86400000000ull) / 1e6;
++    for (int j = 0; j < k; ++j) {
++        const RemoteCar& r = cars[of[chosen[j]]];
++        RemoteNeon* s = nullptr;
++        for (RemoteNeon& t : g_rn.slot)
++            if (t.car == r.car) s = &t;
++        for (RemoteNeon& t : g_rn.slot)
++            if (!s && !t.car) s = &t;
++        if (!s) continue;   // can't happen: kMaxCars slots for at most kMaxCars cars
++        if (!s->car) {
++            s->car = r.car;
++            s->pres = r.pres;
++            s->geo_tick = 0;
++            s->shape_sig = 0;
++        }
++        if (now - s->geo_tick >= 1000) {   // its shape again once a second (a car swap under the same pointer)
++            if (!remote_geometry(ref, s->pres, r.ordinal, &s->ref)) {
++                remote_release(*s);
++                continue;
++            }
++            s->geo_tick = now;
++        }
++        remote_car_frame(*s, r.style, secs);
++    }
++}
++
++// At the beam upload (render thread, g_neon_lock held): placed again from where each car is now, as the player's
++// neon; all dark when the light thread stopped placing them (menus, loading).
++void remote_upload(uintptr_t system) {
++    if (!g_rn.beams || g_rn.beams != system) return;
++    const bool stale = GetTickCount64() - g_rn.last_frame > 250;
++    for (RemoteNeon& s : g_rn.slot) {
++        if (!s.lit) continue;
++        if (stale) {
++            remote_release(s);
++            continue;
++        }
++        alignas(16) float world[16], car_rot[4];
++        if (!s.placed_n || !car_rotation(s.pres, world, car_rot)) continue;
++        const float down[4] = {0.70710678f, 0.0f, 0.0f, 0.70710678f};
++        alignas(16) float rot[4];
++        qmul(car_rot, down, rot);
++        void* mgr = reinterpret_cast<void*>(g_rn.manager);
++        const int n = s.placed_n < s.count ? s.placed_n : s.count;
++        for (int i = 0; i < n; ++i) {
++            float local[3], w[3];
++            edge_point(s.ref, s.placed, i, local);
++            qrot(car_rot, local, w);
++            alignas(16) const float pos[4] = {world[12] + w[0], world[13] + w[1], world[14] + w[2], 1.0f};
++            g_orig_set_pos(mgr, s.handle[i], pos);
++            g_orig_set_dir(mgr, s.handle[i], rot);
++        }
++    }
++}
++
+ void detour_set_int(void* mgr, uint32_t handle, float v) {
+     g_orig_set_int(mgr, handle, v);
+ 
+@@ -2168,6 +2767,8 @@ void detour_set_int(void* mgr, uint32_t handle, float v) {
+     bool player_light = false;
+     for (int k = 0; mine && k < ref.lights; ++k) player_light |= ref.handle[k] == handle;
+     if (player_light) neon_frame(ref);
++    // The other players' neon once a frame: at the player's first light (or 50 ms on, if that one wasn't set).
++    if (player_light && (handle == ref.handle[0] || GetTickCount64() - g_rn.last_frame > 50)) remote_frame(ref);
+     ReleaseSRWLockExclusive(&g_neon_lock);
+ }
+ 
+@@ -2217,6 +2818,7 @@ void upload(const Kind& k, UploadFn orig, void* system_p, void* graphics) {
+     if (&k == &kBeam && TryAcquireSRWLockExclusive(&g_neon_lock)) {
+         if (g_neon.lit && GetTickCount64() - g_neon.last_frame > 250 && g_neon.beams == system) neon_dark();
+         else if (g_neon.lit && g_neon.beams == system) place_again();
++        remote_upload(system);
+         ReleaseSRWLockExclusive(&g_neon_lock);
+     }
+ 
+@@ -2274,6 +2876,22 @@ void cmd_status(char* reply, size_t size) {
+              c.part[kZoneLeft] ? "left" : "", s.side, s.front, s.rear, s.height, s.front_inset, s.rear_inset, s.side_offset, s.side_trim, s.range, s.power, s.inner,
+              s.outer, g_player_car_id.load(), ref.half_width, ref.db_width ? "from the game's data" : "from its lights",
+              ref.front, ref.rear, ref.db_length ? "from the game's data" : "from its lights", n.count, n.lit ? "lit" : "dark", kit, radio, n.problem);
++    // Infinity: the other players' neon (CR-L53).
++    int shown = 0, lights = 0;
++    bool sync = false;
++    AcquireSRWLockExclusive(&g_neon_lock);
++    for (const RemoteNeon& rn : g_rn.slot) {
++        shown += rn.lit ? 1 : 0;
++        lights += rn.count;
++    }
++    sync = g_rn.sync;
++    ReleaseSRWLockExclusive(&g_neon_lock);
++    const size_t at2 = strlen(reply);
++    if (at2 + 1 < size)
++        snprintf(reply + at2, size - at2, "\nother players' neon: %s, %d car(s) shown, %d light(s) made (at most %d cars "
++                                          "within %g m, %d lights each)",
++                 !g_cs_on.load() ? "off (no Infinity car-state sync in this game)" : sync ? "sync on" : "sync off now",
++                 shown, lights, ugr::kMaxCars, double(ugr::kMaxDistance), ugr::kMaxLights);
+ }
+ 
+ void cmd_tune(const char* args, char* reply, size_t size) {
+diff --git a/src/ug_remote.h b/src/ug_remote.h
+new file mode 100644
+index 0000000..4d2c37c
+--- /dev/null
++++ b/src/ug_remote.h
+@@ -0,0 +1,179 @@
++// Underglow on the other players' cars (Infinity: CR-L53, OD-248): the pure parts, without the game or Windows, so a
++// host test can check them (InfinityMods mods/underglow/tests).
++//
++// - The blob: the local car's look in 40 bytes (Underglow blob, sync id 1, layout version 1), given to the Infinity
++//   hook's car-state sync and read back on the other players' PCs. Big-endian, as the rest of the wire.
++//
++//   byte  0      flags: bit 0 the neon is on
++//         1      the lit parts, bit z: 0 front, 1 right, 2 rear, 3 left (switched on and on the car's kit)
++//         2      the LED level, 1..3
++//         3      0
++//         4..7   the primary color, RGB8;   7..10 the secondary
++//         10..14 the effect of each zone (front, right, rear, left)
++//         14..16 brightness u16, 1/1000;    16..18 speed u16, 1/1000 cycles a second
++//         18..21 Lv1 lights: side, front, rear
++//         21     0
++//         22..32 height, front inset, rear inset, side offset, side trim: i16 millimeters
++//         32..34 range u16 cm;  34..36 power u16, 1/100;  36, 37 inner, outer cone degrees
++//         38..40 0
++//
++//   A receiver checks every byte: a blob that breaks this shape is dropped (that car shows no neon). A later layout
++//   version (compatible additions only: the sync id changes for anything else) may be longer; its first 40 bytes
++//   are read as these and its reserved bytes are not checked. An effect this build doesn't know plays Static.
++//
++// - The cars: at most kMaxCars, the nearest within kMaxDistance meters of the player's car; kMaxLights lights each.
++#pragma once
++
++#include <cmath>
++#include <cstdint>
++#include <cstring>
++
++namespace ugr {
++
++const int kBlobSize = 40;
++const uint8_t kBlobVersion = 1;
++const int kMaxCars = 8;
++const float kMaxDistance = 150.0f;
++const int kMaxLights = 32;
++const int kMaxEdge = 64;   // Lv1 lights on one edge (the local neon's kMaxNeon)
++
++struct Style {
++    bool on = false;
++    uint8_t parts = 0;   // bit z: zone z lit
++    uint8_t led = 1;     // 1..3
++    uint8_t rgb[2][3] = {};
++    uint8_t effect[4] = {};
++    float brightness = 0.25f, speed = 0.3f;
++    int side = 10, front = 6, rear = 6;   // Lv1
++    float height = 0.01f, front_inset = 0.5f, rear_inset = 0.7f, side_offset = -0.2f, side_trim = 0.8f;
++    float range = 1.0f, power = 4.0f, inner = 60.0f, outer = 170.0f;
++};
++
++inline float clampf(float x, float lo, float hi) { return !(x >= lo) ? lo : x > hi ? hi : x; }   // NaN: lo
++inline int clampi(int x, int lo, int hi) { return x < lo ? lo : x > hi ? hi : x; }
++
++inline void put16(uint8_t* p, unsigned v) {
++    p[0] = uint8_t(v >> 8);
++    p[1] = uint8_t(v);
++}
++inline unsigned get16(const uint8_t* p) { return unsigned(p[0]) << 8 | p[1]; }
++inline unsigned q16(float x, float scale) { return unsigned(std::lround(double(clampf(x * scale, 0.0f, 65535.0f)))); }
++inline void put_mm(uint8_t* p, float meters) {
++    const long v = std::lround(double(clampf(meters * 1000.0f, -32768.0f, 32767.0f)));
++    put16(p, unsigned(uint16_t(int16_t(v))));
++}
++inline float get_mm(const uint8_t* p) { return float(int16_t(uint16_t(get16(p)))) / 1000.0f; }
++
++// The local car's look as the blob.
++inline void encode(const Style& s, uint8_t out[kBlobSize]) {
++    memset(out, 0, kBlobSize);
++    out[0] = s.on ? 1 : 0;
++    out[1] = s.parts & 0x0F;
++    out[2] = uint8_t(clampi(s.led, 1, 3));
++    memcpy(out + 4, s.rgb[0], 3);
++    memcpy(out + 7, s.rgb[1], 3);
++    memcpy(out + 10, s.effect, 4);
++    put16(out + 14, q16(s.brightness, 1000.0f));
++    put16(out + 16, q16(s.speed, 1000.0f));
++    out[18] = uint8_t(clampi(s.side, 0, kMaxEdge));
++    out[19] = uint8_t(clampi(s.front, 0, kMaxEdge));
++    out[20] = uint8_t(clampi(s.rear, 0, kMaxEdge));
++    put_mm(out + 22, s.height);
++    put_mm(out + 24, s.front_inset);
++    put_mm(out + 26, s.rear_inset);
++    put_mm(out + 28, s.side_offset);
++    put_mm(out + 30, s.side_trim);
++    put16(out + 32, q16(s.range, 100.0f));
++    put16(out + 34, q16(s.power, 100.0f));
++    out[36] = uint8_t(clampi(int(std::lround(double(clampf(s.inner, 0.0f, 180.0f)))), 0, 180));
++    out[37] = uint8_t(clampi(int(std::lround(double(clampf(s.outer, 0.0f, 180.0f)))), 0, 180));
++}
++
++// Another player's blob (`length` bytes, layout `version`), checked; false: no neon for that car. `effects`: how many
++// effects this build has. The numbers are kept to what a light can take (a hostile blob can't blow a light up).
++inline bool decode(const uint8_t* b, int length, uint8_t version, int effects, Style* out) {
++    if (!b || version < 1 || length < kBlobSize || length > 64 || (version == 1 && length != kBlobSize)) return false;
++    if (version == 1 && ((b[0] & ~1u) || b[3] || b[21] || b[38] || b[39])) return false;
++    if ((b[1] & 0xF0u) || b[2] < 1 || b[2] > 3 || b[18] > kMaxEdge || b[19] > kMaxEdge || b[20] > kMaxEdge ||
++        b[36] > 180 || b[37] > 180)
++        return false;
++    Style s;
++    s.on = b[0] & 1;
++    s.parts = b[1];
++    s.led = b[2];
++    memcpy(s.rgb[0], b + 4, 3);
++    memcpy(s.rgb[1], b + 7, 3);
++    for (int z = 0; z < 4; ++z) s.effect[z] = b[10 + z] < effects ? b[10 + z] : 0;
++    s.brightness = clampf(float(get16(b + 14)) / 1000.0f, 0.0f, 4.0f);
++    s.speed = clampf(float(get16(b + 16)) / 1000.0f, 0.0f, 10.0f);
++    s.side = b[18];
++    s.front = b[19];
++    s.rear = b[20];
++    s.height = clampf(get_mm(b + 22), -1.0f, 1.0f);
++    s.front_inset = clampf(get_mm(b + 24), -2.0f, 3.0f);
++    s.rear_inset = clampf(get_mm(b + 26), -2.0f, 3.0f);
++    s.side_offset = clampf(get_mm(b + 28), -1.0f, 1.0f);
++    s.side_trim = clampf(get_mm(b + 30), 0.0f, 3.0f);
++    s.range = clampf(float(get16(b + 32)) / 100.0f, 0.05f, 20.0f);
++    s.power = clampf(float(get16(b + 34)) / 100.0f, 0.0f, 50.0f);
++    s.inner = float(b[36]);
++    s.outer = float(b[37]);
++    if (s.inner > s.outer) s.inner = s.outer;
++    *out = s;
++    return true;
++}
++
++// The lights down each side, across the front and the back, cut to at most `max` in all (2 * side + front + rear),
++// each edge in proportion (Lv3's 20/12/12 is Lv1's 10/6/6 again); what rounding leaves goes to the front and the back.
++inline void cap_lights(int* side, int* front, int* rear, int max) {
++    *side = clampi(*side, 0, kMaxEdge);
++    *front = clampi(*front, 0, kMaxEdge);
++    *rear = clampi(*rear, 0, kMaxEdge);
++    const int total = 2 * *side + *front + *rear;
++    if (max < 0) max = 0;
++    if (total <= max) return;
++    const int s0 = *side, f0 = *front, r0 = *rear;
++    *side = s0 * max / total;
++    *front = f0 * max / total;
++    *rear = r0 * max / total;
++    int left = max - (2 * *side + *front + *rear);
++    while (left > 0) {
++        if (*front < f0 && (*front <= *rear || *rear >= r0)) ++*front, --left;
++        else if (*rear < r0) ++*rear, --left;
++        else if (left >= 2 && *side < s0) ++*side, left -= 2;
++        else break;
++    }
++}
++
++struct Candidate {
++    uintptr_t key;    // the car
++    float pos[3];     // where it is (world, meters)
++};
++
++// The nearest `max_out` candidates within `max_m` of `me`, nearest first (equal distances: the lower key first), as
++// indices into `c`; returns how many. Positions that aren't finite never count.
++inline int select_nearest(const Candidate* c, int n, const float me[3], float max_m, int max_out, int* out) {
++    int k = 0;
++    float dist[64];
++    if (max_out > 64) max_out = 64;
++    for (int i = 0; i < n; ++i) {
++        const float dx = c[i].pos[0] - me[0], dy = c[i].pos[1] - me[1], dz = c[i].pos[2] - me[2];
++        const float d2 = dx * dx + dy * dy + dz * dz;
++        if (!std::isfinite(d2) || d2 > max_m * max_m) continue;
++        // insertion into the sorted list, dropping what falls past max_out
++        int at = k;
++        while (at > 0 && (dist[at - 1] > d2 || (dist[at - 1] == d2 && c[out[at - 1]].key > c[i].key))) --at;
++        if (at >= max_out) continue;
++        const int last = k < max_out ? k : max_out - 1;
++        for (int j = last; j > at; --j) {
++            dist[j] = dist[j - 1];
++            out[j] = out[j - 1];
++        }
++        dist[at] = d2;
++        out[at] = i;
++        if (k < max_out) ++k;
++    }
++    return k;
++}
++
++} // namespace ugr
