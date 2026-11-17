@@ -16,10 +16,12 @@
       "platform/third_party/minhook/src/hook.c",
       "platform/third_party/minhook/src/buffer.c",
       "platform/third_party/minhook/src/trampoline.c",
-      "platform/third_party/minhook/src/hde/hde64.c"
+      "platform/third_party/minhook/src/hde/hde64.c",
+      "platform/src/l10n.cpp"
     ],
     "includes": [
       "platform/include",
+      "platform/src",
       "platform/third_party/minhook/include"
     ],
     "libraries": []

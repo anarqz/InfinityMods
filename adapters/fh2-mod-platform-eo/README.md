@@ -13,8 +13,10 @@ by itself. Nothing of the mod is compiled or shipped here. That matters: these m
 XAML, camera presets, textures) in their DLL, which must never be in an Infinity package (the monorepo's AGENTS.md,
 rule 3), and an upstream update needs only a new pin (`tools/infmods.py sync`), not a port.
 
-`fh2_mod_platform_eo_adapter.cpp` and MinHook (the copy in the mod's `platform/third_party/minhook`, at the commit the
-release was built from) are compiled with MSVC (`toolchain: msvc`) against the mod's own `platform/include/fh2mod.h`.
+`fh2_mod_platform_eo_adapter.cpp`, `fh2_mod_platform_eo_l10n.cpp`, MinHook (the copy in the mod's
+`platform/third_party/minhook`) and the platform's own translations, `platform/src/l10n.cpp` (unchanged), all at the commit
+the release was built from, are compiled with MSVC (`toolchain: msvc`) against the mod's own `platform/include/fh2mod.h`
+and `platform/src` headers (the recipe's `upstream.sources` and `includes`).
 `tools/infmods.py` writes `fh2_mod_platform_eo_config.h` (`FH2MP_EO_MOD_DLL`) from the recipe. The DLL exports
 `FH2PluginInitialize`, `FH2PluginMediaDirectory` and `FH2PluginDatabaseUpdate` (ExtraOptions' plugin ABI 1,
 `fh2/tools/PLUGIN_API.md`): it loads the mod's DLL with its full path and calls its `fh2mod_init` with an
@@ -36,7 +38,9 @@ release was built from) are compiled with MSVC (`toolchain: msvc`) against the m
 | `publish_interface`, `get_interface`, `wait_for_mods` | the broker keeps the interfaces every adapter's mod publishes (64; a name already taken is refused), so FH2 ANNA's menu and NitroSystem's control work between the mods' folders; `get_interface` gives one whose version is at least the one asked for. `wait_for_mods` waits until every adapter has started its mod (3 s after the last `fh2mod_init` returned, 30 s at most), up to its timeout; from inside `fh2mod_init` it returns 0 at once. ExtraOptions starts the mods in load order, so a mod that looks an interface up in its `fh2mod_init` finds it when the publisher loads first (a manifest dependency: Underglow on `fh2-anna`) |
 | string tables, notices, Mods pages, title entries, hotkeys, commands, session logs, save snapshots, dump ranges | not provided: each reports "not added" (0 / `nullptr`) |
 | `playing_online` | 0 (Infinity decides where a mod may run: a mod whose impact is not cosmetic is Noob only). The platform's `FH2Platform.Online` interface (`going_online`) is not published, so `get_interface` gives `nullptr`, as on a platform before 2.9.0 |
-| translations (API 10): `language`, `game_language`, `add_translation`, `tr`, `tr_plural`, `set_string_tr`, `format_number`, `format_date` | not provided; each answers as a platform before API 10 does through `fh2mod_l10n.h`'s fallbacks, so the mod shows its **English** text: `language` is `"en"`, `game_language` 0 (no language yet), `tr` / `tr_plural` give the English back, `add_translation` takes nothing, `format_number` / `format_date` 0 with `""` (the mod writes the number itself), `set_string_tr` is ignored like `set_string`. NitroSystem from 2.0.1 and Underglow from 1.1.1 moved their own translations (pt-BR among them) into the platform, so under this adapter their garage texts and Underglow's entries in FH2 ANNA's menu (Car > Lights, Car > Underglow) are English, while ANNA's own menus keep its translations |
+| translations (API 10): `language`, `add_translation`, `tr`, `tr_plural`, `format_number`, `format_date` | the platform's own `l10n.cpp`, so they work as under the platform: the mod's built-in PO catalogues, its fallbacks (pt-BR, then pt, then the English), plural rules, number and date formats, the test language. The language memory is `<id>\fh2-mods\platform-language.ini` (one per mod folder): before the game picks its language, a few seconds in, text is in the one it had last time, and on a first launch in the one the game picks for Windows' regional format (pt-BR on a Brazilian Windows). A translator's `<id>\fh2-mods\lang\<mod name>\<lang>.po` wins over the built-in one. NitroSystem (2.0.1) and Underglow (1.1.1) translate through these: their garage texts follow the game's language live (they look their texts up as the game asks), as do Underglow's entries in FH2 ANNA's menu |
+| `game_language` (API 10) | the game's text language, read as the platform's `lang.cpp` reads it (the string tables' manager at game+0x3662990, its code an MSVC `std::string` at +0x30) from the image ExtraOptions hands over, only when that image is the FH2 build the address belongs to (its size, 0x3A18000, as the platform checks), each read guarded (SEH); 0 until the game has one. The platform's own log lines ("Language: ...") name the mod's folder |
+| `set_string_tr` (API 10) | ignored like `set_string` (no string tables here) |
 | `set_setting_text`, `set_mod_description` (API 10) | accepted, never shown (like the rows) |
 | UI templates (API 10): `ui_status`, `ui_uses`, `play_ui_sound`, pop-ups, tips, message boxes, page help and hints | not provided: `ui_status` 0 (nothing works), each call 0 ("not shown"); `clear_toast` and `set_tip_seen` do nothing |
 
@@ -44,6 +48,10 @@ release was built from) are compiled with MSVC (`toolchain: msvc`) against the m
 is not ABI 1 for Azimuth, the DLL is not in `plugins\`, MinHook cannot start, the mod's DLL is missing or has no
 `fh2mod_init`, or `fh2mod_init` fails (its hooks are then switched off and its files removed). Underglow checks `ForzaCar::Update`'s stock bytes before hooking it and stays off ("this isn't the FH2 build Underglow knows") when anything has patched it first: NitroSystem's hook when Nitro starts earlier, and online the Infinity hook's headlight and roof sync (its 14-byte detour there, CARSTATE). That check is Underglow's own; the adapter cannot change it. A mod built against another platform API than 10 does not compile here
 (`static_assert`): `tools/infmods.py sync` reports it, and the table must be updated for the new header first.
+
+`tests/run_tests.py` (any OS but MSVC: g++, clang++ or `zig c++`) runs the translations on a host:
+`fh2_mod_platform_eo_l10n.cpp` and each mod's own `platform/src/l10n.cpp` against `tests/shim/windows.h`, with
+NitroSystem's and Underglow's built-in catalogues and a fake game image whose language changes.
 
 ExtraOptions activates a mod's private media only when its ordinary `media` folder exists at startup, so every package
 ships `media/README.txt` (this folder's `media-README.txt`).
