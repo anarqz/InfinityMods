@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "extraoptions-garagerevving",
   "version": "1.0.0",
   "download": {
@@ -8,51 +8,23 @@
     "bytes": 1305861
   },
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "GPL-3.0",
     "homepage": "https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
     "files": {
-      "game": [],
       "azimuth": [
         {
-          "source": "mods/Forza Horizon 2/Extra Options - Garage Revving/plugins/EO_GarageEngineRev.dll",
-          "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/plugins/EO_GarageEngineRev.dll",
-          "role": "binary",
-          "mode": "add-or-replace",
-          "sha256": "ba6b6df6446c1c0d9f6045759b57e215ba00fe26b9d40e075907dffd56e98031",
-          "bytes": 13824
+          "from": "package:mods/Forza Horizon 2/Extra Options - Garage Revving/plugins/EO_GarageEngineRev.dll",
+          "to": "plugins/",
+          "role": "binary"
         },
         {
-          "source": "mods/Forza Horizon 2/Extra Options - Garage Revving/plugins/EO_GarageEngineRev.ini",
-          "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/plugins/EO_GarageEngineRev.ini",
+          "from": "package:mods/Forza Horizon 2/Extra Options - Garage Revving/plugins/EO_GarageEngineRev.ini",
+          "to": "plugins/",
           "role": "config",
-          "mode": "seed",
-          "sha256": "10df73d3328978a2d19a4b238b4d8552ef484e0a408f4dd4bf859df7551e1bff",
-          "bytes": 77
+          "mode": "seed"
         },
-        {
-          "source": "mods/Forza Horizon 2/Extra Options - Garage Revving/mod.json",
-          "destination": "mods/Forza Horizon 2/extraoptions-garagerevving/mod.json",
-          "role": "asset",
-          "mode": "add-or-replace",
-          "sha256": "4f70c5538490f61011f854c7afcdcea91658417aa54bafad98c5e61ea28af00f",
-          "bytes": 262
-        }
+        {"from": "package:mods/Forza Horizon 2/Extra Options - Garage Revving/"}
       ]
     },
     "config": {
@@ -65,10 +37,7 @@
           "id": "logging-enabled",
           "section": "Logging",
           "key": "Enabled",
-          "label": {
-            "en": "Write a log",
-            "pt-BR": "Gravar um log"
-          },
+          "label": {"en": "Write a log", "pt-BR": "Gravar um log"},
           "description": {
             "en": "Writes EO_GarageEngineRev.log beside its settings file. Applied on the next game launch.",
             "pt-BR": "Grava o EO_GarageEngineRev.log ao lado do arquivo de configuração. Aplicado na próxima inicialização do jogo."
@@ -81,20 +50,7 @@
         }
       ]
     },
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
-    "source": {
-      "repository": "https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions",
-      "commit": ""
-    },
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "cosmetic",
-      "compatibilityId": "extraoptions-garagerevving",
-      "revision": 2,
-      "match": "exact",
-      "settings": []
-    }
+    "source": {"repository": "https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions", "commit": ""},
+    "multiplayer": {"impact": "cosmetic", "revision": 2}
   }
 }

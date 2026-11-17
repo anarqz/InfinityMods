@@ -1,272 +1,33 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "fm5-zs-rally-legends-pack",
   "version": "1.0.5",
   "externalSources": [
     {
       "id": "pack",
-      "kind": "either",
-      "label": {
-        "en": "ZS Rally Legends Pack",
-        "pt-BR": "ZS Rally Legends Pack"
-      },
-      "help": {
-        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
-        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
-      },
-      "hint": "ZS FM5 Addon Packs"
+      "label": {"en": "ZS Rally Legends Pack", "pt-BR": "ZS Rally Legends Pack"},
+      "source": "zs-fm5-addon-packs",
+      "tree": {
+        "sha256": "e7c8dadfd0a81c2f7eadee0bfd112f59917b76832c25c8e94ef6ea035d2d64ea",
+        "files": 26,
+        "bytes": 131735109,
+        "anchor": "mod.json"
+      }
     }
   ],
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "Unknown. Player-supplied files; Infinity never distributes them.",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [
-      {
-        "id": "fm5-zs-fm5-common",
-        "versions": [
-          "1.0.0"
-        ]
-      }
-    ],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
+    "dependencies": [{"id": "fm5-zs-fm5-common", "versions": ["1.0.0"]}],
     "files": {
-      "game": [],
       "azimuth": [
         {
-          "source": "pack:ZS FM5 Rally Legends Pack/database.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/database.json",
-          "sha256": "417bce2e5ed332bffe0376233ec88334331279e5486edf4e746ce401ea047192",
-          "bytes": 506445,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
-          "sha256": "500e70b54c45960abe221757c9e8b4cc7a398bc4afb15b8eba006b3c44e197eb",
-          "bytes": 2583296,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/audio/fmodanthem/durango/PG_EAG_Talon_98.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/audio/fmodanthem/durango/PG_EAG_Talon_98.bank",
-          "sha256": "ec62d62ace847413670d4c4a9d4e7d04fdaae8ad141346cb8eba3cc5923a918d",
-          "bytes": 2266848,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/audio/fmodanthem/durango/PG_MIT_EclipseGSX_95.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/audio/fmodanthem/durango/PG_MIT_EclipseGSX_95.bank",
-          "sha256": "9a6f79f1180fd374f652fb7341307dd1694dd5be5738697f18e4aba3f27df13a",
-          "bytes": 2267232,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/audio/fmodanthem/durango/PG_SUB_H6Engine_12_EN.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/audio/fmodanthem/durango/PG_SUB_H6Engine_12_EN.bank",
-          "sha256": "c391a901b59d06f29ad091d1b0541ace793301afeff2ddefb95c3bac119ee0b6",
-          "bytes": 1798144,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/audio/fmodanthem/durango/PG_SUB_WRXSTi_04.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/audio/fmodanthem/durango/PG_SUB_WRXSTi_04.bank",
-          "sha256": "1b0890ca5d5e9f312a285c15bd6650ffa58a68dfa09481797b6f0a80f4d24f76",
-          "bytes": 2013600,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/audio/fmodanthem/durango/PG_TOY_CelicaST185_90.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/audio/fmodanthem/durango/PG_TOY_CelicaST185_90.bank",
-          "sha256": "ec524c005c18aa8d2eb24907576f4d55b2398635111a88d4d67f268c6aad53f2",
-          "bytes": 2296832,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/cars/EAG_Talon_98.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/cars/EAG_Talon_98.zip",
-          "sha256": "c4c2db063a41af919d10539fd608fa62702b24218710a497c122ceb429252324",
-          "bytes": 18348939,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/cars/MIT_EclipseGSX_95.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/cars/MIT_EclipseGSX_95.zip",
-          "sha256": "b873a0dabbe380169825f4305eee73d729decaf5cdd0508ec89b5b6b9afe408d",
-          "bytes": 31031623,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/cars/PEU_205T16_84.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/cars/PEU_205T16_84.zip",
-          "sha256": "ae341e2ff5d63c25d4f5425cf59522a2f9ea3310357685c8104d9b4e11c9f1fc",
-          "bytes": 21600708,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/cars/SUB_WRXSTi_04.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/cars/SUB_WRXSTi_04.zip",
-          "sha256": "8583cd49a93b5a31f7eb068ef16b2994dad9a1ad60fea7ea17ae028632cfa8bf",
-          "bytes": 14447554,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/cars/TOY_CelicaST185_90.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/cars/TOY_CelicaST185_90.zip",
-          "sha256": "91b50d339b7283dff0200728c9d83eec4efc0fa3205bc928b4d2e0cd91609552",
-          "bytes": 29523515,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/stripped/RC0/L_Manu_Logo_EAG.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/stripped/RC0/L_Manu_Logo_EAG.swatchbin",
-          "sha256": "14758daabf19af31cc2ef1880c1ecfee7d100e86925fd755ade25539a4bc943b",
-          "bytes": 196692,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/stripped/RC0/Manu_Logo_EAG.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/stripped/RC0/Manu_Logo_EAG.swatchbin",
-          "sha256": "4d5499ec6fd3d46fdfcd2dcff5c232363eea3f7940cb669e7af9f66598623d6b",
-          "bytes": 65620,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/stripped/RC0/Thumbnail_1517_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/stripped/RC0/Thumbnail_1517_Big.swatchbin",
-          "sha256": "0f6645fa1817de8d542bee62fe31922a5f7933f180c6b311d3000be1e2133596",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/stripped/RC0/Thumbnail_1517_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/stripped/RC0/Thumbnail_1517_Small.swatchbin",
-          "sha256": "c3f506b0888e53540371081d21a6285761a12ec27996148d791d02d2996eec51",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/stripped/RC0/Thumbnail_1591_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/stripped/RC0/Thumbnail_1591_Big.swatchbin",
-          "sha256": "185ef2469788b14555a29522f92526c13b3f098f3299670e1b4c8a44705049cc",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/stripped/RC0/Thumbnail_1591_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/stripped/RC0/Thumbnail_1591_Small.swatchbin",
-          "sha256": "d9ea660885f9071a327f719259720a0e6a99c7c9700f849a6d2e97443bb7b1bf",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/stripped/RC0/Thumbnail_327_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/stripped/RC0/Thumbnail_327_Big.swatchbin",
-          "sha256": "29e368a02979209d076f12d4af63caf81ddf9c0132b64c3f2a0802eb2b3ef0ef",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/stripped/RC0/Thumbnail_327_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/stripped/RC0/Thumbnail_327_Small.swatchbin",
-          "sha256": "d2b2a515135234d20b2a7e34c950babce75e4c27fb220f25330d1636735773b8",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/stripped/RC0/Thumbnail_364_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/stripped/RC0/Thumbnail_364_Big.swatchbin",
-          "sha256": "b3124b4572ad8ac75c5d9ef442facef8c26662b6c9c5e438b1958d5dc0f8ac85",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/stripped/RC0/Thumbnail_364_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/stripped/RC0/Thumbnail_364_Small.swatchbin",
-          "sha256": "186d62704d78a218b0e0f66703a07a3329d71c49a759652c8968f9cb5edfb797",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/stripped/RC0/Thumbnail_462_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/stripped/RC0/Thumbnail_462_Big.swatchbin",
-          "sha256": "420d0cbe7f3e8aefb71b5d109adaa63c7bfdb780ec2aeffb5bc59e3fed8b1262",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/media/stripped/RC0/Thumbnail_462_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/media/stripped/RC0/Thumbnail_462_Small.swatchbin",
-          "sha256": "5c15eefc33fa0057a74e0c2f48145c67967a8424c7c9905818ba8753193a5754",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/mod.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/mod.json",
-          "sha256": "67741d4756844dd1f573e9ed8dda04f16cbf86b14eebb059a7ed3d476edd4933",
-          "bytes": 479,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Rally Legends Pack/strings.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-rally-legends-pack/strings.json",
-          "sha256": "97f27731a3206af2281389449401881c82ddf5aaac9b3a6979cc2bda5931071a",
-          "bytes": 1462,
-          "role": "asset",
-          "mode": "add-or-replace"
+          "from": "pack:ZS FM5 Rally Legends Pack/",
+          "include": ["database.json", "media/**", "mod.json", "strings.json"]
         }
       ]
     },
-    "config": null,
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "gameplay",
-      "compatibilityId": "fm5-zs-rally-legends-pack",
-      "revision": 1,
-      "match": "exact",
-      "settings": []
-    },
+    "multiplayer": {"impact": "gameplay"},
     "countsAsModded": false
   }
 }

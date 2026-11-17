@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "nitrosystem",
   "version": "2.0.0-infinity.3",
   "download": {
@@ -15,109 +15,25 @@
     }
   },
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "MIT",
     "homepage": "https://github.com/anarqz/InfinityMods",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
     "files": {
-      "game": [],
       "azimuth": [
+        {"from": "upstream-assets:FnFNitro-2.0.0/azimuth-windows/fh2-mods/", "to": "fh2-mods/", "role": "binary"},
         {
-          "source": "FnFNitro-2.0.0/azimuth-windows/fh2-mods/FnFNitro.dll",
-          "destination": "mods/Forza Horizon 2/nitrosystem/fh2-mods/FnFNitro.dll",
-          "sha256": "a695c4a858e949001fab185db56e5f0365d14061dd3bcb6dfe0a5b3179c37325",
-          "bytes": 2603520,
-          "role": "binary",
-          "mode": "add-or-replace",
-          "package": "upstream-assets"
+          "from": "upstream-assets:FnFNitro-2.0.0/licenses/LICENSE-NitroSystem.txt",
+          "to": "LICENSE.txt",
+          "role": "license"
         },
-        {
-          "source": "FnFNitro-2.0.0/licenses/LICENSE-NitroSystem.txt",
-          "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE.txt",
-          "sha256": "be4891b23bcb10c0f757f2385d89709057d929a75299aeb2eed296ccee01b33b",
-          "bytes": 1092,
-          "role": "license",
-          "mode": "add-or-replace",
-          "package": "upstream-assets"
-        },
-        {
-          "source": "NitroSystem.Infinity.dll",
-          "destination": "mods/Forza Horizon 2/nitrosystem/plugins/NitroSystem.Infinity.dll",
-          "role": "binary",
-          "mode": "add-or-replace",
-          "sha256": "72b89dbc8685c19b8413a5d7862e05550bca0476e6afd0bc57980b5d9b0edd7c",
-          "bytes": 173056
-        },
-        {
-          "source": "mod.json",
-          "destination": "mods/Forza Horizon 2/nitrosystem/mod.json",
-          "role": "asset",
-          "mode": "add-or-replace",
-          "sha256": "3f14a17f0396c2d0440a86e011ac1266663720043040de9184fa8a84d7fc8d29",
-          "bytes": 177
-        },
-        {
-          "source": "database.json",
-          "destination": "mods/Forza Horizon 2/nitrosystem/database.json",
-          "role": "asset",
-          "mode": "add-or-replace",
-          "sha256": "a35e92aa8740789f1584b7b3ce216a2001145c450e78a4454f0175c9fce74b0c",
-          "bytes": 187
-        },
-        {
-          "source": "media/README.txt",
-          "destination": "mods/Forza Horizon 2/nitrosystem/media/README.txt",
-          "role": "asset",
-          "mode": "add-or-replace",
-          "sha256": "a0b2834ab96df315fa062000e8be27354bf3a784f0850bd038c78ad05f2a5e97",
-          "bytes": 327
-        },
-        {
-          "source": "NOTICE.md",
-          "destination": "mods/Forza Horizon 2/nitrosystem/NOTICE.md",
-          "role": "license",
-          "mode": "add-or-replace",
-          "sha256": "c7d3770edba76d46dd62e843734a51b30efb5ec52667ece64fd2ca8e7d9ebc4c",
-          "bytes": 1927
-        },
-        {
-          "source": "LICENSE-Infinity.txt",
-          "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE-Infinity.txt",
-          "role": "license",
-          "mode": "add-or-replace",
-          "sha256": "273ac90b4f4411cc341cb66aa12c12cd8b2d462429f4e67b40472e8cf65c38b6",
-          "bytes": 1141
-        },
-        {
-          "source": "LICENSE-FH2-Mod-Platform.txt",
-          "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE-FH2-Mod-Platform.txt",
-          "role": "license",
-          "mode": "add-or-replace",
-          "sha256": "592160090948f630b488f0766d5dda6c0345396dfb2f98cceeed54bea448dcf9",
-          "bytes": 1067
-        },
-        {
-          "source": "LICENSE-MinHook.txt",
-          "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE-MinHook.txt",
-          "role": "license",
-          "mode": "add-or-replace",
-          "sha256": "d5c2224982b0b95a16b098a561335fa93f3eaf4d0aa964b7843edb986df78dc8",
-          "bytes": 4365
-        }
+        {"from": "package:media/", "to": "media/"},
+        {"from": "package:LICENSE-FH2-Mod-Platform.txt", "role": "license"},
+        {"from": "package:LICENSE-Infinity.txt", "role": "license"},
+        {"from": "package:LICENSE-MinHook.txt", "role": "license"},
+        {"from": "package:NOTICE.md", "role": "license"},
+        {"from": "package:NitroSystem.Infinity.dll", "to": "plugins/", "role": "binary"},
+        {"from": "package:database.json"},
+        {"from": "package:mod.json"}
       ]
     },
     "config": {
@@ -131,10 +47,7 @@
           "id": "nitroenabled",
           "section": "Settings",
           "key": "NitroEnabled",
-          "label": {
-            "en": "Nitro System",
-            "pt-BR": "Sistema de Nitro"
-          },
+          "label": {"en": "Nitro System", "pt-BR": "Sistema de Nitro"},
           "description": {
             "en": "Turns the Fast & Furious NOS on or off. Hold the NOS Button while driving to boost. Applied on the next game launch.",
             "pt-BR": "Liga ou desliga o NOS de Fast & Furious. Segure o Botão do NOS enquanto dirige para acelerar. Aplicado na próxima inicialização do jogo."
@@ -149,10 +62,7 @@
           "id": "nitrobutton",
           "section": "Settings",
           "key": "NitroButton",
-          "label": {
-            "en": "NOS Button",
-            "pt-BR": "Botão do NOS"
-          },
+          "label": {"en": "NOS Button", "pt-BR": "Botão do NOS"},
           "description": {
             "en": "Which button burns NOS. Pick one the game doesn't use while driving. Applied on the next game launch.",
             "pt-BR": "O botão que usa o NOS. Escolha um que o jogo não use ao dirigir. Aplicado na próxima inicialização do jogo."
@@ -162,128 +72,29 @@
           "type": "enum",
           "default": "LB",
           "choices": [
-            {
-              "value": "LB",
-              "label": {
-                "en": "LB",
-                "pt-BR": "LB"
-              }
-            },
-            {
-              "value": "RB",
-              "label": {
-                "en": "RB",
-                "pt-BR": "RB"
-              }
-            },
-            {
-              "value": "A",
-              "label": {
-                "en": "A",
-                "pt-BR": "A"
-              }
-            },
-            {
-              "value": "B",
-              "label": {
-                "en": "B",
-                "pt-BR": "B"
-              }
-            },
-            {
-              "value": "X",
-              "label": {
-                "en": "X",
-                "pt-BR": "X"
-              }
-            },
-            {
-              "value": "Y",
-              "label": {
-                "en": "Y",
-                "pt-BR": "Y"
-              }
-            },
-            {
-              "value": "LS",
-              "label": {
-                "en": "LS click",
-                "pt-BR": "Clique do LS"
-              }
-            },
-            {
-              "value": "RS",
-              "label": {
-                "en": "RS click",
-                "pt-BR": "Clique do RS"
-              }
-            },
-            {
-              "value": "DPadUp",
-              "label": {
-                "en": "D-pad up",
-                "pt-BR": "Direcional para cima"
-              }
-            },
-            {
-              "value": "DPadDown",
-              "label": {
-                "en": "D-pad down",
-                "pt-BR": "Direcional para baixo"
-              }
-            },
-            {
-              "value": "DPadLeft",
-              "label": {
-                "en": "D-pad left",
-                "pt-BR": "Direcional para a esquerda"
-              }
-            },
-            {
-              "value": "DPadRight",
-              "label": {
-                "en": "D-pad right",
-                "pt-BR": "Direcional para a direita"
-              }
-            },
-            {
-              "value": "Back",
-              "label": {
-                "en": "Back",
-                "pt-BR": "Back"
-              }
-            },
-            {
-              "value": "Start",
-              "label": {
-                "en": "Start",
-                "pt-BR": "Start"
-              }
-            },
-            {
-              "value": "LT",
-              "label": {
-                "en": "LT",
-                "pt-BR": "LT"
-              }
-            },
-            {
-              "value": "RT",
-              "label": {
-                "en": "RT",
-                "pt-BR": "RT"
-              }
-            }
+            {"value": "LB", "label": {"en": "LB", "pt-BR": "LB"}},
+            {"value": "RB", "label": {"en": "RB", "pt-BR": "RB"}},
+            {"value": "A", "label": {"en": "A", "pt-BR": "A"}},
+            {"value": "B", "label": {"en": "B", "pt-BR": "B"}},
+            {"value": "X", "label": {"en": "X", "pt-BR": "X"}},
+            {"value": "Y", "label": {"en": "Y", "pt-BR": "Y"}},
+            {"value": "LS", "label": {"en": "LS click", "pt-BR": "Clique do LS"}},
+            {"value": "RS", "label": {"en": "RS click", "pt-BR": "Clique do RS"}},
+            {"value": "DPadUp", "label": {"en": "D-pad up", "pt-BR": "Direcional para cima"}},
+            {"value": "DPadDown", "label": {"en": "D-pad down", "pt-BR": "Direcional para baixo"}},
+            {"value": "DPadLeft", "label": {"en": "D-pad left", "pt-BR": "Direcional para a esquerda"}},
+            {"value": "DPadRight", "label": {"en": "D-pad right", "pt-BR": "Direcional para a direita"}},
+            {"value": "Back", "label": {"en": "Back", "pt-BR": "Back"}},
+            {"value": "Start", "label": {"en": "Start", "pt-BR": "Start"}},
+            {"value": "LT", "label": {"en": "LT", "pt-BR": "LT"}},
+            {"value": "RT", "label": {"en": "RT", "pt-BR": "RT"}}
           ]
         },
         {
           "id": "hudtheme",
           "section": "Settings",
           "key": "HudTheme",
-          "label": {
-            "en": "HUD Theme",
-            "pt-BR": "Tema da tela do jogo"
-          },
+          "label": {"en": "HUD Theme", "pt-BR": "Tema da tela do jogo"},
           "description": {
             "en": "Original: the game's HUD with a yellow NOS bar. Fast & Furious: cyan NOS bar, gears and assist icons. Applied on the next game launch.",
             "pt-BR": "Original: a tela do jogo com barra de NOS amarela. Fast & Furious: barra de NOS, marchas e ícones de assistência em ciano. Aplicado na próxima inicialização do jogo."
@@ -293,30 +104,15 @@
           "type": "enum",
           "default": "FF",
           "choices": [
-            {
-              "value": "FF",
-              "label": {
-                "en": "Fast & Furious",
-                "pt-BR": "Fast & Furious"
-              }
-            },
-            {
-              "value": "Original",
-              "label": {
-                "en": "Original",
-                "pt-BR": "Original"
-              }
-            }
+            {"value": "FF", "label": {"en": "Fast & Furious", "pt-BR": "Fast & Furious"}},
+            {"value": "Original", "label": {"en": "Original", "pt-BR": "Original"}}
           ]
         },
         {
           "id": "requirenitrouskit",
           "section": "Settings",
           "key": "RequireNitrousKit",
-          "label": {
-            "en": "Require NOS Kit",
-            "pt-BR": "Exigir kit de NOS"
-          },
+          "label": {"en": "Require NOS Kit", "pt-BR": "Exigir kit de NOS"},
           "description": {
             "en": "On: only cars with the NOS Kit (Garage > Upgrades > Custom upgrade > Engine) have NOS, and the stage sets the tank and its recharge. Off: every car has NOS, with the NOS Tank Capacity and NOS Recharge Rate. Applied on the next game launch.",
             "pt-BR": "Ligado: só carros com o kit de NOS (comprado na garagem, como melhoria do motor) têm NOS, e o estágio define o tanque e a recarga. Desligado: todos os carros têm NOS, com a capacidade do tanque de NOS e a recarga do NOS. Aplicado na próxima inicialização do jogo."
@@ -331,10 +127,7 @@
           "id": "torquescale",
           "section": "Settings",
           "key": "TorqueScale",
-          "label": {
-            "en": "NOS Boost Multiplier",
-            "pt-BR": "Multiplicador do NOS"
-          },
+          "label": {"en": "NOS Boost Multiplier", "pt-BR": "Multiplicador do NOS"},
           "description": {
             "en": "Multiplies forward acceleration while NOS is active (Spire default: 1.6x). Applied on the next game launch.",
             "pt-BR": "Multiplica a aceleração para a frente enquanto o NOS está ativo (padrão do Spire: 1,6x). Aplicado na próxima inicialização do jogo."
@@ -353,10 +146,7 @@
           "id": "duration",
           "section": "Settings",
           "key": "Duration",
-          "label": {
-            "en": "NOS Tank Capacity (sec)",
-            "pt-BR": "Capacidade do tanque de NOS (s)"
-          },
+          "label": {"en": "NOS Tank Capacity (sec)", "pt-BR": "Capacidade do tanque de NOS (s)"},
           "description": {
             "en": "Total seconds of continuous boost available in a full tank (Spire default: 20s). Ignored while Require NOS Kit is on: then the NOS Kit's stage sets the tank. Applied on the next game launch.",
             "pt-BR": "Segundos de NOS contínuo em um tanque cheio (padrão do Spire: 20 s). Ignorado com Exigir kit de NOS ligado: aí o estágio do kit de NOS define o tanque. Aplicado na próxima inicialização do jogo."
@@ -375,10 +165,7 @@
           "id": "builduptime",
           "section": "Settings",
           "key": "BuildupTime",
-          "label": {
-            "en": "NOS Buildup Time (sec)",
-            "pt-BR": "Tempo de entrada do NOS (s)"
-          },
+          "label": {"en": "NOS Buildup Time (sec)", "pt-BR": "Tempo de entrada do NOS (s)"},
           "description": {
             "en": "Time taken to ramp up to full boost torque (Spire default: 0.5s). Applied on the next game launch.",
             "pt-BR": "Tempo até chegar à força total do NOS (padrão do Spire: 0,5 s). Aplicado na próxima inicialização do jogo."
@@ -397,10 +184,7 @@
           "id": "rechargerate",
           "section": "Settings",
           "key": "RechargeRate",
-          "label": {
-            "en": "NOS Recharge Rate",
-            "pt-BR": "Recarga do NOS"
-          },
+          "label": {"en": "NOS Recharge Rate", "pt-BR": "Recarga do NOS"},
           "description": {
             "en": "Seconds of NOS restored per second while not boosting. Ignored while Require NOS Kit is on: then the NOS Kit's stage sets the recharge rate. Applied on the next game launch.",
             "pt-BR": "Segundos de NOS recuperados por segundo sem usar o NOS. Ignorado com Exigir kit de NOS ligado: aí o estágio do kit de NOS define a recarga. Aplicado na próxima inicialização do jogo."
@@ -419,10 +203,7 @@
           "id": "refillonracestart",
           "section": "Settings",
           "key": "RefillOnRaceStart",
-          "label": {
-            "en": "Refill NOS on Race Start",
-            "pt-BR": "Recarregar NOS no início da corrida"
-          },
+          "label": {"en": "Refill NOS on Race Start", "pt-BR": "Recarregar NOS no início da corrida"},
           "description": {
             "en": "Fills the NOS tank when a race starts, you quit one, you change car or you fast travel. Applied on the next game launch.",
             "pt-BR": "Enche o tanque de NOS quando uma corrida começa, quando você sai de uma, troca de carro ou faz viagem rápida. Aplicado na próxima inicialização do jogo."
@@ -437,10 +218,7 @@
           "id": "refundonrewind",
           "section": "Settings",
           "key": "RefundOnRewind",
-          "label": {
-            "en": "Refund NOS on Rewind",
-            "pt-BR": "Devolver NOS ao retroceder"
-          },
+          "label": {"en": "Refund NOS on Rewind", "pt-BR": "Devolver NOS ao retroceder"},
           "description": {
             "en": "Rewinding gives back the NOS you used since the point you rewind to. Applied on the next game launch.",
             "pt-BR": "Ao retroceder, você recebe de volta o NOS usado desde o ponto para onde voltou. Aplicado na próxima inicialização do jogo."
@@ -455,10 +233,7 @@
           "id": "drivatarnitro",
           "section": "Settings",
           "key": "DrivatarNitro",
-          "label": {
-            "en": "Drivatar NOS",
-            "pt-BR": "NOS dos Drivatars"
-          },
+          "label": {"en": "Drivatar NOS", "pt-BR": "NOS dos Drivatars"},
           "description": {
             "en": "Drivatars use NOS too, whenever they can (not before the race starts), from a tank with twice your capacity and recharge, with flames and sound. Not once they're over 100 m ahead of you, so you can catch up. Applied on the next game launch.",
             "pt-BR": "Os Drivatars também usam NOS sempre que podem (nunca antes da largada), com um tanque de capacidade e recarga duas vezes maiores que as suas, com chamas e som. Não quando estão mais de 100 m à sua frente, para você poder alcançá-los. Aplicado na próxima inicialização do jogo."
@@ -473,10 +248,7 @@
           "id": "soundvolume",
           "section": "Settings",
           "key": "SoundVolume",
-          "label": {
-            "en": "NOS Sound Volume",
-            "pt-BR": "Volume do som do NOS"
-          },
+          "label": {"en": "NOS Sound Volume", "pt-BR": "Volume do som do NOS"},
           "description": {
             "en": "Volume of the boost and stop sounds. The game's own volume sliders don't change them. Applied on the next game launch.",
             "pt-BR": "Volume dos sons do NOS. Os controles de volume do próprio jogo não os alteram. Aplicado na próxima inicialização do jogo."
@@ -495,10 +267,7 @@
           "id": "drivatarsoundvolume",
           "section": "Settings",
           "key": "DrivatarSoundVolume",
-          "label": {
-            "en": "Drivatar NOS Volume",
-            "pt-BR": "Volume do NOS dos Drivatars"
-          },
+          "label": {"en": "Drivatar NOS Volume", "pt-BR": "Volume do NOS dos Drivatars"},
           "description": {
             "en": "Volume of the Drivatars' NOS, heard from their cars (with Drivatar NOS on). 0 silences it. Applied on the next game launch.",
             "pt-BR": "Volume do NOS dos Drivatars, ouvido dos carros deles (com o NOS dos Drivatars ligado). 0 silencia. Aplicado na próxima inicialização do jogo."
@@ -517,10 +286,7 @@
           "id": "rumble",
           "section": "Settings",
           "key": "Rumble",
-          "label": {
-            "en": "NOS Controller Rumble",
-            "pt-BR": "Vibração do controle no NOS"
-          },
+          "label": {"en": "NOS Controller Rumble", "pt-BR": "Vibração do controle no NOS"},
           "description": {
             "en": "Rumbles the controller while NOS is active. The game's own rumble isn't affected. Applied on the next game launch.",
             "pt-BR": "Faz o controle vibrar enquanto o NOS está ativo. A vibração do próprio jogo não é afetada. Aplicado na próxima inicialização do jogo."
@@ -535,10 +301,7 @@
           "id": "camerashake",
           "section": "Settings",
           "key": "CameraShake",
-          "label": {
-            "en": "NOS Camera Shake",
-            "pt-BR": "Tremor da câmera no NOS"
-          },
+          "label": {"en": "NOS Camera Shake", "pt-BR": "Tremor da câmera no NOS"},
           "description": {
             "en": "How much the camera shakes while NOS is active, in the driver, hood, bumper and chase views. 0 turns it off. Applied on the next game launch.",
             "pt-BR": "Quanto a câmera treme com o NOS ativo, nas visões do piloto, capô, para-choque e perseguição. 0 desliga. Aplicado na próxima inicialização do jogo."
@@ -557,10 +320,7 @@
           "id": "fovboost",
           "section": "Settings",
           "key": "FovBoost",
-          "label": {
-            "en": "NOS Wider FOV",
-            "pt-BR": "Campo de visão maior no NOS"
-          },
+          "label": {"en": "NOS Wider FOV", "pt-BR": "Campo de visão maior no NOS"},
           "description": {
             "en": "How much wider the field of view gets while NOS is active, in the driver, hood, bumper and chase views. 0 turns it off. Applied on the next game launch.",
             "pt-BR": "Quanto o campo de visão aumenta com o NOS ativo, nas visões do piloto, capô, para-choque e perseguição. 0 desliga. Aplicado na próxima inicialização do jogo."
@@ -579,10 +339,7 @@
           "id": "vignetteenabled",
           "section": "Settings",
           "key": "VignetteEnabled",
-          "label": {
-            "en": "NOS Blue Vignette",
-            "pt-BR": "Vinheta azul do NOS"
-          },
+          "label": {"en": "NOS Blue Vignette", "pt-BR": "Vinheta azul do NOS"},
           "description": {
             "en": "A pulsing blue vignette at the screen edges while NOS is active. Applied on the next game launch.",
             "pt-BR": "Uma vinheta azul pulsante nas bordas da tela enquanto o NOS está ativo. Aplicado na próxima inicialização do jogo."
@@ -597,10 +354,7 @@
           "id": "speedlinesenabled",
           "section": "Settings",
           "key": "SpeedLinesEnabled",
-          "label": {
-            "en": "NOS Speed Lines",
-            "pt-BR": "Linhas de velocidade do NOS"
-          },
+          "label": {"en": "NOS Speed Lines", "pt-BR": "Linhas de velocidade do NOS"},
           "description": {
             "en": "Thin blue streaks flying out toward the screen edges while NOS is active, in step with the car's speed. Applied on the next game launch.",
             "pt-BR": "Finos riscos azuis voando para as bordas da tela enquanto o NOS está ativo, no ritmo da velocidade do carro. Aplicado na próxima inicialização do jogo."
@@ -615,10 +369,7 @@
           "id": "hudhide",
           "section": "Settings",
           "key": "HudHide",
-          "label": {
-            "en": "Hide NOS Gauge Without Kit",
-            "pt-BR": "Ocultar medidor sem kit"
-          },
+          "label": {"en": "Hide NOS Gauge Without Kit", "pt-BR": "Ocultar medidor sem kit"},
           "description": {
             "en": "On: the NOS gauge frame is hidden on cars without a NOS Kit. Off: an empty frame stays. Applied on the next game launch.",
             "pt-BR": "Ligado: a moldura do medidor de NOS fica oculta nos carros sem kit de NOS. Desligado: fica uma moldura vazia. Aplicado na próxima inicialização do jogo."
@@ -633,10 +384,7 @@
           "id": "backfireonallcars",
           "section": "Settings",
           "key": "BackfireOnAllCars",
-          "label": {
-            "en": "Backfire on All Cars",
-            "pt-BR": "Estouros no escape em todos os carros"
-          },
+          "label": {"en": "Backfire on All Cars", "pt-BR": "Estouros no escape em todos os carros"},
           "description": {
             "en": "Lets every car backfire, which the NOS exhaust flames need. Off leaves the game's own backfire settings alone. Applied on the next game launch.",
             "pt-BR": "Permite que todos os carros estourem no escape, o que as chamas do NOS precisam. Desligado mantém as configurações do próprio jogo. Aplicado na próxima inicialização do jogo."
@@ -651,10 +399,7 @@
           "id": "debugoverlay",
           "section": "Settings",
           "key": "DebugOverlay",
-          "label": {
-            "en": "NOS Debug Overlay",
-            "pt-BR": "Sobreposição de depuração do NOS"
-          },
+          "label": {"en": "NOS Debug Overlay", "pt-BR": "Sobreposição de depuração do NOS"},
           "description": {
             "en": "Draws NOS and flame debug info over the game (needs borderless/windowed mode). Applied on the next game launch.",
             "pt-BR": "Mostra informações de depuração do NOS e das chamas sobre o jogo (requer modo janela ou sem bordas). Aplicado na próxima inicialização do jogo."
@@ -667,25 +412,14 @@
         }
       ]
     },
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [
-      "FnFNitro-2.0.0/INSTALL.txt",
-      "FnFNitro-2.0.0/README.md",
-      "FnFNitro-2.0.0/azimuth-windows/DWrite.dll",
-      "FnFNitro-2.0.0/licenses/LICENSE-FH2-Mod-Platform.txt",
-      "FnFNitro-2.0.0/licenses/LICENSE-MinHook.txt"
-    ],
-    "databaseMigrations": [],
     "source": {
       "repository": "https://github.com/anarqz/InfinityMods",
       "commit": "a1a819f7a7607eb09a764fb41924295baef1754a"
     },
     "multiplayer": {
-      "schemaVersion": 1,
       "impact": "gameplay",
       "compatibilityId": "infinity-nitrosystem",
       "revision": 2,
-      "match": "exact",
       "settings": [
         "nitroenabled",
         "requirenitrouskit",
@@ -700,18 +434,9 @@
       ]
     },
     "incompatibleFiles": [
-      {
-        "root": "azimuth",
-        "path": "d3dcompiler_47.dll"
-      },
-      {
-        "root": "azimuth",
-        "path": "fh2-mods/FnFNitro.dll"
-      },
-      {
-        "root": "azimuth",
-        "path": "infinity-mods/NitroSystem/FnFNitro.dll"
-      }
+      {"root": "azimuth", "path": "d3dcompiler_47.dll"},
+      {"root": "azimuth", "path": "fh2-mods/FnFNitro.dll"},
+      {"root": "azimuth", "path": "infinity-mods/NitroSystem/FnFNitro.dll"}
     ]
   }
 }

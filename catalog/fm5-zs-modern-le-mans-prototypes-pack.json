@@ -1,232 +1,33 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "fm5-zs-modern-le-mans-prototypes-pack",
   "version": "1.0.5",
   "externalSources": [
     {
       "id": "pack",
-      "kind": "either",
-      "label": {
-        "en": "ZS Modern Le Mans Prototypes Pack",
-        "pt-BR": "ZS Modern Le Mans Prototypes Pack"
-      },
-      "help": {
-        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
-        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
-      },
-      "hint": "ZS FM5 Addon Packs"
+      "label": {"en": "ZS Modern Le Mans Prototypes Pack", "pt-BR": "ZS Modern Le Mans Prototypes Pack"},
+      "source": "zs-fm5-addon-packs",
+      "tree": {
+        "sha256": "584b530fc4ac91c5c154efe7410e525612ddea0a910354fd191290615d3e0e72",
+        "files": 21,
+        "bytes": 82456852,
+        "anchor": "mod.json"
+      }
     }
   ],
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "Unknown. Player-supplied files; Infinity never distributes them.",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [
-      {
-        "id": "fm5-zs-fm5-common",
-        "versions": [
-          "1.0.0"
-        ]
-      }
-    ],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
+    "dependencies": [{"id": "fm5-zs-fm5-common", "versions": ["1.0.0"]}],
     "files": {
-      "game": [],
       "azimuth": [
         {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/database.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/database.json",
-          "sha256": "fa0fe71dfe24291b1d80744c4818d6f7c67b89cf441a365f07ead7c0435ef5fc",
-          "bytes": 168015,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/audio/fmodanthem/durango/PG_AUD_1_R18_12.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/audio/fmodanthem/durango/PG_AUD_1_R18_12.bank",
-          "sha256": "2ddd096e4d7dd4b8d342dc93a41bf076e51068bceb9d78b2eb3a852802c636d5",
-          "bytes": 1272032,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/audio/fmodanthem/durango/PG_AUD_2_R8_06.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/audio/fmodanthem/durango/PG_AUD_2_R8_06.bank",
-          "sha256": "dc2b10a854f4bd68ff421a08e97d67d356d7942bfc8b3e4d1c280e2f70627c10",
-          "bytes": 2053120,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/audio/fmodanthem/durango/PG_PEU_9_908_09.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/audio/fmodanthem/durango/PG_PEU_9_908_09.bank",
-          "sha256": "341dde84f1c70d6398de9e5e0efdcaa5412454a4723ce328340b023c14897203",
-          "bytes": 1369440,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/audio/fmodanthem/durango/PG_RAD_SR8LM_10.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/audio/fmodanthem/durango/PG_RAD_SR8LM_10.bank",
-          "sha256": "59e6556902792402fbe5e0789d606d3d07a72627109eb6e0bf6b9bd39dbad46a",
-          "bytes": 2090400,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/cars/AUD_2_R8_06.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/cars/AUD_2_R8_06.zip",
-          "sha256": "2758ddab7cda42d686827330fef6ca71deac4f9b20824a9c4dbea42b98d12dc4",
-          "bytes": 21895605,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/cars/AUd_1_r18_12.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/cars/AUd_1_r18_12.zip",
-          "sha256": "8b80eb579bd1417140a607424e8314f18149515a20d7dd696dc77bb43c308d0a",
-          "bytes": 14590328,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/cars/PEU_9_908_09.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/cars/PEU_9_908_09.zip",
-          "sha256": "3acc25a9a18713984ea4ac4ae08428f2f199c5ca49416487ba72723b30c5df4e",
-          "bytes": 18376360,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/cars/RAD_SR8LM_10.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/cars/RAD_SR8LM_10.zip",
-          "sha256": "82d6f283efb133a476b9a5a7c668d65d7b88cbee2bf0d28ea5b6210d826faedf",
-          "bytes": 18280368,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/stripped/RC0/L_Manu_Logo_RAD.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/stripped/RC0/L_Manu_Logo_RAD.swatchbin",
-          "sha256": "58b9df73c7d7fcc026a14718e91bd9de4d135d4ba701799c5035b55458915f3c",
-          "bytes": 65620,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/stripped/RC0/Manu_Logo_RAD.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/stripped/RC0/Manu_Logo_RAD.swatchbin",
-          "sha256": "e31952cd252a8b541a00724326d2a0b62e9a186aec3c9564854370ab48547629",
-          "bytes": 65620,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_1191_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_1191_Big.swatchbin",
-          "sha256": "ee964eb749a056a92b4abd2d22dae16cf0ef6ecb4d42278239b2ce8e73964fb4",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_1191_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_1191_Small.swatchbin",
-          "sha256": "887f62d2f45bc72a9ddc012cc58d56ba28835703419e406178e33f510c21d24c",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_1247_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_1247_Big.swatchbin",
-          "sha256": "4b3085fb94e5dc653e215c42fdd45df013c8820877cc6ad6cfa7fbd094b545ee",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_1247_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_1247_Small.swatchbin",
-          "sha256": "3e3aa2bf625582538ddfce56f5c8405cdba0411fccbf5c017f4dadbae6c78b1f",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_2014_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_2014_Big.swatchbin",
-          "sha256": "4374853c7d5ab4c0782e81ff3dc27768ef3b88e6c58f2551cd5472636a7c1406",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_2014_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_2014_Small.swatchbin",
-          "sha256": "3cf33eafc68e9a03e26558169bd8c847bbb7b04afc4134449114dae2e620c0a2",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_415_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_415_Big.swatchbin",
-          "sha256": "140bfbece3b20b925cd73f2b07b9752208cd8a5c370d85d67432355d2e6438fc",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_415_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_415_Small.swatchbin",
-          "sha256": "145ac2fd3cdf1caeeb8060225a6a4fb1ae409b1cf5c23626b37ae1c482a7e576",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/mod.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/mod.json",
-          "sha256": "81885d60b9b8acaac3be761b8d11ff15e71d8d3b2157b92da5a8df52b2d195fa",
-          "bytes": 504,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Modern Le Mans Prototypes Pack/strings.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-modern-le-mans-prototypes-pack/strings.json",
-          "sha256": "ccc4d119f32b6e0742134d2cae3959c847ec6de0ce7452ce4838bcfcdd328da0",
-          "bytes": 544,
-          "role": "asset",
-          "mode": "add-or-replace"
+          "from": "pack:ZS FM5 Modern Le Mans Prototypes Pack/",
+          "include": ["database.json", "media/**", "mod.json", "strings.json"]
         }
       ]
     },
-    "config": null,
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "gameplay",
-      "compatibilityId": "fm5-zs-modern-le-mans-prototypes-pack",
-      "revision": 1,
-      "match": "exact",
-      "settings": []
-    },
+    "multiplayer": {"impact": "gameplay"},
     "countsAsModded": false
   }
 }

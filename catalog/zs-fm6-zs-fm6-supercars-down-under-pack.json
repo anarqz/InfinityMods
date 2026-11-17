@@ -1,280 +1,33 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "zs-fm6-zs-fm6-supercars-down-under-pack",
   "version": "0.1.0",
   "externalSources": [
     {
       "id": "pack",
-      "kind": "either",
-      "label": {
-        "en": "ZS FM6 Supercars Down Under Pack",
-        "pt-BR": "ZS FM6 Supercars Down Under Pack"
-      },
-      "help": {
-        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
-        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
-      },
-      "hint": "ZS FM6 Addon Packs"
+      "label": {"en": "ZS FM6 Supercars Down Under Pack", "pt-BR": "ZS FM6 Supercars Down Under Pack"},
+      "source": "zs-fm6-addon-packs",
+      "tree": {
+        "sha256": "53de910c480bd308b59094cd25a90922cb7017f631bb690b24ee1e5752b63d6f",
+        "files": 27,
+        "bytes": 152711878,
+        "anchor": "mod.json"
+      }
     }
   ],
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "Unknown. Player-supplied files; Infinity never distributes them.",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [
-      {
-        "id": "zs-fm6-zs-fm6-common",
-        "versions": [
-          "0.1.0"
-        ]
-      }
-    ],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
+    "dependencies": [{"id": "zs-fm6-zs-fm6-common", "versions": ["0.1.0"]}],
     "files": {
-      "game": [],
       "azimuth": [
         {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/database.json",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/database.json",
-          "sha256": "ed2692151c34d8f97cebc511db6e6bf9936bc1f4651540e53c3db4da102815ac",
-          "bytes": 165251,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/audio/cars/VOL_33_S60_15.xml",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/audio/cars/VOL_33_S60_15.xml",
-          "sha256": "ac216c3ba119f78e68121e15989ed668d08c2aedbfa573a8734ac4acae7eb263",
-          "bytes": 1099,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/audio/fmodanthem/durango/PG_MER_4_E63AMG_15_Alt.bank",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/audio/fmodanthem/durango/PG_MER_4_E63AMG_15_Alt.bank",
-          "sha256": "bba502bd75cdb85b63d3b29d4c91c92eebd3a70b9c1235d9da92471203ed885b",
-          "bytes": 3012224,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/audio/fmodanthem/durango/PG_VOL_33_S60_15.bank",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/audio/fmodanthem/durango/PG_VOL_33_S60_15.bank",
-          "sha256": "e0c672cbc75622ee251a0fdf1c947abb57b7a7d793fff550921a6c84dc8f5dfe",
-          "bytes": 2338304,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/cars/FOR_17_FalconFG_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/cars/FOR_17_FalconFG_15.zip",
-          "sha256": "b510517af2a34b26b55bc00dadf2402c88230df40ef69d8c7fa89a1248c4c60a",
-          "bytes": 19384397,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/cars/FOR_5_FalconFG_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/cars/FOR_5_FalconFG_15.zip",
-          "sha256": "b82368f0e9907b82600658ca3857793e75873455f76038aec777de6f3a8cb4c6",
-          "bytes": 20010352,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/cars/HOL_1_CommodoreVF_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/cars/HOL_1_CommodoreVF_15.zip",
-          "sha256": "61fa4513b38818a46c3c5f2f1927f67fa059800ae61ef57f275c54ad2d96d8a4",
-          "bytes": 18704960,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/cars/HOL_97_CommodoreVF_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/cars/HOL_97_CommodoreVF_15.zip",
-          "sha256": "4d25b8bdc5d889fec72268e7f5331bb0c006784b26830d25e106f56e95599e6d",
-          "bytes": 18749520,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/cars/MER_9_E63AMG_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/cars/MER_9_E63AMG_15.zip",
-          "sha256": "f14e3af20dadc53c2016694f32d613a0007509aa17cf0f99ef82b4a152103424",
-          "bytes": 22389031,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/cars/NIS_23_Altima_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/cars/NIS_23_Altima_15.zip",
-          "sha256": "1bf0af30483982146e8ad804d5d8361563edb94d1fb7993a0504b2a496185917",
-          "bytes": 22717847,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/cars/VOL_33_S60_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/cars/VOL_33_S60_15.zip",
-          "sha256": "d3b79e503b3ec65503b05030e662a91a9809640cb2b671607ce8e4dc28676f99",
-          "bytes": 21337221,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2327_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2327_Big.swatchbin",
-          "sha256": "1115145ebcc24b0b8f3b2576cbc7779af04b53d5e7385a65508b70f05c2b5748",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2327_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2327_Small.swatchbin",
-          "sha256": "8391f1db289588483fbb2da63ca31c57caca4effdecd044b3b19749be098e42f",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2331_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2331_Big.swatchbin",
-          "sha256": "18ed4a266ac47bdb218c09a4c08873f23e555e80a7e06741c755512978316b7c",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2331_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2331_Small.swatchbin",
-          "sha256": "15473190a78b32252ea107763be3627ca84ea2baac04061029b161d4ce9bea73",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2407_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2407_Big.swatchbin",
-          "sha256": "5aa63a48d612bf344ac2d8fcf95d26dc420bb44f8aeb2df1501ef2f2a440cfac",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2407_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2407_Small.swatchbin",
-          "sha256": "0a315944d878593702b5562bfb681ae3f14f8edd2c2e5e46a5c503d01d76b847",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2425_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2425_Big.swatchbin",
-          "sha256": "10daba2c85d2ce09adeff8de7980dc91561d2ae08dc725c302af9d3c69d4d818",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2425_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2425_Small.swatchbin",
-          "sha256": "107a38f5f2fed80e7cd4a43a2f8d1ab91e5ffe511ae84cb1f3cd9f5f60ed5680",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2438_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2438_Big.swatchbin",
-          "sha256": "b34d058c7cc94b2266e125f0d4feea23bb4ebc0b3be8e8646e32c894437e1bda",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2438_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2438_Small.swatchbin",
-          "sha256": "db1b2ea15a7a49dc7ddcd7d3435eac6c7c5a6f7ee166295c46f4d2d800f9f138",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2484_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2484_Big.swatchbin",
-          "sha256": "064098df70e773b60ff5220bb4d5339f12bd37a4089130893304be02f14905e5",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2484_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2484_Small.swatchbin",
-          "sha256": "8a8e9f98cf49450469f301ece9284c6e2f50df70c644be013df6cb378c147d67",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2502_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2502_Big.swatchbin",
-          "sha256": "e4d5e6fdba5f45dc03643e71938fbd82e3b12de8f0d8086b8a5bcb77c546b840",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2502_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2502_Small.swatchbin",
-          "sha256": "3eb35f1c7bd32f30a14ccb01d9368c4776844a899de5327313aaefaee4bb96be",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/mod.json",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/mod.json",
-          "sha256": "5bd456814f73e2b8091fb319db0b7dd19f74c32dfd0b625d9979cd837e46c86b",
-          "bytes": 332,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Supercars Down Under Pack/strings.json",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-supercars-down-under-pack/strings.json",
-          "sha256": "251637c4d1669550a69f86c07d8d1bb5356f5214f2519fff249b8527185c662b",
-          "bytes": 772,
-          "role": "asset",
-          "mode": "add-or-replace"
+          "from": "pack:ZS FM6 Supercars Down Under Pack/",
+          "include": ["database.json", "media/**", "mod.json", "strings.json"]
         }
       ]
     },
-    "config": null,
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "gameplay",
-      "compatibilityId": "zs-fm6-zs-fm6-supercars-down-under-pack",
-      "revision": 1,
-      "match": "exact",
-      "settings": []
-    },
+    "multiplayer": {"impact": "gameplay"},
     "countsAsModded": false
   }
 }

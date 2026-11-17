@@ -1,176 +1,33 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "fm5-zs-vintage-le-mans-prototypes-pack",
   "version": "1.0.5",
   "externalSources": [
     {
       "id": "pack",
-      "kind": "either",
-      "label": {
-        "en": "ZS Vintage Le Mans Prototypes Pack",
-        "pt-BR": "ZS Vintage Le Mans Prototypes Pack"
-      },
-      "help": {
-        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
-        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
-      },
-      "hint": "ZS FM5 Addon Packs"
+      "label": {"en": "ZS Vintage Le Mans Prototypes Pack", "pt-BR": "ZS Vintage Le Mans Prototypes Pack"},
+      "source": "zs-fm5-addon-packs",
+      "tree": {
+        "sha256": "58f3b6a2b27e5fd3e11756fe418fe9d4e47708bb64f8d8ef1b1f52f656082269",
+        "files": 14,
+        "bytes": 53700790,
+        "anchor": "mod.json"
+      }
     }
   ],
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "Unknown. Player-supplied files; Infinity never distributes them.",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [
-      {
-        "id": "fm5-zs-fm5-common",
-        "versions": [
-          "1.0.0"
-        ]
-      }
-    ],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
+    "dependencies": [{"id": "fm5-zs-fm5-common", "versions": ["1.0.0"]}],
     "files": {
-      "game": [],
       "azimuth": [
         {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/database.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/database.json",
-          "sha256": "00ca4a587b85c5ec238daf3f6b304372a6a87d19e6f0764558577bfaa60010b5",
-          "bytes": 116254,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/media/audio/fmodanthem/durango/PG_FER_12_333SP_98.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/media/audio/fmodanthem/durango/PG_FER_12_333SP_98.bank",
-          "sha256": "bd2c99a0c7b065953d10db868dc153b1ea970f9bbac0083b7b89365756933cf9",
-          "bytes": 1812960,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/media/audio/fmodanthem/durango/PG_TOY_3_GT1_99.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/media/audio/fmodanthem/durango/PG_TOY_3_GT1_99.bank",
-          "sha256": "71497657fad5afd84582cfd8d2519f1c3f1b505bc8405fae88b11aec75db4d88",
-          "bytes": 2066592,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/media/cars/FER_12_333SP_98.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/media/cars/FER_12_333SP_98.zip",
-          "sha256": "1b0bbfd8bfef0f4e67ff2a16b93f40fcbb8b9fb15bbf591b6d6c14c3337e8fab",
-          "bytes": 18765971,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/media/cars/MAZ_55_787B_91.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/media/cars/MAZ_55_787B_91.zip",
-          "sha256": "9acc05556287f8116e78cee47972fa1b60f89c98c4ec15ca7dadb2a5aeb8dc18",
-          "bytes": 14524269,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/media/cars/TOY_3_GT1_99.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/media/cars/TOY_3_GT1_99.zip",
-          "sha256": "001bf91eae64c5b29b15ecac196c32a70b7d022d9ea67a15823e4ea89cb6dc98",
-          "bytes": 14742236,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_1335_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_1335_Big.swatchbin",
-          "sha256": "669593f7931b6a83a9929f0e600b6dfce2b502f9baecefb3be734116f0adfeaa",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_1335_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_1335_Small.swatchbin",
-          "sha256": "f808756bee0ebe6fb76b4cf762a2b7fa03a8abddbe262adb7372a365f192c3b2",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_524_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_524_Big.swatchbin",
-          "sha256": "ae971cf891be1a55a90491f4a5269e0ac91882f51fcf0e27c60dbbf9ae085ad0",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_524_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_524_Small.swatchbin",
-          "sha256": "257701af6d59617e4865f77e61c7143a398b3eb699df2dfbabcf173159d26432",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_555_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_555_Big.swatchbin",
-          "sha256": "3b0ba904baa1802fbc198dc2d7671c62a3d86520ef6f8d0601eee108fecd4a28",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/media/stripped/RC0/Thumbnail_555_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/media/stripped/RC0/Thumbnail_555_Small.swatchbin",
-          "sha256": "7adc5e36c63b0883ebe70ca376bfdc7418bd1025c34f63668c502c554d2b77d0",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/mod.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/mod.json",
-          "sha256": "f52767287df8745cd3287b775a15b3bf0b54bce27bf754e77fe08e3de9a6570e",
-          "bytes": 470,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/strings.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-vintage-le-mans-prototypes-pack/strings.json",
-          "sha256": "37be62bfaa50863ca228df07222385022f0113c125be240cb3b16de0f2a07b62",
-          "bytes": 366,
-          "role": "asset",
-          "mode": "add-or-replace"
+          "from": "pack:ZS FM5 Vintage Le Mans Prototypes Pack/",
+          "include": ["database.json", "media/**", "mod.json", "strings.json"]
         }
       ]
     },
-    "config": null,
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "gameplay",
-      "compatibilityId": "fm5-zs-vintage-le-mans-prototypes-pack",
-      "revision": 1,
-      "match": "exact",
-      "settings": []
-    },
+    "multiplayer": {"impact": "gameplay"},
     "countsAsModded": false
   }
 }

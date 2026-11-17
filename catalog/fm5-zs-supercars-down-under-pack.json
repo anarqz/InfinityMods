@@ -1,176 +1,33 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "fm5-zs-supercars-down-under-pack",
   "version": "1.0.5",
   "externalSources": [
     {
       "id": "pack",
-      "kind": "either",
-      "label": {
-        "en": "ZS Supercars Down Under Pack",
-        "pt-BR": "ZS Supercars Down Under Pack"
-      },
-      "help": {
-        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
-        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
-      },
-      "hint": "ZS FM5 Addon Packs"
+      "label": {"en": "ZS Supercars Down Under Pack", "pt-BR": "ZS Supercars Down Under Pack"},
+      "source": "zs-fm5-addon-packs",
+      "tree": {
+        "sha256": "c8e2d88c2931584a211ab5ded281dda8e20e22079f398508a81a46e9eda9baf4",
+        "files": 14,
+        "bytes": 54599469,
+        "anchor": "mod.json"
+      }
     }
   ],
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "Unknown. Player-supplied files; Infinity never distributes them.",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [
-      {
-        "id": "fm5-zs-fm5-common",
-        "versions": [
-          "1.0.0"
-        ]
-      }
-    ],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
+    "dependencies": [{"id": "fm5-zs-fm5-common", "versions": ["1.0.0"]}],
     "files": {
-      "game": [],
       "azimuth": [
         {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/database.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/database.json",
-          "sha256": "bb7360de9a091975805f222fa88793254c0575a977b07bc4189b3fe802114cc3",
-          "bytes": 133237,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/media/audio/fmodanthem/durango/PG_FOR_5_FGFalcon_11.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/media/audio/fmodanthem/durango/PG_FOR_5_FGFalcon_11.bank",
-          "sha256": "53e0e0e847434bc9ab018e8a8c5aa16d7292bfad058e692c55a256946aba84d2",
-          "bytes": 2295840,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/media/audio/fmodanthem/durango/PG_HOL_1_CommodoreVE_11.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/media/audio/fmodanthem/durango/PG_HOL_1_CommodoreVE_11.bank",
-          "sha256": "b11660584f8cccaab91c57b15a1a362debe0dc0506434d14409bc0488d95e059",
-          "bytes": 2296224,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/media/cars/FOR_5_FGFalcon_11.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/media/cars/FOR_5_FGFalcon_11.zip",
-          "sha256": "ea2732f70becabc324c86b1bf8db43d64573404ae95d630be5131abcdfdb8673",
-          "bytes": 17982189,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/media/cars/HOL_10_CommodoreVF_13.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/media/cars/HOL_10_CommodoreVF_13.zip",
-          "sha256": "1578601e861d37e5b3c4a8d6eb242a89611e9189b689e22a7a7d69e2169ee292",
-          "bytes": 18939216,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/media/cars/HOL_1_CommodoreVE_11.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/media/cars/HOL_1_CommodoreVE_11.zip",
-          "sha256": "59c3fa0144af3b448f4404daeb70cff68ee84e204d924d3a308ef6353297b69f",
-          "bytes": 11280133,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_1408_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/media/stripped/RC0/Thumbnail_1408_Big.swatchbin",
-          "sha256": "1b66d42990ffbcca5f4372656902f674c562da10e49fce4acfebf5b21f0f3dfb",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_1408_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/media/stripped/RC0/Thumbnail_1408_Small.swatchbin",
-          "sha256": "7e28609c8a636bb9b115da9ea7b4652354d9a40dbe0253ebcaa49c15b8c7f5e8",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_1412_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/media/stripped/RC0/Thumbnail_1412_Big.swatchbin",
-          "sha256": "9919ea4e1aa309f8af19397f08074d8b49f52c7584d4763892b9db74159d6af4",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_1412_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/media/stripped/RC0/Thumbnail_1412_Small.swatchbin",
-          "sha256": "db53c50a64e4e468f681c749a7d4304c03d786522a07784e6c73468d582a7065",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2118_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2118_Big.swatchbin",
-          "sha256": "45d382e8f1c5b793a63b2f69944a886b63104789561716ec811e0f04c641e9a8",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/media/stripped/RC0/Thumbnail_2118_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/media/stripped/RC0/Thumbnail_2118_Small.swatchbin",
-          "sha256": "d1605430aff96fe22c346cf7e131c0b824bf58eb8f70920d444f7205189be4a8",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/mod.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/mod.json",
-          "sha256": "99e54d60f3ca39917ef75033797af00b18e23cdb82cfeb1edeee1c8ec5147605",
-          "bytes": 494,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Supercars Down Under Pack/strings.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-supercars-down-under-pack/strings.json",
-          "sha256": "a608e45476c6e2e735f4917a5f7f0a68c46f216add589bdbc9c43b67ac407bb8",
-          "bytes": 464,
-          "role": "asset",
-          "mode": "add-or-replace"
+          "from": "pack:ZS FM5 Supercars Down Under Pack/",
+          "include": ["database.json", "media/**", "mod.json", "strings.json"]
         }
       ]
     },
-    "config": null,
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "gameplay",
-      "compatibilityId": "fm5-zs-supercars-down-under-pack",
-      "revision": 1,
-      "match": "exact",
-      "settings": []
-    },
+    "multiplayer": {"impact": "gameplay"},
     "countsAsModded": false
   }
 }

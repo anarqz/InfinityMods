@@ -1,0 +1,427 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/anarqz/InfinityMods/main/schemas/catalog-v4.schema.json",
+  "title": "Infinity mod catalog index (schema 4)",
+  "description": "The catalog index the Infinity launcher reads (official: catalog/index.json on InfinityMods' main, launcher 3.2.0 on). Each entry carries a mod's card and pins its detail file (path, sha256, bytes) exactly as in schema 3; sources holds the external-source texts (kind, help, hint) that several mods share. A detail file ($defs/mod) maps files by rules instead of one entry per file: a rule takes, from one of the mod's sources ('<source>:<path>', source = package, an additionalDownloads name or an externalSources id), either a folder (path '' or ending in '/': every file under it, optionally only those matching include) or one file, and puts it at <base> + to + (path relative to the folder; for one file, its name), base being the mod's folder mods/<game folder>/<id>/ for the azimuth root and the game folder for the game root; a one-file rule whose to does not end in '/' names the destination itself. Rules apply in order and the first that matches a file wins; role and mode default to asset and add-or-replace. Paths and globs (* within a segment, ** any depth, ?) match case-insensitively; '\\\\' is read as '/'; '..', absolute paths and drive letters are refused; two files on one destination (case-insensitively) are refused. Download files are pinned by their download; an external source is pinned by its tree: SHA-256 over one UTF-8 line per file, '<path relative to the from-folder>\\t<sha256 hex>\\t<bytes>\\n', sorted by the path's UTF-8 bytes, with its file count, byte total and an anchor (a path relative to the from-folder used to find the pack). Each external source has exactly one folder rule. Install fields left out take their defaults (schemaVersion 1, kind mod, runtime standalone, review reviewed with no blockers, dependencies, conflicts, runtimeOutputs and databaseMigrations empty, config null, countsAsModded true; compatibility.gameBuilds empty and verification unverified; multiplayer.schemaVersion 1, compatibilityId the mod's id, revision 1, match exact, settings empty). A mod's settings form is <mod folder>/infinity.settings.json in its own package; install.config inline is for packages not built here (and both together are refused). tools/infmods.py check also refuses duplicate ids, unknown sources and the role/mode rules above. Schema-2 and schema-3 files stay valid custom catalogs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "mods"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 4
+    },
+    "mods": {
+      "type": "array",
+      "maxItems": 512,
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/sourceText"
+      }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "name",
+        "description",
+        "author",
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "author": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "description": "The detail file: relative to the index's URL, or an absolute https URL.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^(https://[^/?#@:]+/[^#]*|(?!/)(?!(.*/)?\\.\\.(/|$))[^?#:\\\\]+)$"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 262144
+        }
+      }
+    },
+    "mod": {
+      "description": "A detail file: the mod's downloads or external sources and its install block, with schemaVersion 4 and the entry's id and version.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "id",
+        "version",
+        "install"
+      ],
+      "oneOf": [
+        {
+          "required": [
+            "download"
+          ],
+          "not": {
+            "required": [
+              "externalSources"
+            ]
+          }
+        },
+        {
+          "required": [
+            "externalSources"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "download"
+                ]
+              },
+              {
+                "required": [
+                  "additionalDownloads"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 4
+        },
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "download": {
+          "$ref": "#/$defs/download"
+        },
+        "additionalDownloads": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/download"
+          }
+        },
+        "externalSources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/externalSource"
+          }
+        },
+        "requires": {
+          "type": "array",
+          "items": {
+            "const": "infinity-mod-runtime"
+          }
+        },
+        "install": {
+          "type": "object",
+          "properties": {
+            "countsAsModded": {
+              "description": "OD-236: false = the mod never makes a session modded and is the only kind Hardcore keeps on (spotify-radio, garage-revving, the ZS car packs). Absent = true. A JSON boolean only.",
+              "type": "boolean"
+            },
+            "files": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "game": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/rule"
+                  }
+                },
+                "azimuth": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/rule"
+                  }
+                }
+              }
+            },
+            "excludedArchiveEntries": {
+              "not": {},
+              "description": "Retired in schema 4: rules name what is taken."
+            }
+          },
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "id"
+                ]
+              },
+              {
+                "required": [
+                  "version"
+                ]
+              },
+              {
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "required": [
+                  "description"
+                ]
+              },
+              {
+                "required": [
+                  "author"
+                ]
+              },
+              {
+                "required": [
+                  "package"
+                ]
+              },
+              {
+                "required": [
+                  "additionalPackages"
+                ]
+              },
+              {
+                "required": [
+                  "payload"
+                ]
+              },
+              {
+                "required": [
+                  "externalSources"
+                ]
+              },
+              {
+                "required": [
+                  "required"
+                ]
+              },
+              {
+                "required": [
+                  "availability"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,63}$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "text": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "pt-BR"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pt-BR": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "download": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "pattern": "^https://[^/?#@:]+/[^#]*$"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 67108864
+        }
+      }
+    },
+    "sourceText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "help",
+        "hint"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "help": {
+          "$ref": "#/$defs/text"
+        },
+        "hint": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "externalSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "tree"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "source": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "help": {
+          "$ref": "#/$defs/text"
+        },
+        "hint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tree": {
+          "$ref": "#/$defs/tree"
+        }
+      }
+    },
+    "tree": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sha256",
+        "files",
+        "bytes",
+        "anchor"
+      ],
+      "properties": {
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "files": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "anchor": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        }
+      }
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from"
+      ],
+      "properties": {
+        "from": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,63}:[^:]*$",
+          "maxLength": 1024
+        },
+        "to": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "include": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        },
+        "role": {
+          "enum": [
+            "binary",
+            "config",
+            "asset",
+            "user-asset",
+            "license"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "add",
+            "replace",
+            "add-or-replace",
+            "seed"
+          ]
+        }
+      }
+    }
+  }
+}

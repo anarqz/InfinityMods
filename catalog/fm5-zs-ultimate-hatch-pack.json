@@ -1,208 +1,33 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "fm5-zs-ultimate-hatch-pack",
   "version": "1.0.5",
   "externalSources": [
     {
       "id": "pack",
-      "kind": "either",
-      "label": {
-        "en": "ZS Ultimate Hatch Pack",
-        "pt-BR": "ZS Ultimate Hatch Pack"
-      },
-      "help": {
-        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
-        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
-      },
-      "hint": "ZS FM5 Addon Packs"
+      "label": {"en": "ZS Ultimate Hatch Pack", "pt-BR": "ZS Ultimate Hatch Pack"},
+      "source": "zs-fm5-addon-packs",
+      "tree": {
+        "sha256": "f5db2013e03ebb00abdd874868822a757391a7f0d747cbb128552c79e36079d8",
+        "files": 18,
+        "bytes": 75641417,
+        "anchor": "mod.json"
+      }
     }
   ],
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "Unknown. Player-supplied files; Infinity never distributes them.",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [
-      {
-        "id": "fm5-zs-fm5-common",
-        "versions": [
-          "1.0.0"
-        ]
-      }
-    ],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
+    "dependencies": [{"id": "fm5-zs-fm5-common", "versions": ["1.0.0"]}],
     "files": {
-      "game": [],
       "azimuth": [
         {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/database.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/database.json",
-          "sha256": "e572954bbd8490a97ba135480e4435fd488547589e22b9a19504d25135c75649",
-          "bytes": 326560,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/audio/fmodanthem/durango/PG_AUD_RS3LCE_11.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/audio/fmodanthem/durango/PG_AUD_RS3LCE_11.bank",
-          "sha256": "3a8863cdcfb78da71db02fca6ab5c88aa23c630ed579e6c80481636ca09c1517",
-          "bytes": 1996928,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/audio/fmodanthem/durango/PG_AUD_S3Sedan_15.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/audio/fmodanthem/durango/PG_AUD_S3Sedan_15.bank",
-          "sha256": "f2c8f648c61da127ca1336407ec70ab6b8f128c00b7bfa2f2c14e4400e129c8e",
-          "bytes": 1896160,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/audio/fmodanthem/durango/PG_FOR_FocusSTFM_13.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/audio/fmodanthem/durango/PG_FOR_FocusSTFM_13.bank",
-          "sha256": "96596e9ba4d3b6cee83784ea5dcdb5b714a342112de968a0523969688b91b651",
-          "bytes": 2313824,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/cars/AUD_RS3LCE_11.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/cars/AUD_RS3LCE_11.zip",
-          "sha256": "49c3c0e67ef1e543edec357fab539abb9d030a2e42aa1f55d0a9a9022c3bd77f",
-          "bytes": 19284222,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/cars/AUD_S3Sedan_15.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/cars/AUD_S3Sedan_15.zip",
-          "sha256": "620a58f5bfd5b138ccc34fb2d581bfb8c1ba90b38a07e475d08ee991e3e47503",
-          "bytes": 18158728,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/cars/AUD_TTRSFM_10.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/cars/AUD_TTRSFM_10.zip",
-          "sha256": "42138d149e83ba780f63cefaf16e9ff75f06ce3a950d6a8690beb2bdf99a8b1d",
-          "bytes": 16781035,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/cars/FOR_FocusSTFM_13.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/cars/FOR_FocusSTFM_13.zip",
-          "sha256": "6169bfc09c4d96a566335e99bfa5598234f955cfd2519f6667995b5a7556879b",
-          "bytes": 12654145,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/stripped/RC0/Thumbnail_2115_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/stripped/RC0/Thumbnail_2115_Big.swatchbin",
-          "sha256": "d72f3c1d47ec297b3630bb17cee7a708ca64a1557961e6dce02954dbaed14abc",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/stripped/RC0/Thumbnail_2115_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/stripped/RC0/Thumbnail_2115_Small.swatchbin",
-          "sha256": "6e27b359b0a655b5fdcefea65217675ad5f85f5360000d5ee175ccfbb931d514",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/stripped/RC0/Thumbnail_2116_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/stripped/RC0/Thumbnail_2116_Big.swatchbin",
-          "sha256": "d4e8a4e428010281e2b4a871bb56f33205b5d77c5eef928f64ba921d00025de6",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/stripped/RC0/Thumbnail_2116_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/stripped/RC0/Thumbnail_2116_Small.swatchbin",
-          "sha256": "00e94989936fd1d64e59217e603820f7ab81c391bd94566f5dd059b224b6ae9c",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/stripped/RC0/Thumbnail_2117_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/stripped/RC0/Thumbnail_2117_Big.swatchbin",
-          "sha256": "08e4dada89fcaba8bce34272eab6c20d5a59b2280032a3e8c4dee30401a48899",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/stripped/RC0/Thumbnail_2117_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/stripped/RC0/Thumbnail_2117_Small.swatchbin",
-          "sha256": "a97ef2290ea50c327c60136119343aeeb1d6b7a34168628bd8104e2b26c12f87",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/stripped/RC0/Thumbnail_2132_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/stripped/RC0/Thumbnail_2132_Big.swatchbin",
-          "sha256": "3b07047fab33844f8e82b6540983dad181e8860defc073d2ed09a96fc1041f76",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/media/stripped/RC0/Thumbnail_2132_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/media/stripped/RC0/Thumbnail_2132_Small.swatchbin",
-          "sha256": "82f51cbe35516c732b3a7f30912a2cd661c8bf42dbdcba6aec22d1adebd44d7c",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/mod.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/mod.json",
-          "sha256": "71ea0fea560eae315931f0f1f29c3e3f72a19c0abffe0be496789772fa33346a",
-          "bytes": 478,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Ultimate Hatch Pack/strings.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-ultimate-hatch-pack/strings.json",
-          "sha256": "1750f10afafa706aebf2a7a94e7890f472e1518eea87efb0e98343f006c9cfad",
-          "bytes": 441,
-          "role": "asset",
-          "mode": "add-or-replace"
+          "from": "pack:ZS FM5 Ultimate Hatch Pack/",
+          "include": ["database.json", "media/**", "mod.json", "strings.json"]
         }
       ]
     },
-    "config": null,
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "gameplay",
-      "compatibilityId": "fm5-zs-ultimate-hatch-pack",
-      "revision": 1,
-      "match": "exact",
-      "settings": []
-    },
+    "multiplayer": {"impact": "gameplay"},
     "countsAsModded": false
   }
 }

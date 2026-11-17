@@ -1,256 +1,33 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "zs-fm6-zs-fm6-hills-and-trails-pack",
   "version": "0.1.0",
   "externalSources": [
     {
       "id": "pack",
-      "kind": "either",
-      "label": {
-        "en": "ZS FM6 Hills and Trails Pack",
-        "pt-BR": "ZS FM6 Hills and Trails Pack"
-      },
-      "help": {
-        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
-        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
-      },
-      "hint": "ZS FM6 Addon Packs"
+      "label": {"en": "ZS FM6 Hills and Trails Pack", "pt-BR": "ZS FM6 Hills and Trails Pack"},
+      "source": "zs-fm6-addon-packs",
+      "tree": {
+        "sha256": "7c164f2e138b1ccdbde8bb3fd1b7a5815fa090e954ba668c4ed3535f807bb68c",
+        "files": 24,
+        "bytes": 150464274,
+        "anchor": "mod.json"
+      }
     }
   ],
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "Unknown. Player-supplied files; Infinity never distributes them.",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [
-      {
-        "id": "zs-fm6-zs-fm6-common",
-        "versions": [
-          "0.1.0"
-        ]
-      }
-    ],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
+    "dependencies": [{"id": "zs-fm6-zs-fm6-common", "versions": ["0.1.0"]}],
     "files": {
-      "game": [],
       "azimuth": [
         {
-          "source": "pack:ZS FM6 Hills and Trails Pack/database.json",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/database.json",
-          "sha256": "c5b129ae892270226d3bbca3cf57ddfbecfd2bdae8342c428823d0082713fc1f",
-          "bytes": 266322,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/audio/cars/LR_RangeRoverSVR_15.xml",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/audio/cars/LR_RangeRoverSVR_15.xml",
-          "sha256": "fb7580fbe2821d55a1dd35332e811380fc29b6feb4fa50129d50b9fdc6fb5c2e",
-          "bytes": 364,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/audio/fmodanthem/durango/PG_FOR_F150Raptor_17.bank",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/audio/fmodanthem/durango/PG_FOR_F150Raptor_17.bank",
-          "sha256": "a7f462d2fd4d3a72a2ccaaf5586e31ad89b82c0c942e207a6078df143344747e",
-          "bytes": 2816448,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/audio/fmodanthem/durango/PG_LR_RangeRoverSVR_15.bank",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/audio/fmodanthem/durango/PG_LR_RangeRoverSVR_15.bank",
-          "sha256": "3b3e0521e853e6df7a1a9f0a84882bf817c3ffdce1f03feb043ad13b339b748b",
-          "bytes": 2328960,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/cars/BMW_X6M_16.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/cars/BMW_X6M_16.zip",
-          "sha256": "6e22cd4051d50720e239ec78c617134ada740b14d2e7cf6a8b71d74db934fb44",
-          "bytes": 23319953,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/cars/FOR_F150Raptor_17.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/cars/FOR_F150Raptor_17.zip",
-          "sha256": "902ff5d9dfced46d27b924ef6dc9c64405a583f6d39a95cca8304176a2dcd0cd",
-          "bytes": 20294248,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/cars/LR_RangeRoverSVR_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/cars/LR_RangeRoverSVR_15.zip",
-          "sha256": "ecd4a78e48b9b4fb38a4f2c46f6380480eacadf8bfed32d18a0299e640baec66",
-          "bytes": 20318534,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/cars/MIT_LancerEvoIXMR_06.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/cars/MIT_LancerEvoIXMR_06.zip",
-          "sha256": "b2142f1d71a3a46ad5ae1c0de1d3889cc42f7fb1f4098ee15aecd5f7102f5e34",
-          "bytes": 32568027,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/cars/OPE_Manta400_84.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/cars/OPE_Manta400_84.zip",
-          "sha256": "e00e79ade00693f0d69ae425d149e93395a41a2f299ac8f82eb18a5002253f53",
-          "bytes": 19681410,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/cars/SUB_WRXSTiTF_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/cars/SUB_WRXSTiTF_15.zip",
-          "sha256": "5755ce670aca2cd129a04afa61c49d064614515a80609ba6614fdb2915cd155b",
-          "bytes": 25525772,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/stripped/RC0/Thumbnail_2397_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/stripped/RC0/Thumbnail_2397_Big.swatchbin",
-          "sha256": "248909595c5f2cdf915adb009b914b750e8972f9f9d30de26448b7caca336439",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/stripped/RC0/Thumbnail_2397_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/stripped/RC0/Thumbnail_2397_Small.swatchbin",
-          "sha256": "f2da70610e85553a879d9130730767583f67e416737bcac46980581afd80d352",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/stripped/RC0/Thumbnail_2420_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/stripped/RC0/Thumbnail_2420_Big.swatchbin",
-          "sha256": "02462baca52a160784c5db70274fd190bf7b581982c3a3c68148de5339b789e7",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/stripped/RC0/Thumbnail_2420_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/stripped/RC0/Thumbnail_2420_Small.swatchbin",
-          "sha256": "f09c932fbac97baae12f5b7afcf337a086e007aff7672cf8d2f598866dd0ad4e",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/stripped/RC0/Thumbnail_2431_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/stripped/RC0/Thumbnail_2431_Big.swatchbin",
-          "sha256": "7f3b2790e951d3b4995639ba8824cec51086baf80e1cfe9a98b0cea8ec08c698",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/stripped/RC0/Thumbnail_2431_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/stripped/RC0/Thumbnail_2431_Small.swatchbin",
-          "sha256": "0a3dfbc1184a4297b326f18e82f553dc06fdfa2132ff010543be8fc2bb68bcdb",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/stripped/RC0/Thumbnail_2454_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/stripped/RC0/Thumbnail_2454_Big.swatchbin",
-          "sha256": "03c3a8403fba6a620fc852e5fd258f941bea6e6f86f339322bf10ca139826e6f",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/stripped/RC0/Thumbnail_2454_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/stripped/RC0/Thumbnail_2454_Small.swatchbin",
-          "sha256": "76876f965bf5549c538dfd418616784a21654ab9b25236b8f29e5c6f062733d5",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/stripped/RC0/Thumbnail_2494_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/stripped/RC0/Thumbnail_2494_Big.swatchbin",
-          "sha256": "56adec142556f50f0d15d5a97739557cad29182a63c88732f84650d5315a5bff",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/stripped/RC0/Thumbnail_2494_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/stripped/RC0/Thumbnail_2494_Small.swatchbin",
-          "sha256": "af75a57caeb5fb9b4528f1a7ddaa870bcaee7a0c1afb5dd54a589b59ba45ca92",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/stripped/RC0/Thumbnail_374_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/stripped/RC0/Thumbnail_374_Big.swatchbin",
-          "sha256": "498345330e36cba0cf04673b9dca84bb42fc5b8fa17f979e8ad52d1ac5c45ed6",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/media/stripped/RC0/Thumbnail_374_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/media/stripped/RC0/Thumbnail_374_Small.swatchbin",
-          "sha256": "21b8d78612c2f5a9f612ce04f82f388580f90b7bcaec592f87b9354fe4cb4620",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/mod.json",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/mod.json",
-          "sha256": "741d12c445793b951ab713626342a35291f2490b200b8de6071f54dd0817bc44",
-          "bytes": 324,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Hills and Trails Pack/strings.json",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-hills-and-trails-pack/strings.json",
-          "sha256": "419e21ceab5c706cee4f8d02df109d2f21ae376666ee5ead79aad0455742b841",
-          "bytes": 568,
-          "role": "asset",
-          "mode": "add-or-replace"
+          "from": "pack:ZS FM6 Hills and Trails Pack/",
+          "include": ["database.json", "media/**", "mod.json", "strings.json"]
         }
       ]
     },
-    "config": null,
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "gameplay",
-      "compatibilityId": "zs-fm6-zs-fm6-hills-and-trails-pack",
-      "revision": 1,
-      "match": "exact",
-      "settings": []
-    },
+    "multiplayer": {"impact": "gameplay"},
     "countsAsModded": false
   }
 }

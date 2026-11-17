@@ -1,805 +1,673 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
+  "sources": {
+    "zs-fm5-addon-packs": {
+      "kind": "either",
+      "help": {
+        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM5 Addon Packs"
+    },
+    "zs-fm6-addon-packs": {
+      "kind": "either",
+      "help": {
+        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
+        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
+      },
+      "hint": "ZS FM6 Addon Packs"
+    }
+  },
   "mods": [
     {
       "id": "nitrosystem",
       "version": "2.0.0-infinity.3",
-      "name": {
-        "en": "Nitro System",
-        "pt-BR": "Sistema de Nitro"
-      },
+      "name": {"en": "Nitro System", "pt-BR": "Sistema de Nitro"},
       "description": {
         "en": "qiangqiang101's NitroSystem 2.0: Fast & Furious NOS, bought per car as a NOS Kit in the garage, with exhaust flames, sound and a NOS gauge. Its own release DLL, loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter; no FH2 Mod Platform needed.",
         "pt-BR": "O NitroSystem 2.0 de qiangqiang101: NOS de Fast & Furious, comprado por carro como Kit de NOS na garagem, com chamas no escape, som e medidor de NOS. A DLL da própria release do autor, carregada pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform; a FH2 Mod Platform não é necessária."
       },
       "author": "qiangqiang101",
       "path": "nitrosystem.json",
-      "sha256": "ee3237d98aae2f148972034d556d6290da234786141d2e0730b222e86fbc04be",
-      "bytes": 25923
+      "sha256": "05ec5fe98b5f7fd703221102a6e0096f1170dd93cead058bf6697e5cab785f87",
+      "bytes": 20248
     },
     {
       "id": "fm5-zs-fm5-common",
       "version": "1.0.0",
-      "name": {
-        "en": "ZS FM5 Common",
-        "pt-BR": "ZS FM5 Common"
-      },
+      "name": {"en": "ZS FM5 Common", "pt-BR": "ZS FM5 Common"},
       "description": {
         "en": "What every ZS FM5 pack needs: shared database rows, manufacturer logos and its changes to FH2's own cars. Infinity keeps it first in the load order, before every other mod.",
         "pt-BR": "O que todo pacote ZS FM5 precisa: linhas compartilhadas do banco de dados, logotipos das marcas e as mudanças dele nos carros do próprio FH2. O Infinity o mantém primeiro na ordem de carregamento, antes de qualquer outro mod."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-fm5-common.json",
-      "sha256": "658a3d5b67eb9f5715e6c183f4cf9ace1c1ef5f94c4d02be99bfbba6fb9d3505",
-      "bytes": 4991
+      "sha256": "06defaa0ae9756abf590908566ed15ad3da866b56793f0a06d47b8b5665d88cd",
+      "bytes": 820
     },
     {
       "id": "fm5-zs-classic-american-muscle-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Classic American Muscle Pack",
-        "pt-BR": "ZS Classic American Muscle Pack"
-      },
+      "name": {"en": "ZS Classic American Muscle Pack", "pt-BR": "ZS Classic American Muscle Pack"},
       "description": {
         "en": "11 cars from Forza Motorsport 5, converted by ZephyrSkies: 1940 Ford De Luxe Coupe; 1965 Ford Mustang GT Coupe; 1966 Chevrolet Nova SS; 1967 Chevrolet Chevelle SS-396; 1969 Chevrolet Nova SS 396; 1969 Pontiac Firebird Trans Am; 1970 Chevrolet El Camino SS 454; 1970 Dodge Coronet Super Bee; 1970 Mercury Cougar Eliminator; 1971 Ford Mustang Mach 1; 1973 Ford XB Falcon GT. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "11 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 1940 Ford De Luxe Coupe; 1965 Ford Mustang GT Coupe; 1966 Chevrolet Nova SS; 1967 Chevrolet Chevelle SS-396; 1969 Chevrolet Nova SS 396; 1969 Pontiac Firebird Trans Am; 1970 Chevrolet El Camino SS 454; 1970 Dodge Coronet Super Bee; 1970 Mercury Cougar Eliminator; 1971 Ford Mustang Mach 1; 1973 Ford XB Falcon GT. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-classic-american-muscle-pack.json",
-      "sha256": "2947630d9dc31222de28d204204f772ff4769dc532c0cb10f2582d74f37ebb4f",
-      "bytes": 23267
+      "sha256": "059e384f6ee141ba27c90d17f8032039533df0208c0d4710f40a8f1bc6429e82",
+      "bytes": 994
     },
     {
       "id": "fm5-zs-classic-formula-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Classic Formula Pack",
-        "pt-BR": "ZS Classic Formula Pack"
-      },
+      "name": {"en": "ZS Classic Formula Pack", "pt-BR": "ZS Classic Formula Pack"},
       "description": {
         "en": "5 cars from Forza Motorsport 5, converted by ZephyrSkies: 1967 Brabham BT24; 1967 Lotus Type 49; 1976 Ferrari #1 Scuderia Ferrari 312 T2; 1976 McLaren #11 Team McLaren M23; 1977 Ford Foyt #14 Gilmore Coyote. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "5 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 1967 Brabham BT24; 1967 Lotus Type 49; 1976 Ferrari #1 Scuderia Ferrari 312 T2; 1976 McLaren #11 Team McLaren M23; 1977 Ford Foyt #14 Gilmore Coyote. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-classic-formula-pack.json",
-      "sha256": "838b5691a209aceeaf8be4fa567c204bc7366bd7d84d79a37f059db9e88c01ac",
-      "bytes": 12106
+      "sha256": "3e605d46581a8f2c681bdbc687b750b69d10e1c5e826473dd1ff6d69e8df0e65",
+      "bytes": 962
     },
     {
       "id": "fm5-zs-cult-classics-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Cult Classics Pack",
-        "pt-BR": "ZS Cult Classics Pack"
-      },
+      "name": {"en": "ZS Cult Classics Pack", "pt-BR": "ZS Cult Classics Pack"},
       "description": {
         "en": "7 cars from Forza Motorsport 5, converted by ZephyrSkies: 1965 Alfa Romeo Giulia Sprint GTA Stradale; 1968 Ferrari 365 GTB/4; 1971 Lotus Elan Sprint; 1973 Mazda RX-3; 1975 Fiat X1/9; 1986 Alfa Romeo GTV-6; 1990 Alfa Romeo SZ Sprint Zagato. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "7 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 1965 Alfa Romeo Giulia Sprint GTA Stradale; 1968 Ferrari 365 GTB/4; 1971 Lotus Elan Sprint; 1973 Mazda RX-3; 1975 Fiat X1/9; 1986 Alfa Romeo GTV-6; 1990 Alfa Romeo SZ Sprint Zagato. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-cult-classics-pack.json",
-      "sha256": "c3fe25e76804f73f92696f9eebfd475b84627c126d60898554eab41cc0b63cd3",
-      "bytes": 14906
+      "sha256": "419c320e4f8313812dbc02aa99d0fa0fcf7269c84d1ab47e02896e94a0193784",
+      "bytes": 954
     },
     {
       "id": "fm5-zs-drag-strip-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Drag Strip Pack",
-        "pt-BR": "ZS Drag Strip Pack"
-      },
+      "name": {"en": "ZS Drag Strip Pack", "pt-BR": "ZS Drag Strip Pack"},
       "description": {
         "en": "9 cars from Forza Motorsport 5, converted by ZephyrSkies: 2007 Ford Shelby GT500; 2008 Dodge Viper SRT10 ACR; 2011 Cadillac CTS-V Coupe; 2011 Holden HSV GTS; 2012 Chevrolet Mountain Dew #88 Camaro ZL1; 2012 Chrysler 300 SRT8; 2012 Dodge Xbox One Edition Charger SRT8; 2013 Ford Shelby GT500 Limited Collector Edition; 2013 SRT GTS Limited Collector Edition. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "9 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 2007 Ford Shelby GT500; 2008 Dodge Viper SRT10 ACR; 2011 Cadillac CTS-V Coupe; 2011 Holden HSV GTS; 2012 Chevrolet Mountain Dew #88 Camaro ZL1; 2012 Chrysler 300 SRT8; 2012 Dodge Xbox One Edition Charger SRT8; 2013 Ford Shelby GT500 Limited Collector Edition; 2013 SRT GTS Limited Collector Edition. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-drag-strip-pack.json",
-      "sha256": "3fd9baa2f0ef64c07e61b53e591ec31a2a59b67d306e781c3664c9a99d45917c",
-      "bytes": 18944
+      "sha256": "5b6db66e420a245eab6fa60c3415c463298c9f5f93c0f0ffaf4fd084410db5cd",
+      "bytes": 912
     },
     {
       "id": "fm5-zs-family-hauler-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Family Hauler Pack",
-        "pt-BR": "ZS Family Hauler Pack"
-      },
+      "name": {"en": "ZS Family Hauler Pack", "pt-BR": "ZS Family Hauler Pack"},
       "description": {
         "en": "5 cars from Forza Motorsport 5, converted by ZephyrSkies: 2003 BMW M5; 2009 Lexus IS F; 2013 Audi RS 7 Sportback; 2014 Infiniti Q50 Eau Rouge; 2014 Infiniti Q50S. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "5 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 2003 BMW M5; 2009 Lexus IS F; 2013 Audi RS 7 Sportback; 2014 Infiniti Q50 Eau Rouge; 2014 Infiniti Q50S. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-family-hauler-pack.json",
-      "sha256": "b25307c1af39ef14eb66311340f3c94be503e9303ebfaa4365faabe379b5cb25",
-      "bytes": 11102
+      "sha256": "ce54400553efccf82c449cecff150565dcedc08d3c454f8cc4660fe92df39851",
+      "bytes": 953
     },
     {
       "id": "fm5-zs-formula-racing-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Formula Racing Pack",
-        "pt-BR": "ZS Formula Racing Pack"
-      },
+      "name": {"en": "ZS Formula Racing Pack", "pt-BR": "ZS Formula Racing Pack"},
       "description": {
         "en": "9 cars from Forza Motorsport 5, converted by ZephyrSkies: 2013 Chevrolet #1 Andretti Autosport Dallara DW12; 2013 Chevrolet #12 Team Penske Dallara DW12; 2013 Ford Formula Ford EcoBoost 200; 2013 Honda #15 Rahal Letterman Lanigan Racing Dallara DW12; 2013 Honda #9 Target Chip Ganassi Dallara DW12; 2013 Infiniti #77 Schmidt Peterson Motorsports Dallara IPS Indy Lights; 2013 Lotus E21; 2013 Mazda #7 Andretti Autosport USF2000; 2014 Renault Spark SRT_01E. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "9 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 2013 Chevrolet #1 Andretti Autosport Dallara DW12; 2013 Chevrolet #12 Team Penske Dallara DW12; 2013 Ford Formula Ford EcoBoost 200; 2013 Honda #15 Rahal Letterman Lanigan Racing Dallara DW12; 2013 Honda #9 Target Chip Ganassi Dallara DW12; 2013 Infiniti #77 Schmidt Peterson Motorsports Dallara IPS Indy Lights; 2013 Lotus E21; 2013 Mazda #7 Andretti Autosport USF2000; 2014 Renault Spark SRT_01E. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-formula-racing-pack.json",
-      "sha256": "54034f6b9128c0ba518e578ce6916d4683131d26817eff8c58587cf8fc4905d9",
-      "bytes": 18745
+      "sha256": "48e522e268a502d6eeac713506436205cdab2f9ddaf45d239135626ba1d6d3da",
+      "bytes": 958
     },
     {
       "id": "fm5-zs-golden-age-racing-pack",
       "version": "1.0.6",
-      "name": {
-        "en": "ZS Golden Age Racing Pack",
-        "pt-BR": "ZS Golden Age Racing Pack"
-      },
+      "name": {"en": "ZS Golden Age Racing Pack", "pt-BR": "ZS Golden Age Racing Pack"},
       "description": {
         "en": "5 cars from Forza Motorsport 5, converted by ZephyrSkies: 1939 Audi Auto Union Type D; 1939 Maserati 8CTF; 1952 Ferrari 375; 1966 Chaparral #66 Chaparral Cars 2E; 1971 Ferrari #2 Ferrari Automobili 312 P. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "5 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 1939 Audi Auto Union Type D; 1939 Maserati 8CTF; 1952 Ferrari 375; 1966 Chaparral #66 Chaparral Cars 2E; 1971 Ferrari #2 Ferrari Automobili 312 P. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-golden-age-racing-pack.json",
-      "sha256": "4e74a85257ab219ece81ccb4a84b454d4eda2edfadeab8060d8408d7eafc8409",
-      "bytes": 12166
+      "sha256": "667bbdba3485c080a7e041d4d948d12bb56f1f41bceb2b5a6a5e41b1e10e296b",
+      "bytes": 970
     },
     {
       "id": "fm5-zs-grand-touring-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Grand Touring Pack",
-        "pt-BR": "ZS Grand Touring Pack"
-      },
+      "name": {"en": "ZS Grand Touring Pack", "pt-BR": "ZS Grand Touring Pack"},
       "description": {
         "en": "5 cars from Forza Motorsport 5, converted by ZephyrSkies: 2008 Aston Martin DBS; 2010 Ferrari 599 GTO; 2011 Ferrari FF; 2012 Aston Martin Vanquish Limited Collector Edition; 2014 Rolls-Royce Wraith. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "5 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 2008 Aston Martin DBS; 2010 Ferrari 599 GTO; 2011 Ferrari FF; 2012 Aston Martin Vanquish Limited Collector Edition; 2014 Rolls-Royce Wraith. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-grand-touring-pack.json",
-      "sha256": "446c118d11cffdea48ddd0a0b6b8f807aaba9028753f82ca9cb1c894b2f01f1f",
-      "bytes": 12378
+      "sha256": "adbcf5115d21eeb21ec2ac2fe4a2239722e8b112e0694a8b91654b6c32a51ff0",
+      "bytes": 953
     },
     {
       "id": "fm5-zs-gtx-racing-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS GTX Racing Pack",
-        "pt-BR": "ZS GTX Racing Pack"
-      },
+      "name": {"en": "ZS GTX Racing Pack", "pt-BR": "ZS GTX Racing Pack"},
       "description": {
         "en": "7 cars from Forza Motorsport 5, converted by ZephyrSkies: 1989 Audi #4 Audi 90 quattro IMSA GTO; 2006 Aston Martin #007 Aston Martin Racing DBR9; 2009 BMW #92 Rahal Letterman Racing M3 GT2; 2011 Chevrolet #4 Corvette Racing ZR1; 2011 Ferrari #62 Risi Competizione F458 Italia; 2013 BMW M Performance M3 Racing; 2013 SRT #91 SRT Motorsport GTS-R. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "7 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 1989 Audi #4 Audi 90 quattro IMSA GTO; 2006 Aston Martin #007 Aston Martin Racing DBR9; 2009 BMW #92 Rahal Letterman Racing M3 GT2; 2011 Chevrolet #4 Corvette Racing ZR1; 2011 Ferrari #62 Risi Competizione F458 Italia; 2013 BMW M Performance M3 Racing; 2013 SRT #91 SRT Motorsport GTS-R. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-gtx-racing-pack.json",
-      "sha256": "8b6c419951424fcd0dae63ad0e81dd53b1f50ea33d855d598263938772b04dc6",
-      "bytes": 14768
+      "sha256": "bd2d16c72c8516a983afc7a0f14292631df4ef0be5c1cf98b96e68bdcfd70dbb",
+      "bytes": 912
     },
     {
       "id": "fm5-zs-hills-and-trails-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Hills and Trails Pack",
-        "pt-BR": "ZS Hills and Trails Pack"
-      },
+      "name": {"en": "ZS Hills and Trails Pack", "pt-BR": "ZS Hills and Trails Pack"},
       "description": {
         "en": "4 cars from Forza Motorsport 5, converted by ZephyrSkies: 1983 GMC Vandura G-1500; 1991 GMC Syclone; 2009 Jeep Grand Cherokee SRT8; 2012 Land Rover Range Rover Supercharged. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "4 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 1983 GMC Vandura G-1500; 1991 GMC Syclone; 2009 Jeep Grand Cherokee SRT8; 2012 Land Rover Range Rover Supercharged. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-hills-and-trails-pack.json",
-      "sha256": "2f80ca39b2d674cc3e25dd5fab0fc6389bc766dd867ad97a2a4bed190472cfef",
-      "bytes": 11412
+      "sha256": "79a6ab046665863817387207a0cbd39dd55f173755780a17228647fd4c580134",
+      "bytes": 965
     },
     {
       "id": "fm5-zs-midnight-touge-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Midnight Touge Pack",
-        "pt-BR": "ZS Midnight Touge Pack"
-      },
+      "name": {"en": "ZS Midnight Touge Pack", "pt-BR": "ZS Midnight Touge Pack"},
       "description": {
         "en": "6 cars from Forza Motorsport 5, converted by ZephyrSkies: 1985 Mazda RX-7 GSL-SE; 1989 Toyota MR2 SC; 1997 Mitsubishi GTO; 1997 Nissan Skyline GT-R V-Spec; 2003 Nissan Fairlady Z; 2005 Honda NSX-R. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "6 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 1985 Mazda RX-7 GSL-SE; 1989 Toyota MR2 SC; 1997 Mitsubishi GTO; 1997 Nissan Skyline GT-R V-Spec; 2003 Nissan Fairlady Z; 2005 Honda NSX-R. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-midnight-touge-pack.json",
-      "sha256": "ce54a07e5b6e01b1ed0f5c4866655e9fa19d5349a06c25942b88b441197e464f",
-      "bytes": 13340
+      "sha256": "abd9c2b5bfc9be70deb0951c753cd3cff477ec66bd9f7100170635b5eb2feab4",
+      "bytes": 958
     },
     {
       "id": "fm5-zs-modern-le-mans-prototypes-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Modern Le Mans Prototypes Pack",
-        "pt-BR": "ZS Modern Le Mans Prototypes Pack"
-      },
+      "name": {"en": "ZS Modern Le Mans Prototypes Pack", "pt-BR": "ZS Modern Le Mans Prototypes Pack"},
       "description": {
         "en": "4 cars from Forza Motorsport 5, converted by ZephyrSkies: 2006 Audi #2 Audi Sport North America R8; 2009 Peugeot #9 Peugeot Sport Total 908; 2011 Radical SR8 RX; 2012 Audi #1 Audi Team Joest R18 e-tron quattro. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "4 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 2006 Audi #2 Audi Sport North America R8; 2009 Peugeot #9 Peugeot Sport Total 908; 2011 Radical SR8 RX; 2012 Audi #1 Audi Team Joest R18 e-tron quattro. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-modern-le-mans-prototypes-pack.json",
-      "sha256": "ad9e659fd50c8e2bc49e6b62f083beeecd4dcf6914edaa45358c39cd36d7265c",
-      "bytes": 10832
+      "sha256": "d8b5881a7c9dfec85ce31c7fc3b167fdcf8020d4c30e449b90ddc6c3df49670e",
+      "bytes": 1001
     },
     {
       "id": "fm5-zs-rally-legends-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Rally Legends Pack",
-        "pt-BR": "ZS Rally Legends Pack"
-      },
+      "name": {"en": "ZS Rally Legends Pack", "pt-BR": "ZS Rally Legends Pack"},
       "description": {
         "en": "5 cars from Forza Motorsport 5, converted by ZephyrSkies: 1984 Peugeot 205 Turbo 16; 1992 Toyota Celica GT-Four RC ST185; 1995 Mitsubishi Eclipse GSX; 1998 Eagle Talon TSi Turbo; 2004 Subaru Impreza WRX STi. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "5 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 1984 Peugeot 205 Turbo 16; 1992 Toyota Celica GT-Four RC ST185; 1995 Mitsubishi Eclipse GSX; 1998 Eagle Talon TSi Turbo; 2004 Subaru Impreza WRX STi. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-rally-legends-pack.json",
-      "sha256": "64f4fa77ccefef2f2cac110a2f2c72dc8733e04715ea30a28dcc7ed700c86c3b",
-      "bytes": 12470
+      "sha256": "0d4a0a36e6c8e826b3c83a9607fb1f9f473c5389faeadbc76a7935c04364fc8a",
+      "bytes": 954
     },
     {
       "id": "fm5-zs-regularly-priced-hatch-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Regularly Priced Hatch Pack",
-        "pt-BR": "ZS Regularly Priced Hatch Pack"
-      },
+      "name": {"en": "ZS Regularly Priced Hatch Pack", "pt-BR": "ZS Regularly Priced Hatch Pack"},
       "description": {
         "en": "10 cars from Forza Motorsport 5, converted by ZephyrSkies: 1994 Honda Prelude Si; 2003 Toyota Celica SS-I; 2005 Dodge SRT4 ACR; 2007 Honda Civic Type-R; 2009 MINI John Cooper Works; 2011 Citroën DS3 Racing; 2011 Peugeot 308 GTI; 2012 Scion tC; 2013 Vauxhall Astra 1.6 Tech Line Top Gear Edition; 2014 Honda Civic Si. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "10 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 1994 Honda Prelude Si; 2003 Toyota Celica SS-I; 2005 Dodge SRT4 ACR; 2007 Honda Civic Type-R; 2009 MINI John Cooper Works; 2011 Citroën DS3 Racing; 2011 Peugeot 308 GTI; 2012 Scion tC; 2013 Vauxhall Astra 1.6 Tech Line Top Gear Edition; 2014 Honda Civic Si. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-regularly-priced-hatch-pack.json",
-      "sha256": "50822046dad047c2f219c4c499fbede37636fd8639438a6554c40b106662b906",
-      "bytes": 22129
+      "sha256": "d2a0661ecc795308bd204b02380bd21233bf57d093ff3dec948b968fcbf0583b",
+      "bytes": 990
     },
     {
       "id": "fm5-zs-retro-muscle-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Retro Muscle Pack",
-        "pt-BR": "ZS Retro Muscle Pack"
-      },
+      "name": {"en": "ZS Retro Muscle Pack", "pt-BR": "ZS Retro Muscle Pack"},
       "description": {
         "en": "4 cars from Forza Motorsport 5, converted by ZephyrSkies: 1995 Ford SVT Cobra R; 2002 Chevrolet Camaro 35th Anniversary SS; 2002 Chevrolet Corvette Z06; 2002 Pontiac Firebird Trans Am Ram Air. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "4 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 1995 Ford SVT Cobra R; 2002 Chevrolet Camaro 35th Anniversary SS; 2002 Chevrolet Corvette Z06; 2002 Pontiac Firebird Trans Am Ram Air. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-retro-muscle-pack.json",
-      "sha256": "9b86033055489ecbf64361de1c815ab377240bd04b5c4c28da121f1ce8161d21",
-      "bytes": 9534
+      "sha256": "e6754f442a4a29ec2c7c341defd6fd1a36c29f89a01dd27382409df6d79150ce",
+      "bytes": 919
     },
     {
       "id": "fm5-zs-retro-supercars-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Retro Supercars Pack",
-        "pt-BR": "ZS Retro Supercars Pack"
-      },
+      "name": {"en": "ZS Retro Supercars Pack", "pt-BR": "ZS Retro Supercars Pack"},
       "description": {
         "en": "3 cars from Forza Motorsport 5, converted by ZephyrSkies: 1991 Ferrari 512 TR; 1998 Mercedes AMG Mercedes CLK GTR; 1998 Nissan R390. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "3 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 1991 Ferrari 512 TR; 1998 Mercedes AMG Mercedes CLK GTR; 1998 Nissan R390. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-retro-supercars-pack.json",
-      "sha256": "a45cc328e63458378509b7d9db9aa41a896430bf3ec890a2d00991337d743864",
-      "bytes": 7850
+      "sha256": "4ccb9da8356da5e322885bd4609bba35cb21a85238f288b2d9b62e1ed0ca0e71",
+      "bytes": 961
     },
     {
       "id": "fm5-zs-road-and-track-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Road and Track Pack",
-        "pt-BR": "ZS Road and Track Pack"
-      },
+      "name": {"en": "ZS Road and Track Pack", "pt-BR": "ZS Road and Track Pack"},
       "description": {
         "en": "6 cars from Forza Motorsport 5, converted by ZephyrSkies: 1999 Lotus Elise Series 1 Sport 190; 2000 BMW Z8; 2005 BMW M3; 2009 Pontiac Solstice GXP; 2012 Infiniti IPL G Coupe; 2013 Mazda MX-5 Cup. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "6 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 1999 Lotus Elise Series 1 Sport 190; 2000 BMW Z8; 2005 BMW M3; 2009 Pontiac Solstice GXP; 2012 Infiniti IPL G Coupe; 2013 Mazda MX-5 Cup. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-road-and-track-pack.json",
-      "sha256": "f4e47cfb67ece5e20e476dad2a772e59449a363ab7f8352250ca78e6c3e548e6",
-      "bytes": 13324
+      "sha256": "a5acb46399ec06bb246dc4ced9d6dbbddc5765ea43b3334720a71b1170cd16c9",
+      "bytes": 958
     },
     {
       "id": "fm5-zs-silver-age-supercars-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Silver Age Supercars Pack",
-        "pt-BR": "ZS Silver Age Supercars Pack"
-      },
+      "name": {"en": "ZS Silver Age Supercars Pack", "pt-BR": "ZS Silver Age Supercars Pack"},
       "description": {
         "en": "7 cars from Forza Motorsport 5, converted by ZephyrSkies: 2004 Saleen S7; 2008 Lamborghini Reventón; 2010 Audi Forza Motorsport R8 5.2 FSI quattro; 2010 Audi R8 Coupé 5.2 FSI quattro; 2011 Lamborghini Forza Motorsport Gallardo LP570-4 Superleggera; 2011 McLaren Forza Motorsport MP4-12C; 2013 McLaren P1 Limited Collector Edition. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "7 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 2004 Saleen S7; 2008 Lamborghini Reventón; 2010 Audi Forza Motorsport R8 5.2 FSI quattro; 2010 Audi R8 Coupé 5.2 FSI quattro; 2011 Lamborghini Forza Motorsport Gallardo LP570-4 Superleggera; 2011 McLaren Forza Motorsport MP4-12C; 2013 McLaren P1 Limited Collector Edition. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-silver-age-supercars-pack.json",
-      "sha256": "afa424d7ebb0de0bb84fc5610efde40781d57b3c83349207ead62fb99e46ee53",
-      "bytes": 15864
+      "sha256": "b378f0b6b21a799fe0d97d1b6e785395b98b01f287e14cf76584b9acecda9450",
+      "bytes": 982
     },
     {
       "id": "fm5-zs-supercars-down-under-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Supercars Down Under Pack",
-        "pt-BR": "ZS Supercars Down Under Pack"
-      },
+      "name": {"en": "ZS Supercars Down Under Pack", "pt-BR": "ZS Supercars Down Under Pack"},
       "description": {
         "en": "3 cars from Forza Motorsport 5, converted by ZephyrSkies: 2011 Ford #5 Ford Performance Racing FG Falcon; 2011 Holden #1 Toll Holden Racing Team Commodore VE; 2013 Holden #10 Holden Xbox Racing Team Commodore VF. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "3 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 2011 Ford #5 Ford Performance Racing FG Falcon; 2011 Holden #1 Toll Holden Racing Team Commodore VE; 2013 Holden #10 Holden Xbox Racing Team Commodore VF. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-supercars-down-under-pack.json",
-      "sha256": "d8148b9714e29acdf8a4600cf0593826629d141b501e70e2911128637500170b",
-      "bytes": 7656
+      "sha256": "f7618a5471640561a5cf3d25ab2d9977f751c727fab4e41809b5e164dce80ff9",
+      "bytes": 981
     },
     {
       "id": "fm5-zs-ultimate-hatch-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Ultimate Hatch Pack",
-        "pt-BR": "ZS Ultimate Hatch Pack"
-      },
+      "name": {"en": "ZS Ultimate Hatch Pack", "pt-BR": "ZS Ultimate Hatch Pack"},
       "description": {
         "en": "4 cars from Forza Motorsport 5, converted by ZephyrSkies: 2010 Audi Forza Motorsport TT RS Coupe; 2011 Audi RS 3 Sportback Limited Collector Edition; 2013 Ford Forza Motorsport Focus ST; 2015 Audi S3 Sedan. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "4 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 2010 Audi Forza Motorsport TT RS Coupe; 2011 Audi RS 3 Sportback Limited Collector Edition; 2013 Ford Forza Motorsport Focus ST; 2015 Audi S3 Sedan. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-ultimate-hatch-pack.json",
-      "sha256": "0be17c0a426ef08b06ba08385db8fba373d0b3bb9a6a42cbb20236fc9534b9f4",
-      "bytes": 9098
+      "sha256": "c183af143da5e36b584c238e8ae4f593f533b05f1d30532691f426d82a46018f",
+      "bytes": 957
     },
     {
       "id": "fm5-zs-vintage-le-mans-prototypes-pack",
       "version": "1.0.5",
-      "name": {
-        "en": "ZS Vintage Le Mans Prototypes Pack",
-        "pt-BR": "ZS Vintage Le Mans Prototypes Pack"
-      },
+      "name": {"en": "ZS Vintage Le Mans Prototypes Pack", "pt-BR": "ZS Vintage Le Mans Prototypes Pack"},
       "description": {
         "en": "3 cars from Forza Motorsport 5, converted by ZephyrSkies: 1991 Mazda #55 Mazda 787B; 1998 Ferrari #12 Risi Competizione F333 SP; 1999 Toyota #3 Toyota Motorsports GT-ONE TS020. Needs ZS FM5 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "3 carros do Forza Motorsport 5, convertidos por ZephyrSkies: 1991 Mazda #55 Mazda 787B; 1998 Ferrari #12 Risi Competizione F333 SP; 1999 Toyota #3 Toyota Motorsports GT-ONE TS020. Precisa do ZS FM5 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "fm5-zs-vintage-le-mans-prototypes-pack.json",
-      "sha256": "4c27c7862c61687c60c2c36bc86e69cca4a36b054b71a6baf579c7c07ac16950",
-      "bytes": 7786
+      "sha256": "41681bb291bcb6e91a1eabd28aa0409d2cc6ab052baa223a77c7c18ae25584de",
+      "bytes": 1005
     },
     {
       "id": "zs-fm6-zs-fm6-common",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Common",
-        "pt-BR": "ZS FM6 Common"
-      },
+      "name": {"en": "ZS FM6 Common", "pt-BR": "ZS FM6 Common"},
       "description": {
         "en": "What every ZS FM6 pack needs: shared database rows, manufacturer logos, engine sounds and its changes to FH2's own cars. Infinity keeps it first in the load order, before every other mod.",
         "pt-BR": "O que todo pacote ZS FM6 precisa: linhas compartilhadas do banco de dados, logotipos das marcas, sons de motor e as mudanças dele nos carros do próprio FH2. O Infinity o mantém primeiro na ordem de carregamento, antes de qualquer outro mod."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-common.json",
-      "sha256": "d2990ab108cdc52f6ba693a47ba63c999169db2a6cd6b6b44771fd94af9bae35",
-      "bytes": 27917
+      "sha256": "30764fb53c876fd488dec6b7a2991ce6c4904ed144de050b1a26475445112020",
+      "bytes": 826
     },
     {
       "id": "zs-fm6-zs-fm6-cult-classics-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Cult Classics Pack",
-        "pt-BR": "ZS FM6 Cult Classics Pack"
-      },
+      "name": {"en": "ZS FM6 Cult Classics Pack", "pt-BR": "ZS FM6 Cult Classics Pack"},
       "description": {
         "en": "5 cars from Forza Motorsport 6, converted by ZephyrSkies: 1958 Plymouth Fury; 1971 Ford Falcon XY GTHO Phase III; 1973 Holden HQ Monaro GTS 350; 2000 Plymouth Prowler; 2069 Chryslus Rocket 69. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "5 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 1958 Plymouth Fury; 1971 Ford Falcon XY GTHO Phase III; 1973 Holden HQ Monaro GTS 350; 2000 Plymouth Prowler; 2069 Chryslus Rocket 69. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-cult-classics-pack.json",
-      "sha256": "8112290b79523a6ceb5640a75997df7c2e9129687b944d99364d789a50aff8cc",
-      "bytes": 9576
+      "sha256": "f660faa85231205ed9121a804869dda78e622ce31fd6cded443b075c5d9e5569",
+      "bytes": 972
     },
     {
       "id": "zs-fm6-zs-fm6-family-hauler-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Family Hauler Pack",
-        "pt-BR": "ZS FM6 Family Hauler Pack"
-      },
+      "name": {"en": "ZS FM6 Family Hauler Pack", "pt-BR": "ZS FM6 Family Hauler Pack"},
       "description": {
         "en": "11 cars from Forza Motorsport 6, converted by ZephyrSkies: 1986 BMW M635CSi; 1992 Alfa Romeo Milano Quadrifoglio Verde; 1997 Maserati Ghibli Cup; 2000 BMW 323ti Sport; 2003 Audi RS 6; 2009 Audi RS 6; 2014 Lexus IS 350 F Sport; 2014 Maserati Ghibli S; 2015 Infiniti Q60 Concept; 2016 Mercedes-AMG C 63 S Coupé; 2016 Rolls-Royce Dawn. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "11 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 1986 BMW M635CSi; 1992 Alfa Romeo Milano Quadrifoglio Verde; 1997 Maserati Ghibli Cup; 2000 BMW 323ti Sport; 2003 Audi RS 6; 2009 Audi RS 6; 2014 Lexus IS 350 F Sport; 2014 Maserati Ghibli S; 2015 Infiniti Q60 Concept; 2016 Mercedes-AMG C 63 S Coupé; 2016 Rolls-Royce Dawn. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-family-hauler-pack.json",
-      "sha256": "ea39cc1c2372980a2b4e63a7b5102a0419c4a2b37c8f3c8daf36a98b1f37baf0",
-      "bytes": 21380
+      "sha256": "f4bb03b1265e420197075a023fd9108d11fa7b84886043288522cb86b33e4608",
+      "bytes": 972
     },
     {
       "id": "zs-fm6-zs-fm6-formula-e-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Formula E Pack",
-        "pt-BR": "ZS FM6 Formula E Pack"
-      },
+      "name": {"en": "ZS FM6 Formula E Pack", "pt-BR": "ZS FM6 Formula E Pack"},
       "description": {
         "en": "8 cars from Forza Motorsport 6, converted by ZephyrSkies: 2015 Formula E #10 Trulli Spark SRT_01E; 2015 Formula E #2 Virgin Racing VIR 01E; 2015 Formula E #21 Mahindra M2Electro; 2015 Formula E #23 Venturi 1; 2015 Formula E #27 Andretti Formula E Spark SRT_01E; 2015 Formula E #55 Amlin Aguri Spark SRT_01E; 2015 Formula E #6 Dragon Racing Spark SRT_01E; 2015 Formula E #9 e.dams-Renault Spark SRT_01E. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "8 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 2015 Formula E #10 Trulli Spark SRT_01E; 2015 Formula E #2 Virgin Racing VIR 01E; 2015 Formula E #21 Mahindra M2Electro; 2015 Formula E #23 Venturi 1; 2015 Formula E #27 Andretti Formula E Spark SRT_01E; 2015 Formula E #55 Amlin Aguri Spark SRT_01E; 2015 Formula E #6 Dragon Racing Spark SRT_01E; 2015 Formula E #9 e.dams-Renault Spark SRT_01E. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-formula-e-pack.json",
-      "sha256": "edafc3978ea4dcd2b9c01ec863ad8b0664ca13bdf04e63480bc4a0589b968a4a",
-      "bytes": 13142
+      "sha256": "569f5d586aad44260d4de6130f53f56a31a1d39803db9c364c84a1eb69716c80",
+      "bytes": 926
     },
     {
       "id": "zs-fm6-zs-fm6-golden-age-racing-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Golden Age Racing Pack",
-        "pt-BR": "ZS FM6 Golden Age Racing Pack"
-      },
+      "name": {"en": "ZS FM6 Golden Age Racing Pack", "pt-BR": "ZS FM6 Golden Age Racing Pack"},
       "description": {
         "en": "12 cars from Forza Motorsport 6, converted by ZephyrSkies: 1934 Alfa Romeo P3; 1939 Mercedes W154; 1955 Mercedes 300 SLR; 1955 Porsche 550 Spyder; 1957 Porsche 356A Speedster; 1960 Porsche 718 RS 60; 1963 Ferrari 250LM; 1967 Mercedes 280 SL; 1969 Fiat Dino 2.4 Coupe; 1969 Lola #10 Simoniz Special T163; 1969 McLaren #4 McLaren Cars M8B; 1969 Nissan #21 Nissan Racing R382. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "12 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 1934 Alfa Romeo P3; 1939 Mercedes W154; 1955 Mercedes 300 SLR; 1955 Porsche 550 Spyder; 1957 Porsche 356A Speedster; 1960 Porsche 718 RS 60; 1963 Ferrari 250LM; 1967 Mercedes 280 SL; 1969 Fiat Dino 2.4 Coupe; 1969 Lola #10 Simoniz Special T163; 1969 McLaren #4 McLaren Cars M8B; 1969 Nissan #21 Nissan Racing R382. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-golden-age-racing-pack.json",
-      "sha256": "143a343e374632b001d7bbc1aca22723fdf7a2c8453c81cee5e615e7b2a37364",
-      "bytes": 24364
+      "sha256": "2ec9f31a10c18b494974fafad5c7bbfc19647f37dd79d3d296b4ded21c82d814",
+      "bytes": 988
     },
     {
       "id": "zs-fm6-zs-fm6-hills-and-trails-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Hills and Trails Pack",
-        "pt-BR": "ZS FM6 Hills and Trails Pack"
-      },
+      "name": {"en": "ZS FM6 Hills and Trails Pack", "pt-BR": "ZS FM6 Hills and Trails Pack"},
       "description": {
         "en": "6 cars from Forza Motorsport 6, converted by ZephyrSkies: 1984 Opel Manta 400; 2006 Mitsubishi Lancer Evolution IX MR; 2015 BMW X6 M; 2015 Land Rover Range Rover Sport SVR; 2015 Subaru Team Forza WRX STI; 2017 Ford F-150 Raptor. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "6 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 1984 Opel Manta 400; 2006 Mitsubishi Lancer Evolution IX MR; 2015 BMW X6 M; 2015 Land Rover Range Rover Sport SVR; 2015 Subaru Team Forza WRX STI; 2017 Ford F-150 Raptor. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-hills-and-trails-pack.json",
-      "sha256": "1fe36a92520e597ae6a8af887440e0875383386fc3804938dcb418f16db95085",
-      "bytes": 11887
+      "sha256": "a57a91d85056a0f8b393b452789c95b2cee74f0d03a1b7d2b1b53ca6a6ef261f",
+      "bytes": 984
     },
     {
       "id": "zs-fm6-zs-fm6-hot-wheels-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Hot Wheels Pack",
-        "pt-BR": "ZS FM6 Hot Wheels Pack"
-      },
+      "name": {"en": "ZS FM6 Hot Wheels Pack", "pt-BR": "ZS FM6 Hot Wheels Pack"},
       "description": {
         "en": "2 cars from Forza Motorsport 6, converted by ZephyrSkies: 2005 Ford Hot Wheels Mustang; 2011 Hot Wheels Bone Shaker. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "2 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 2005 Ford Hot Wheels Mustang; 2011 Hot Wheels Bone Shaker. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-hot-wheels-pack.json",
-      "sha256": "abe00119f4780d0665fc57f37af539e091a6b313965caa97fbd38f092b3a7489",
-      "bytes": 6215
+      "sha256": "29869f902e6a617ea3bc6d3c0c2ee8dcab75d8b831fe274baa247dd0ea31b50b",
+      "bytes": 929
     },
     {
       "id": "zs-fm6-zs-fm6-modern-formula-racing-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Modern Formula Racing Pack",
-        "pt-BR": "ZS FM6 Modern Formula Racing Pack"
-      },
+      "name": {"en": "ZS FM6 Modern Formula Racing Pack", "pt-BR": "ZS FM6 Modern Formula Racing Pack"},
       "description": {
         "en": "3 cars from Forza Motorsport 6, converted by ZephyrSkies: 2013 Caparo T1; 2015 Lotus E23; 2015 Mazda Formula Mazda. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "3 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 2013 Caparo T1; 2015 Lotus E23; 2015 Mazda Formula Mazda. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-modern-formula-racing-pack.json",
-      "sha256": "722e60d36b702b568674c70a161a1ec673db4f3c20b6358eceaab08c076a8cca",
-      "bytes": 8119
+      "sha256": "1ad853f15c2ca0b963724a612f248dafb6f3e3f74116e96f69d9a987d92ced17",
+      "bytes": 1003
     },
     {
       "id": "zs-fm6-zs-fm6-modern-gtx-racing-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Modern GTX Racing Pack",
-        "pt-BR": "ZS FM6 Modern GTX Racing Pack"
-      },
+      "name": {"en": "ZS FM6 Modern GTX Racing Pack", "pt-BR": "ZS FM6 Modern GTX Racing Pack"},
       "description": {
         "en": "21 cars from Forza Motorsport 6, converted by ZephyrSkies: 2011 McLaren #59 McLaren GT 12C GT3; 2011 Mercedes #35 Black Falcon SLS AMG GT3; 2011 Porsche #45 Flying Lizard 911 GT3 RSR; 2014 Audi #45 Flying Lizard Motorsports R8 LMS ultra; 2014 BMW #55 BMW Team RLL Z4 GTE; 2014 BMW #56 BMW Team RLL Z4 GTE; 2014 Bentley #7 M-Sport Bentley Continental GT3; 2014 Chevrolet #3 Corvette Racing Corvette C7.R; 2014 Dodge #93 SRT Motorsports Viper GTS-R; 2014 Ferrari #51 AF Corse 458 Italia GTE; 2014 Ferrari #62 Risi Competizione 458 Italia GTLM; 2014 Jaguar #14 Emil Frey GT3 Jaguar XK; 2014 Lamborghini #14 GMG Racing LP 570-4 Super Trofeo; 2014 Lamborghini #18 DragonSpeed Gallardo LP 570-4 Super Trofeo; 2014 Maserati #35 M.Calamia Swiss Team MC Trofeo; 2014 McLaren #60 Bhaitech 12C GT3; 2014 McLaren #98 ART Grand Prix 12C GT3; 2014 Mercedes #84 HTP Motorsport SLS AMG GT3; 2015 Lamborghini #63 Squadra Corse Huracán LP620-2 Super Trofeo; 2015 Nissan #1 NISMO MOTUL AUTECH GT-R; 2016 Ford #66 Ford Racing GT Le Mans. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "21 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 2011 McLaren #59 McLaren GT 12C GT3; 2011 Mercedes #35 Black Falcon SLS AMG GT3; 2011 Porsche #45 Flying Lizard 911 GT3 RSR; 2014 Audi #45 Flying Lizard Motorsports R8 LMS ultra; 2014 BMW #55 BMW Team RLL Z4 GTE; 2014 BMW #56 BMW Team RLL Z4 GTE; 2014 Bentley #7 M-Sport Bentley Continental GT3; 2014 Chevrolet #3 Corvette Racing Corvette C7.R; 2014 Dodge #93 SRT Motorsports Viper GTS-R; 2014 Ferrari #51 AF Corse 458 Italia GTE; 2014 Ferrari #62 Risi Competizione 458 Italia GTLM; 2014 Jaguar #14 Emil Frey GT3 Jaguar XK; 2014 Lamborghini #14 GMG Racing LP 570-4 Super Trofeo; 2014 Lamborghini #18 DragonSpeed Gallardo LP 570-4 Super Trofeo; 2014 Maserati #35 M.Calamia Swiss Team MC Trofeo; 2014 McLaren #60 Bhaitech 12C GT3; 2014 McLaren #98 ART Grand Prix 12C GT3; 2014 Mercedes #84 HTP Motorsport SLS AMG GT3; 2015 Lamborghini #63 Squadra Corse Huracán LP620-2 Super Trofeo; 2015 Nissan #1 NISMO MOTUL AUTECH GT-R; 2016 Ford #66 Ford Racing GT Le Mans. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-modern-gtx-racing-pack.json",
-      "sha256": "f6107cee1bc41ebe0c8b2efa0dc59227ad7d56edee9616e2de62de672f5f33dd",
-      "bytes": 38846
+      "sha256": "209cfbfd30b93cda3bfe04077c78bfc13bce3ade64799b67042de9cdfafc650d",
+      "bytes": 988
     },
     {
       "id": "zs-fm6-zs-fm6-modern-indycar-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Modern Indycar Pack",
-        "pt-BR": "ZS FM6 Modern Indycar Pack"
-      },
+      "name": {"en": "ZS FM6 Modern Indycar Pack", "pt-BR": "ZS FM6 Modern Indycar Pack"},
       "description": {
         "en": "10 cars from Forza Motorsport 6, converted by ZephyrSkies: 2015 Chevrolet #1 Team Penske IndyCar; 2015 Chevrolet #67 CFH Racing IndyCar; 2015 Chevrolet #9 Target Chip Ganassi Racing IndyCar; 2015 Honda #14 AJ Foyt Enterprises IndyCar; 2015 Honda #15 Rahal Letterman Lanigan Racing IndyCar; 2015 Honda #25 Andretti Autosport IndyCar; 2015 Honda #27 Andretti Autosport IndyCar; 2015 Honda #28 Andretti Autosport IndyCar; 2015 Honda #5 Schmidt Peterson Motorsports IndyCar; 2015 Honda #7 Schmidt Peterson Motorsports IndyCar. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "10 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 2015 Chevrolet #1 Team Penske IndyCar; 2015 Chevrolet #67 CFH Racing IndyCar; 2015 Chevrolet #9 Target Chip Ganassi Racing IndyCar; 2015 Honda #14 AJ Foyt Enterprises IndyCar; 2015 Honda #15 Rahal Letterman Lanigan Racing IndyCar; 2015 Honda #25 Andretti Autosport IndyCar; 2015 Honda #27 Andretti Autosport IndyCar; 2015 Honda #28 Andretti Autosport IndyCar; 2015 Honda #5 Schmidt Peterson Motorsports IndyCar; 2015 Honda #7 Schmidt Peterson Motorsports IndyCar. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-modern-indycar-pack.json",
-      "sha256": "facc6b5731f9234b40fa3950587df7ed93b99c3bc892e8816140b858ac3ec734",
-      "bytes": 15938
+      "sha256": "19ab2bcae4b91d7f873744d6ac95d522e7ffcb56959b97fefe683b260b1b2a91",
+      "bytes": 976
     },
     {
       "id": "zs-fm6-zs-fm6-modern-le-mans-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Modern Le Mans Pack",
-        "pt-BR": "ZS FM6 Modern Le Mans Pack"
-      },
+      "name": {"en": "ZS FM6 Modern Le Mans Pack", "pt-BR": "ZS FM6 Modern Le Mans Pack"},
       "description": {
         "en": "13 cars from Forza Motorsport 6, converted by ZephyrSkies: 2003 Bentley #7 Team Bentley Speed 8; 2004 Audi #5 Audi Sport Japan Team Goh R8; 2008 Porsche #7 Penske Racing RS Spyder Evo; 2011 Audi #2 Audi Sport Team Joest R15++ TDI; 2011 Peugeot #10 Team Matmut 908; 2014 Audi #2 Audi Team Joest R18 e-tron quattro; 2014 Mazda #70 SpeedSource Lola B12/80; 2014 Toyota #12 Rebellion Racing R-One; 2014 Toyota #8 Toyota Racing TS040 HYBRID; 2015 Chevrolet #10 Wayne Taylor Racing Corvette Daytona Prototype; 2015 Ford #02 Chip Ganassi Racing Riley MK XXVI Daytona Prototype; 2015 Nissan #23 GT-R LM NISMO; 2015 Porsche #19 Porsche Team 919 Hybrid. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "13 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 2003 Bentley #7 Team Bentley Speed 8; 2004 Audi #5 Audi Sport Japan Team Goh R8; 2008 Porsche #7 Penske Racing RS Spyder Evo; 2011 Audi #2 Audi Sport Team Joest R15++ TDI; 2011 Peugeot #10 Team Matmut 908; 2014 Audi #2 Audi Team Joest R18 e-tron quattro; 2014 Mazda #70 SpeedSource Lola B12/80; 2014 Toyota #12 Rebellion Racing R-One; 2014 Toyota #8 Toyota Racing TS040 HYBRID; 2015 Chevrolet #10 Wayne Taylor Racing Corvette Daytona Prototype; 2015 Ford #02 Chip Ganassi Racing Riley MK XXVI Daytona Prototype; 2015 Nissan #23 GT-R LM NISMO; 2015 Porsche #19 Porsche Team 919 Hybrid. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-modern-le-mans-pack.json",
-      "sha256": "b37afed2d2a07d4cb0edf773b0adbd88a0f279eb065501004a3ece2d6114c1a2",
-      "bytes": 26230
+      "sha256": "3281aac1e833dd3f6db081b011fa4d352d9423dd6469143908a5a1eda6d1583d",
+      "bytes": 976
     },
     {
       "id": "zs-fm6-zs-fm6-modern-muscle-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Modern Muscle Pack",
-        "pt-BR": "ZS FM6 Modern Muscle Pack"
-      },
+      "name": {"en": "ZS FM6 Modern Muscle Pack", "pt-BR": "ZS FM6 Modern Muscle Pack"},
       "description": {
         "en": "8 cars from Forza Motorsport 6, converted by ZephyrSkies: 2015 Dodge Challenger SRT Hellcat; 2015 Dodge Challenger SRT Hellcat Battletoads Edition; 2015 Dodge Charger SRT Hellcat; 2015 Dodge Team Forza Challenger SRT Hellcat; 2015 Ford Team Forza Mustang GT; 2016 Cadillac CTS-V Sedan; 2016 Chevrolet Camaro Super Sport; 2016 Ford Shelby GT350R. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "8 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 2015 Dodge Challenger SRT Hellcat; 2015 Dodge Challenger SRT Hellcat Battletoads Edition; 2015 Dodge Charger SRT Hellcat; 2015 Dodge Team Forza Challenger SRT Hellcat; 2015 Ford Team Forza Mustang GT; 2016 Cadillac CTS-V Sedan; 2016 Chevrolet Camaro Super Sport; 2016 Ford Shelby GT350R. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-modern-muscle-pack.json",
-      "sha256": "4afcb7b48a0331363bbe0447619352cb6264dfd2fbc85239cd231032179dc0b2",
-      "bytes": 14842
+      "sha256": "f440833cd72398498f2c5544b3d05a304d3913629a1c9b94a5b280ffc5f693d7",
+      "bytes": 972
     },
     {
       "id": "zs-fm6-zs-fm6-modern-touring-car-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Modern Touring Car Pack",
-        "pt-BR": "ZS FM6 Modern Touring Car Pack"
-      },
+      "name": {"en": "ZS FM6 Modern Touring Car Pack", "pt-BR": "ZS FM6 Modern Touring Car Pack"},
       "description": {
         "en": "11 cars from Forza Motorsport 6, converted by ZephyrSkies: 2014 Audi #67 Rotek Racing S3 Saloon; 2014 BMW #5 eBay Motors 125i M Sport; 2014 Chevrolet #4 ROAL Motorsport RML Cruze TC1 WTCC; 2014 Honda #2 Castrol Honda Civic WTCC; 2014 Honda #5 Zengo Motorsport Civic WTCC; 2014 Mercedes #33 WIX Racing A-Class; 2014 Toyota #11 Handy Motorsport Avensis; 2014 Toyota #20 United Autosports Avensis; 2014 Toyota #80 Speedworks Motorsport Avensis; 2014 Volvo #1 Volvo Polestar Racing S60 STCC; 2014 Volvo #13 Volvo Polestar Racing S60 STCC. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "11 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 2014 Audi #67 Rotek Racing S3 Saloon; 2014 BMW #5 eBay Motors 125i M Sport; 2014 Chevrolet #4 ROAL Motorsport RML Cruze TC1 WTCC; 2014 Honda #2 Castrol Honda Civic WTCC; 2014 Honda #5 Zengo Motorsport Civic WTCC; 2014 Mercedes #33 WIX Racing A-Class; 2014 Toyota #11 Handy Motorsport Avensis; 2014 Toyota #20 United Autosports Avensis; 2014 Toyota #80 Speedworks Motorsport Avensis; 2014 Volvo #1 Volvo Polestar Racing S60 STCC; 2014 Volvo #13 Volvo Polestar Racing S60 STCC. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-modern-touring-car-pack.json",
-      "sha256": "a28ef60c7e442f26e6410a3c0d17155d7e75cd38e4f4dc8d9066ce0fde6e64e9",
-      "bytes": 20162
+      "sha256": "7d9c17f2d69ccbb760a9a762918727522f65ebeda963f1e59fd12c86239427ff",
+      "bytes": 992
     },
     {
       "id": "zs-fm6-zs-fm6-open-wheel-legends-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Open-Wheel Legends Pack",
-        "pt-BR": "ZS FM6 Open-Wheel Legends Pack"
-      },
+      "name": {"en": "ZS FM6 Open-Wheel Legends Pack", "pt-BR": "ZS FM6 Open-Wheel Legends Pack"},
       "description": {
         "en": "10 cars from Forza Motorsport 6, converted by ZephyrSkies: 1964 Ferrari F-158 F1; 1964 Watson #1 Sheraton-Thompson Special Roadster; 1966 McLaren M2B; 1967 Eagle-Weslake T1G; 1967 Honda RA300; 1969 Ford Brawner Hawk III; 1976 Lotus #5 Team Lotus 77; 1988 McLaren #12 Honda McLaren MP4/4; 1990 Chevrolet #30 Douglas Shierson Racing Lola T90/00; 1990 Ferrari #1 Scuderia Ferrari 641. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "10 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 1964 Ferrari F-158 F1; 1964 Watson #1 Sheraton-Thompson Special Roadster; 1966 McLaren M2B; 1967 Eagle-Weslake T1G; 1967 Honda RA300; 1969 Ford Brawner Hawk III; 1976 Lotus #5 Team Lotus 77; 1988 McLaren #12 Honda McLaren MP4/4; 1990 Chevrolet #30 Douglas Shierson Racing Lola T90/00; 1990 Ferrari #1 Scuderia Ferrari 641. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-open-wheel-legends-pack.json",
-      "sha256": "6759c10f78ab135bc9cffdace00d88721119cc87e17f2355439eb191e1aeccb9",
-      "bytes": 21078
+      "sha256": "5ba573730cab871b4913005cf41af740c3dde9cf680dd31f87d1d086baa90c54",
+      "bytes": 992
     },
     {
       "id": "zs-fm6-zs-fm6-reasonable-hatch-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Reasonable Hatch Pack",
-        "pt-BR": "ZS FM6 Reasonable Hatch Pack"
-      },
+      "name": {"en": "ZS FM6 Reasonable Hatch Pack", "pt-BR": "ZS FM6 Reasonable Hatch Pack"},
       "description": {
         "en": "4 cars from Forza Motorsport 6, converted by ZephyrSkies: 2010 Renault Clio RS; 2014 Volkswagen Golf R; 2016 Abarth 695 Biposto; 2017 Ford Focus RS. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "4 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 2010 Renault Clio RS; 2014 Volkswagen Golf R; 2016 Abarth 695 Biposto; 2017 Ford Focus RS. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-reasonable-hatch-pack.json",
-      "sha256": "1ef22f21ffb64a49897f59ddee7d2a5365d0d3ccdad5942f9f0687aca03aeb66",
-      "bytes": 9758
+      "sha256": "dcbb7524311d1c31e2712d50d114b5583aa4949a2c7f2589b8bb5cb3ac17b60d",
+      "bytes": 984
     },
     {
       "id": "zs-fm6-zs-fm6-silver-age-supercars-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Silver Age Supercars Pack",
-        "pt-BR": "ZS FM6 Silver Age Supercars Pack"
-      },
+      "name": {"en": "ZS FM6 Silver Age Supercars Pack", "pt-BR": "ZS FM6 Silver Age Supercars Pack"},
       "description": {
         "en": "5 cars from Forza Motorsport 6, converted by ZephyrSkies: 2015 Ferrari 488 GTB; 2015 McLaren 570S Coupé; 2016 Audi R8 V10 plus; 2017 Ford GT; 2017 Ford GT Nutri-Grain Edition. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "5 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 2015 Ferrari 488 GTB; 2015 McLaren 570S Coupé; 2016 Audi R8 V10 plus; 2017 Ford GT; 2017 Ford GT Nutri-Grain Edition. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-silver-age-supercars-pack.json",
-      "sha256": "acc0cb48e3d90298d60dc303b7db2752ea1a6823da46d3bf10b06f7e0f401aa2",
-      "bytes": 11247
+      "sha256": "b8e4c011e461b505ea0628a9f74ec7b93f158162ab3c757f3e3ec06f22fb69da",
+      "bytes": 1000
     },
     {
       "id": "zs-fm6-zs-fm6-super-sports-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Super Sports Pack",
-        "pt-BR": "ZS FM6 Super Sports Pack"
-      },
+      "name": {"en": "ZS FM6 Super Sports Pack", "pt-BR": "ZS FM6 Super Sports Pack"},
       "description": {
         "en": "14 cars from Forza Motorsport 6, converted by ZephyrSkies: 1977 Aston Martin V8 Vantage; 1988 Holden VL Commodore Group A SV; 1990 Jaguar XJ-S; 1996 Subaru SVX; 2004 Porsche 911 GT3; 2005 Lotus Elise 111S; 2012 Aston Martin V12 Zagato; 2014 BMW Team Forza M4 Coupe; 2014 Ferrari California T; 2015 Audi Team Forza TTS Coupé; 2015 Jaguar XKR-S GT; 2015 Mercedes-AMG GT S; 2016 Jaguar F-TYPE Project 7; 2016 Mazda Team Forza MX-5. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "14 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 1977 Aston Martin V8 Vantage; 1988 Holden VL Commodore Group A SV; 1990 Jaguar XJ-S; 1996 Subaru SVX; 2004 Porsche 911 GT3; 2005 Lotus Elise 111S; 2012 Aston Martin V12 Zagato; 2014 BMW Team Forza M4 Coupe; 2014 Ferrari California T; 2015 Audi Team Forza TTS Coupé; 2015 Jaguar XKR-S GT; 2015 Mercedes-AMG GT S; 2016 Jaguar F-TYPE Project 7; 2016 Mazda Team Forza MX-5. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-super-sports-pack.json",
-      "sha256": "d1a5a17e91b36bc57e2b0c4eeb7d6d5d64479fe7fd929ef1ab2b78621b099901",
-      "bytes": 26449
+      "sha256": "75211d4ffe2debeac9121330306388cf82b11b962302b568e1e16b41b5240c9d",
+      "bytes": 938
     },
     {
       "id": "zs-fm6-zs-fm6-supercars-down-under-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Supercars Down Under Pack",
-        "pt-BR": "ZS FM6 Supercars Down Under Pack"
-      },
+      "name": {"en": "ZS FM6 Supercars Down Under Pack", "pt-BR": "ZS FM6 Supercars Down Under Pack"},
       "description": {
         "en": "7 cars from Forza Motorsport 6, converted by ZephyrSkies: 2015 Ford #17 Xbox Racing Ford Falcon FG X; 2015 Ford #5 Pepsi Max Crew PRA Falcon FG X; 2015 Holden #1 Red Bull Racing Australia VF Commodore; 2015 Holden #97 Tekno Autosports VF Commodore; 2015 Mercedes #9 Erebus Motorsport E63 AMG V8 Supercar; 2015 Nissan #23 Nissan Motorsport Altima; 2015 Volvo #33 Wilson Security Racing GRM S60. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "7 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 2015 Ford #17 Xbox Racing Ford Falcon FG X; 2015 Ford #5 Pepsi Max Crew PRA Falcon FG X; 2015 Holden #1 Red Bull Racing Australia VF Commodore; 2015 Holden #97 Tekno Autosports VF Commodore; 2015 Mercedes #9 Erebus Motorsport E63 AMG V8 Supercar; 2015 Nissan #23 Nissan Motorsport Altima; 2015 Volvo #33 Wilson Security Racing GRM S60. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-supercars-down-under-pack.json",
-      "sha256": "dc40256011e77aa18641eeaa7f070f189ca709c288d90df9ca5dbe0e27a43ce5",
-      "bytes": 13401
+      "sha256": "d239a8b539222d7a40d3603b795ba14c8713751fff6a4ee2876ad87efc7da4e3",
+      "bytes": 1000
     },
     {
       "id": "zs-fm6-zs-fm6-vintage-compacts-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Vintage Compacts Pack",
-        "pt-BR": "ZS FM6 Vintage Compacts Pack"
-      },
+      "name": {"en": "ZS FM6 Vintage Compacts Pack", "pt-BR": "ZS FM6 Vintage Compacts Pack"},
       "description": {
         "en": "11 cars from Forza Motorsport 6, converted by ZephyrSkies: 1966 Nissan Silvia; 1967 Sunbeam Tiger; 1967 Volvo 123GT; 1968 Opel GT; 1969 Datsun 2000 Roadster; 1973 Ford Escort RS1600; 1973 Nissan Skyline GT-R; 1974 Toyota Corolla SR5; 1977 Holden Torana A9X; 1979 Opel Kadett C GT/E; 1980 Fiat 124 Sport Spider. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "11 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 1966 Nissan Silvia; 1967 Sunbeam Tiger; 1967 Volvo 123GT; 1968 Opel GT; 1969 Datsun 2000 Roadster; 1973 Ford Escort RS1600; 1973 Nissan Skyline GT-R; 1974 Toyota Corolla SR5; 1977 Holden Torana A9X; 1979 Opel Kadett C GT/E; 1980 Fiat 124 Sport Spider. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-vintage-compacts-pack.json",
-      "sha256": "51e503cbb3e2280bc7316dd75cf27ad55d245e176c90525cc3ce18ce25ca5bc4",
-      "bytes": 18667
+      "sha256": "bb733a83c8f7049b25c5b82b47ff36fb9599f86c5b297825a61ecee968880b30",
+      "bytes": 984
     },
     {
       "id": "zs-fm6-zs-fm6-vintage-gtx-racing-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Vintage GTX Racing Pack",
-        "pt-BR": "ZS FM6 Vintage GTX Racing Pack"
-      },
+      "name": {"en": "ZS FM6 Vintage GTX Racing Pack", "pt-BR": "ZS FM6 Vintage GTX Racing Pack"},
       "description": {
         "en": "12 cars from Forza Motorsport 6, converted by ZephyrSkies: 1975 BMW #93 Hervé Poulain 3.0 CSL; 1979 BMW #6 BMW Motorsport M1 Procar; 1979 Datsun #33 Bob Sharp Racing 280ZX Turbo; 1980 Lancia #31 Lancia Corse Beta Montecarlo Turbo; 1981 Ford #2 Zakspeed Racing Capri Turbo; 1981 Ford #55 Liqui Moly equipe Capri Turbo; 1982 Ferrari #71 Ferrari France 512 BB/LM; 1982 Ferrari #72 N.A.R.T. 512 BB/LM; 1990 Mercury #15 Whistler Radar Cougar XR-7; 1991 Mazda #62 Mazda Motorsport RX-7; 1994 Nissan #75 Cunningham Racing 300ZX; 1998 Porsche #26 Porsche AG 911 GT1-98. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "12 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 1975 BMW #93 Hervé Poulain 3.0 CSL; 1979 BMW #6 BMW Motorsport M1 Procar; 1979 Datsun #33 Bob Sharp Racing 280ZX Turbo; 1980 Lancia #31 Lancia Corse Beta Montecarlo Turbo; 1981 Ford #2 Zakspeed Racing Capri Turbo; 1981 Ford #55 Liqui Moly equipe Capri Turbo; 1982 Ferrari #71 Ferrari France 512 BB/LM; 1982 Ferrari #72 N.A.R.T. 512 BB/LM; 1990 Mercury #15 Whistler Radar Cougar XR-7; 1991 Mazda #62 Mazda Motorsport RX-7; 1994 Nissan #75 Cunningham Racing 300ZX; 1998 Porsche #26 Porsche AG 911 GT1-98. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-vintage-gtx-racing-pack.json",
-      "sha256": "c00af5471b6dcf95f6d21ae827caa77549235e009e8e9aa237d6be29e23f3ce1",
-      "bytes": 23224
+      "sha256": "cc0a5b209836697cc28b060cddecaf20bdf0d6d9eeb553726f810c62eda2d0cc",
+      "bytes": 992
     },
     {
       "id": "zs-fm6-zs-fm6-vintage-le-mans-pack",
       "version": "0.1.0",
-      "name": {
-        "en": "ZS FM6 Vintage Le Mans Pack",
-        "pt-BR": "ZS FM6 Vintage Le Mans Pack"
-      },
+      "name": {"en": "ZS FM6 Vintage Le Mans Pack", "pt-BR": "ZS FM6 Vintage Le Mans Pack"},
       "description": {
         "en": "8 cars from Forza Motorsport 6, converted by ZephyrSkies: 1987 Porsche #17 Porsche AG 962C; 1988 Jaguar #60 Castrol Jaguar Racing XJR-9; 1991 Mazda #18 Mazdaspeed 787B; 1991 Nissan #23 Nissan R91CP; 1993 Peugeot #3 Peugeot Talbot Sport 905 EVO 1C; 1998 Ferrari #30 MOMO Doran Racing F333 SP; 1999 BMW #15 BMW Motorsport V12 LMR; 1999 BMW #16 BMW Motorsport V12 LMR. Needs ZS FM6 Common. Online, everyone in a lobby needs the same packs.",
         "pt-BR": "8 carros do Forza Motorsport 6, convertidos por ZephyrSkies: 1987 Porsche #17 Porsche AG 962C; 1988 Jaguar #60 Castrol Jaguar Racing XJR-9; 1991 Mazda #18 Mazdaspeed 787B; 1991 Nissan #23 Nissan R91CP; 1993 Peugeot #3 Peugeot Talbot Sport 905 EVO 1C; 1998 Ferrari #30 MOMO Doran Racing F333 SP; 1999 BMW #15 BMW Motorsport V12 LMR; 1999 BMW #16 BMW Motorsport V12 LMR. Precisa do ZS FM6 Common. Online, todos no lobby precisam dos mesmos pacotes."
       },
       "author": "ZephyrSkies",
       "path": "zs-fm6-zs-fm6-vintage-le-mans-pack.json",
-      "sha256": "00afa36e8f8e6e556367f9f69762c146f067ad6d5e24c9c7f6c823ba39d9514c",
-      "bytes": 17347
+      "sha256": "ac4869b7eb4db328b2a0e4ca5ff2340519ea9b11fd47d5a7cb58e464a564fece",
+      "bytes": 980
     },
     {
       "id": "extraoptions-garagerevving",
       "version": "1.0.0",
-      "name": {
-        "en": "Garage Revving",
-        "pt-BR": "Ronco na Garagem"
-      },
+      "name": {"en": "Garage Revving", "pt-BR": "Ronco na Garagem"},
       "description": {
         "en": "Hold RT in the garage to hear the car's engine rev. From Extra Options by Arthur (RokkuDayo): the author's own files from Extra Options 0.6.1. Garage only: nothing other players see, hear or race against, so it plays in every mode.",
         "pt-BR": "Segure RT na garagem para ouvir o motor do carro roncar. Do Extra Options, de Arthur (RokkuDayo): os arquivos do próprio autor, do Extra Options 0.6.1. Só na garagem: nada que outros jogadores vejam, ouçam ou enfrentem numa corrida, então funciona em todos os modos."
       },
       "author": "Arthur (RokkuDayo)",
       "path": "extraoptions-garagerevving.json",
-      "sha256": "2167feb06a447314293d7479cf03a37d827266b7275ada419f06ab4b58b13ab8",
-      "bytes": 3338
+      "sha256": "da1f0c63bd6fa8b61ba7d54b8289ff6c977fefcb55133316a4fd3168d50a1e28",
+      "bytes": 2065
     },
     {
       "id": "extraoptions-weathercontrol",
       "version": "1.1.0",
-      "name": {
-        "en": "Weather Control",
-        "pt-BR": "Controle do Clima"
-      },
+      "name": {"en": "Weather Control", "pt-BR": "Controle do Clima"},
       "description": {
         "en": "Time and weather in the free-roam pause menu: press Y to lock the hour and pick sunny, wet, rain or storm. From Extra Options: the author's own files from Extra Options 0.6.1. It changes the world you race in, so it plays in Noob only.",
         "pt-BR": "Hora e clima no menu de pausa do free roam: aperte Y para travar a hora e escolher sol, pista molhada, chuva ou tempestade. Do Extra Options: os arquivos do próprio autor, do Extra Options 0.6.1. Muda o mundo em que você corre, então funciona só no Noob."
       },
       "author": "BlackPanthaa (from Pantsedit's Set Time & Weather FH2), Extra Options integration by Arthur (RokkuDayo)",
       "path": "extraoptions-weathercontrol.json",
-      "sha256": "23a82c4b6a87596c460a0865c3e5dfa0253e122d513334365951292542bf3ed4",
-      "bytes": 10471
+      "sha256": "78ffd2e9e13db827641fd47b71cfbd98f8355150ae8d77adfe157be4fe2f48dd",
+      "bytes": 1226
     },
     {
       "id": "spotifyradio",
       "version": "1.5.0-infinity.1",
-      "name": {
-        "en": "Spotify Radio",
-        "pt-BR": "Rádio Spotify"
-      },
+      "name": {"en": "Spotify Radio", "pt-BR": "Rádio Spotify"},
       "description": {
         "en": "Plays Spotify on the game's own Xbox Music station, in the car, at car meets and from the festival speakers, with the song on the radio HUD. Needs Spotify Premium: in Spotify, pick the speaker \"Forza Horizon Radio\". The first start opens Spotify's sign-in page in your browser. Left stick or F6 skips, F5 goes back, F7 pauses. By Bullet4fun, built from its source as an ExtraOptions mod. Only you hear it: it plays in every mode.",
         "pt-BR": "Toca o Spotify na própria estação Xbox Music do jogo, no carro, nos encontros de carros e nos alto-falantes do festival, com a música no HUD do rádio. Precisa do Spotify Premium: no Spotify, escolha o alto-falante \"Forza Horizon Radio\". Na primeira vez, a página de login do Spotify abre no navegador. Analógico esquerdo ou F6 pula, F5 volta, F7 pausa. De Bullet4fun, compilado a partir do código-fonte como mod do ExtraOptions. Só você ouve: funciona em todos os modos."
       },
       "author": "Bullet4fun",
       "path": "spotifyradio.json",
-      "sha256": "3728a739dad49a05399e3e6160ee4bb042a6492c35a677e7811bf55168b3e3c9",
-      "bytes": 4811
+      "sha256": "c02e1545cd1e2b00cf1c6136db958816d08651ce16af36e32ee8c3a7ccfd57cb",
+      "bytes": 1960
     },
     {
       "id": "camera-mods",
       "version": "1.3.0-infinity.1",
-      "name": {
-        "en": "Camera Mods",
-        "pt-BR": "Câmeras Extras"
-      },
+      "name": {"en": "Camera Mods", "pt-BR": "Câmeras Extras"},
       "description": {
         "en": "Extra cameras by Deuquan: drone and free cam (O), walk mode (P), follow drone (T), passenger (M), driver seat (H), 360 (X), roof, dashcam, dashboard and front chase cams (1-4), cinema mode and an enhanced chase cam; LB cycles them on a controller. Built from its source. Keys are fixed to the defaults. A free camera shows more of a race than the game's own, so it plays in Noob only.",
         "pt-BR": "Câmeras extras de Deuquan: drone e câmera livre (O), modo a pé (P), drone que segue o carro (T), passageiro (M), banco do motorista (H), 360 (X), câmeras de teto, painel, retrovisor e perseguição frontal (1-4), modo cinema e uma câmera de perseguição aprimorada; no controle, LB alterna entre elas. Compilado a partir do código-fonte. As teclas são as padrão. Uma câmera livre mostra mais de uma corrida do que as do próprio jogo, então funciona só no Noob."
       },
       "author": "Deuquan",
       "path": "camera-mods.json",
-      "sha256": "2634ec99a5adfa075d007f7b99f001dd554b690c3ea602fe12734bc2b695839c",
-      "bytes": 2830
+      "sha256": "65abd77ee20146ea11c2ba20aca2f5f982dc6f8709b7d093223ec7f335decf18",
+      "bytes": 1217
     },
     {
       "id": "underglow",
       "version": "1.1.0-infinity.4",
-      "name": {
-        "en": "Underglow",
-        "pt-BR": "Neon"
-      },
+      "name": {"en": "Underglow", "pt-BR": "Neon"},
       "description": {
         "en": "qiangqiang101's Underglow: neon under your car made of the game's own lights, so it lights up the road, with 61 effects (15 follow the car radio), 28 colors and each part on its own. Buy an Underglow Kit per car in the garage (Upgrades > Aero and Appearance); its colors, effects and parts are in FH2 ANNA (Car > Lights and Car > Underglow), which it needs. Built here from the author's source with one patch, so it coexists with the Infinity hook (which also hooks the car update), and loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter.",
         "pt-BR": "O Underglow de qiangqiang101: neon embaixo do carro feito com as próprias luzes do jogo, que ilumina a pista, com 61 efeitos (15 seguem o rádio do carro), 28 cores e cada parte independente. Compre um Kit de Neon por carro na garagem (Melhorias > Aerodinâmica e aparência); as cores, os efeitos e as partes ficam na FH2 ANNA (Carro > Luzes e Carro > Neon), que ele exige. Compilado aqui a partir do código do autor com um patch, para conviver com o hook do Infinity (que também intercepta a atualização do carro), e carregado pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform."
       },
       "author": "qiangqiang101",
       "path": "underglow.json",
-      "sha256": "3e57ce434b6f2897a80e6b54cc6f7cf1346bc5357c085f637308da95d856c94e",
-      "bytes": 66874
+      "sha256": "7a82780b46164c812766a28587774ea97cfb967ca7ac177406be879871905861",
+      "bytes": 36265
     },
     {
       "id": "fh2-anna",
       "version": "1.2.0-infinity.2",
-      "name": {
-        "en": "FH2 ANNA",
-        "pt-BR": "FH2 ANNA"
-      },
+      "name": {"en": "FH2 ANNA", "pt-BR": "FH2 ANNA"},
       "description": {
         "en": "qiangqiang101's FH2 ANNA: the in-car assistant from Forza Horizon 3 back on Forza Horizon 2's HUD (D-pad down while driving), with Auto Drive along your GPS route and a cinematic camera, lights, doors, routes to the nearest event and voice commands. Other mods add to its menu (Underglow: Car > Underglow). Its own release DLL, loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter. Needs the minimap on.",
         "pt-BR": "A FH2 ANNA de qiangqiang101: a assistente do carro do Forza Horizon 3 de volta ao HUD do Forza Horizon 2 (direcional para baixo ao dirigir), com direção automática pela rota do GPS e câmera cinematográfica, luzes, portas, rotas para o evento mais próximo e comandos de voz. Outros mods aparecem no menu dela (Neon: Carro > Neon). A DLL da própria release do autor, carregada pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform. Precisa do minimapa ligado."
       },
       "author": "qiangqiang101",
       "path": "fh2-anna.json",
-      "sha256": "7f40c36469bba9fdf2afa1aa2cb4b209b82197a7a72ee305c49f42aa76b037bd",
-      "bytes": 10958
+      "sha256": "995d4d54c39c8b52ee9e71994ee606065de230ca8467009b9e5198ba96f64f4a",
+      "bytes": 6697
     }
   ]
 }

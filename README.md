@@ -45,9 +45,9 @@ mods/<id>/mod.json        build recipe: which upstream sources, which adapter (n
 mods/<id>/manifest.json   Infinity manifest (runtime standalone, files under mods/<game folder>/<id>/); the release fills hashes and the commit
 mods/<id>/extraoptions/   the package's own ExtraOptions mod.json (format_version 1; same id and version), database.json if any
 mods/<id>/LICENSE, NOTICE.md   the original licence and the attribution shipped in the package
-catalog/index.json        the official mod catalog (schema 3): each mod's card (id, version, name, description, author) and its detail file's pin
-catalog/<id>.json         the rest of that mod's catalog entry (downloads, install); what you edit
-schemas/                  JSON Schema of catalog/ (catalog-v3.schema.json) and of a schema-2 custom catalog (catalog.schema.json)
+catalog/index.json        the official mod catalog (schema 4): each mod's card (id, version, name, description, author), its detail file's pin, shared source texts
+catalog/<id>.json         the rest of that mod's catalog entry (downloads, install, file rules); what you edit
+schemas/                  JSON Schema of catalog/ (catalog-v4.schema.json) and of the custom-catalog forms (catalog-v3, catalog.schema.json)
 tools/infmods.py          build, verify, release, check (Python 3.10+, standard library only)
 ```
 
@@ -57,13 +57,22 @@ The Infinity launcher reads the catalog straight from this repository's `main` b
 (raw.githubusercontent.com) and keeps a cached copy for offline listing. A change merged to `main` reaches every
 player at once, so only the owner (@anarqz, `.github/CODEOWNERS`) approves changes to `catalog/` or `schemas/`.
 
-The catalog is split (schema 3, [`schemas/catalog-v3.schema.json`](schemas/catalog-v3.schema.json)):
-`catalog/index.json` lists every mod's card and pins its detail file `catalog/<id>.json` by `path`, `sha256` and
-`bytes`; the detail file repeats the mod's `id` and `version` and holds the rest of its entry (`download` or
-`externalSources`, `additionalDownloads`, `requires`, `install`). Launchers with schema 3 read only
-`catalog/index.json`, download only the detail files whose pin changed, and refuse one that differs from its pin.
-The schema-2 `catalog.json` was retired once the launcher floor reached 3.1.7, the first launcher that reads
-schema 3.
+The catalog is split (schema 4, [`schemas/catalog-v4.schema.json`](schemas/catalog-v4.schema.json), launcher
+3.2.0 on): `catalog/index.json` lists every mod's card and pins its detail file `catalog/<id>.json` by `path`,
+`sha256` and `bytes`; the detail file repeats the mod's `id` and `version` and holds the rest of its entry
+(`download` or `externalSources`, `additionalDownloads`, `requires`, `install`). The launcher reads only
+`catalog/index.json`, downloads only the detail files whose pin changed, and refuses one that differs from its pin.
+
+A detail file maps files by **rules**, not one entry per file. A rule takes a folder (`"from": "package:media/"`) or
+one file (`"from": "package:NOTICE.md"`) from one of the mod's sources (`package`, an `additionalDownloads` name or an
+`externalSources` id) and puts it in the mod's folder (`to`, default the folder itself; `role`/`mode` default
+`asset`/`add-or-replace`; the first rule that matches a file wins). Downloads pin their files by the download's own
+SHA-256. A player-supplied pack (ZephyrSkies) is pinned by its `tree`: one SHA-256 over every file it takes (path,
+SHA-256, size), so a pack is one rule and one pin instead of a line per file. Install fields at their default are
+left out (the schema lists the defaults), the ZS source texts are in the index's `sources` once, and a mod's
+settings form ships in its own package as `infinity.settings.json` (`release` generates it from the manifest's
+`config`); only a mod whose package is not built here (`authorPackage`) keeps `install.config` inline.
+`tools/infmods.py` writes all of this: never hand-write a tree or a rule list.
 
 To change a mod's entry, edit `catalog/<id>.json` (card text and `version`: `catalog/index.json`; a version
 changes in both), then:
@@ -73,9 +82,10 @@ python3 -I tools/infmods.py catalog    # re-pin catalog/index.json, then check
 python3 -I tools/infmods.py check      # schemas, pins, no duplicate or unlisted ids, every file in its game's mods folder
 ```
 
-Custom catalogs (the launcher's "Use a different catalog") may be either form: a schema-3 index whose `path`s are
-relative to the index's own URL (or absolute `https://`), or one schema-2 file. `check --catalog <file>` validates
-either.
+Custom catalogs (the launcher's "Use a different catalog") may be schema 4 or the earlier forms: a schema-3 index
+whose `path`s are relative to the index's own URL (or absolute `https://`), or one schema-2 file.
+`check --catalog <file>` validates each; `catalog --from <file>` converts one into `catalog/` (it downloads each
+pinned archive once, to read which files a folder rule may take).
 
 Each mod is offered for the games its manifest declares (`games`, FH2 when absent) and is either for both
 modes (its `multiplayer.impact` is `cosmetic`: nothing other players see, hear or race against) or for Noob

@@ -1,312 +1,33 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "zs-fm6-zs-fm6-modern-muscle-pack",
   "version": "0.1.0",
   "externalSources": [
     {
       "id": "pack",
-      "kind": "either",
-      "label": {
-        "en": "ZS FM6 Modern Muscle Pack",
-        "pt-BR": "ZS FM6 Modern Muscle Pack"
-      },
-      "help": {
-        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
-        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
-      },
-      "hint": "ZS FM6 Addon Packs"
+      "label": {"en": "ZS FM6 Modern Muscle Pack", "pt-BR": "ZS FM6 Modern Muscle Pack"},
+      "source": "zs-fm6-addon-packs",
+      "tree": {
+        "sha256": "1b38302da4c1b5c468296f02a03c2127b1bd9db70a9ebc273baa767f325c537f",
+        "files": 31,
+        "bytes": 195167376,
+        "anchor": "mod.json"
+      }
     }
   ],
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "Unknown. Player-supplied files; Infinity never distributes them.",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [
-      {
-        "id": "zs-fm6-zs-fm6-common",
-        "versions": [
-          "0.1.0"
-        ]
-      }
-    ],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
+    "dependencies": [{"id": "zs-fm6-zs-fm6-common", "versions": ["0.1.0"]}],
     "files": {
-      "game": [],
       "azimuth": [
         {
-          "source": "pack:ZS FM6 Modern Muscle Pack/database.json",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/database.json",
-          "sha256": "525d36226a390f03b33fa1b64d1e073ae68c69541e582b9a44cef53dc6d8f116",
-          "bytes": 327581,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/audio/fmodanthem/durango/PG_CHE_Camaro_16.bank",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/audio/fmodanthem/durango/PG_CHE_Camaro_16.bank",
-          "sha256": "8ceb0f9fe43d5d40ae5a557f9aab6ac771e83997acea206f752c95281a40d080",
-          "bytes": 2435616,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/audio/fmodanthem/durango/PG_DOD_ChallengerHellcat_15.bank",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/audio/fmodanthem/durango/PG_DOD_ChallengerHellcat_15.bank",
-          "sha256": "35de5352c63d3257d6d3cef08d90c2aabbb2b990533e09395196d8bf5954bb0b",
-          "bytes": 2660672,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/audio/fmodanthem/durango/PG_DOD_ChargerSRTHellcat_15.bank",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/audio/fmodanthem/durango/PG_DOD_ChargerSRTHellcat_15.bank",
-          "sha256": "8cb3d94a11fce91efef0e4b1872e975c52c496d503432553b198a9af6f222b09",
-          "bytes": 2661728,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/audio/fmodanthem/durango/PG_FOR_ShelbyGT350R_16.bank",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/audio/fmodanthem/durango/PG_FOR_ShelbyGT350R_16.bank",
-          "sha256": "aaa3426f4bc51cc328456c5f979080b597830737f301443ffcedb7e84a01920d",
-          "bytes": 3112096,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/cars/CAD_CTSVSedan_16.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/cars/CAD_CTSVSedan_16.zip",
-          "sha256": "9816626c80f5360815d9fbbf7cabd7e46f875f6b50b6659992ff465ee2d352d4",
-          "bytes": 21707915,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/cars/CHE_Camaro_16.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/cars/CHE_Camaro_16.zip",
-          "sha256": "5af8e1f6414f5b243d1f08e3c2c4b9cc2a396c8221355ace55761ad74a4b6045",
-          "bytes": 19664885,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/cars/DOD_ChallengerHellcatBT_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/cars/DOD_ChallengerHellcatBT_15.zip",
-          "sha256": "8275cb6bba33965bd9040c4125f85530a01206fa45f1cfe1f27b72fd53e568f3",
-          "bytes": 23711700,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/cars/DOD_ChallengerHellcatTF_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/cars/DOD_ChallengerHellcatTF_15.zip",
-          "sha256": "8f3c640c51cfe8b9ccca1ecb4b43dad8db1244e376952c110841e0c0ecbdfc14",
-          "bytes": 29648883,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/cars/DOD_ChallengerHellcat_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/cars/DOD_ChallengerHellcat_15.zip",
-          "sha256": "5e372cd7873ca7e8a65e9450753f17561fb16c7b21705b60fa02e48c470aa0e6",
-          "bytes": 22188324,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/cars/DOD_ChargerSRTHellcat_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/cars/DOD_ChargerSRTHellcat_15.zip",
-          "sha256": "e9bfb7158238bad8c0c31a80b1443ad0233ca6a777404c9f2e105103b4c4c95d",
-          "bytes": 21319830,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/cars/FOR_MustangGTTF_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/cars/FOR_MustangGTTF_15.zip",
-          "sha256": "19dcaded7df3d1ef239cddc85963c01c91c6bfffa89c25840747731fd67c21ed",
-          "bytes": 21445633,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/cars/FOR_ShelbyGT350R_16.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/cars/FOR_ShelbyGT350R_16.zip",
-          "sha256": "df78ec1a83547dab2af3e6edf6ae54532c97e059a846ed900cca74e914b5561c",
-          "bytes": 19823660,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2263_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2263_Big.swatchbin",
-          "sha256": "aa109f9acc56ee7c74720d3536578ae8d9e579847509905e12cd9e296ffa259d",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2263_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2263_Small.swatchbin",
-          "sha256": "435dcf4c4c0329e06ca0657a67d2c35fc7e5d8bd82fc8b574f2632eec73cb799",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2400_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2400_Big.swatchbin",
-          "sha256": "0d859c382e29ef997093abff4d1b1111cec7eb38ea222ebfc52ce9388d256a55",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2400_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2400_Small.swatchbin",
-          "sha256": "39add5d2e947660b8e99bcefe0f01a2db201692adb63dff1bb40a38b294e3df9",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2421_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2421_Big.swatchbin",
-          "sha256": "366b641a6750c5bcf418e1c2b0c169bdbbaaf97be0842fa06b5a2df5f5560604",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2421_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2421_Small.swatchbin",
-          "sha256": "83d98cffa3f533f8b37229ff0f48304298a8ed3bc1efea43e01dfcd76ab6a7d1",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2451_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2451_Big.swatchbin",
-          "sha256": "000903c29ed089f120cca5f4691f28bac716927605cf1a4390e8fe2e2dbf596d",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2451_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2451_Small.swatchbin",
-          "sha256": "a164b78a8fb15e11a3a2fda909dcaf680046d8540c85cc87b7ca08b2cab02d59",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2452_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2452_Big.swatchbin",
-          "sha256": "47c8a2d4b242450bcd48a6ba37525d18151bc17c867a6c341d3cec1a3825c94b",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2452_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2452_Small.swatchbin",
-          "sha256": "0811908d1a0a967c9eeee536355a430682e66d27c9101465cd2d641dd1273cdc",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2468_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2468_Big.swatchbin",
-          "sha256": "f966464285c761e6054a3ae8856dbb047f3f73f73754bd076559bbe0ffd4dd0f",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2468_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2468_Small.swatchbin",
-          "sha256": "7c1c2d3cd92d83e885d2d0080dddd2b03033ccf790e962dcc3de5e6d1cfa213e",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2523_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2523_Big.swatchbin",
-          "sha256": "0bd4b11a4666056b9f283f3f4c83ef9d14969cb386add0d2991dc3ed20f25e31",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2523_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2523_Small.swatchbin",
-          "sha256": "2c52e6b3a495d500df89dd78b3b33678ad301a27b89dd7ff16257cd43c718c6f",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2545_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2545_Big.swatchbin",
-          "sha256": "5970a3c3d69a10f9f3e923ca91fbb3f7539c9b6019459107044710824c35d97b",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/media/stripped/RC0/Thumbnail_2545_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/media/stripped/RC0/Thumbnail_2545_Small.swatchbin",
-          "sha256": "d8b667ed9f9d4b9cff674544e871bd4244d366a0e508e39c3f469fa9606e6068",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/mod.json",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/mod.json",
-          "sha256": "fc94b10c71e6ebcb30d72f3eda7072cb30e73a5ea5e250b78c09052f8d885518",
-          "bytes": 318,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Modern Muscle Pack/strings.json",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-modern-muscle-pack/strings.json",
-          "sha256": "5d85960f38345afe564b8fcdccd1a4ff538241d756641446be9b39388a913094",
-          "bytes": 743,
-          "role": "asset",
-          "mode": "add-or-replace"
+          "from": "pack:ZS FM6 Modern Muscle Pack/",
+          "include": ["database.json", "media/**", "mod.json", "strings.json"]
         }
       ]
     },
-    "config": null,
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "gameplay",
-      "compatibilityId": "zs-fm6-zs-fm6-modern-muscle-pack",
-      "revision": 1,
-      "match": "exact",
-      "settings": []
-    },
+    "multiplayer": {"impact": "gameplay"},
     "countsAsModded": false
   }
 }

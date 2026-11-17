@@ -1,216 +1,30 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "fm5-zs-retro-muscle-pack",
   "version": "1.0.5",
   "externalSources": [
     {
       "id": "pack",
-      "kind": "either",
-      "label": {
-        "en": "ZS Retro Muscle Pack",
-        "pt-BR": "ZS Retro Muscle Pack"
-      },
-      "help": {
-        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
-        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
-      },
-      "hint": "ZS FM5 Addon Packs"
+      "label": {"en": "ZS Retro Muscle Pack", "pt-BR": "ZS Retro Muscle Pack"},
+      "source": "zs-fm5-addon-packs",
+      "tree": {
+        "sha256": "c8887317799158eb331f4af09cf3ab0d9fd01810a6b0e33e717417a830c85d44",
+        "files": 19,
+        "bytes": 73666393,
+        "anchor": "mod.json"
+      }
     }
   ],
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "Unknown. Player-supplied files; Infinity never distributes them.",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [
-      {
-        "id": "fm5-zs-fm5-common",
-        "versions": [
-          "1.0.0"
-        ]
-      }
-    ],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
+    "dependencies": [{"id": "fm5-zs-fm5-common", "versions": ["1.0.0"]}],
     "files": {
-      "game": [],
       "azimuth": [
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/database.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/database.json",
-          "sha256": "16a149e2079e84ab2875974be100d2a74ec2d959f57cf8e48b3c44bbc8eb90fe",
-          "bytes": 334394,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/audio/fmodanthem/durango/PG_CHE_2_MonteCarloSS_11_EN.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/audio/fmodanthem/durango/PG_CHE_2_MonteCarloSS_11_EN.bank",
-          "sha256": "da3cb2af7b79abdfcffa25634c509b6256803d110d485c6c7f3e0977ef6feb6c",
-          "bytes": 2286432,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
-          "sha256": "500e70b54c45960abe221757c9e8b4cc7a398bc4afb15b8eba006b3c44e197eb",
-          "bytes": 2583296,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/audio/fmodanthem/durango/PG_CHE_CorvetteZ06_02.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/audio/fmodanthem/durango/PG_CHE_CorvetteZ06_02.bank",
-          "sha256": "dda5127f580bd03500cf20a676cb1017012a78e716fa58e9aace10bd80d17d7b",
-          "bytes": 2609824,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/audio/fmodanthem/durango/PG_FOR_Mustang_95.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/audio/fmodanthem/durango/PG_FOR_Mustang_95.bank",
-          "sha256": "30a5e08a008d22e4689197076f6f18a84279d8482b62178050d51de53d0024e5",
-          "bytes": 2573984,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/cars/CHE_Camaro35thAnniversary_02.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/cars/CHE_Camaro35thAnniversary_02.zip",
-          "sha256": "f3b6625eeb94003c00c4c1b1d0b35328c7798e4fde8fe95ba7392634d8e5af5f",
-          "bytes": 13331061,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/cars/CHE_CorvetteZ06_02.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/cars/CHE_CorvetteZ06_02.zip",
-          "sha256": "1937d7ac0bee4e6aefdcca2d3c06798d63f59f25a741bbc52c94f0725fdeee12",
-          "bytes": 11807371,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/cars/FOR_Mustang_95.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/cars/FOR_Mustang_95.zip",
-          "sha256": "a3e076aae5cc84bfb125010ac1c4e0b0458b1d2e499f63ef5a220ffd861bf780",
-          "bytes": 18595879,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/cars/PON_TransAm_02.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/cars/PON_TransAm_02.zip",
-          "sha256": "e17dea0bb0cf498ff5436e63884bfae2133ab84ebb0f8a39563bbf70847c134b",
-          "bytes": 17314379,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/stripped/RC0/Thumbnail_1065_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/stripped/RC0/Thumbnail_1065_Big.swatchbin",
-          "sha256": "525efcd92685403130d28d15b68d26ff35e8e11d77ba47ca6decc18e1ef8f7a6",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/stripped/RC0/Thumbnail_1065_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/stripped/RC0/Thumbnail_1065_Small.swatchbin",
-          "sha256": "1fcf7810342a4a0bd09987a7a7defe060709d058ebaf1b34fd23690e05be7741",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/stripped/RC0/Thumbnail_1510_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/stripped/RC0/Thumbnail_1510_Big.swatchbin",
-          "sha256": "452ec78c0e4153ebb50a9f5345d22520ea13fd14ab2c21e8836bcac82ac1141b",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/stripped/RC0/Thumbnail_1510_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/stripped/RC0/Thumbnail_1510_Small.swatchbin",
-          "sha256": "998b0039d631ad2ff811a5155bf3552e68016e54cef83a17c7c87f4b921c7e32",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/stripped/RC0/Thumbnail_287_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/stripped/RC0/Thumbnail_287_Big.swatchbin",
-          "sha256": "7e635122f1fc069fc1ad81df2a5e7ac5297485cf141bf78097c964c8102ba180",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/stripped/RC0/Thumbnail_287_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/stripped/RC0/Thumbnail_287_Small.swatchbin",
-          "sha256": "883065382a949b65e6d6434fbef04ad6179dbbc815c2e995af2ec3e614d540ed",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/stripped/RC0/Thumbnail_314_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/stripped/RC0/Thumbnail_314_Big.swatchbin",
-          "sha256": "4e745d8b62f043e10b7c327e1cd29dc0da35bcab8f24034309ab30ad0f62d760",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/media/stripped/RC0/Thumbnail_314_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/media/stripped/RC0/Thumbnail_314_Small.swatchbin",
-          "sha256": "85eb00a3dd2d0e969b5798f8b2edcc323ba486b422a4ae801e6d8ca6b05b8617",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/mod.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/mod.json",
-          "sha256": "57b8b9f122dd2ce80f1897ef76a54cd94b6e23ad4ba9fe04aae87875a6ee6097",
-          "bytes": 460,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Retro Muscle Pack/strings.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-retro-muscle-pack/strings.json",
-          "sha256": "028d9e862324ecae34c71032c028409805a1427f91802d012948b03efa1b4177",
-          "bytes": 417,
-          "role": "asset",
-          "mode": "add-or-replace"
-        }
+        {"from": "pack:ZS FM5 Retro Muscle Pack/", "include": ["database.json", "media/**", "mod.json", "strings.json"]}
       ]
     },
-    "config": null,
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "gameplay",
-      "compatibilityId": "fm5-zs-retro-muscle-pack",
-      "revision": 1,
-      "match": "exact",
-      "settings": []
-    },
+    "multiplayer": {"impact": "gameplay"},
     "countsAsModded": false
   }
 }

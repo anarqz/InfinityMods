@@ -1,288 +1,30 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "zs-fm6-zs-fm6-formula-e-pack",
   "version": "0.1.0",
   "externalSources": [
     {
       "id": "pack",
-      "kind": "either",
-      "label": {
-        "en": "ZS FM6 Formula E Pack",
-        "pt-BR": "ZS FM6 Formula E Pack"
-      },
-      "help": {
-        "en": "Choose the folder with your ZS FM6 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
-        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM6 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
-      },
-      "hint": "ZS FM6 Addon Packs"
+      "label": {"en": "ZS FM6 Formula E Pack", "pt-BR": "ZS FM6 Formula E Pack"},
+      "source": "zs-fm6-addon-packs",
+      "tree": {
+        "sha256": "702a8508e5e8f8b374b08c0bd50d8f35564757d58f4aa7b83f76469b50cc6e7e",
+        "files": 28,
+        "bytes": 161670776,
+        "anchor": "mod.json"
+      }
     }
   ],
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "Unknown. Player-supplied files; Infinity never distributes them.",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [
-      {
-        "id": "zs-fm6-zs-fm6-common",
-        "versions": [
-          "0.1.0"
-        ]
-      }
-    ],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
+    "dependencies": [{"id": "zs-fm6-zs-fm6-common", "versions": ["0.1.0"]}],
     "files": {
-      "game": [],
       "azimuth": [
-        {
-          "source": "pack:ZS FM6 Formula E Pack/database.json",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/database.json",
-          "sha256": "92baa212a48ea9ec475480732bcebf318e7d363c17ff47f19643bdd1a0fbe564",
-          "bytes": 166141,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/audio/cars/REN_2_FormulaE_15.xml",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/audio/cars/REN_2_FormulaE_15.xml",
-          "sha256": "4da536824339438ccb73583e921a732bc594a40c02e1b8a81106caaaa43326a8",
-          "bytes": 2270,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/cars/REN_10_FormulaE_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/cars/REN_10_FormulaE_15.zip",
-          "sha256": "7a3f8d4039fdd59dc5cde358fa9b0a554c0b5fe636e7e688f0b5084ca189e6f1",
-          "bytes": 20174339,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/cars/REN_21_FormulaE_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/cars/REN_21_FormulaE_15.zip",
-          "sha256": "0d405ce51fa848755dc287ca858c3345e94c2ff645f02a66840a787f6f047651",
-          "bytes": 19417794,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/cars/REN_23_FormulaE_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/cars/REN_23_FormulaE_15.zip",
-          "sha256": "f202fe087bbf7eba63530dcf0a15bc61a6678f77fac150c2425261ebd63697e7",
-          "bytes": 19322259,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/cars/REN_27_FormulaE_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/cars/REN_27_FormulaE_15.zip",
-          "sha256": "3253723b8557377fb57a0670db80acb4412ca211198351254e555fd7c7f3deee",
-          "bytes": 19487961,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/cars/REN_2_FormulaE_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/cars/REN_2_FormulaE_15.zip",
-          "sha256": "d864a045fef38ad42c42f79d5a69a93707a470031b577b6ba3538b870c0674ef",
-          "bytes": 20088900,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/cars/REN_55_FormulaE_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/cars/REN_55_FormulaE_15.zip",
-          "sha256": "8ffa5fbf25edc3a6f260a903a20703990051bc8c2bce06092be4c5fa2731d6c9",
-          "bytes": 19346939,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/cars/REN_6_FormulaE_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/cars/REN_6_FormulaE_15.zip",
-          "sha256": "134616d282e12e2f9e848ffcede1199ae5cad9347e3867bb068e4d3c8823d117",
-          "bytes": 19812744,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/cars/REN_9_FormulaE_15.zip",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/cars/REN_9_FormulaE_15.zip",
-          "sha256": "a0ff4df47ea8aca2794bad80b6dd3ddc9d32884dcabc79e40ca1cbcdf1fc55be",
-          "bytes": 19392476,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2342_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2342_Big.swatchbin",
-          "sha256": "6811c31016a32552599acc3cf9f5f2cbd22725c8bb418e03a2c423286d66b929",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2342_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2342_Small.swatchbin",
-          "sha256": "fdd6e99503233945926952b7a6cc448aa4c581bce62f38694bf43ed3b76cb2d4",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2343_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2343_Big.swatchbin",
-          "sha256": "99788dba3c01028897df9b2218c8e2fac15cd303776a33694887d9a6fd299f61",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2343_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2343_Small.swatchbin",
-          "sha256": "c786278f216cdbc687fe3b1b70273d3cbc73ceddf56417503ed3bb205a87c389",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2344_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2344_Big.swatchbin",
-          "sha256": "cfd520031a4e492cc8066a6c531bc96db06d5a08b0b7f3b387eeec1068f82b0a",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2344_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2344_Small.swatchbin",
-          "sha256": "10947692b70e4ab6fd924ee4bf1891c7b2e7bb20e9ac31635904c1c1683ba25e",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2345_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2345_Big.swatchbin",
-          "sha256": "fe1c82b9674a15371b006b12828cd7787210be01c91e51cf64895fff7d93fa7e",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2345_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2345_Small.swatchbin",
-          "sha256": "5a794ac39216b6f1ca8f861665be49bb6e685ecfcd91e5b58d5c15350ce75def",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2347_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2347_Big.swatchbin",
-          "sha256": "3ae24b1e68e172f11e6195956c7ba1b7640e5662b7981d44637b51786d3ee3f8",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2347_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2347_Small.swatchbin",
-          "sha256": "b8a68faa036413224b50a761fb7d072751e486f7bdaaa42f0faf2cc91142323d",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2348_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2348_Big.swatchbin",
-          "sha256": "5f7aee96ddb407cb0647cc5a09879454c67da955101cd8c9d5b2975b8d7cfd95",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2348_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2348_Small.swatchbin",
-          "sha256": "594066e2ea205a6d1ed7929d53c0170748e06f3c2424aa5a2182b2caa77876ca",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2349_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2349_Big.swatchbin",
-          "sha256": "c496fab876bab3e3947dc513111fe7043bce7dd90fbbadcd31391bd0feab20c1",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2349_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2349_Small.swatchbin",
-          "sha256": "c763a8dbbd559f88e1973a0ca59d10400bc93a912e55f9488720c2bda2a420b4",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2350_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2350_Big.swatchbin",
-          "sha256": "3841df78737642798a654644cf0e20ea0eae8f5014a183fe2e112b99502c3522",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/media/stripped/RC0/Thumbnail_2350_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/media/stripped/RC0/Thumbnail_2350_Small.swatchbin",
-          "sha256": "2184ba0ea342ce5b27f1bb9e6335db0d251bcaaeda14e7d20d8e7c20eb689af3",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/mod.json",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/mod.json",
-          "sha256": "28c8fd839af4244b6859692f9a722ad1de050cd753174f1ad32aa71f39aabe80",
-          "bytes": 310,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM6 Formula E Pack/strings.json",
-          "destination": "mods/Forza Horizon 2/zs-fm6-zs-fm6-formula-e-pack/strings.json",
-          "sha256": "972de4ff7ae982855143f49be5ed1fcc7f03f2b2edf5e81314272b251eba06f5",
-          "bytes": 851,
-          "role": "asset",
-          "mode": "add-or-replace"
-        }
+        {"from": "pack:ZS FM6 Formula E Pack/", "include": ["database.json", "media/**", "mod.json", "strings.json"]}
       ]
     },
-    "config": null,
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "gameplay",
-      "compatibilityId": "zs-fm6-zs-fm6-formula-e-pack",
-      "revision": 1,
-      "match": "exact",
-      "settings": []
-    },
+    "multiplayer": {"impact": "gameplay"},
     "countsAsModded": false
   }
 }

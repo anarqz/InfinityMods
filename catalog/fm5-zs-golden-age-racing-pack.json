@@ -1,264 +1,33 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "fm5-zs-golden-age-racing-pack",
   "version": "1.0.6",
   "externalSources": [
     {
       "id": "pack",
-      "kind": "either",
-      "label": {
-        "en": "ZS Golden Age Racing Pack",
-        "pt-BR": "ZS Golden Age Racing Pack"
-      },
-      "help": {
-        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
-        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
-      },
-      "hint": "ZS FM5 Addon Packs"
+      "label": {"en": "ZS Golden Age Racing Pack", "pt-BR": "ZS Golden Age Racing Pack"},
+      "source": "zs-fm5-addon-packs",
+      "tree": {
+        "sha256": "04ee2c99a3782d06f8539ee0f60d72ba56d185fc4d6d75e9a08e3949aa5e0ec1",
+        "files": 25,
+        "bytes": 109996178,
+        "anchor": "mod.json"
+      }
     }
   ],
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "Unknown. Player-supplied files; Infinity never distributes them.",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [
-      {
-        "id": "fm5-zs-fm5-common",
-        "versions": [
-          "1.0.0"
-        ]
-      }
-    ],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
+    "dependencies": [{"id": "fm5-zs-fm5-common", "versions": ["1.0.0"]}],
     "files": {
-      "game": [],
       "azimuth": [
         {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/database.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/database.json",
-          "sha256": "6a071ec29b3ddfcb1d6e94d058631f3119e4905e9d1ba3a636ccdfe867ec13ea",
-          "bytes": 296431,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/audio/fmodanthem/durango/PG_AUD_TypeD_39.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/audio/fmodanthem/durango/PG_AUD_TypeD_39.bank",
-          "sha256": "dea864b6e4599a14095760339a202d58d87cdbb4619735c5e17c894024f59cf9",
-          "bytes": 2015360,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/audio/fmodanthem/durango/PG_CHA_66_2E_66.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/audio/fmodanthem/durango/PG_CHA_66_2E_66.bank",
-          "sha256": "9bd471b69144f49062bd3f6d5bd90b6aceee440ba464df994f367dda53a7a05c",
-          "bytes": 2677632,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/audio/fmodanthem/durango/PG_FER_2_312PB_72.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/audio/fmodanthem/durango/PG_FER_2_312PB_72.bank",
-          "sha256": "4c9ef3e8e3be5af543e13c3496eb51d237bf9b21e738ec6051d5e2480c57af48",
-          "bytes": 2167008,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/audio/fmodanthem/durango/PG_FER_375_52.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/audio/fmodanthem/durango/PG_FER_375_52.bank",
-          "sha256": "51f3176119db7f30bec466ce03816ff2b279534779b9201c4f171de74a65299a",
-          "bytes": 1575488,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/audio/fmodanthem/durango/PG_MAS_8CTF_39.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/audio/fmodanthem/durango/PG_MAS_8CTF_39.bank",
-          "sha256": "21a1062c566a11d36fd95eab22d0197c217055fe6707aa832c25251a40c5a684",
-          "bytes": 1721920,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/cars/AUD_TypeD_39.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/cars/AUD_TypeD_39.zip",
-          "sha256": "4ad9a5787621e552d1f8506b508f0f97927efa98b1a0bd73c9187a7123aa65ce",
-          "bytes": 16532759,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/cars/CHA_66_2E_66.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/cars/CHA_66_2E_66.zip",
-          "sha256": "710f59c821c1fbd001620f7adf67584ebe07eb6ff10937e7f48eb876fc1c70da",
-          "bytes": 17416942,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/cars/FER_2_312PB_72.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/cars/FER_2_312PB_72.zip",
-          "sha256": "82dd0543827bdd52aad2b5861935b8487a7c3d6a09ae208736a074df7e318bab",
-          "bytes": 18772688,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/cars/Fer_375_52.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/cars/Fer_375_52.zip",
-          "sha256": "5ffe4e8e1dadae0328ce9b1969032fa6adbee724ecf2505a225745e0a2049490",
-          "bytes": 22920749,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/cars/MAS_8CTF_39.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/cars/MAS_8CTF_39.zip",
-          "sha256": "2496d366b29d524423e9fa5d3c02805b04570949e896ee17043c290e984ded1f",
-          "bytes": 20980833,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/stripped/RC0/L_Manu_Logo_CHA.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/stripped/RC0/L_Manu_Logo_CHA.swatchbin",
-          "sha256": "d26e6c613a289195bac2080b2f5fa32bf67148bddbb9d432d7ea86c6280f5cdc",
-          "bytes": 65620,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/stripped/RC0/Manu_Logo_CHA.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/stripped/RC0/Manu_Logo_CHA.swatchbin",
-          "sha256": "b8ab8ec3687e863d3d79fc6d0f6009ba5802af33ef83c4b13ccc95cefac09ece",
-          "bytes": 65620,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/stripped/RC0/Thumbnail_1465_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/stripped/RC0/Thumbnail_1465_Big.swatchbin",
-          "sha256": "08f716ef53736d2255010c9ab105b56bec530fd7a7837b4f93086dbe39bfe05a",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/stripped/RC0/Thumbnail_1465_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/stripped/RC0/Thumbnail_1465_Small.swatchbin",
-          "sha256": "80973406d6c0736941327a164da494f02b9e5b948b6baf9d2ef21a9aa6e7bfc7",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/stripped/RC0/Thumbnail_1553_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/stripped/RC0/Thumbnail_1553_Big.swatchbin",
-          "sha256": "6dac0ee1b0622af07da3a266dae93bdc715b5dd547f11167009517957b84bc29",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/stripped/RC0/Thumbnail_1553_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/stripped/RC0/Thumbnail_1553_Small.swatchbin",
-          "sha256": "a24530b67f85e146f89f7ffc81bf358cb2be81704c49d917e08841661e17371f",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/stripped/RC0/Thumbnail_2068_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/stripped/RC0/Thumbnail_2068_Big.swatchbin",
-          "sha256": "1345f79617e789a66438ab39ad00ba750497be0a28ac8d1c7e95d31b32501890",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/stripped/RC0/Thumbnail_2068_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/stripped/RC0/Thumbnail_2068_Small.swatchbin",
-          "sha256": "68bde2311bf64025a9f7616cc690da2e382f4cf3e3aafe4310cea9380ca5b052",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/stripped/RC0/Thumbnail_2070_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/stripped/RC0/Thumbnail_2070_Big.swatchbin",
-          "sha256": "437023f30fa29a56325a7670c216fd4c065191b07044bceabaf3f1b20bda8f5d",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/stripped/RC0/Thumbnail_2070_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/stripped/RC0/Thumbnail_2070_Small.swatchbin",
-          "sha256": "f7526f7030e10f71811f011c12c8c3a50c8f776d8b8c3b64aa1084ac36a4d10d",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/stripped/RC0/Thumbnail_2096_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/stripped/RC0/Thumbnail_2096_Big.swatchbin",
-          "sha256": "730c1aab9357ed199f074e1677283204e46655ed551d8caf50673475eb54b706",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/media/stripped/RC0/Thumbnail_2096_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/media/stripped/RC0/Thumbnail_2096_Small.swatchbin",
-          "sha256": "6ce998bd60914dde70390ac7d261ee76b9158decbb63134abefc7bdc99926e30",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/mod.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/mod.json",
-          "sha256": "edd440249967f3a8f048912cbc94b68a3e106818a313b04fab5bd21177cf743b",
-          "bytes": 471,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Golden Age Racing Pack/strings.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-golden-age-racing-pack/strings.json",
-          "sha256": "c308673865ce294267e965a59c6b6ac773e1bb7a8cd8ee8cf7ef17b762729541",
-          "bytes": 537,
-          "role": "asset",
-          "mode": "add-or-replace"
+          "from": "pack:ZS FM5 Golden Age Racing Pack/",
+          "include": ["database.json", "media/**", "mod.json", "strings.json"]
         }
       ]
     },
-    "config": null,
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "gameplay",
-      "compatibilityId": "fm5-zs-golden-age-racing-pack",
-      "revision": 1,
-      "match": "exact",
-      "settings": []
-    },
+    "multiplayer": {"impact": "gameplay"},
     "countsAsModded": false
   }
 }

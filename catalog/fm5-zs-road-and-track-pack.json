@@ -1,288 +1,33 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "fm5-zs-road-and-track-pack",
   "version": "1.0.5",
   "externalSources": [
     {
       "id": "pack",
-      "kind": "either",
-      "label": {
-        "en": "ZS Road and Track Pack",
-        "pt-BR": "ZS Road and Track Pack"
-      },
-      "help": {
-        "en": "Choose the folder with your ZS FM5 Addon Packs ZIPs (or any folder above it), or this pack's own ZIP or folder. Infinity checks every file and copies what it needs; you can move or delete the packs afterwards.",
-        "pt-BR": "Escolha a pasta com os ZIPs de ZS FM5 Addon Packs (ou qualquer pasta acima dela), ou o próprio ZIP ou pasta deste pacote. O Infinity confere cada arquivo e copia o que precisa; depois você pode mover ou apagar os pacotes."
-      },
-      "hint": "ZS FM5 Addon Packs"
+      "label": {"en": "ZS Road and Track Pack", "pt-BR": "ZS Road and Track Pack"},
+      "source": "zs-fm5-addon-packs",
+      "tree": {
+        "sha256": "38f61a1b55fd1a5fae33878f7edbb8288eb6aa497b6aa1adcf423d75c636fadf",
+        "files": 28,
+        "bytes": 127713151,
+        "anchor": "mod.json"
+      }
     }
   ],
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "Unknown. Player-supplied files; Infinity never distributes them.",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [
-      {
-        "id": "fm5-zs-fm5-common",
-        "versions": [
-          "1.0.0"
-        ]
-      }
-    ],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
+    "dependencies": [{"id": "fm5-zs-fm5-common", "versions": ["1.0.0"]}],
     "files": {
-      "game": [],
       "azimuth": [
         {
-          "source": "pack:ZS FM5 Road and Track Pack/database.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/database.json",
-          "sha256": "089614dc0fc046c9198f3d63631204fcf1f581d2ccff35430ac0da2ee34d1c41",
-          "bytes": 503188,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/audio/fmodanthem/durango/PG_BMW_E46M3_05.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/audio/fmodanthem/durango/PG_BMW_E46M3_05.bank",
-          "sha256": "a710d30359abccbb0c6ef3fc1279dffa4c0acb0d953a72d2bc664bdfee898ac1",
-          "bytes": 2553824,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/audio/fmodanthem/durango/PG_BMW_Z8_00.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/audio/fmodanthem/durango/PG_BMW_Z8_00.bank",
-          "sha256": "fb96c3eae294bcff17460dbf872dca29514bcb0b2c0131f185b51129cb25a379",
-          "bytes": 2043392,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/audio/fmodanthem/durango/PG_CHE_Camaro35thAnniversary_02.bank",
-          "sha256": "500e70b54c45960abe221757c9e8b4cc7a398bc4afb15b8eba006b3c44e197eb",
-          "bytes": 2583296,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/audio/fmodanthem/durango/PG_INF_IPLG_12.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/audio/fmodanthem/durango/PG_INF_IPLG_12.bank",
-          "sha256": "20e416214a3076ce269a14059a67454c2433a0f987ab8af16d4abdb481b70c75",
-          "bytes": 2566080,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/audio/fmodanthem/durango/PG_LOT_Elise_99.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/audio/fmodanthem/durango/PG_LOT_Elise_99.bank",
-          "sha256": "0e09ca6121474e68442efbcc0e81ad97b85d3be13575bcdd0c92eb238bcb6422",
-          "bytes": 2125632,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/audio/fmodanthem/durango/PG_MAZ_MX5Cup_13.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/audio/fmodanthem/durango/PG_MAZ_MX5Cup_13.bank",
-          "sha256": "7d6dc6a9d5392748f7086d0b168ed9dc4fd55fd59eb9fff0173eb6b164ca2ff9",
-          "bytes": 2454752,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/audio/fmodanthem/durango/PG_PON_SolsticeGXP_09.bank",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/audio/fmodanthem/durango/PG_PON_SolsticeGXP_09.bank",
-          "sha256": "e0069d2abcfe32acba8198e54d5a40a3558e90c229bc98ce8ee4ce0193178978",
-          "bytes": 2435328,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/cars/BMW_E46M3_05.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/cars/BMW_E46M3_05.zip",
-          "sha256": "c6993388e21b5f05fd315656c02371b139913254ab76e3881f8059b51710dd4f",
-          "bytes": 13934062,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/cars/BMW_Z8_00.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/cars/BMW_Z8_00.zip",
-          "sha256": "f2f0288a5115cd4d2f3ae908df4933910bf3601ef3901c720bf2dce5b2d74461",
-          "bytes": 17868497,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/cars/INF_IPLG_12.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/cars/INF_IPLG_12.zip",
-          "sha256": "b1f0b3e66cd702a871de745cdd733a2992079cddabf27f7bfa4a4f8894a0d69c",
-          "bytes": 15428861,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/cars/LOT_Elise_99.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/cars/LOT_Elise_99.zip",
-          "sha256": "ee3d9d59a1c669436f1d5b928a8c52e04ba05ca1b7a8ea8a58a63955d844d9ad",
-          "bytes": 21483120,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/cars/MAZ_MX5Cup_13.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/cars/MAZ_MX5Cup_13.zip",
-          "sha256": "484a091008a6873d710421448a1e6b628259a1c750fe6e6173140dd16ce71c14",
-          "bytes": 18090823,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/cars/PON_SolsticeGXP_09.zip",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/cars/PON_SolsticeGXP_09.zip",
-          "sha256": "5bf27ad58477535216c34df450079cdf76a5a62c8d56aa5ae758ec876702a11c",
-          "bytes": 20297915,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/stripped/RC0/Thumbnail_1307_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/stripped/RC0/Thumbnail_1307_Big.swatchbin",
-          "sha256": "05d845fe782ce35f57cea5893865d60b829042e7f812c0cd22ab0b2b62ebd9ab",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/stripped/RC0/Thumbnail_1307_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/stripped/RC0/Thumbnail_1307_Small.swatchbin",
-          "sha256": "b16dccfa4f97d084fb850b0a364ed73e8514a6f7f8c59669120fad30be17a256",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/stripped/RC0/Thumbnail_1327_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/stripped/RC0/Thumbnail_1327_Big.swatchbin",
-          "sha256": "588c7dacdcb300fd7bf171d21e132a6bb0fc6123e1e52819c10ebf09b22b7f1a",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/stripped/RC0/Thumbnail_1327_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/stripped/RC0/Thumbnail_1327_Small.swatchbin",
-          "sha256": "558d39864c19521b8ef80869ede8e4ba796a9ac2f045096881793ff8fc1b8fe1",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/stripped/RC0/Thumbnail_1376_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/stripped/RC0/Thumbnail_1376_Big.swatchbin",
-          "sha256": "aead9640bb122a375064decbf6ecaadb8245147758d9d4bbae581c3e463bc1d7",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/stripped/RC0/Thumbnail_1376_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/stripped/RC0/Thumbnail_1376_Small.swatchbin",
-          "sha256": "56c477c9fa6bc419a22325718565681bf9bf7cb53778fbc7874992320ae498bf",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/stripped/RC0/Thumbnail_1663_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/stripped/RC0/Thumbnail_1663_Big.swatchbin",
-          "sha256": "dc2c6b1849b01fb55c2a3abe41240464992a688bdb3e0c56a8994128863a5ebf",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/stripped/RC0/Thumbnail_1663_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/stripped/RC0/Thumbnail_1663_Small.swatchbin",
-          "sha256": "d63f327a02b10ddc0e6aa958a4f7f8eebc40fe2bfd71ae2056210a06ced8d51e",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/stripped/RC0/Thumbnail_2084_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/stripped/RC0/Thumbnail_2084_Big.swatchbin",
-          "sha256": "602d5ba64ddb3f16ac78f6e8de135d8682a5a927995a29e3ec844a827f0f3618",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/stripped/RC0/Thumbnail_2084_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/stripped/RC0/Thumbnail_2084_Small.swatchbin",
-          "sha256": "c914bfa7bcb127747c7482a4b6d80f6ac65956e7c7a7bcb94de87cf398351cc5",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/stripped/RC0/Thumbnail_383_Big.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/stripped/RC0/Thumbnail_383_Big.swatchbin",
-          "sha256": "18c2f240f4e0d9bbfe9f6816cd91ddf5a0b5a15d4c3c5429782b04313f9011ab",
-          "bytes": 524372,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/media/stripped/RC0/Thumbnail_383_Small.swatchbin",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/media/stripped/RC0/Thumbnail_383_Small.swatchbin",
-          "sha256": "04229f4a7e201a63276815a602f76880fb3b771c4b57a20f02251ccc448272a4",
-          "bytes": 32852,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/mod.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/mod.json",
-          "sha256": "b1749e733ff840320fd8b381b80eb20df54dc3f346ba5b8154bd0279d7f57622",
-          "bytes": 471,
-          "role": "asset",
-          "mode": "add-or-replace"
-        },
-        {
-          "source": "pack:ZS FM5 Road and Track Pack/strings.json",
-          "destination": "mods/Forza Horizon 2/fm5-zs-road-and-track-pack/strings.json",
-          "sha256": "bc7d4d7c502d37ba722c678705d0ccb7e96e78a6e3e4483f5129a37bfa640466",
-          "bytes": 566,
-          "role": "asset",
-          "mode": "add-or-replace"
+          "from": "pack:ZS FM5 Road and Track Pack/",
+          "include": ["database.json", "media/**", "mod.json", "strings.json"]
         }
       ]
     },
-    "config": null,
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "gameplay",
-      "compatibilityId": "fm5-zs-road-and-track-pack",
-      "revision": 1,
-      "match": "exact",
-      "settings": []
-    },
+    "multiplayer": {"impact": "gameplay"},
     "countsAsModded": false
   }
 }

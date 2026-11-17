@@ -4,7 +4,7 @@
   build   <mod> [--zig ZIG] [--out DIR]     compile the mod and its adapter
   verify  <mod> [--zig ZIG]                 build twice in separate folders: same bytes, sane PE, plugin exports
   release [--zig ZIG] --tag TAG [--catalog INDEX] [--out DIR] [--allow-dirty] [MOD ...]
-  catalog [--from V2.json]                  re-pin catalog/index.json after editing catalog/ (--from: split a v2 file)
+  catalog [--from FILE]                     re-pin catalog/index.json after editing catalog/ (--from: convert a v2 file or v3 index)
   check   [--catalog FILE]                  validate the catalog (schemas/ + rules below); FILE may be a v2 custom catalog
   external-packs <set folder>... --cars fh2-packs.json --out DIR   ZephyrSkies pack entries (OD-232), read from the ZIPs
   sync    <mod> [--tag TAG] [--zip ZIP --url URL] [--write]   re-pin an FH2 Mod Platform mod to an upstream release
@@ -32,10 +32,13 @@ the manifest's `games`, FH2 when it declares none) and exports FH2PluginInitiali
 starts the original loader's entry point, or, for an ExtraOptions plugin itself (`adapter` null), the upstream source
 exports it. There is no Infinity mod runtime: no entry needs `infinity-mod-runtime`, and `release` drops that entry.
 
-The catalog is split (schema 3, schemas/catalog-v3.schema.json): catalog/index.json lists each mod's card details
-(id, version, name, description, author) and pins its detail file catalog/<id>.json (path, sha256, bytes); the
-detail file holds the rest of its schema-2 entry. catalog/ is what people edit; `catalog` re-pins the index after an
-edit. The schema-2 catalog.json was retired once every launcher read schema 3 (floor 3.1.7).
+The catalog is split (schema 4, schemas/catalog-v4.schema.json): catalog/index.json lists each mod's card details
+(id, version, name, description, author), pins its detail file catalog/<id>.json (path, sha256, bytes) and holds the
+external-source texts several mods share (sources). A detail file maps files by rules (a folder or one file of a
+source, into the mod's folder), pins a player-supplied pack by one tree digest, leaves install defaults out, and
+leaves the settings form in the mod's package (infinity.settings.json, written by `release`). The tool keeps a
+schema-2 entry (manifest.json, pack_entry) as its input form and converts it with compact(), which proves the rules
+expand to the same files before writing. catalog/ is what people edit; `catalog` re-pins the index after an edit.
 
 `release` writes one ZIP per mod (<id>-<version>.zip), each mod's filled manifest and the merged
 catalog (dist/catalog/). A mod whose ZIP has the same SHA-256 as its current catalog entry keeps that entry
@@ -43,9 +46,9 @@ unchanged (URL, version and source commit), so players see no update; a changed 
 version. Nothing is uploaded or published.
 
 `check` validates what launchers read from this repository's main branch: catalog/index.json and every detail
-file against schemas/catalog-v3.schema.json (the subset of JSON Schema it uses), with no BOM, no duplicate JSON keys and
-the launcher's size limits, each pin matching its file, ids unique, no detail file left unlisted, every installed
-file in its game's mods folder. `check --catalog FILE` validates any one catalog file too, a schema-2 custom catalog
+file against schemas/catalog-v4.schema.json (the subset of JSON Schema it uses), with no BOM, no duplicate JSON keys and
+the launcher's size limits, each pin matching its file, ids unique, no detail file left unlisted, and the rules'
+own checks (declared sources, safe paths, one folder rule per external source, the launcher's role/mode rules). `check --catalog FILE` validates any one catalog file too, a schema-2 custom catalog
 included (schemas/catalog.schema.json). OD-233 retired the parity exemptions
 (parity-non-required.json): a mod is either both modes (its multiplayer impact cosmetic) or Noob only.
 """
@@ -457,7 +460,20 @@ def vcvars():
     return Path(vs) / "VC/Auxiliary/Build/vcvars64.bat"
 
 
-def package(recipe, dll, out, mod_dll=None):
+def with_settings_file(recipe, manifest):
+    """Schema 4, F: a mod with a settings form carries it in its own package (<mod folder>/infinity.settings.json),
+    so the catalog leaves it out. Returns the manifest mapping that file, and the file's bytes (None without a form)."""
+    if not manifest.get("config"):
+        return manifest, None
+    if SETTINGS_FILE in recipe["package"]:
+        sys.exit(f"{recipe['id']}: {SETTINGS_FILE} is generated from the manifest's config; drop it from the package map")
+    manifest = copy.deepcopy(manifest)
+    manifest["files"]["azimuth"].append({"source": SETTINGS_FILE, "destination": mod_folder(manifest) + SETTINGS_FILE,
+                                         "role": "asset", "mode": "add-or-replace"})
+    return manifest, dumps(manifest["config"])
+
+
+def package(recipe, dll, out, mod_dll=None, settings=None):
     """Deterministic ZIP of the recipe's `package` map ("$dll" is the build): fixed time, sorted names.
     Text entries are stored with LF endings, so a Windows checkout (core.autocrlf) packs the same bytes."""
     generated = GENERATORS[recipe["generate"]](recipe) if recipe.get("generate") else {}
@@ -465,6 +481,8 @@ def package(recipe, dll, out, mod_dll=None):
                else generated[name] if source == "$generated"
                else (ROOT / source).read_bytes().replace(b"\r\n", b"\n")
                for name, source in recipe["package"].items()}
+    if settings is not None:
+        entries[SETTINGS_FILE] = settings
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, "w") as archive:
         for name in sorted(entries):
@@ -531,39 +549,260 @@ def catalog_entry(manifest):
 CATALOG_DIR = ROOT / "catalog"
 INDEX_NAME = "index.json"
 CARD_FIELDS = ("id", "version", "name", "description", "author")
-DETAIL_MAX_BYTES = 256 * 1024  # Infinity.Core: a schema-3 detail file's limit
+DETAIL_MAX_BYTES = 256 * 1024  # Infinity.Core: a detail file's limit
+SCHEMA_VERSION = 4
+SETTINGS_FILE = "infinity.settings.json"  # a mod's settings form, in its own package (schema 4, F)
+# Schema 4, E: an install field left out means its default (the launcher fills the same values in)
+INSTALL_DEFAULTS = {"schemaVersion": 1, "kind": "mod", "runtime": "standalone",
+                    "review": {"status": "reviewed", "blockers": []}, "dependencies": [], "conflicts": [],
+                    "config": None, "runtimeOutputs": [], "databaseMigrations": [], "countsAsModded": True}
+COMPATIBILITY_DEFAULTS = {"gameBuilds": [], "verification": "unverified"}
+MULTIPLAYER_DEFAULTS = {"schemaVersion": 1, "revision": 1, "match": "exact", "settings": []}  # and compatibilityId = id
+RULE_DEFAULTS = {"role": "asset", "mode": "add-or-replace"}
+DROPPED_INSTALL = ("excludedArchiveEntries",)  # rules name what is taken; anything else in an archive is ignored
+
+
+def pretty(value, indent=0, used=0, width=120):
+    """JSON nested by two spaces, with every object or array that fits the line kept on it (a rule, a pin, a short text)."""
+    flat = json.dumps(value, ensure_ascii=False, separators=(", ", ": "))
+    if not isinstance(value, (dict, list)) or not value or used + len(flat) <= width:
+        return flat
+    pad = " " * (indent + 2)
+    if isinstance(value, dict):
+        items = []
+        for key, item in value.items():
+            head = f"{pad}{json.dumps(key, ensure_ascii=False)}: "
+            items.append(head + pretty(item, indent + 2, len(head), width))
+        return "{\n" + ",\n".join(items) + "\n" + " " * indent + "}"
+    return "[\n" + ",\n".join(pad + pretty(item, indent + 2, len(pad), width) for item in value) + "\n" + " " * indent + "]"
 
 
 def dumps(value):
-    return (json.dumps(value, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
+    return (pretty(value) + "\n").encode("utf-8")
+
+
+def tree_digest(files):
+    """Schema 4, C: an external source's pin over (path relative to its from-folder, sha256, bytes), one UTF-8 line
+    each ("<path>\t<sha256>\t<bytes>\n"), sorted by the path's UTF-8 bytes."""
+    lines = sorted(files, key=lambda f: f[0].encode("utf-8"))
+    digest = hashlib.sha256(b"".join(f"{path}\t{sha}\t{size}\n".encode("utf-8") for path, sha, size in lines))
+    paths = {path for path, _, _ in lines}
+    return {"sha256": digest.hexdigest(), "files": len(lines), "bytes": sum(size for _, _, size in lines),
+            "anchor": "mod.json" if "mod.json" in paths else lines[0][0]}
+
+
+def strip_defaults(value, defaults):
+    return {k: v for k, v in value.items() if not (k in defaults and defaults[k] == v)}
+
+
+def file_source(file, external_ids):
+    """(source name, path inside it) of a schema-2 file entry."""
+    if "package" in file:
+        return file["package"], file["source"]
+    source = file["source"]
+    if ":" in source and source.split(":", 1)[0] in external_ids:
+        return tuple(source.split(":", 1))
+    return "package", source
+
+
+def rule_for(source, path, to, role, mode):
+    rule = {"from": f"{source}:{path}"}
+    if to:
+        rule["to"] = to
+    rule.update(strip_defaults({"role": role, "mode": mode}, RULE_DEFAULTS))
+    return rule
+
+
+def cover(source, mapped, listing):
+    """The fewest rules that take exactly the mapped files of one download (path -> (dest, role, mode)) out of its
+    archive listing: a folder whose every entry is mapped the same way is one folder rule; anything else one rule per file."""
+    rules = []
+
+    def single(p):
+        dest, role, mode = mapped[p]
+        name = p.rsplit("/", 1)[-1]
+        to = dest[:-len(name)] if dest.endswith("/" + name) or dest == name else dest
+        rules.append(rule_for(source, p, to, role, mode))
+
+    def walk(prefix):
+        under = sorted(p for p in listing if p.startswith(prefix))
+        if under and all(p in mapped and mapped[p][0].endswith(p[len(prefix):]) for p in under):
+            bases = {mapped[p][0][:len(mapped[p][0]) - len(p) + len(prefix)] for p in under}
+            base = next(iter(bases))
+            if len(bases) == 1 and (base == "" or base.endswith("/")):
+                kinds = [mapped[p][1:] for p in under]
+                common = max(sorted(set(kinds)), key=kinds.count)
+                for p in under:  # first match wins: the exceptions come before the folder rule
+                    if mapped[p][1:] != common:
+                        single(p)
+                rules.append(rule_for(source, prefix, base, *common))
+                return
+        for child in sorted({p[len(prefix):].split("/", 1)[0] for p in under if "/" in p[len(prefix):]}):
+            walk(f"{prefix}{child}/")
+        for p in under:
+            if "/" not in p[len(prefix):] and p in mapped:
+                single(p)
+
+    walk("")
+    return rules
+
+
+def expand_rules(rules, listings, external):
+    """The schema-2 file list a schema-4 rule list stands for (download sources from their listing, external sources
+    from `external`, path -> (sha256, bytes)); used to prove a conversion exact. Returns {dest: (source, path, role, mode)}."""
+    out = {}
+    for rule in rules:
+        source, path = rule["from"].split(":", 1)
+        role, mode = rule.get("role", "asset"), rule.get("mode", "add-or-replace")
+        names = listings.get(source) or external.get(source) or ()
+        if path == "" or path.endswith("/"):
+            include = rule.get("include")
+            for name in sorted(names):
+                if not name.lower().startswith(path.lower()):
+                    continue
+                rel = name[len(path):]
+                if include and not any(glob_match(g, rel) for g in include):
+                    continue
+                out.setdefault((rule.get("to", "") + rel).lower(), (rule.get("to", "") + rel, source, name, role, mode))
+        else:
+            name = path.rsplit("/", 1)[-1]
+            to = rule.get("to", "")
+            dest = to + name if to == "" or to.endswith("/") else to
+            out.setdefault(dest.lower(), (dest, source, path, role, mode))
+    return out
+
+
+def glob_match(pattern, path):
+    """Schema 4 globs, case-insensitive: * within one segment, ** any depth, ? one character."""
+    regex = ""
+    i = 0
+    while i < len(pattern):
+        if pattern.startswith("**/", i):
+            regex, i = regex + "(?:.*/)?", i + 3
+        elif pattern.startswith("**", i):
+            regex, i = regex + ".*", i + 2
+        elif pattern[i] == "*":
+            regex, i = regex + "[^/]*", i + 1
+        elif pattern[i] == "?":
+            regex, i = regex + "[^/]", i + 1
+        else:
+            regex, i = regex + re.escape(pattern[i]), i + 1
+    return re.fullmatch(regex, path, re.IGNORECASE) is not None
+
+
+def archive_listing(pin, cache={}):
+    """Every file entry of a pinned download (fetched once per run, checked against its pin)."""
+    key = pin["sha256"]
+    if key not in cache:
+        data = download(pin["url"])
+        if hashlib.sha256(data).hexdigest() != pin["sha256"] or len(data) != pin["bytes"]:
+            sys.exit(f"{pin['url']}: does not match its pin")
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            cache[key] = {i.filename.replace("\\", "/") for i in archive.infolist() if not i.is_dir()}
+    return cache[key]
+
+
+def compact(entry, listings=None):
+    """A schema-2 entry as a schema-4 catalog entry (card fields plus the detail file's fields), with its index
+    source texts: rules instead of per-file entries (proved to expand to the same files), tree pins for external
+    sources, defaults left out and the settings form left in the package when the package carries it.
+    `listings` names the archive entries of each download ("package", additionalDownloads names); fetched if missing."""
+    entry = copy.deepcopy(entry)
+    install = entry["install"]
+    folder = mod_folder({"id": entry["id"], **({"games": install["games"]} if "games" in install else {})})
+    external_ids = {s["id"] for s in entry.get("externalSources", [])}
+    listings = dict(listings or {})
+    downloads = {"package": entry.get("download"), **entry.get("additionalDownloads", {})}
+    sources, rules_by_root, trees = {}, {}, {}
+    for root in ("game", "azimuth"):
+        groups = {}
+        for f in install["files"][root]:
+            source, path = file_source(f, external_ids)
+            dest = f["destination"]
+            if root == "azimuth":
+                if not dest.startswith(folder):
+                    sys.exit(f"{entry['id']}: {dest} is outside {folder}")
+                dest = dest[len(folder):]
+            groups.setdefault(source, {})[path] = (dest, f["role"], f["mode"], f["sha256"], f["bytes"])
+        rules = []
+        for source, files in groups.items():
+            mapped = {p: v[:3] for p, v in files.items()}
+            if source in external_ids:
+                tops = {p.split("/", 1)[0] + "/" if "/" in p else "" for p in files}
+                if len(tops) != 1:
+                    sys.exit(f"{entry['id']}: external source {source} spans several folders {sorted(tops)}")
+                top = tops.pop()
+                rels = {p[len(top):]: v for p, v in files.items()}
+                if any(v[0] != rel or v[1:3] != ("asset", "add-or-replace") for rel, v in rels.items()):
+                    sys.exit(f"{entry['id']}: external files must keep their path, as assets added or replaced")
+                include = sorted({r.split("/", 1)[0] + "/**" if "/" in r else r for r in rels})
+                rules.append({"from": f"{source}:{top}", "include": include})
+                if source in trees:
+                    sys.exit(f"{entry['id']}: external source {source} in both roots")
+                trees[source] = tree_digest([(rel, v[3], v[4]) for rel, v in rels.items()])
+                continue
+            if source not in listings:
+                if not downloads.get(source):
+                    sys.exit(f"{entry['id']}: files from {source}, which the entry does not download")
+                listings[source] = archive_listing(downloads[source])
+            rules += cover(source, mapped, listings[source])
+        expanded = expand_rules(rules, listings, {s: set(g) for s, g in groups.items() if s in external_ids})
+        want = {dest.lower(): (dest, source, path, role, mode)
+                for source, files in groups.items() for path, (dest, role, mode, _, _) in files.items()}
+        if expanded != want:
+            diff = sorted(set(expanded.items()) ^ set(want.items()))[:4]
+            sys.exit(f"{entry['id']}: {root} rules do not reproduce its files: {diff}")
+        rules_by_root[root] = rules
+        if root == "azimuth":
+            settings_in_package = expanded.get(SETTINGS_FILE, (None, None))[1] == "package"
+    for s in entry.get("externalSources", []):
+        text = {k: s.pop(k) for k in ("kind", "help", "hint") if k in s}
+        name = re.sub(r"[^a-z0-9]+", "-", text.get("hint", s["id"]).lower()).strip("-")
+        if sources.setdefault(name, text) != text:
+            sys.exit(f"{entry['id']}: two different source texts for {name}")
+        s["source"] = name
+        s["tree"] = trees.pop(s["id"]) if s["id"] in trees else sys.exit(f"{entry['id']}: source {s['id']} maps no file")
+    install["files"] = {root: rules for root, rules in rules_by_root.items() if rules}
+    if install.get("config") is not None and settings_in_package:
+        install["config"] = None
+    for key in DROPPED_INSTALL:
+        install.pop(key, None)
+    if "compatibility" in install:
+        install["compatibility"] = strip_defaults(install["compatibility"], COMPATIBILITY_DEFAULTS)
+    if "multiplayer" in install:
+        install["multiplayer"] = strip_defaults(install["multiplayer"], {**MULTIPLAYER_DEFAULTS, "compatibilityId": entry["id"]})
+    entry["install"] = strip_defaults(install, INSTALL_DEFAULTS)
+    return entry, sources
 
 
 def detail_of(entry):
-    """A schema-2 entry's detail file (schema 3): everything but the card text, with the entry's id and version."""
-    return {"schemaVersion": 3, "id": entry["id"], "version": entry["version"],
+    """A schema-4 entry's detail file: everything but the card text, with the entry's id and version."""
+    return {"schemaVersion": SCHEMA_VERSION, "id": entry["id"], "version": entry["version"],
             **{k: v for k, v in entry.items() if k not in CARD_FIELDS}}
 
 
 def entry_of(card, detail):
-    """The schema-2 entry an index card and its detail file stand for (the launcher rebuilds the same one)."""
+    """The entry an index card and its detail file stand for (card fields plus the detail's own)."""
     return {**{k: card[k] for k in CARD_FIELDS}, **{k: v for k, v in detail.items() if k not in ("schemaVersion", "id", "version")}}
 
 
-def split_catalog(catalog):
-    """A schema-2 catalog as (index bytes, {file name: detail bytes})."""
+def write_catalog(catalog, out):
+    """Writes out/catalog/ (schema 4): the index, its source texts and one detail file per mod (any other .json removed)."""
+    used = {s["source"] for m in catalog["mods"] for s in m.get("externalSources", [])}
     details, cards = {}, []
     for entry in catalog["mods"]:
         raw = dumps(detail_of(entry))
+        if len(raw) > DETAIL_MAX_BYTES:
+            sys.exit(f"{entry['id']}: detail file {len(raw)} bytes (limit {DETAIL_MAX_BYTES})")
         name = f"{entry['id']}.json"
         details[name] = raw
         cards.append({**{k: entry[k] for k in CARD_FIELDS}, "path": name,
                       "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)})
-    return dumps({"schemaVersion": 3, "mods": cards}), details
-
-
-def write_catalog(catalog, out):
-    """Writes out/catalog/: the index and one detail file per mod (any other .json there removed)."""
-    index, details = split_catalog(catalog)
+    index = {"schemaVersion": SCHEMA_VERSION}
+    if used:
+        index["sources"] = {k: v for k, v in sorted(catalog.get("sources", {}).items()) if k in used}
+    index["mods"] = cards
+    index_raw = dumps(index)
     folder = out / "catalog"
     folder.mkdir(parents=True, exist_ok=True)
     for stale in folder.glob("*.json"):
@@ -571,37 +810,62 @@ def write_catalog(catalog, out):
             stale.unlink()
     for name, raw in details.items():
         (folder / name).write_bytes(raw)
-    (folder / INDEX_NAME).write_bytes(index)
-    return len(index)
+    (folder / INDEX_NAME).write_bytes(index_raw)
+    return len(index_raw)
+
+
+def add_entry(catalog, entry, listings=None):
+    """Puts a schema-2 entry into a loaded catalog as schema 4 (replacing its id). Returns (compact entry, existing)."""
+    compacted, texts = compact(entry, listings)
+    for name, text in texts.items():
+        if catalog["sources"].setdefault(name, text) != text:
+            sys.exit(f"{entry['id']}: its source text {name} differs from the index's; change both")
+    existing = next((m for m in catalog["mods"] if m["id"] == entry["id"]), None)
+    return compacted, existing
+
+
+def put_entry(catalog, compacted, existing):
+    if existing:
+        catalog["mods"][catalog["mods"].index(existing)] = compacted
+    else:
+        catalog["mods"].append(compacted)
 
 
 def load_catalog(path):
-    """A catalog as its schema-2 form: a v2 file as it is, a v3 index merged with its detail files (local paths only)."""
+    """A local catalog as schema-4 entries ({"sources", "mods"}): a v4 index merged with its detail files, or a
+    v2 file / v3 index converted (its downloads fetched once to read their archive listings)."""
     path = Path(path)
     document = json.loads(path.read_text(encoding="utf-8"))
-    if document.get("schemaVersion") != 3:
-        return document
-    mods = []
-    for card in document["mods"]:
-        if card["path"].startswith("https://"):
-            sys.exit(f"{card['id']}: a remote detail file; the tool reads local catalogs only")
-        detail = json.loads((path.parent / card["path"]).read_text(encoding="utf-8"))
-        if (detail.get("id"), detail.get("version")) != (card["id"], card["version"]):
-            sys.exit(f"{card['path']}: id/version {detail.get('id')} {detail.get('version')} differ from the index's"
-                     f" {card['id']} {card['version']}; change both")
-        mods.append(entry_of(card, detail))
-    return {"schemaVersion": 2, "mods": mods}
+    version = document.get("schemaVersion")
+    if version == 2:
+        entries = document["mods"]
+    else:
+        entries = []
+        for card in document["mods"]:
+            if card["path"].startswith("https://"):
+                sys.exit(f"{card['id']}: a remote detail file; the tool reads local catalogs only")
+            detail = json.loads((path.parent / card["path"]).read_text(encoding="utf-8"))
+            if (detail.get("id"), detail.get("version")) != (card["id"], card["version"]):
+                sys.exit(f"{card['path']}: id/version {detail.get('id')} {detail.get('version')} differ from the index's"
+                         f" {card['id']} {card['version']}; change both")
+            entries.append(entry_of(card, detail))
+    if version == SCHEMA_VERSION:
+        return {"sources": document.get("sources", {}), "mods": entries}
+    catalog = {"sources": {}, "mods": []}
+    for entry in entries:
+        put_entry(catalog, *add_entry(catalog, entry))
+    return catalog
 
 
-def catalog_command(from_v2):
-    """Re-pins catalog/index.json after an edit of catalog/; --from splits a schema-2 file into catalog/."""
-    catalog = json.loads(Path(from_v2).read_text(encoding="utf-8")) if from_v2 else load_catalog(CATALOG_DIR / INDEX_NAME)
-    if from_v2 is None:  # the index's card text wins; details come from the files as edited
+def catalog_command(source):
+    """Re-pins catalog/index.json after an edit of catalog/; --from converts a schema-2 file or a schema-3 index."""
+    if source is None:  # the index's card text wins; details come from the files as edited
         index = json.loads((CATALOG_DIR / INDEX_NAME).read_text(encoding="utf-8"))
         listed = {c["path"] for c in index["mods"]}
         unlisted = sorted(p.name for p in CATALOG_DIR.glob("*.json") if p.name != INDEX_NAME and p.name not in listed)
         if unlisted:
             sys.exit("not in catalog/index.json (add a card for each, or delete them): " + ", ".join(unlisted))
+    catalog = load_catalog(source or CATALOG_DIR / INDEX_NAME)
     index_bytes = write_catalog(catalog, ROOT)
     print(f"catalog/{INDEX_NAME} {index_bytes} bytes of {CATALOG_MAX_BYTES}, {len(catalog['mods'])} detail files")
     return check(CATALOG_DIR / INDEX_NAME)
@@ -641,22 +905,20 @@ def release(names, zig, tag, catalog_path, out, allow_dirty):
         if recipe.get("authorPackage"):  # the author's ZIP, pinned by pin-author: nothing built, nothing to attach
             if not manifest["package"]["sha256"] or any(not f.get("sha256") for f in manifest["files"]["azimuth"]):
                 sys.exit(f"{name}: not pinned; run pin-author {name} --write")
-            entry = catalog_entry(manifest)
+            entry, existing = add_entry(catalog, catalog_entry(manifest))
             if existing == entry:
                 report.append(f"{recipe['id']}: unchanged, keeps {existing['download']['url']}")
                 continue
             if existing and existing.get("version") == recipe["version"] and existing.get("download") != entry["download"]:
                 sys.exit(f"{recipe['id']}: the author's package changed but version {recipe['version']} did not; bump it")
-            if existing:
-                catalog["mods"][catalog["mods"].index(existing)] = entry
-            else:
-                catalog["mods"].append(entry)
+            put_entry(catalog, entry, existing)
             report.append(f"{recipe['id']}: {'updated' if existing else 'new'} {recipe['version']}, the author's {manifest['package']['url']}")
             continue
         with tempfile.TemporaryDirectory(prefix="infmods-") as temporary:
             dll = build(name, zig, Path(temporary))
             mod_dll = build_mod(recipe, Path(temporary) / "mod") if recipe.get("modBuild") else None
-            zip_path, contents = package(recipe, dll, out / "assets", mod_dll)
+            manifest, settings = with_settings_file(recipe, manifest)
+            zip_path, contents = package(recipe, dll, out / "assets", mod_dll, settings)
         digest = hashlib.sha256(zip_path.read_bytes()).hexdigest()
         if existing and existing.get("download", {}).get("sha256") == digest:
             report.append(f"{recipe['id']}: unchanged, keeps {existing['download']['url']}")
@@ -667,11 +929,8 @@ def release(names, zig, tag, catalog_path, out, allow_dirty):
         filled = fill_manifest(manifest, recipe, zip_path, contents, url, commit)
         (out / "manifests" / f"{recipe['id']}-{recipe['version']}.json").write_text(
             json.dumps(filled, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
-        entry = catalog_entry(filled)
-        if existing:
-            catalog["mods"][catalog["mods"].index(existing)] = entry
-        else:
-            catalog["mods"].append(entry)
+        entry, existing = add_entry(catalog, catalog_entry(filled), {"package": set(contents)})
+        put_entry(catalog, entry, existing)
         report.append(f"{recipe['id']}: {'updated' if existing else 'new'} {recipe['version']} at {url}")
     write_catalog(catalog, out)
     (out / "RELEASE.txt").write_text(f"tag {tag}\ncommit {commit}\n" + "\n".join(report) + "\n", encoding="utf-8", newline="\n")
@@ -834,6 +1093,106 @@ def check_v3(index_path, problems):
     return {"schemaVersion": 2, "mods": mods}
 
 
+SAFE_PATH = re.compile(r"^(?!/)(?!.*(^|/)\.\.(/|$))[^:\\]*$")
+
+
+def rule_problems(entry, index_sources):
+    """Schema 4's rules that the schema cannot say: declared sources, safe paths, one folder rule per external
+    source, the launcher's role/mode/settings rules (ModManifest.cs:206-208) and no two rules on one file."""
+    problems, install = [], entry["install"]
+    folder = mod_folder({"id": entry["id"], **({"games": install["games"]} if "games" in install else {})})
+    downloads = ({"package"} if "download" in entry else set()) | set(entry.get("additionalDownloads", {}))
+    external = {s["id"]: s for s in entry.get("externalSources", [])}
+    for s in external.values():
+        if "source" in s and s["source"] not in index_sources:
+            problems.append(f"source {s['source']} is not in the index's sources")
+        if "source" not in s and not {"kind", "help", "hint"} <= set(s):
+            problems.append(f"source {s['id']} needs kind, help and hint (or a source in the index)")
+    config = install.get("config")
+    config_dest = config["path"][len(folder):] if config and config["path"].startswith(folder) else None
+    taken, external_rules = set(), {}
+    for root, rules in install.get("files", {}).items():
+        for rule in rules:
+            source, path = rule["from"].split(":", 1)
+            to = rule.get("to", "")
+            role, mode = rule.get("role", "asset"), rule.get("mode", "add-or-replace")
+            where = rule["from"]
+            if source not in downloads and source not in external:
+                problems.append(f"{where}: {source} is neither a download nor an external source of this mod")
+            if not SAFE_PATH.match(path) or not SAFE_PATH.match(to):
+                problems.append(f"{where}: unsafe path (a leading '/', '..', ':' or '\\')")
+            folder_rule = path == "" or path.endswith("/")
+            if folder_rule and to and not to.endswith("/"):
+                problems.append(f"{where}: a folder rule's to must end with '/'")
+            if not folder_rule and "include" in rule:
+                problems.append(f"{where}: include belongs to folder rules")
+            if source in external:
+                external_rules.setdefault(source, []).append(rule)
+                if not folder_rule or role != "asset" or mode != "add-or-replace":
+                    problems.append(f"{where}: an external source maps one folder, as assets added or replaced")
+            dest = None if folder_rule else (to + path.rsplit("/", 1)[-1] if to == "" or to.endswith("/") else to)
+            if mode == "seed" and role not in ("config", "user-asset") \
+                    or role == "config" and (mode != "seed" or dest is None or root != "azimuth" or dest != config_dest) \
+                    or dest and config_dest and root == "azimuth" and dest.lower() == config_dest.lower() and role != "config":
+                problems.append(f"{where}: invalid role {role}/mode {mode} for its settings mapping")
+            if dest and root == "azimuth" and dest.lower() == SETTINGS_FILE and config:
+                problems.append(f"{where}: a settings form both inline and in {SETTINGS_FILE}")
+            if dest:
+                if (root, dest.lower()) in taken:
+                    problems.append(f"{where}: two rules install {dest}")
+                taken.add((root, dest.lower()))
+    for sid, s in external.items():
+        if len(external_rules.get(sid, [])) != 1:
+            problems.append(f"external source {sid} needs exactly one folder rule, found {len(external_rules.get(sid, []))}")
+    return problems
+
+
+def check_v4(index_path, problems):
+    """A schema-4 index and its local detail files. Returns the catalog (sources and entries), or None."""
+    schema = json.loads((ROOT / "schemas" / "catalog-v4.schema.json").read_text(encoding="utf-8"))
+    folder, name = index_path.parent, f"{index_path.parent.name}/{index_path.name}"
+    try:
+        index = read_strict(index_path, CATALOG_MAX_BYTES)
+    except (OSError, ValueError) as error:
+        problems.append(f"{name}: {error}")
+        return None
+    if errors := schema_errors(index, schema, schema):
+        problems += [f"{name}: {e}" for e in errors]
+        return None
+    ids = [c["id"] for c in index["mods"]]
+    problems += [f"{name}: id {i} listed more than once" for i in sorted(set(ids)) if ids.count(i) > 1]
+    mods, listed, used = [], set(), set()
+    for card in index["mods"]:
+        where = f"{name}: {card['id']}"
+        if card["path"] != f"{card['id']}.json" or card["id"] == Path(INDEX_NAME).stem:
+            problems.append(f"{where}: path must be {card['id']}.json (and no mod is called {Path(INDEX_NAME).stem})")
+            continue
+        listed.add(card["path"])
+        detail_path = folder / card["path"]
+        try:
+            raw = detail_path.read_bytes()
+            detail = read_strict(detail_path, DETAIL_MAX_BYTES)
+        except (OSError, ValueError) as error:
+            problems.append(f"{where}: {card['path']}: {error}")
+            continue
+        if hashlib.sha256(raw).hexdigest() != card["sha256"] or len(raw) != card["bytes"]:
+            problems.append(f"{where}: {card['path']} does not match its pin (run: python3 -I tools/infmods.py catalog)")
+        if errors := schema_errors(detail, schema["$defs"]["mod"], schema):
+            problems += [f"{where}: {card['path']}: {e}" for e in errors]
+            continue
+        if (detail["id"], detail["version"]) != (card["id"], card["version"]):
+            problems.append(f"{where}: {card['path']} says {detail['id']} {detail['version']}, the index {card['id']} {card['version']}")
+            continue
+        entry = entry_of(card, detail)
+        problems += [f"{where}: {p}" for p in rule_problems(entry, index.get("sources", {}))]
+        used |= {s["source"] for s in entry.get("externalSources", []) if "source" in s}
+        mods.append(entry)
+    problems += [f"{name}: source {s} is used by no mod" for s in sorted(set(index.get("sources", {})) - used)]
+    problems += [f"{folder.name}/{p.name}: not listed in {name}" for p in sorted(folder.glob("*.json"))
+                 if p.name != INDEX_NAME and p.name not in listed]
+    return {"sources": index.get("sources", {}), "mods": mods}
+
+
 def check(catalog_path):
     """The official catalog (catalog/index.json and its detail files), or any one catalog file."""
     problems, catalog_path = [], Path(catalog_path)
@@ -842,10 +1201,12 @@ def check(catalog_path):
     except (OSError, ValueError) as error:
         print("FAIL", f"{catalog_path}: {error}")
         return 1
-    if schema_version != 3:  # a schema-2 file: a custom catalog
-        catalog = check_v2(catalog_path, catalog_path.name, problems)
-    else:
+    if schema_version == SCHEMA_VERSION:
+        catalog = check_v4(catalog_path, problems)
+    elif schema_version == 3:  # a custom catalog in the earlier split form
         catalog = check_v3(catalog_path, problems)
+    else:  # a schema-2 file: a custom catalog
+        catalog = check_v2(catalog_path, catalog_path.name, problems)
     if (ROOT / "catalog.json").exists():
         problems.append("catalog.json: retired (every launcher reads catalog/index.json); delete it")
     for p in problems:
@@ -996,8 +1357,8 @@ def external_packs(set_dirs, cars_path, catalog_path, out):
             entries.append(pack_entry(set_dir.name, game, top, manifest, files, versions, cars, azimuth_versions, first))
             report.append(f"{manifest['id']} {manifest['version']}: {len(files)} files"
                           + (", load order first" if first else "") + (f", left out {', '.join(skipped)}" if skipped else ""))
-    ids = {e["id"] for e in entries}
-    catalog["mods"] = [m for m in catalog["mods"] if m["id"] not in ids] + entries
+    for entry in entries:
+        put_entry(catalog, *add_entry(catalog, entry))
     index_bytes = write_catalog(catalog, Path(out))
     print("\n".join(report))
     print(f"{len(entries)} entries; index {index_bytes} bytes of {CATALOG_MAX_BYTES} -> {out}/catalog/")
@@ -1227,13 +1588,13 @@ def main():
     r.add_argument("mods", nargs="*")
     r.add_argument("--zig", type=Path)
     r.add_argument("--tag", required=True)
-    r.add_argument("--catalog", type=Path, default=CATALOG_DIR / INDEX_NAME, help="the current catalog: catalog/index.json, or a v2 file (read only)")
+    r.add_argument("--catalog", type=Path, default=CATALOG_DIR / INDEX_NAME, help="the current catalog: catalog/index.json (read only)")
     r.add_argument("--out", type=Path, default=ROOT / "dist")
     r.add_argument("--allow-dirty", action="store_true", help="development only: the commit pinned is HEAD, not the tree")
     c = sub.add_parser("check")
     c.add_argument("--catalog", type=Path, default=CATALOG_DIR / INDEX_NAME)
     g = sub.add_parser("catalog", help="re-pin catalog/index.json after editing catalog/")
-    g.add_argument("--from", dest="from_v2", type=Path, help="split this schema-2 catalog into catalog/ instead")
+    g.add_argument("--from", dest="from_v2", type=Path, help="convert this schema-2 file or schema-3 index into catalog/")
     e = sub.add_parser("external-packs", help="catalog entries for the ZephyrSkies pack sets from their ZIPs (read only)")
     e.add_argument("sets", nargs="+", type=Path, help="a set folder of pack ZIPs, named as in PACK_SETS")
     e.add_argument("--cars", type=Path, required=True, help="the monorepo's crates/fi-gamedb/data/fh2-packs.json (OD-231)")

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "camera-mods",
   "version": "1.3.0-infinity.1",
   "download": {
@@ -8,90 +8,26 @@
     "bytes": 73045
   },
   "install": {
-    "schemaVersion": 1,
-    "kind": "mod",
     "license": "GPL-3.0",
     "homepage": "https://github.com/anarqz/InfinityMods",
-    "runtime": "standalone",
-    "review": {
-      "status": "reviewed",
-      "blockers": []
-    },
-    "compatibility": {
-      "azimuthVersions": [
-        "1.0.4"
-      ],
-      "gameBuilds": [],
-      "verification": "unverified"
-    },
-    "dependencies": [],
-    "conflicts": [],
+    "compatibility": {"azimuthVersions": ["1.0.4"]},
     "files": {
-      "game": [],
       "azimuth": [
-        {
-          "source": "CameraMods.dll",
-          "destination": "mods/Forza Horizon 2/camera-mods/plugins/CameraMods.dll",
-          "role": "binary",
-          "mode": "add-or-replace",
-          "sha256": "3b2b96aca7e19cec25186c2b0f36766edd126b0bd4a24f799a020b780b6adefe",
-          "bytes": 126976
-        },
-        {
-          "source": "mod.json",
-          "destination": "mods/Forza Horizon 2/camera-mods/mod.json",
-          "role": "asset",
-          "mode": "add-or-replace",
-          "sha256": "ee15436ba627ec60d70cb15bc4f27378ce6452864659b653dacec4c821b7c875",
-          "bytes": 314
-        },
-        {
-          "source": "LICENSE.txt",
-          "destination": "mods/Forza Horizon 2/camera-mods/LICENSE.txt",
-          "role": "license",
-          "mode": "add-or-replace",
-          "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
-          "bytes": 35149
-        },
-        {
-          "source": "NOTICE.md",
-          "destination": "mods/Forza Horizon 2/camera-mods/NOTICE.md",
-          "role": "license",
-          "mode": "add-or-replace",
-          "sha256": "258c4216533e620fd6b64cba2b22a4b311d0cd8167fd1dba44480980650be50d",
-          "bytes": 1057
-        }
+        {"from": "package:CameraMods.dll", "to": "plugins/", "role": "binary"},
+        {"from": "package:LICENSE.txt", "role": "license"},
+        {"from": "package:NOTICE.md", "role": "license"},
+        {"from": "package:mod.json"}
       ]
     },
-    "config": null,
-    "runtimeOutputs": [],
-    "excludedArchiveEntries": [],
-    "databaseMigrations": [],
     "source": {
       "repository": "https://github.com/anarqz/InfinityMods",
       "commit": "09e2300eb9262120af44ba70a69060ea7bc1f0f8"
     },
-    "multiplayer": {
-      "schemaVersion": 1,
-      "impact": "gameplay",
-      "compatibilityId": "camera-mods",
-      "revision": 1,
-      "match": "exact",
-      "settings": []
-    },
+    "multiplayer": {"impact": "gameplay"},
     "incompatibleFiles": [
-      {
-        "root": "azimuth",
-        "path": "mods/Camera Mods/plugins/CameraMods.dll"
-      },
-      {
-        "root": "azimuth",
-        "path": "mods/Forza Horizon 2/Camera Mods/plugins/CameraMods.dll"
-      },
-      {
-        "root": "azimuth",
-        "path": "fh2-mods/CameraModsMenu.dll"
-      }
+      {"root": "azimuth", "path": "mods/Camera Mods/plugins/CameraMods.dll"},
+      {"root": "azimuth", "path": "mods/Forza Horizon 2/Camera Mods/plugins/CameraMods.dll"},
+      {"root": "azimuth", "path": "fh2-mods/CameraModsMenu.dll"}
     ]
   }
 }
