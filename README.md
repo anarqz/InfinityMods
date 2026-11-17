@@ -92,6 +92,7 @@ git submodule update --init --recursive
 python3 -I tools/infmods.py build  nitrosystem                      # Windows (MSVC)
 python3 -I tools/infmods.py verify nitrosystem                      # Windows (MSVC)
 python3 -I tools/infmods.py verify underglow                        # Windows (MSVC)
+python3 -I mods/underglow/tests/run_tests.py --zig /path/to/zig     # any OS: Underglow's host tests (its patches' pure logic)
 python3 -I tools/infmods.py verify fh2-anna                         # Windows (MSVC)
 python3 -I tools/infmods.py sync   underglow                        # any OS: report a newer upstream release (--write to re-pin)
 python3 -I tools/infmods.py pin-author extraoptions-weathercontrol  # any OS: re-pin an authorPackage mod (--write)

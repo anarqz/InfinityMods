@@ -1,18 +1,219 @@
-Fromdiff --git a/src/neon_mod.cpp b/src/neon_mod.cpp
-index 61c0dd7..c62904b 100644
+From: Infinity Mods <noreply@infinitymods.invalid>
+Subject: [PATCH] Show the other players' neon through the Infinity hook's car-state sync
+
+Under Infinity, in an online free-roam world, the Infinity hook (azimuth-tls.dll, or ExtraOptions.Infinity's
+winmm.dll) exports InfinityCarSync_* (ABI version 1; CR-L53, OD-248). Underglow finds it with GetProcAddress
+only and registers as sync id 1. It hands the hook the local car's look (on/off, the lit parts, LED level,
+colors as RGB, effects, brightness, speed, the shape) as one 40-byte blob whenever it changes, and an "off"
+blob as soon as it registers (never nothing: the world forwards other players' blobs only to a hook that
+sends one). On the other players' cars (ForzaCar kind 2 or 5) that the hook matched, it shows their neon:
+the 8 nearest within 150 m, at most 32 lights each, from the one shared light manager (at most 256 extra
+beam presets). An audio effect on another player's car is a steady glow. Lights of a car that leaves,
+whose blob is gone or when the sync stops go dark and are reused. Without the hook, or with another
+version of its API, nothing of this runs. The local car's neon is unchanged.
+The API's header, src/infinity_carsync.h, is the Infinity hook's own (MIT), vendored as it is.
+---
+diff --git a/src/infinity_carsync.h b/src/infinity_carsync.h
+new file mode 100644
+index 0000000..f39d731
+--- /dev/null
++++ b/src/infinity_carsync.h
+@@ -0,0 +1,178 @@
++/* SPDX-License-Identifier: MIT
++
++   Copyright (c) 2026 Alexandre Moraes and the Infinity Launcher contributors
++
++   Permission is hereby granted, free of charge, to any person obtaining a copy of this file (the
++   "Software"), to deal in the Software without restriction, including without limitation the
++   rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
++   Software, and to permit persons to whom the Software is furnished to do so, subject to the
++   following conditions: the above copyright notice and this permission notice shall be included
++   in all copies or substantial portions of the Software.
++
++   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
++   BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++   NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
++   DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++
++   This one header is MIT (owner decision, 2026-11-17) so mods of any licence can include it; the
++   rest of the hook stays GPL-3.0-or-later (native/hook/NOTICE.md). It is self-contained: it
++   includes only system headers.
++
++   ForzaInfinity hook: the car-state sync API for mods (CR-L53, OD-248). A mod copies or includes
++   this one file.
++
++   A mod (an ExtraOptions plugin such as Underglow) shows its own state on the cars of the other
++   players in an online free-roam world who have the same mod. It gives the hook up to 64 opaque
++   bytes for the local car ("blob"); the hook sends them through the world's relay (attribute 0xC0FD,
++   docs/contracts/MATCHMAKING_API.md §5f) and keeps what the other players' mods sent, keyed by the
++   car the hook matched to each player. The hook never reads the bytes.
++
++   Rules (§5f "Who gets what"):
++   - a mod sends and receives only after InfinityCarSync_Register in this process: the hook keeps a
++     received blob only for a registered sync id, and drops the others unread;
++   - the sync id is the protocol's registry id of the mod (1 = Underglow; ids are never reused, an
++     incompatible blob layout takes a new id; 2 is FH2 ANNA's parts and signals and is not a blob);
++   - the blob version byte is the mod's own, for compatible additions only;
++   - the relay passes a blob only between two players whose seats both declared the mod, and
++     forgets it 5 s after its sender stopped sending it; the hook does the same (a blob older than
++     5 s is gone). Every received byte must still be validated by the mod: nothing here is
++     authority.
++   - the hook sends on a change (at most 10 times a second) and every second; at most two blobs go
++     in one datagram (rotated when more mods are registered);
++   - a mod must always have a blob out, its "off" state included: publish an explicit off blob (the
++     mod's own bytes, e.g. a flags byte of 0) right after Register, never nothing. The world sends
++     0xC0FD to a hook only while that hook sends some, so a mod with nothing published receives
++     nothing from the others either.
++
++   The hook may be absent (offline, another loader, an older hook): resolve the API at run time and
++   work without it. InfinityCarSync_Resolve below finds the module that exports it (the hook is
++   azimuth-tls.dll, or inside ExtraOptions.Infinity's winmm.dll) with GetProcAddress only.
++
++   Threads: every function may be called from any thread; Get is cheap (a shared lock, no
++   allocation) and meant for each frame. Pointers are not kept past the call.
++
++   ABI: INFINITY_CARSYNC_VERSION 1. Every export keeps its signature for the life of version 1;
++   additions get new exports; InfinityCarSyncInfo only grows at its end (its `size` says how much
++   the caller has room for). A hook with another major version refuses Register. */
++#ifndef INFINITY_CARSYNC_H
++#define INFINITY_CARSYNC_H
++
++#include <stdint.h>
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++#define INFINITY_CARSYNC_VERSION 1u
++/* the largest blob (bytes) */
++#define INFINITY_CARSYNC_BLOB_MAX 64u
++/* the most mods one process may register */
++#define INFINITY_CARSYNC_MODS_MAX 4u
++
++/* results (int32_t): > 0 success (Get: the blob's length), 0 nothing (Get: no blob for that car) */
++#define INFINITY_CARSYNC_OK 1
++#define INFINITY_CARSYNC_NONE 0
++#define INFINITY_CARSYNC_E_VERSION (-1)      /* abi_version is not this hook's */
++#define INFINITY_CARSYNC_E_ID (-2)           /* sync id 0, or one that is not a blob (2) */
++#define INFINITY_CARSYNC_E_FULL (-3)         /* INFINITY_CARSYNC_MODS_MAX mods already registered */
++#define INFINITY_CARSYNC_E_UNREGISTERED (-4) /* Publish/Get before Register of that id */
++#define INFINITY_CARSYNC_E_LENGTH (-5)       /* Publish: length 0 or > INFINITY_CARSYNC_BLOB_MAX, or bytes NULL */
++#define INFINITY_CARSYNC_E_CAPACITY (-6)     /* Get: capacity smaller than the blob (nothing copied) */
++#define INFINITY_CARSYNC_E_ARGUMENT (-7)     /* a NULL pointer, or Info's size below 8 */
++
++/* the sync ids of the registry (§5f) */
++#define INFINITY_CARSYNC_ID_UNDERGLOW 1u
++#define INFINITY_CARSYNC_ID_ANNA 2u /* 0xC0FC, sent by the hook itself: not a blob id */
++
++typedef struct InfinityCarSyncInfo {
++    uint32_t size;       /* in: sizeof(InfinityCarSyncInfo) of the caller; out: the bytes filled */
++    uint32_t version;    /* INFINITY_CARSYNC_VERSION of the hook */
++    uint32_t blob_max;   /* INFINITY_CARSYNC_BLOB_MAX */
++    uint32_t mods_max;   /* INFINITY_CARSYNC_MODS_MAX */
++    uint32_t flags;      /* bit 0: the sync runs now (online free roam, ExtraOptions active) */
++} InfinityCarSyncInfo;
++
++/* The exports (C, the platform's default x64 calling convention). */
++typedef uint32_t (*InfinityCarSync_VersionFn)(void);
++typedef int32_t (*InfinityCarSync_InfoFn)(InfinityCarSyncInfo *info);
++/* Register a mod's sync id; again with the same id only updates its blob version. */
++typedef int32_t (*InfinityCarSync_RegisterFn)(uint32_t abi_version, uint8_t sync_id, uint8_t blob_version);
++/* The local car's blob, `length` 1..64 bytes (copied; 0 is refused). An unchanged blob costs
++   nothing: call it whenever the mod's state may have changed. Once published, the blob goes with
++   every refresh for as long as the process runs. */
++typedef int32_t (*InfinityCarSync_PublishFn)(uint8_t sync_id, const void *bytes, uint32_t length);
++/* Another player's blob for `car` (a ForzaCar pointer of the game, as the mod's car hooks see it;
++   only the remote players' cars, ForzaCar kind 2 or 5, that the hook matched to their owner):
++   copies it into `out` and returns its length, with its version in *blob_version (may be NULL);
++   0 when that car has none. */
++typedef int32_t (*InfinityCarSync_GetFn)(const void *car, uint8_t sync_id, void *out, uint32_t capacity,
++                                         uint8_t *blob_version);
++
++#ifdef INFINITY_CARSYNC_EXPORTS
++/* the hook's side (native/hook/src/infinity/carstate.c) */
++__declspec(dllexport) uint32_t InfinityCarSync_Version(void);
++__declspec(dllexport) int32_t InfinityCarSync_Info(InfinityCarSyncInfo *info);
++__declspec(dllexport) int32_t InfinityCarSync_Register(uint32_t abi_version, uint8_t sync_id, uint8_t blob_version);
++__declspec(dllexport) int32_t InfinityCarSync_Publish(uint8_t sync_id, const void *bytes, uint32_t length);
++__declspec(dllexport) int32_t InfinityCarSync_Get(const void *car, uint8_t sync_id, void *out, uint32_t capacity,
++                                                  uint8_t *blob_version);
++#endif
++
++#ifdef INFINITY_CARSYNC_RESOLVER
++/* A mod's side: define INFINITY_CARSYNC_RESOLVER in one source file (after <windows.h>) and call
++   InfinityCarSync_Resolve once (e.g. when the plugin starts, and again later if it returned 0: the
++   hook is in the process from the game's start). 1 when every function was found and the hook's
++   version is INFINITY_CARSYNC_VERSION; 0 otherwise, with `api` zeroed: the mod then works alone. */
++#include <windows.h>
++#include <psapi.h> /* K32EnumProcessModules (kernel32 since Windows 7) */
++typedef struct InfinityCarSyncApi {
++    InfinityCarSync_VersionFn Version;
++    InfinityCarSync_InfoFn Info;
++    InfinityCarSync_RegisterFn Register;
++    InfinityCarSync_PublishFn Publish;
++    InfinityCarSync_GetFn Get;
++} InfinityCarSyncApi;
++
++static int InfinityCarSync_ResolveFrom(HMODULE module, InfinityCarSyncApi *api) {
++    InfinityCarSyncApi found;
++    found.Version = (InfinityCarSync_VersionFn)(void *)GetProcAddress(module, "InfinityCarSync_Version");
++    found.Info = (InfinityCarSync_InfoFn)(void *)GetProcAddress(module, "InfinityCarSync_Info");
++    found.Register = (InfinityCarSync_RegisterFn)(void *)GetProcAddress(module, "InfinityCarSync_Register");
++    found.Publish = (InfinityCarSync_PublishFn)(void *)GetProcAddress(module, "InfinityCarSync_Publish");
++    found.Get = (InfinityCarSync_GetFn)(void *)GetProcAddress(module, "InfinityCarSync_Get");
++    if (!found.Version || !found.Info || !found.Register || !found.Publish || !found.Get ||
++        found.Version() != INFINITY_CARSYNC_VERSION) {
++        return 0;
++    }
++    *api = found;
++    return 1;
++}
++
++static int InfinityCarSync_Resolve(InfinityCarSyncApi *api) {
++    HMODULE modules[512];
++    DWORD needed = 0;
++    api->Version = 0, api->Info = 0, api->Register = 0, api->Publish = 0, api->Get = 0;
++    /* the standalone hook first, then every module of the process (ExtraOptions.Infinity's
++       winmm.dll shares its base name with System32's, so it is not looked up by name) */
++    HMODULE hook = GetModuleHandleW(L"azimuth-tls.dll");
++    if (hook && InfinityCarSync_ResolveFrom(hook, api)) {
++        return 1;
++    }
++    if (!K32EnumProcessModules(GetCurrentProcess(), modules, sizeof(modules), &needed)) {
++        return 0;
++    }
++    DWORD count = needed / sizeof(HMODULE);
++    for (DWORD i = 0; i < count && i < sizeof(modules) / sizeof(modules[0]); ++i) {
++        if (InfinityCarSync_ResolveFrom(modules[i], api)) {
++            return 1;
++        }
++    }
++    return 0;
++}
++#endif
++
++#ifdef __cplusplus
++}
++#endif
++#endif
+diff --git a/src/neon_mod.cpp b/src/neon_mod.cpp
+index 61c0dd7..7104af9 100644
 --- a/src/neon_mod.cpp
 +++ b/src/neon_mod.cpp
-@@ -51,6 +51,9 @@
+@@ -51,6 +51,11 @@
  #include "neon_text.h"
  #include "ug_upgrade.h"
  #include "car_sizes.h"
 +#include "ug_remote.h"   // Infinity: the other players' neon (CR-L53)
-+
-+#include <psapi.h>       // K32EnumProcessModules (kernel32), to find the Infinity hook's car-state sync
++// The Infinity hook's car-state sync API (MIT, vendored as it is from native/hook/include of Infinity Horizon):
++// its declarations and InfinityCarSync_Resolve (GetProcAddress only).
++#define INFINITY_CARSYNC_RESOLVER
++#include "infinity_carsync.h"
  
  #ifndef UNDERGLOW_VERSION
  #define UNDERGLOW_VERSION "0.0.0"
-@@ -847,12 +850,206 @@ bool set_car_style(int which, int color, int zone, int effect) {
+@@ -847,12 +852,167 @@ bool set_car_style(int which, int color, int zone, int effect) {
      return true;
  }
  
@@ -24,52 +225,13 @@ index 61c0dd7..c62904b 100644
 +// players who both have it). Found at run time with GetProcAddress only: without the hook, or with another version of
 +// its API, nothing here runs and Underglow is what it always was.
 +
-+using CsVersionFn = uint32_t (*)(void);
-+struct CsInfo {
-+    uint32_t size, version, blob_max, mods_max, flags;   // flags bit 0: the sync runs now
-+};
-+using CsInfoFn = int32_t (*)(CsInfo* info);
-+using CsRegisterFn = int32_t (*)(uint32_t abi_version, uint8_t sync_id, uint8_t blob_version);
-+using CsPublishFn = int32_t (*)(uint8_t sync_id, const void* bytes, uint32_t length);
-+using CsGetFn = int32_t (*)(const void* car, uint8_t sync_id, void* out, uint32_t capacity, uint8_t* blob_version);
-+struct CarSyncApi {
-+    CsVersionFn version = nullptr;
-+    CsInfoFn info = nullptr;
-+    CsRegisterFn reg = nullptr;
-+    CsPublishFn publish = nullptr;
-+    CsGetFn get = nullptr;
-+};
-+const uint32_t kCarSyncAbi = 1;      // INFINITY_CARSYNC_VERSION
-+const uint8_t kCarSyncId = 1;        // the registry's id of Underglow (MATCHMAKING_API §5f)
-+const int32_t kCarSyncOk = 1;
++const uint32_t kCarSyncAbi = INFINITY_CARSYNC_VERSION;
++const uint8_t kCarSyncId = INFINITY_CARSYNC_ID_UNDERGLOW;   // the registry's id of Underglow (MATCHMAKING_API §5f)
++const int32_t kCarSyncOk = INFINITY_CARSYNC_OK;
 +const int kCarSyncTries = 12;        // looked for when the player's car first drives, then every 5 s for a minute
-+CarSyncApi g_cs;                     // written once, before g_cs_on
++InfinityCarSyncApi g_cs;             // written once, before g_cs_on
 +std::atomic<bool> g_cs_on{false};
 +SRWLOCK g_cs_game_lock = SRWLOCK_INIT;   // the player's side below (resolve, publish): one thread at a time
-+
-+bool cs_resolve_from(HMODULE module, CarSyncApi* api) {
-+    CarSyncApi a;
-+    a.version = reinterpret_cast<CsVersionFn>(reinterpret_cast<void*>(GetProcAddress(module, "InfinityCarSync_Version")));
-+    a.info = reinterpret_cast<CsInfoFn>(reinterpret_cast<void*>(GetProcAddress(module, "InfinityCarSync_Info")));
-+    a.reg = reinterpret_cast<CsRegisterFn>(reinterpret_cast<void*>(GetProcAddress(module, "InfinityCarSync_Register")));
-+    a.publish = reinterpret_cast<CsPublishFn>(reinterpret_cast<void*>(GetProcAddress(module, "InfinityCarSync_Publish")));
-+    a.get = reinterpret_cast<CsGetFn>(reinterpret_cast<void*>(GetProcAddress(module, "InfinityCarSync_Get")));
-+    if (!a.version || !a.info || !a.reg || !a.publish || !a.get || a.version() != kCarSyncAbi) return false;
-+    *api = a;
-+    return true;
-+}
-+
-+// The standalone hook by name, then every module (ExtraOptions.Infinity's winmm.dll shares System32's name).
-+bool cs_resolve(CarSyncApi* api) {
-+    if (HMODULE hook = GetModuleHandleW(L"azimuth-tls.dll"); hook && cs_resolve_from(hook, api)) return true;
-+    static HMODULE modules[1024];   // only under g_cs_game_lock
-+    DWORD needed = 0;
-+    if (!K32EnumProcessModules(GetCurrentProcess(), modules, sizeof modules, &needed)) return false;
-+    const DWORD count = needed / sizeof(HMODULE);
-+    for (DWORD i = 0; i < count && i < sizeof modules / sizeof modules[0]; ++i)
-+        if (cs_resolve_from(modules[i], api)) return true;
-+    return false;
-+}
 +
 +// An audio effect on another player's car: the receiver's radio isn't the sender's, so it shows a steady glow.
 +bool effect_is_audio(int effect) {
@@ -126,9 +288,9 @@ index 61c0dd7..c62904b 100644
 +    if (!g_cs_on.load(std::memory_order_acquire) && tries < kCarSyncTries && now >= next_try) {
 +        ++tries;
 +        next_try = now + 5000;
-+        CarSyncApi api;
-+        if (cs_resolve(&api)) {
-+            const int32_t r = api.reg(kCarSyncAbi, kCarSyncId, ugr::kBlobVersion);
++        InfinityCarSyncApi api;
++        if (InfinityCarSync_Resolve(&api)) {
++            const int32_t r = api.Register(kCarSyncAbi, kCarSyncId, ugr::kBlobVersion);
 +            tries = kCarSyncTries;   // found: no more looking, whatever Register says
 +            if (r == kCarSyncOk) {
 +                // An "off" blob at once, and a blob always after it (never withdrawn): the world passes the other
@@ -138,7 +300,7 @@ index 61c0dd7..c62904b 100644
 +                none.on = false;
 +                none.parts = 0;
 +                ugr::encode(none, off);
-+                api.publish(kCarSyncId, off, sizeof off);
++                api.Publish(kCarSyncId, off, sizeof off);
 +                g_cs = api;
 +                g_cs_on.store(true, std::memory_order_release);
 +                g_api->log(g_mod, "the Infinity hook's car-state sync is here: the other players' Underglow shows on "
@@ -155,7 +317,7 @@ index 61c0dd7..c62904b 100644
 +        next_look = now + 100;
 +        uint8_t blob[ugr::kBlobSize];
 +        ugr::encode(local_style(), blob);
-+        if ((!published || memcmp(blob, last, sizeof blob)) && g_cs.publish(kCarSyncId, blob, sizeof blob) == kCarSyncOk) {
++        if ((!published || memcmp(blob, last, sizeof blob)) && g_cs.Publish(kCarSyncId, blob, sizeof blob) == kCarSyncOk) {
 +            memcpy(last, blob, sizeof blob);
 +            published = true;
 +        }
@@ -183,7 +345,7 @@ index 61c0dd7..c62904b 100644
 +    if (!vtable_is(pres, kCarPresVtables, 2)) return;
 +    uint8_t buf[64];
 +    uint8_t version = 0;
-+    const int32_t n = g_cs.get(reinterpret_cast<const void*>(c), kCarSyncId, buf, sizeof buf, &version);
++    const int32_t n = g_cs.Get(reinterpret_cast<const void*>(c), kCarSyncId, buf, sizeof buf, &version);
 +    RemoteCar r;
 +    r.car = c;
 +    r.pres = pres;
@@ -219,7 +381,7 @@ index 61c0dd7..c62904b 100644
  }
  
  struct PlayerLight {
-@@ -981,6 +1178,8 @@ void remember_player(const Resolved& r, uintptr_t beams) {
+@@ -981,6 +1141,8 @@ void remember_player(const Resolved& r, uintptr_t beams) {
  std::atomic<bool> g_neon_build{false};   // the neon wants lights made (on the creating thread)
  SRWLOCK g_neon_lock = SRWLOCK_INIT;      // the neon is only touched by whoever holds it
  void neon_build(const Reference& ref);
@@ -228,7 +390,7 @@ index 61c0dd7..c62904b 100644
  
  // ---- CreateLight: remember each handle's key and index --------------------------------------------------------
  
-@@ -1009,6 +1208,17 @@ uint32_t* detour_create(void* mgr, uint32_t* handle, uint32_t key, uint32_t inde
+@@ -1009,6 +1171,17 @@ uint32_t* detour_create(void* mgr, uint32_t* handle, uint32_t key, uint32_t inde
          }
          ReleaseSRWLockExclusive(&g_neon_lock);
      }
@@ -246,7 +408,7 @@ index 61c0dd7..c62904b 100644
      return r;
  }
  
-@@ -2155,6 +2365,395 @@ void neon_frame(const Reference& ref) {
+@@ -2155,6 +2328,395 @@ void neon_frame(const Reference& ref) {
      g_neon.problem[0] = 0;
  }
  
@@ -552,9 +714,9 @@ index 61c0dd7..c62904b 100644
 +    }
 +    g_rn.last_frame = now;
 +    if (now - g_rn.info_tick >= 1000) {
-+        CsInfo info{};
++        InfinityCarSyncInfo info{};
 +        info.size = sizeof info;
-+        g_rn.sync = g_cs.info(&info) > 0 && (info.flags & 1u);
++        g_rn.sync = g_cs.Info(&info) > 0 && (info.flags & 1u);
 +        g_rn.info_tick = now;
 +    }
 +    static RemoteCar cars[kMaxRemoteCars];
@@ -642,7 +804,7 @@ index 61c0dd7..c62904b 100644
  void detour_set_int(void* mgr, uint32_t handle, float v) {
      g_orig_set_int(mgr, handle, v);
  
-@@ -2168,6 +2767,8 @@ void detour_set_int(void* mgr, uint32_t handle, float v) {
+@@ -2168,6 +2730,8 @@ void detour_set_int(void* mgr, uint32_t handle, float v) {
      bool player_light = false;
      for (int k = 0; mine && k < ref.lights; ++k) player_light |= ref.handle[k] == handle;
      if (player_light) neon_frame(ref);
@@ -651,7 +813,7 @@ index 61c0dd7..c62904b 100644
      ReleaseSRWLockExclusive(&g_neon_lock);
  }
  
-@@ -2217,6 +2818,7 @@ void upload(const Kind& k, UploadFn orig, void* system_p, void* graphics) {
+@@ -2217,6 +2781,7 @@ void upload(const Kind& k, UploadFn orig, void* system_p, void* graphics) {
      if (&k == &kBeam && TryAcquireSRWLockExclusive(&g_neon_lock)) {
          if (g_neon.lit && GetTickCount64() - g_neon.last_frame > 250 && g_neon.beams == system) neon_dark();
          else if (g_neon.lit && g_neon.beams == system) place_again();
@@ -659,7 +821,7 @@ index 61c0dd7..c62904b 100644
          ReleaseSRWLockExclusive(&g_neon_lock);
      }
  
-@@ -2274,6 +2876,22 @@ void cmd_status(char* reply, size_t size) {
+@@ -2274,6 +2839,22 @@ void cmd_status(char* reply, size_t size) {
               c.part[kZoneLeft] ? "left" : "", s.side, s.front, s.rear, s.height, s.front_inset, s.rear_inset, s.side_offset, s.side_trim, s.range, s.power, s.inner,
               s.outer, g_player_car_id.load(), ref.half_width, ref.db_width ? "from the game's data" : "from its lights",
               ref.front, ref.rear, ref.db_length ? "from the game's data" : "from its lights", n.count, n.lit ? "lit" : "dark", kit, radio, n.problem);

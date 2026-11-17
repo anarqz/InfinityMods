@@ -13,7 +13,10 @@ The patched check also accepts another hook's jump there (E9 rel32, or FF 25 wit
 0002 (online, under Infinity only): Underglow finds the Infinity hook's car-state sync (`InfinityCarSync_*`, looked up
 with GetProcAddress), gives it this car's look as a 40-byte blob (on/off, parts, LED level, colors, effects, shape) and
 shows the neon of the other players in the same world who have Underglow too: the 8 nearest within 150 m, at most 32
-lights each, audio effects as a steady glow. Nothing else is sent. Without the Infinity hook it does nothing. Everything
+lights each, audio effects as a steady glow. Nothing else is sent. Without the Infinity hook it does nothing. 0002
+compiles in the hook's API header `infinity_carsync.h` as it is, with its notice: Alexandre Moraes and the Infinity
+Launcher contributors, MIT (Infinity Horizon, https://github.com/anarqz/InfinityHorizon, `native/hook/include`; the
+rest of that hook is GPL-3.0-or-later and none of it is in this package). Everything
 else is the author's code, unchanged. That DLL contains the author's `camera_presets.h`, his edited copy of
 the game's garage camera shots with his five Underglow shots, shipped here by the owner's decision (Alex, 2026-11-12,
 an exception to the rule that no game-derived material ships; nothing else game-derived is included).
