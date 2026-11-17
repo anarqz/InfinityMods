@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "underglow",
-  "version": "1.1.0-infinity.5",
+  "version": "1.1.1-infinity.1",
   "kind": "mod",
   "name": {
     "en": "Underglow",
@@ -16,8 +16,10 @@
   },
   "runtime": "standalone",
   "review": {
-    "status": "reviewed",
-    "blockers": []
+    "status": "draft",
+    "blockers": [
+      "the adapter build for FH2 Mod Platform API 10 (WINDOWS, MSVC) and a native game check through the Infinity launcher are pending"
+    ]
   },
   "compatibility": {
     "azimuthVersions": [
@@ -36,7 +38,7 @@
     {
       "id": "fh2-anna",
       "versions": [
-        "1.2.0-infinity.2"
+        "1.2.4-infinity.1"
       ]
     }
   ],

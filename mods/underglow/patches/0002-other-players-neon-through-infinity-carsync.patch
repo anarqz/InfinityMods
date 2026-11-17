@@ -199,11 +199,11 @@ index 0000000..50c2b8c
 +#endif
 +#endif
 diff --git a/src/neon_mod.cpp b/src/neon_mod.cpp
-index 61c0dd7..80e4583 100644
+index 27b196e..4df83bb 100644
 --- a/src/neon_mod.cpp
 +++ b/src/neon_mod.cpp
-@@ -51,6 +51,11 @@
- #include "neon_text.h"
+@@ -55,6 +55,11 @@
+ #pragma warning(pop)
  #include "ug_upgrade.h"
  #include "car_sizes.h"
 +#include "ug_remote.h"   // Infinity: the other players' neon (CR-L53)
@@ -214,7 +214,7 @@ index 61c0dd7..80e4583 100644
  
  #ifndef UNDERGLOW_VERSION
  #define UNDERGLOW_VERSION "0.0.0"
-@@ -847,12 +852,173 @@ bool set_car_style(int which, int color, int zone, int effect) {
+@@ -900,12 +905,173 @@ bool set_car_style(int which, int color, int zone, int effect) {
      return true;
  }
  
@@ -388,7 +388,7 @@ index 61c0dd7..80e4583 100644
  }
  
  struct PlayerLight {
-@@ -981,6 +1147,8 @@ void remember_player(const Resolved& r, uintptr_t beams) {
+@@ -1034,6 +1200,8 @@ void remember_player(const Resolved& r, uintptr_t beams) {
  std::atomic<bool> g_neon_build{false};   // the neon wants lights made (on the creating thread)
  SRWLOCK g_neon_lock = SRWLOCK_INIT;      // the neon is only touched by whoever holds it
  void neon_build(const Reference& ref);
@@ -397,7 +397,7 @@ index 61c0dd7..80e4583 100644
  
  // ---- CreateLight: remember each handle's key and index --------------------------------------------------------
  
-@@ -1009,6 +1177,17 @@ uint32_t* detour_create(void* mgr, uint32_t* handle, uint32_t key, uint32_t inde
+@@ -1062,6 +1230,17 @@ uint32_t* detour_create(void* mgr, uint32_t* handle, uint32_t key, uint32_t inde
          }
          ReleaseSRWLockExclusive(&g_neon_lock);
      }
@@ -415,7 +415,7 @@ index 61c0dd7..80e4583 100644
      return r;
  }
  
-@@ -2155,6 +2334,395 @@ void neon_frame(const Reference& ref) {
+@@ -2208,6 +2387,395 @@ void neon_frame(const Reference& ref) {
      g_neon.problem[0] = 0;
  }
  
@@ -811,7 +811,7 @@ index 61c0dd7..80e4583 100644
  void detour_set_int(void* mgr, uint32_t handle, float v) {
      g_orig_set_int(mgr, handle, v);
  
-@@ -2168,6 +2736,8 @@ void detour_set_int(void* mgr, uint32_t handle, float v) {
+@@ -2221,6 +2789,8 @@ void detour_set_int(void* mgr, uint32_t handle, float v) {
      bool player_light = false;
      for (int k = 0; mine && k < ref.lights; ++k) player_light |= ref.handle[k] == handle;
      if (player_light) neon_frame(ref);
@@ -820,7 +820,7 @@ index 61c0dd7..80e4583 100644
      ReleaseSRWLockExclusive(&g_neon_lock);
  }
  
-@@ -2217,6 +2787,7 @@ void upload(const Kind& k, UploadFn orig, void* system_p, void* graphics) {
+@@ -2270,6 +2840,7 @@ void upload(const Kind& k, UploadFn orig, void* system_p, void* graphics) {
      if (&k == &kBeam && TryAcquireSRWLockExclusive(&g_neon_lock)) {
          if (g_neon.lit && GetTickCount64() - g_neon.last_frame > 250 && g_neon.beams == system) neon_dark();
          else if (g_neon.lit && g_neon.beams == system) place_again();
@@ -828,7 +828,7 @@ index 61c0dd7..80e4583 100644
          ReleaseSRWLockExclusive(&g_neon_lock);
      }
  
-@@ -2274,6 +2845,22 @@ void cmd_status(char* reply, size_t size) {
+@@ -2327,6 +2898,22 @@ void cmd_status(char* reply, size_t size) {
               c.part[kZoneLeft] ? "left" : "", s.side, s.front, s.rear, s.height, s.front_inset, s.rear_inset, s.side_offset, s.side_trim, s.range, s.power, s.inner,
               s.outer, g_player_car_id.load(), ref.half_width, ref.db_width ? "from the game's data" : "from its lights",
               ref.front, ref.rear, ref.db_length ? "from the game's data" : "from its lights", n.count, n.lit ? "lit" : "dark", kit, radio, n.problem);
