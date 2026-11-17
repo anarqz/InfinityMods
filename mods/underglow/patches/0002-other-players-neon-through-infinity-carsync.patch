@@ -6,7 +6,8 @@ winmm.dll) exports InfinityCarSync_* (ABI version 1; CR-L53, OD-248). Underglow 
 only and registers as sync id 1. It hands the hook the local car's look (on/off, the lit parts, LED level,
 colors as RGB, effects, brightness, speed, the shape) as one 40-byte blob whenever it changes, and an "off"
 blob as soon as it registers (never nothing: the world forwards other players' blobs only to a hook that
-sends one). On the other players' cars (ForzaCar kind 2 or 5) that the hook matched, it shows their neon:
+sends one). It asks the hook about every car but the player's (the kind doesn't tell a player's car apart:
+2 or 5 in a hosted world, 3 in an official one); on the ones the hook matched to another player it shows their neon:
 the 8 nearest within 150 m, at most 32 lights each, from the one shared light manager (at most 256 extra
 beam presets). An audio effect on another player's car is a steady glow. Lights of a car that leaves,
 whose blob is gone or when the sync stops go dark and are reused. Without the hook, or with another
@@ -198,7 +199,7 @@ index 0000000..f39d731
 +#endif
 +#endif
 diff --git a/src/neon_mod.cpp b/src/neon_mod.cpp
-index 61c0dd7..7104af9 100644
+index 61c0dd7..80e4583 100644
 --- a/src/neon_mod.cpp
 +++ b/src/neon_mod.cpp
 @@ -51,6 +51,11 @@
@@ -213,7 +214,7 @@ index 61c0dd7..7104af9 100644
  
  #ifndef UNDERGLOW_VERSION
  #define UNDERGLOW_VERSION "0.0.0"
-@@ -847,12 +852,167 @@ bool set_car_style(int which, int color, int zone, int effect) {
+@@ -847,12 +852,173 @@ bool set_car_style(int which, int color, int zone, int effect) {
      return true;
  }
  
@@ -325,7 +326,7 @@ index 61c0dd7..7104af9 100644
 +    ReleaseSRWLockExclusive(&g_cs_game_lock);
 +}
 +
-+// The other players' cars (ForzaCar kind 2 or 5) the game updates, with the look the hook has for each: read by the
++// The other players' cars the game updates, with the look the hook has for each: read by the
 +// neon on the light thread.
 +struct RemoteCar {
 +    uintptr_t car = 0, pres = 0;
@@ -357,6 +358,10 @@ index 61c0dd7..7104af9 100644
 +    int at = -1, oldest = 0;
 +    for (int i = 0; i < kMaxRemoteCars && at < 0; ++i)
 +        if (g_rc[i].car == c) at = i;
++    if (at < 0 && !r.has) {   // traffic and AI (no blob, not listed): never take a place from a player's car
++        ReleaseSRWLockExclusive(&g_rc_lock);
++        return;
++    }
 +    for (int i = 0; i < kMaxRemoteCars && at < 0; ++i)
 +        if (g_rc[i].seen < g_rc[oldest].seen) oldest = i;
 +    g_rc[at >= 0 ? at : oldest] = r;
@@ -368,7 +373,9 @@ index 61c0dd7..7104af9 100644
 +    int kind = -1;
 +    if (!rd(c + kForzaCarKindOffset, &kind, 4)) return;
 +    if (kind == 0) cs_player_car();
-+    else if ((kind == 2 || kind == 5) && g_cs_on.load(std::memory_order_acquire)) cs_remote_car(c);
++    // Every other car is asked: its kind doesn't tell another player's car apart (2 or 5 in a player-hosted world, 3 in
++    // an official one); the hook answers only for the car it matched to another player.
++    else if (kind != 0 && g_cs_on.load(std::memory_order_acquire)) cs_remote_car(c);
 +}
 +
  void detour_car_update(void* car, float dt, float b, uint32_t flag) {
@@ -381,7 +388,7 @@ index 61c0dd7..7104af9 100644
  }
  
  struct PlayerLight {
-@@ -981,6 +1141,8 @@ void remember_player(const Resolved& r, uintptr_t beams) {
+@@ -981,6 +1147,8 @@ void remember_player(const Resolved& r, uintptr_t beams) {
  std::atomic<bool> g_neon_build{false};   // the neon wants lights made (on the creating thread)
  SRWLOCK g_neon_lock = SRWLOCK_INIT;      // the neon is only touched by whoever holds it
  void neon_build(const Reference& ref);
@@ -390,7 +397,7 @@ index 61c0dd7..7104af9 100644
  
  // ---- CreateLight: remember each handle's key and index --------------------------------------------------------
  
-@@ -1009,6 +1171,17 @@ uint32_t* detour_create(void* mgr, uint32_t* handle, uint32_t key, uint32_t inde
+@@ -1009,6 +1177,17 @@ uint32_t* detour_create(void* mgr, uint32_t* handle, uint32_t key, uint32_t inde
          }
          ReleaseSRWLockExclusive(&g_neon_lock);
      }
@@ -408,7 +415,7 @@ index 61c0dd7..7104af9 100644
      return r;
  }
  
-@@ -2155,6 +2328,395 @@ void neon_frame(const Reference& ref) {
+@@ -2155,6 +2334,395 @@ void neon_frame(const Reference& ref) {
      g_neon.problem[0] = 0;
  }
  
@@ -804,7 +811,7 @@ index 61c0dd7..7104af9 100644
  void detour_set_int(void* mgr, uint32_t handle, float v) {
      g_orig_set_int(mgr, handle, v);
  
-@@ -2168,6 +2730,8 @@ void detour_set_int(void* mgr, uint32_t handle, float v) {
+@@ -2168,6 +2736,8 @@ void detour_set_int(void* mgr, uint32_t handle, float v) {
      bool player_light = false;
      for (int k = 0; mine && k < ref.lights; ++k) player_light |= ref.handle[k] == handle;
      if (player_light) neon_frame(ref);
@@ -813,7 +820,7 @@ index 61c0dd7..7104af9 100644
      ReleaseSRWLockExclusive(&g_neon_lock);
  }
  
-@@ -2217,6 +2781,7 @@ void upload(const Kind& k, UploadFn orig, void* system_p, void* graphics) {
+@@ -2217,6 +2787,7 @@ void upload(const Kind& k, UploadFn orig, void* system_p, void* graphics) {
      if (&k == &kBeam && TryAcquireSRWLockExclusive(&g_neon_lock)) {
          if (g_neon.lit && GetTickCount64() - g_neon.last_frame > 250 && g_neon.beams == system) neon_dark();
          else if (g_neon.lit && g_neon.beams == system) place_again();
@@ -821,7 +828,7 @@ index 61c0dd7..7104af9 100644
          ReleaseSRWLockExclusive(&g_neon_lock);
      }
  
-@@ -2274,6 +2839,22 @@ void cmd_status(char* reply, size_t size) {
+@@ -2274,6 +2845,22 @@ void cmd_status(char* reply, size_t size) {
               c.part[kZoneLeft] ? "left" : "", s.side, s.front, s.rear, s.height, s.front_inset, s.rear_inset, s.side_offset, s.side_trim, s.range, s.power, s.inner,
               s.outer, g_player_car_id.load(), ref.half_width, ref.db_width ? "from the game's data" : "from its lights",
               ref.front, ref.rear, ref.db_length ? "from the game's data" : "from its lights", n.count, n.lit ? "lit" : "dark", kit, radio, n.problem);
