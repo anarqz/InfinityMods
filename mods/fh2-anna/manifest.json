@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "fh2-anna",
-  "version": "1.2.0-infinity.2",
+  "version": "1.2.4-infinity.1",
   "kind": "mod",
   "name": {
     "en": "FH2 ANNA",
@@ -16,8 +16,10 @@
   },
   "runtime": "standalone",
   "review": {
-    "status": "reviewed",
-    "blockers": []
+    "status": "draft",
+    "blockers": [
+      "the adapter build for FH2 Mod Platform API 10 (WINDOWS, MSVC) and a native game check through the Infinity launcher are pending"
+    ]
   },
   "compatibility": {
     "azimuthVersions": [
@@ -40,8 +42,8 @@
       {
         "source": "fh2-mods/FH2ANNA.dll",
         "destination": "mods/Forza Horizon 2/fh2-anna/fh2-mods/FH2ANNA.dll",
-        "sha256": "da7032e35f3444fc77dc80b744f22418cb6fcffafd02617f7f597ce241cab02d",
-        "bytes": 1189376,
+        "sha256": "7b4d1f2eb38e7bd8aa13df355cdfba0338371e3faf281ae122dc7bc865630a5d",
+        "bytes": 1200640,
         "role": "binary",
         "mode": "add-or-replace",
         "package": "upstream-assets"
@@ -288,9 +290,9 @@
   },
   "additionalPackages": {
     "upstream-assets": {
-      "url": "https://github.com/qiangqiang101/FH2-ANNA/releases/download/1.2.0/FH2ANNA-1.2.0.zip",
-      "sha256": "b339186683f1b4f7949ec0ffce88e4ed00729c885085419105fa608c979554e8",
-      "bytes": 1341846,
+      "url": "https://github.com/qiangqiang101/FH2-ANNA/releases/download/1.2.4/FH2ANNA-1.2.4.zip",
+      "sha256": "959b5caad7185a93a5216a7bdd1aa08e95d925d7c47060d44932f18b60d4a9ad",
+      "bytes": 2209500,
       "format": "zip"
     }
   },

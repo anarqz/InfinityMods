@@ -1,6 +1,6 @@
 {
   "id": "fh2-anna",
-  "version": "1.2.0-infinity.2",
+  "version": "1.2.4-infinity.1",
   "folder": "fh2-anna",
   "dll": "FH2ANNA.Infinity.dll",
   "adapter": "fh2-mod-platform-eo",
@@ -11,7 +11,7 @@
   "upstream": {
     "submodule": "upstream/anna",
     "repository": "https://github.com/qiangqiang101/FH2-ANNA",
-    "version": "1.2.0",
+    "version": "1.2.4",
     "sources": [
       "platform/third_party/minhook/src/hook.c",
       "platform/third_party/minhook/src/buffer.c",
