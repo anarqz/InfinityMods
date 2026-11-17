@@ -748,7 +748,7 @@
         "en": "Plays Spotify on the game's own Xbox Music station, in the car, at car meets and from the festival speakers, with the song on the radio HUD. Needs Spotify Premium: in Spotify, pick the speaker \"Forza Horizon Radio\". The first start opens Spotify's sign-in page in your browser. Left stick or F6 skips, F5 goes back, F7 pauses. By Bullet4fun, built from its source as an ExtraOptions mod. Only you hear it: it plays in every mode.",
         "pt-BR": "Toca o Spotify na própria estação Xbox Music do jogo, no carro, nos encontros de carros e nos alto-falantes do festival, com a música no HUD do rádio. Precisa do Spotify Premium: no Spotify, escolha o alto-falante \"Forza Horizon Radio\". Na primeira vez, a página de login do Spotify abre no navegador. Analógico esquerdo ou F6 pula, F5 volta, F7 pausa. De Bullet4fun, compilado a partir do código-fonte como mod do ExtraOptions. Só você ouve: funciona em todos os modos."
       },
-      "author": "Bullet4fun; Infinity build by anarqz",
+      "author": "Bullet4fun",
       "path": "spotifyradio.json",
       "sha256": "3728a739dad49a05399e3e6160ee4bb042a6492c35a677e7811bf55168b3e3c9",
       "bytes": 4811
@@ -764,7 +764,7 @@
         "en": "Extra cameras by Deuquan: drone and free cam (O), walk mode (P), follow drone (T), passenger (M), driver seat (H), 360 (X), roof, dashcam, dashboard and front chase cams (1-4), cinema mode and an enhanced chase cam; LB cycles them on a controller. Built from its source. Keys are fixed to the defaults. A free camera shows more of a race than the game's own, so it plays in Noob only.",
         "pt-BR": "Câmeras extras de Deuquan: drone e câmera livre (O), modo a pé (P), drone que segue o carro (T), passageiro (M), banco do motorista (H), 360 (X), câmeras de teto, painel, retrovisor e perseguição frontal (1-4), modo cinema e uma câmera de perseguição aprimorada; no controle, LB alterna entre elas. Compilado a partir do código-fonte. As teclas são as padrão. Uma câmera livre mostra mais de uma corrida do que as do próprio jogo, então funciona só no Noob."
       },
-      "author": "Deuquan; Infinity build by anarqz",
+      "author": "Deuquan",
       "path": "camera-mods.json",
       "sha256": "2634ec99a5adfa075d007f7b99f001dd554b690c3ea602fe12734bc2b695839c",
       "bytes": 2830
