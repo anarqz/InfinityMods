@@ -102,6 +102,14 @@ packages: the manifest downloads them from the original author's release and che
 
 ## Release
 
+Before every push, no commit message may name an assistant conversation or session (no
+`Claude-Session:` line, no claude.ai link, no session id). Install the guard once per clone:
+
+```sh
+git config core.hooksPath tools/hooks          # pre-push runs the check below on the new commits
+python3 -I tools/infmods.py messages           # by hand: origin/main..HEAD (or any rev-list arguments)
+```
+
 One GitHub release per drop, one ZIP per mod (`<id>-<version>.zip`, deterministic).
 
 ```sh

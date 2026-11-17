@@ -1,0 +1,15 @@
+#!/bin/sh
+# Refuse a push whose new commits name an assistant session or conversation in their messages.
+# Install once per clone: git config core.hooksPath tools/hooks
+root=$(git rev-parse --show-toplevel) || exit 1
+zero=0000000000000000000000000000000000000000
+status=0
+while read -r local_ref local_sha remote_ref remote_sha; do
+    [ "$local_sha" = "$zero" ] && continue
+    if [ "$remote_sha" = "$zero" ]; then
+        python3 -I "$root/tools/infmods.py" messages -- "$local_sha" --not --remotes || status=1
+    else
+        python3 -I "$root/tools/infmods.py" messages "$remote_sha..$local_sha" || status=1
+    fi
+done
+exit $status

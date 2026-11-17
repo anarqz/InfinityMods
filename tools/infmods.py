@@ -1214,6 +1214,24 @@ def pe_report_bytes(data):
         return pe_report(path)
 
 
+# No commit message that leaves this repository may name an assistant conversation or session:
+# no `Claude-Session:` line, claude.ai conversation, session or share link, or `session_<id>`.
+SESSION_PATTERN = re.compile(
+    r"Claude-Session:|claude\.ai/(?:code|chat|share|project)s?/|\bsession_[A-Za-z0-9]{16,}", re.I)
+
+
+def messages(revs):
+    """Fail when a commit in `revs` (git rev-list arguments) names an assistant session."""
+    log = subprocess.run(["git", "-C", str(ROOT), "log", "--format=%H%x00%B%x01", *revs],
+                         check=True, capture_output=True, text=True).stdout
+    bad = [sha for sha, _, body in (e.strip().partition("\0") for e in log.split("\x01"))
+           if sha and SESSION_PATTERN.search(body)]
+    for sha in bad:
+        print(f"messages: commit {sha[:8]} names an assistant session or conversation; reword it before pushing")
+    print(f"messages: {len(bad)} problem(s)")
+    return 1 if bad else 0
+
+
 def main():
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -1230,6 +1248,8 @@ def main():
     r.add_argument("--catalog", type=Path, default=CATALOG_DIR / INDEX_NAME, help="the current catalog: catalog/index.json, or a v2 file (read only)")
     r.add_argument("--out", type=Path, default=ROOT / "dist")
     r.add_argument("--allow-dirty", action="store_true", help="development only: the commit pinned is HEAD, not the tree")
+    m = sub.add_parser("messages", help="refuse commit messages that name an assistant session (before every push)")
+    m.add_argument("revs", nargs="*", default=["origin/main..HEAD"], help="git rev-list arguments (default: origin/main..HEAD)")
     c = sub.add_parser("check")
     c.add_argument("--catalog", type=Path, default=CATALOG_DIR / INDEX_NAME)
     g = sub.add_parser("catalog", help="re-pin catalog/index.json after editing catalog/")
@@ -1250,6 +1270,8 @@ def main():
     s.add_argument("--url", help="where --zip was downloaded from (the URL the manifest pins)")
     s.add_argument("--write", action="store_true")
     args = parser.parse_args()
+    if args.cmd == "messages":
+        return messages(args.revs)
     if args.cmd == "check":
         return check(args.catalog)
     if args.cmd == "catalog":
