@@ -14,10 +14,8 @@
     "homepage": "https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions",
     "runtime": "standalone",
     "review": {
-      "status": "pending",
-      "blockers": [
-        "native check of the author's Extra Options 0.6.1 files (SAURON, Proton)"
-      ]
+      "status": "reviewed",
+      "blockers": []
     },
     "compatibility": {
       "azimuthVersions": [

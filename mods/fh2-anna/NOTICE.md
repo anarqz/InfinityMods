@@ -1,4 +1,4 @@
-# FH2 ANNA · Infinity: attribution and scope
+# FH2 ANNA: attribution and scope
 
 FH2 ANNA: qiangqiang101 (Bartholomew Ho), https://github.com/qiangqiang101/FH2-ANNA, MIT (LICENSE.txt, from the
 original release). FH2 Mod Platform header: Trinculo54, https://github.com/Trinculo54/fh2-mod-platform, MIT

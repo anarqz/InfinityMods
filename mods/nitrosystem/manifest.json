@@ -4,10 +4,10 @@
   "version": "2.0.0-infinity.3",
   "kind": "mod",
   "name": {
-    "en": "Nitro System · Infinity",
-    "pt-BR": "Sistema de Nitro · Infinity"
+    "en": "Nitro System",
+    "pt-BR": "Sistema de Nitro"
   },
-  "author": "qiangqiang101; Infinity edition by anarqz",
+  "author": "qiangqiang101",
   "license": "MIT",
   "homepage": "https://github.com/anarqz/InfinityMods",
   "description": {

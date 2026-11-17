@@ -1,4 +1,4 @@
-# Nitro System · Infinity: attribution and scope
+# Nitro System: attribution and scope
 
 NitroSystem: qiangqiang101 (Bartholomew Ho), https://github.com/qiangqiang101/FH2-NitroSystem, MIT (LICENSE.txt,
 from the original release). FH2 Mod Platform header: Trinculo54, https://github.com/Trinculo54/fh2-mod-platform, MIT

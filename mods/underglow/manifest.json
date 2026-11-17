@@ -4,10 +4,10 @@
   "version": "1.1.0-infinity.4",
   "kind": "mod",
   "name": {
-    "en": "Underglow · Infinity",
-    "pt-BR": "Neon · Infinity"
+    "en": "Underglow",
+    "pt-BR": "Neon"
   },
-  "author": "qiangqiang101; Infinity edition by anarqz",
+  "author": "qiangqiang101",
   "license": "MIT",
   "homepage": "https://github.com/anarqz/InfinityMods",
   "description": {

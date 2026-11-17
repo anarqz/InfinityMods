@@ -1,4 +1,4 @@
-# Underglow · Infinity: attribution and scope
+# Underglow: attribution and scope
 
 Underglow: qiangqiang101 (Bartholomew Ho), https://github.com/qiangqiang101/FH2-Underglow, MIT (LICENSE.txt, the
 original repository's licence). FH2 Mod Platform header: Trinculo54, https://github.com/Trinculo54/fh2-mod-platform, MIT
