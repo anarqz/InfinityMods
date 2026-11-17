@@ -1,11 +1,11 @@
 {
   "schemaVersion": 3,
   "id": "underglow",
-  "version": "1.1.0-infinity.4",
+  "version": "1.1.0-infinity.5",
   "download": {
-    "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.11.12/underglow-1.1.0-infinity.4.zip",
-    "sha256": "75d197b93ada9cdb3f71a93ee99be36965ce37d07174a573aadd258134ac9105",
-    "bytes": 894705
+    "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.11.17/underglow-1.1.0-infinity.5.zip",
+    "sha256": "d5125924b99fd0572c78c51d3910b22b72a5fd37f949314817d9ab5fd5a17e10",
+    "bytes": 908394
   },
   "install": {
     "schemaVersion": 1,
@@ -41,8 +41,8 @@
           "destination": "mods/Forza Horizon 2/underglow/fh2-mods/Underglow.dll",
           "role": "binary",
           "mode": "add-or-replace",
-          "sha256": "bb3f0cc51915d595d75a4dc7b4af100f97224441e3fe44ee13f59ceecadc90b2",
-          "bytes": 1697792
+          "sha256": "8268b6f4a5635cfc8a5267acbeb9fbb7ceb4d9bfc6dd53abf4f5e9a97e3c0cbb",
+          "bytes": 1740800
         },
         {
           "source": "LICENSE.txt",
@@ -57,7 +57,7 @@
           "destination": "mods/Forza Horizon 2/underglow/plugins/Underglow.Infinity.dll",
           "role": "binary",
           "mode": "add-or-replace",
-          "sha256": "db7690db0c3a711e3ad72376ac253fe0cf6db9b67f189e0cc1f50997ea0d472c",
+          "sha256": "d9dcd7d5f465dbf2b8c23f865a6392582044cef7e288dd6786fa5162f94fedf2",
           "bytes": 173056
         },
         {
@@ -65,7 +65,7 @@
           "destination": "mods/Forza Horizon 2/underglow/mod.json",
           "role": "asset",
           "mode": "add-or-replace",
-          "sha256": "19c72ccf291c575d18e7d46d1fefc3e66f3c12b4529240b22ac0b2927a19e563",
+          "sha256": "157d127164c983a88cc9989709ee06a98c2a8e2aba67d7b3d70038ea30f1855e",
           "bytes": 213
         },
         {
@@ -89,8 +89,8 @@
           "destination": "mods/Forza Horizon 2/underglow/NOTICE.md",
           "role": "license",
           "mode": "add-or-replace",
-          "sha256": "f1810c91305068e59d815c5232333dc0093579749d9a7d6cf4ee7c0e2807895e",
-          "bytes": 2918
+          "sha256": "d673b71b5a7fac8ff3ce161391ac21cb464a2e2d01b6ad6c43348ae3707c4390",
+          "bytes": 3648
         },
         {
           "source": "LICENSE-Infinity.txt",
@@ -2498,7 +2498,7 @@
     "databaseMigrations": [],
     "source": {
       "repository": "https://github.com/anarqz/InfinityMods",
-      "commit": "a1a819f7a7607eb09a764fb41924295baef1754a"
+      "commit": "b06015fcea4218e0787db039c489c5bb45622198"
     },
     "multiplayer": {
       "schemaVersion": 1,

@@ -771,18 +771,18 @@
     },
     {
       "id": "underglow",
-      "version": "1.1.0-infinity.4",
+      "version": "1.1.0-infinity.5",
       "name": {
         "en": "Underglow",
         "pt-BR": "Neon"
       },
       "description": {
-        "en": "qiangqiang101's Underglow: neon under your car made of the game's own lights, so it lights up the road, with 61 effects (15 follow the car radio), 28 colors and each part on its own. Buy an Underglow Kit per car in the garage (Upgrades > Aero and Appearance); its colors, effects and parts are in FH2 ANNA (Car > Lights and Car > Underglow), which it needs. Built here from the author's source with one patch, so it coexists with the Infinity hook (which also hooks the car update), and loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter.",
-        "pt-BR": "O Underglow de qiangqiang101: neon embaixo do carro feito com as próprias luzes do jogo, que ilumina a pista, com 61 efeitos (15 seguem o rádio do carro), 28 cores e cada parte independente. Compre um Kit de Neon por carro na garagem (Melhorias > Aerodinâmica e aparência); as cores, os efeitos e as partes ficam na FH2 ANNA (Carro > Luzes e Carro > Neon), que ele exige. Compilado aqui a partir do código do autor com um patch, para conviver com o hook do Infinity (que também intercepta a atualização do carro), e carregado pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform."
+        "en": "qiangqiang101's Underglow: neon under your car made of the game's own lights, so it lights up the road, with 61 effects (15 follow the car radio), 28 colors and each part on its own. Buy an Underglow Kit per car in the garage (Upgrades > Aero and Appearance); its colors, effects and parts are in FH2 ANNA (Car > Lights and Car > Underglow), which it needs. With the Infinity launcher 3.2.0's hook, other players' neon shows on their cars when both of you have Underglow; without it, it works as before. Built here from the author's source with patches, so it coexists with the Infinity hook (which also hooks the car update), and loaded by ExtraOptions (built into Infinity) through an FH2 Mod Platform adapter.",
+        "pt-BR": "O Underglow de qiangqiang101: neon embaixo do carro feito com as próprias luzes do jogo, que ilumina a pista, com 61 efeitos (15 seguem o rádio do carro), 28 cores e cada parte independente. Compre um Kit de Neon por carro na garagem (Melhorias > Aerodinâmica e aparência); as cores, os efeitos e as partes ficam na FH2 ANNA (Carro > Luzes e Carro > Neon), que ele exige. Com o hook do launcher 3.2.0, o neon dos outros jogadores aparece nos carros deles quando vocês dois têm o Neon; sem ele, funciona como antes. Compilado aqui a partir do código do autor com patches, para conviver com o hook do Infinity (que também intercepta a atualização do carro), e carregado pelo ExtraOptions (embutido no Infinity) por um adaptador da FH2 Mod Platform."
       },
       "author": "qiangqiang101",
       "path": "underglow.json",
-      "sha256": "3e57ce434b6f2897a80e6b54cc6f7cf1346bc5357c085f637308da95d856c94e",
+      "sha256": "505df90391f3f122e1862d4aa93fa9fa9be99c1e3b3820b3dd03ebeadcebb07b",
       "bytes": 66874
     },
     {
