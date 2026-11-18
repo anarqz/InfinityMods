@@ -11,31 +11,74 @@ Supported: FH2 on Azimuth 1.0.4 (`forza_durango_release_final.exe` sha256 `3ec04
 
 ## For players
 
-### Install and set up
+### Quick start (5 minutes)
 
-Install EasyRadio from the Infinity launcher's Mods page, then open its settings:
+1. **Install EasyRadio** from the Infinity launcher: **Mods** page → **EasyRadio** → **Install**.
+2. **Make a music folder** next to `azimuth.exe` (the Azimuth folder you chose in the launcher):
 
-| Setting | Values | |
+   ```text
+   <Azimuth>\
+     azimuth.exe
+     EasyRadio\           create this folder
+       music1\            and this one inside it
+         My Song.mp3
+         Another Song.mp3
+         logo.png         optional: your station's logo
+   ```
+
+   Not inside `mods\`: the music folder sits beside `mods\`, so updating or uninstalling the mod never deletes your
+   songs.
+3. **Pick the station:** on the Mods page, open EasyRadio's **Options** and set, for example, **Horizon Pulse** to
+   `music1`. Leave the other stations on `stock` to keep their own songs.
+4. **Start the game** and tune to that station. Your songs play in a new random order at every start, with their
+   titles and artists on the radio HUD and your logo as the station icon.
+5. **Skip a song:** press **F6**, or quickly tap the **left stick** (a short tap, under half a second). About a
+   second and a half later the next song starts.
+
+Changes (new songs, a new logo, other settings) apply the next time the game starts.
+
+### More stations
+
+You have eight folders to use: `music1` … `music8`. Each station can play any of them, and two stations can share
+one. For example: Horizon Pulse → `music1` (your pop), Bass Arena → `music2` (your drum and bass). A folder a
+station names but that does not exist yet is created, empty, at the next game start, so you can also set the
+station first and fill the folder afterwards.
+
+### Your songs
+
+- **MP3 files only**, directly in the folder (subfolders are not read). Files shorter than 10 seconds are skipped.
+- **Title and artist** come from the file's tags (ID3, as music players and taggers write them). A file without
+  tags uses its name, written as `Artist - Title.mp3`.
+- The game's radio font has only Latin letters: accents are removed (`Beyoncé` shows as `Beyonce`) and other
+  scripts (Japanese, Cyrillic, ...) are left out of the HUD text. The song still plays.
+- Video leftovers such as `(Official Music Video)` are cleaned from titles; `feat.` shows as `ft.`.
+- Long songs play to the end. Up to 4000 songs per station. The first start after adding many songs takes a moment
+  longer while EasyRadio reads them; later starts use a cache.
+
+### Your logo
+
+Put `logo.png` (or `logo.jpg`, `logo.bmp`) in the music folder. Any size works: it is fitted into the station icon,
+which is about twice as wide as it is tall (196 × 96), so a wide image looks best. Transparent PNGs work. Without a
+logo the station keeps its own icon. The station's name stays the same (the game ties unlocks to it).
+
+### Settings
+
+| Setting | Values | What it does |
 |---|---|---|
 | Horizon Pulse, Bass Arena, Horizon XS, Radio Levante, Hospital Records, Ninja Tune, Innovative Leisure | `stock`, `music1` … `music8` | `stock` keeps the station's own songs; `musicN` plays `<Azimuth>\EasyRadio\musicN\` |
-| DJ and stingers | `keep`, `off` | the station's DJ lines and stingers between your songs, or songs back to back |
-| Skip key | `off`, `F1` … `F12` | default `F6`; ExtraOptions uses `F1`–`F4` |
-| Skip pad button | `off`, `A` `B` `X` `Y` `LB` `RB` `LS` `RS` `View` `Menu` `Up` `Down` `Left` `Right` | default `LS` (a left-stick click is also the horn) |
+| DJ and stingers | `keep`, `off` | `keep`: the station's DJ lines and jingles play between your songs. `off`: your songs back to back |
+| Skip key | `off`, `F1` … `F12` | default `F6` (works while the game window has the focus). Extra Options already uses `F1`–`F4` |
+| Skip pad button | `off`, `A` `B` `X` `Y` `LB` `RB` `LS` `RS` `View` `Menu` `Up` `Down` `Left` `Right` | default `LS`, a quick tap only. A left-stick click is also the horn |
 
-Then put the MP3s in the folders, next to `azimuth.exe`:
+If you also use **Spotify Radio**, it uses `F6` and the left stick too: give EasyRadio other buttons.
 
-```text
-<Azimuth>\EasyRadio\
-  music1\*.mp3        the songs of the station(s) set to music1
-  music1\logo.png     optional: the station's HUD icon (any size, fitted into 196x96; transparency works; .jpg or .bmp too)
-  music2\...
-```
+### Questions
 
-A folder that a station names but that does not exist yet is created, empty, at the next game start. Changes apply
-at the next game start.
-
-Your music stays outside the mod's own folder (`<Azimuth>\mods\Forza Horizon 2\easyradio\`), so updating,
-disabling, uninstalling or reinstalling the mod never touches it; uninstalling keeps `easyradio.ini` too.
+- **The station still plays its own songs.** Check that the station is set to a folder (not `stock`), that the folder
+  is `<Azimuth>\EasyRadio\musicN\` and holds `.mp3` files, and that you restarted the game. Then read the log below.
+- **The icon did not change.** The folder has no `logo.png` / `logo.jpg` / `logo.bmp`.
+- **A song is missing.** It is not an MP3, is shorter than 10 seconds, or could not be read: the log names it.
+- **Online / Hardcore?** EasyRadio is allowed in every mode: only you hear your radio.
 
 ### By hand
 
@@ -57,26 +100,16 @@ The launcher's settings page only offers `stock` and `music1`–`music8`: a stat
 "needs attention" there, and the launcher's "Repair settings" would set it back to `stock`.
 
 Station ids: `horizon` (or `pulse`, Horizon Pulse), `bass` (Bass Arena), `xs` (Horizon XS), `levante` (Radio
-Levante), `hospital` (Hospital Records), `ninjatune` (Ninja Tune), `innovative` (Innovative Leisure). The station keeps
-its name: the game keys unlocks and icons by it.
+Levante), `hospital` (Hospital Records), `ninjatune` (Ninja Tune), `innovative` (Innovative Leisure).
 
-- **Songs:** every `.mp3` in the folder (not in subfolders). Title and artist come from the ID3 tags (v2.2/2.3/2.4,
-  or v1); without a title tag, from a file name `Artist - Title`. The HUD font is Latin-only, so accents are removed
-  (`Beyoncé` → `Beyonce`), other scripts are dropped, video noise such as `(Official Music Video)` goes, `feat.`
-  becomes `ft.`, and titles are cut at 80 characters, artists at 40.
-- **Shuffle:** every game start plays the folder in a new random order.
-- **Skip:** the key (only while the game window has the focus) or a lone tap of the pad button skips to the next
-  song about 1.5 s later, with the station's stinger or DJ line as at a natural end. Spotify Radio also skips on
-  `F6` and the left stick: with both installed, give EasyRadio other buttons.
-- The first start after adding many songs reads them all; later starts use a cache.
+### The log
 
-### When something is wrong
-
-Open `mods\Forza Horizon 2\easyradio\EasyRadio.log` (written at every start):
+`mods\Forza Horizon 2\easyradio\EasyRadio.log` is written at every game start:
 
 - `ready: hooks installed; N songs` and, a few seconds later, `RadioSystem::Load (language XX) ... reads the
   generated RadioInfo` mean it works.
-- `SKIP <file>: <reason>`: that file is left out (not an MP3, shorter than 10 s, unreadable). The rest plays.
+- `pulse: HUD icon made from ...logo.png`: your logo is in use.
+- `SKIP <file>: <reason>`: that file is left out. The rest plays.
 - `WARN: easyradio.ini line N: ...`: that line is ignored.
 - `WARN: <station>: the folder ... did not exist; created it empty`: put MP3s in it.
 - `FAIL: ... the radio stays stock`: nothing usable (every station `stock`, no playable song, or the game's files
@@ -87,10 +120,9 @@ A broken file never stops the game; with nothing valid the radio simply stays as
 
 ### Limits
 
-- One exact game build (Azimuth 1.0.4's FH2). Another build: the code checks refuse, the radio stays stock.
-- MP3 only. Folders are not recursive. Up to 4000 songs per station.
+- One exact game build (Azimuth 1.0.4's FH2). On another build the code checks refuse and the radio stays stock.
+- MP3 only; folders are not recursive; up to 4000 songs per station.
 - Another mod that replaces `RadioInfo_*.xml` or the radio icons through its `media` folder wins over EasyRadio.
-- The HUD shows no station-name text; the name stays the station's.
 
 ## For maintainers
 
