@@ -800,6 +800,22 @@
       "path": "fh2-anna.json",
       "sha256": "bcf81fd8ecfeafb570739f8f1ab34d5303c985c6872f0bdf7b469c0de8f7eeab",
       "bytes": 10959
+    },
+    {
+      "id": "easyradio",
+      "version": "1.1.0-infinity.1",
+      "name": {
+        "en": "EasyRadio",
+        "pt-BR": "EasyRadio"
+      },
+      "description": {
+        "en": "Your own music on the game's radio stations. Pick in Settings which station plays which folder (music1 to music8 in the EasyRadio folder next to azimuth.exe) and put your MP3s there: the station shows each song's title and artist on the HUD, your logo.png as its icon, shuffles at every start, and F6 or a left-stick tap skips a song. Your music stays when the mod is updated or removed. By anarqz (Infinity). Only you hear it: it plays in every mode.",
+        "pt-BR": "Suas próprias músicas nas estações de rádio do jogo. Escolha nas Configurações qual estação toca qual pasta (music1 a music8 na pasta EasyRadio, ao lado do azimuth.exe) e coloque seus MP3 nela: a estação mostra o título e o artista de cada música no HUD, o seu logo.png como ícone, embaralha a cada início, e F6 ou um toque no analógico esquerdo pula a música. Suas músicas ficam quando o mod é atualizado ou removido. De anarqz (Infinity). Só você ouve: funciona em todos os modos."
+      },
+      "author": "anarqz",
+      "path": "easyradio.json",
+      "sha256": "0cf180b286c3b6e6179f0b7ffda7915b893ad30773ff6f060697e558c46d590e",
+      "bytes": 31047
     }
   ]
 }
