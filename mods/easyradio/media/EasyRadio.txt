@@ -1,0 +1,1 @@
+EasyRadio keeps this folder so Extra Options mounts the mod's media; the generated files live in plugins/generated.

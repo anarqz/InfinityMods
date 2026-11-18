@@ -31,6 +31,7 @@ assets before; if the ZIP changes, installs refuse it until `tools/infmods.py pi
 | [Weather Control](mods/extraoptions-weathercontrol) | [Extra Options](https://github.com/RokkuDayo/ForzaHorizon2_ExtraOptions) 0.6.1 (the author's release files, 1.1.0) | none (an ExtraOptions plugin) | GPL-3.0 | Noob |
 | [Spotify Radio](mods/spotifyradio) | [Bullet4fun/FH_ModsCollection](https://github.com/Bullet4fun/FH_ModsCollection) `spotify-radio` (an Azimuth Mod Loader mod) | none: a fork whose `INFINITY_EO` build is an ExtraOptions plugin (`upstream/fh-mods-collection/infinity/README.md`) | GPL-3.0-or-later | both |
 | [Camera Mods](mods/camera-mods) | [Deuquan/FH2-CameraMods](https://github.com/Deuquan/FH2-CameraMods) `plugin/` | none (an ExtraOptions plugin) | GPL-3.0 | Noob |
+| [EasyRadio](mods/easyradio) | Infinity's own mod (anarqz), source in [`mods/easyradio`](mods/easyradio) | none (an ExtraOptions plugin) | GPL-3.0-or-later | both |
 
 Install them from the Infinity launcher's Mods page. They do not need the loaders they were
 written for (FH2_ModLoader, FH2 Mod Platform), nor a separate ExtraOptions; do not install both.
@@ -45,6 +46,7 @@ mods/<id>/mod.json        build recipe: which upstream sources, which adapter (n
 mods/<id>/manifest.json   Infinity manifest (runtime standalone, files under mods/<game folder>/<id>/); the release fills hashes and the commit
 mods/<id>/extraoptions/   the package's own ExtraOptions mod.json (format_version 1; same id and version), database.json if any
 mods/<id>/LICENSE, NOTICE.md   the original licence and the attribution shipped in the package
+mods/easyradio/src, tests/  EasyRadio's own source and host tests (Infinity's own mod: recipe `source` instead of `upstream`)
 catalog/index.json        the official mod catalog (schema 3): each mod's card (id, version, name, description, author) and its detail file's pin
 catalog/<id>.json         the rest of that mod's catalog entry (downloads, install); what you edit
 schemas/                  JSON Schema of catalog/ (catalog-v3.schema.json) and of a schema-2 custom catalog (catalog.schema.json)
@@ -93,6 +95,8 @@ python3 -I tools/infmods.py build  nitrosystem                      # Windows (M
 python3 -I tools/infmods.py verify nitrosystem                      # Windows (MSVC)
 python3 -I tools/infmods.py verify underglow                        # Windows (MSVC)
 python3 -I mods/underglow/tests/run_tests.py --zig /path/to/zig     # any OS: Underglow's host tests (its patches' pure logic)
+python3 -I tools/infmods.py verify easyradio --zig /path/to/zig        # any OS: EasyRadio (Infinity's own mod, source in mods/easyradio)
+python3 -I mods/easyradio/tests/run_tests.py --zig /path/to/zig     # Linux/macOS: EasyRadio's host tests (--exe: its code checks)
 python3 -I adapters/fh2-mod-platform-eo/tests/run_tests.py         # any OS: the adapter's translations (g++, clang++ or --cxx)
 python3 -I tools/infmods.py verify fh2-anna                         # Windows (MSVC)
 python3 -I tools/infmods.py sync   underglow                        # any OS: report a newer upstream release (--write to re-pin)

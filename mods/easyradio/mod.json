@@ -1,0 +1,52 @@
+{
+  "id": "easyradio",
+  "version": "1.1.0-infinity.1",
+  "folder": "easyradio",
+  "dll": "EasyRadio.dll",
+  "adapter": null,
+  "toolchain": "zig",
+  "source": {
+    "path": "mods/easyradio",
+    "version": "1.1.0: Infinity's own ExtraOptions plugin, source in this folder",
+    "sources": [
+      "src/easyradio.c",
+      "src/er_platform_win32.c",
+      "src/er_util.c",
+      "src/er_text.c",
+      "src/er_mp3.c",
+      "src/er_ini.c",
+      "src/er_xml.c",
+      "src/er_logo.c",
+      "src/er_gen.c"
+    ],
+    "includes": [
+      "src"
+    ],
+    "extraFlags": [
+      "-mno-stack-arg-probe"
+    ],
+    "importDefinitions": [
+      "src/kernel32.def",
+      "src/user32.def"
+    ]
+  },
+  "allowedImports": [
+    "KERNEL32.dll",
+    "USER32.dll"
+  ],
+  "package": {
+    "EasyRadio.dll": "$dll",
+    "mod.json": "mods/easyradio/extraoptions/mod.json",
+    "media/EasyRadio.txt": "mods/easyradio/media/EasyRadio.txt",
+    "easyradio.ini": "mods/easyradio/easyradio.ini",
+    "README.md": "mods/easyradio/README.md",
+    "LICENSE.txt": "mods/easyradio/LICENSE",
+    "NOTICE.md": "mods/easyradio/NOTICE.md"
+  },
+  "versionInfo": {
+    "description": "EasyRadio: your own music on Forza Horizon 2's radio (ExtraOptions mod)",
+    "company": "anarqz (Infinity)",
+    "product": "Infinity Mods",
+    "license": "GPL-3.0-or-later"
+  }
+}

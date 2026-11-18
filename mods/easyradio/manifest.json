@@ -1,0 +1,951 @@
+{
+  "schemaVersion": 1,
+  "id": "easyradio",
+  "version": "1.1.0-infinity.1",
+  "kind": "mod",
+  "name": {
+    "en": "EasyRadio",
+    "pt-BR": "EasyRadio"
+  },
+  "author": "anarqz",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://github.com/anarqz/InfinityMods/tree/main/mods/easyradio",
+  "description": {
+    "en": "Your own music on the game's radio stations. Pick in Settings which station plays which folder (music1 to music8 in the EasyRadio folder next to azimuth.exe) and put your MP3s there: the station shows each song's title and artist on the HUD, your logo.png as its icon, shuffles at every start, and F6 or a left-stick tap skips a song. Your music stays when the mod is updated or removed. By anarqz (Infinity). Only you hear it: it plays in every mode.",
+    "pt-BR": "Suas próprias músicas nas estações de rádio do jogo. Escolha nas Configurações qual estação toca qual pasta (music1 a music8 na pasta EasyRadio, ao lado do azimuth.exe) e coloque seus MP3 nela: a estação mostra o título e o artista de cada música no HUD, o seu logo.png como ícone, embaralha a cada início, e F6 ou um toque no analógico esquerdo pula a música. Suas músicas ficam quando o mod é atualizado ou removido. De anarqz (Infinity). Só você ouve: funciona em todos os modos."
+  },
+  "runtime": "standalone",
+  "review": {
+    "status": "reviewed",
+    "blockers": []
+  },
+  "compatibility": {
+    "azimuthVersions": [
+      "1.0.4"
+    ],
+    "gameBuilds": [],
+    "verification": "unverified"
+  },
+  "package": {
+    "url": "",
+    "sha256": "",
+    "bytes": 0,
+    "format": "zip"
+  },
+  "dependencies": [],
+  "conflicts": [],
+  "files": {
+    "game": [],
+    "azimuth": [
+      {
+        "source": "EasyRadio.dll",
+        "destination": "mods/Forza Horizon 2/easyradio/plugins/EasyRadio.dll",
+        "role": "binary",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "mod.json",
+        "destination": "mods/Forza Horizon 2/easyradio/mod.json",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "media/EasyRadio.txt",
+        "destination": "mods/Forza Horizon 2/easyradio/media/EasyRadio.txt",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "easyradio.ini",
+        "destination": "mods/Forza Horizon 2/easyradio/easyradio.ini",
+        "role": "config",
+        "mode": "seed"
+      },
+      {
+        "source": "README.md",
+        "destination": "mods/Forza Horizon 2/easyradio/README.md",
+        "role": "asset",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "LICENSE.txt",
+        "destination": "mods/Forza Horizon 2/easyradio/LICENSE.txt",
+        "role": "license",
+        "mode": "add-or-replace"
+      },
+      {
+        "source": "NOTICE.md",
+        "destination": "mods/Forza Horizon 2/easyradio/NOTICE.md",
+        "role": "license",
+        "mode": "add-or-replace"
+      }
+    ]
+  },
+  "config": {
+    "root": "azimuth",
+    "path": "mods/Forza Horizon 2/easyradio/easyradio.ini",
+    "format": "ini",
+    "create": "defaults",
+    "preserveOnDisable": true,
+    "options": [
+      {
+        "id": "horizon",
+        "section": "radios",
+        "key": "horizon",
+        "label": {
+          "en": "Horizon Pulse",
+          "pt-BR": "Horizon Pulse"
+        },
+        "description": {
+          "en": "What Horizon Pulse plays. Stock: the station's own songs. musicN: the MP3 files in the folder EasyRadio\\musicN next to azimuth.exe (created empty at the next game start if missing; a logo.png there becomes the station's icon). Several stations may share a folder. Applied on the next game launch.",
+          "pt-BR": "O que a Horizon Pulse toca. Original: as músicas da própria estação. musicN: os arquivos MP3 da pasta EasyRadio\\musicN, ao lado do azimuth.exe (criada vazia na próxima inicialização do jogo se não existir; um logo.png nela vira o ícone da estação). Várias estações podem usar a mesma pasta. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "enum",
+        "default": "stock",
+        "choices": [
+          {
+            "value": "stock",
+            "label": {
+              "en": "Stock (the station's own songs)",
+              "pt-BR": "Original (as músicas da própria estação)"
+            }
+          },
+          {
+            "value": "music1",
+            "label": {
+              "en": "My folder music1",
+              "pt-BR": "Minha pasta music1"
+            }
+          },
+          {
+            "value": "music2",
+            "label": {
+              "en": "My folder music2",
+              "pt-BR": "Minha pasta music2"
+            }
+          },
+          {
+            "value": "music3",
+            "label": {
+              "en": "My folder music3",
+              "pt-BR": "Minha pasta music3"
+            }
+          },
+          {
+            "value": "music4",
+            "label": {
+              "en": "My folder music4",
+              "pt-BR": "Minha pasta music4"
+            }
+          },
+          {
+            "value": "music5",
+            "label": {
+              "en": "My folder music5",
+              "pt-BR": "Minha pasta music5"
+            }
+          },
+          {
+            "value": "music6",
+            "label": {
+              "en": "My folder music6",
+              "pt-BR": "Minha pasta music6"
+            }
+          },
+          {
+            "value": "music7",
+            "label": {
+              "en": "My folder music7",
+              "pt-BR": "Minha pasta music7"
+            }
+          },
+          {
+            "value": "music8",
+            "label": {
+              "en": "My folder music8",
+              "pt-BR": "Minha pasta music8"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bass",
+        "section": "radios",
+        "key": "bass",
+        "label": {
+          "en": "Bass Arena",
+          "pt-BR": "Bass Arena"
+        },
+        "description": {
+          "en": "What Bass Arena plays. Stock: the station's own songs. musicN: the MP3 files in the folder EasyRadio\\musicN next to azimuth.exe (created empty at the next game start if missing; a logo.png there becomes the station's icon). Several stations may share a folder. Applied on the next game launch.",
+          "pt-BR": "O que a Bass Arena toca. Original: as músicas da própria estação. musicN: os arquivos MP3 da pasta EasyRadio\\musicN, ao lado do azimuth.exe (criada vazia na próxima inicialização do jogo se não existir; um logo.png nela vira o ícone da estação). Várias estações podem usar a mesma pasta. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "enum",
+        "default": "stock",
+        "choices": [
+          {
+            "value": "stock",
+            "label": {
+              "en": "Stock (the station's own songs)",
+              "pt-BR": "Original (as músicas da própria estação)"
+            }
+          },
+          {
+            "value": "music1",
+            "label": {
+              "en": "My folder music1",
+              "pt-BR": "Minha pasta music1"
+            }
+          },
+          {
+            "value": "music2",
+            "label": {
+              "en": "My folder music2",
+              "pt-BR": "Minha pasta music2"
+            }
+          },
+          {
+            "value": "music3",
+            "label": {
+              "en": "My folder music3",
+              "pt-BR": "Minha pasta music3"
+            }
+          },
+          {
+            "value": "music4",
+            "label": {
+              "en": "My folder music4",
+              "pt-BR": "Minha pasta music4"
+            }
+          },
+          {
+            "value": "music5",
+            "label": {
+              "en": "My folder music5",
+              "pt-BR": "Minha pasta music5"
+            }
+          },
+          {
+            "value": "music6",
+            "label": {
+              "en": "My folder music6",
+              "pt-BR": "Minha pasta music6"
+            }
+          },
+          {
+            "value": "music7",
+            "label": {
+              "en": "My folder music7",
+              "pt-BR": "Minha pasta music7"
+            }
+          },
+          {
+            "value": "music8",
+            "label": {
+              "en": "My folder music8",
+              "pt-BR": "Minha pasta music8"
+            }
+          }
+        ]
+      },
+      {
+        "id": "xs",
+        "section": "radios",
+        "key": "xs",
+        "label": {
+          "en": "Horizon XS",
+          "pt-BR": "Horizon XS"
+        },
+        "description": {
+          "en": "What Horizon XS plays. Stock: the station's own songs. musicN: the MP3 files in the folder EasyRadio\\musicN next to azimuth.exe (created empty at the next game start if missing; a logo.png there becomes the station's icon). Several stations may share a folder. Applied on the next game launch.",
+          "pt-BR": "O que a Horizon XS toca. Original: as músicas da própria estação. musicN: os arquivos MP3 da pasta EasyRadio\\musicN, ao lado do azimuth.exe (criada vazia na próxima inicialização do jogo se não existir; um logo.png nela vira o ícone da estação). Várias estações podem usar a mesma pasta. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "enum",
+        "default": "stock",
+        "choices": [
+          {
+            "value": "stock",
+            "label": {
+              "en": "Stock (the station's own songs)",
+              "pt-BR": "Original (as músicas da própria estação)"
+            }
+          },
+          {
+            "value": "music1",
+            "label": {
+              "en": "My folder music1",
+              "pt-BR": "Minha pasta music1"
+            }
+          },
+          {
+            "value": "music2",
+            "label": {
+              "en": "My folder music2",
+              "pt-BR": "Minha pasta music2"
+            }
+          },
+          {
+            "value": "music3",
+            "label": {
+              "en": "My folder music3",
+              "pt-BR": "Minha pasta music3"
+            }
+          },
+          {
+            "value": "music4",
+            "label": {
+              "en": "My folder music4",
+              "pt-BR": "Minha pasta music4"
+            }
+          },
+          {
+            "value": "music5",
+            "label": {
+              "en": "My folder music5",
+              "pt-BR": "Minha pasta music5"
+            }
+          },
+          {
+            "value": "music6",
+            "label": {
+              "en": "My folder music6",
+              "pt-BR": "Minha pasta music6"
+            }
+          },
+          {
+            "value": "music7",
+            "label": {
+              "en": "My folder music7",
+              "pt-BR": "Minha pasta music7"
+            }
+          },
+          {
+            "value": "music8",
+            "label": {
+              "en": "My folder music8",
+              "pt-BR": "Minha pasta music8"
+            }
+          }
+        ]
+      },
+      {
+        "id": "levante",
+        "section": "radios",
+        "key": "levante",
+        "label": {
+          "en": "Radio Levante",
+          "pt-BR": "Radio Levante"
+        },
+        "description": {
+          "en": "What Radio Levante plays. Stock: the station's own songs. musicN: the MP3 files in the folder EasyRadio\\musicN next to azimuth.exe (created empty at the next game start if missing; a logo.png there becomes the station's icon). Several stations may share a folder. Applied on the next game launch.",
+          "pt-BR": "O que a Radio Levante toca. Original: as músicas da própria estação. musicN: os arquivos MP3 da pasta EasyRadio\\musicN, ao lado do azimuth.exe (criada vazia na próxima inicialização do jogo se não existir; um logo.png nela vira o ícone da estação). Várias estações podem usar a mesma pasta. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "enum",
+        "default": "stock",
+        "choices": [
+          {
+            "value": "stock",
+            "label": {
+              "en": "Stock (the station's own songs)",
+              "pt-BR": "Original (as músicas da própria estação)"
+            }
+          },
+          {
+            "value": "music1",
+            "label": {
+              "en": "My folder music1",
+              "pt-BR": "Minha pasta music1"
+            }
+          },
+          {
+            "value": "music2",
+            "label": {
+              "en": "My folder music2",
+              "pt-BR": "Minha pasta music2"
+            }
+          },
+          {
+            "value": "music3",
+            "label": {
+              "en": "My folder music3",
+              "pt-BR": "Minha pasta music3"
+            }
+          },
+          {
+            "value": "music4",
+            "label": {
+              "en": "My folder music4",
+              "pt-BR": "Minha pasta music4"
+            }
+          },
+          {
+            "value": "music5",
+            "label": {
+              "en": "My folder music5",
+              "pt-BR": "Minha pasta music5"
+            }
+          },
+          {
+            "value": "music6",
+            "label": {
+              "en": "My folder music6",
+              "pt-BR": "Minha pasta music6"
+            }
+          },
+          {
+            "value": "music7",
+            "label": {
+              "en": "My folder music7",
+              "pt-BR": "Minha pasta music7"
+            }
+          },
+          {
+            "value": "music8",
+            "label": {
+              "en": "My folder music8",
+              "pt-BR": "Minha pasta music8"
+            }
+          }
+        ]
+      },
+      {
+        "id": "hospital",
+        "section": "radios",
+        "key": "hospital",
+        "label": {
+          "en": "Hospital Records",
+          "pt-BR": "Hospital Records"
+        },
+        "description": {
+          "en": "What Hospital Records plays. Stock: the station's own songs. musicN: the MP3 files in the folder EasyRadio\\musicN next to azimuth.exe (created empty at the next game start if missing; a logo.png there becomes the station's icon). Several stations may share a folder. Applied on the next game launch.",
+          "pt-BR": "O que a Hospital Records toca. Original: as músicas da própria estação. musicN: os arquivos MP3 da pasta EasyRadio\\musicN, ao lado do azimuth.exe (criada vazia na próxima inicialização do jogo se não existir; um logo.png nela vira o ícone da estação). Várias estações podem usar a mesma pasta. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "enum",
+        "default": "stock",
+        "choices": [
+          {
+            "value": "stock",
+            "label": {
+              "en": "Stock (the station's own songs)",
+              "pt-BR": "Original (as músicas da própria estação)"
+            }
+          },
+          {
+            "value": "music1",
+            "label": {
+              "en": "My folder music1",
+              "pt-BR": "Minha pasta music1"
+            }
+          },
+          {
+            "value": "music2",
+            "label": {
+              "en": "My folder music2",
+              "pt-BR": "Minha pasta music2"
+            }
+          },
+          {
+            "value": "music3",
+            "label": {
+              "en": "My folder music3",
+              "pt-BR": "Minha pasta music3"
+            }
+          },
+          {
+            "value": "music4",
+            "label": {
+              "en": "My folder music4",
+              "pt-BR": "Minha pasta music4"
+            }
+          },
+          {
+            "value": "music5",
+            "label": {
+              "en": "My folder music5",
+              "pt-BR": "Minha pasta music5"
+            }
+          },
+          {
+            "value": "music6",
+            "label": {
+              "en": "My folder music6",
+              "pt-BR": "Minha pasta music6"
+            }
+          },
+          {
+            "value": "music7",
+            "label": {
+              "en": "My folder music7",
+              "pt-BR": "Minha pasta music7"
+            }
+          },
+          {
+            "value": "music8",
+            "label": {
+              "en": "My folder music8",
+              "pt-BR": "Minha pasta music8"
+            }
+          }
+        ]
+      },
+      {
+        "id": "ninjatune",
+        "section": "radios",
+        "key": "ninjatune",
+        "label": {
+          "en": "Ninja Tune",
+          "pt-BR": "Ninja Tune"
+        },
+        "description": {
+          "en": "What Ninja Tune plays. Stock: the station's own songs. musicN: the MP3 files in the folder EasyRadio\\musicN next to azimuth.exe (created empty at the next game start if missing; a logo.png there becomes the station's icon). Several stations may share a folder. Applied on the next game launch.",
+          "pt-BR": "O que a Ninja Tune toca. Original: as músicas da própria estação. musicN: os arquivos MP3 da pasta EasyRadio\\musicN, ao lado do azimuth.exe (criada vazia na próxima inicialização do jogo se não existir; um logo.png nela vira o ícone da estação). Várias estações podem usar a mesma pasta. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "enum",
+        "default": "stock",
+        "choices": [
+          {
+            "value": "stock",
+            "label": {
+              "en": "Stock (the station's own songs)",
+              "pt-BR": "Original (as músicas da própria estação)"
+            }
+          },
+          {
+            "value": "music1",
+            "label": {
+              "en": "My folder music1",
+              "pt-BR": "Minha pasta music1"
+            }
+          },
+          {
+            "value": "music2",
+            "label": {
+              "en": "My folder music2",
+              "pt-BR": "Minha pasta music2"
+            }
+          },
+          {
+            "value": "music3",
+            "label": {
+              "en": "My folder music3",
+              "pt-BR": "Minha pasta music3"
+            }
+          },
+          {
+            "value": "music4",
+            "label": {
+              "en": "My folder music4",
+              "pt-BR": "Minha pasta music4"
+            }
+          },
+          {
+            "value": "music5",
+            "label": {
+              "en": "My folder music5",
+              "pt-BR": "Minha pasta music5"
+            }
+          },
+          {
+            "value": "music6",
+            "label": {
+              "en": "My folder music6",
+              "pt-BR": "Minha pasta music6"
+            }
+          },
+          {
+            "value": "music7",
+            "label": {
+              "en": "My folder music7",
+              "pt-BR": "Minha pasta music7"
+            }
+          },
+          {
+            "value": "music8",
+            "label": {
+              "en": "My folder music8",
+              "pt-BR": "Minha pasta music8"
+            }
+          }
+        ]
+      },
+      {
+        "id": "innovative",
+        "section": "radios",
+        "key": "innovative",
+        "label": {
+          "en": "Innovative Leisure",
+          "pt-BR": "Innovative Leisure"
+        },
+        "description": {
+          "en": "What Innovative Leisure plays. Stock: the station's own songs. musicN: the MP3 files in the folder EasyRadio\\musicN next to azimuth.exe (created empty at the next game start if missing; a logo.png there becomes the station's icon). Several stations may share a folder. Applied on the next game launch.",
+          "pt-BR": "O que a Innovative Leisure toca. Original: as músicas da própria estação. musicN: os arquivos MP3 da pasta EasyRadio\\musicN, ao lado do azimuth.exe (criada vazia na próxima inicialização do jogo se não existir; um logo.png nela vira o ícone da estação). Várias estações podem usar a mesma pasta. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "enum",
+        "default": "stock",
+        "choices": [
+          {
+            "value": "stock",
+            "label": {
+              "en": "Stock (the station's own songs)",
+              "pt-BR": "Original (as músicas da própria estação)"
+            }
+          },
+          {
+            "value": "music1",
+            "label": {
+              "en": "My folder music1",
+              "pt-BR": "Minha pasta music1"
+            }
+          },
+          {
+            "value": "music2",
+            "label": {
+              "en": "My folder music2",
+              "pt-BR": "Minha pasta music2"
+            }
+          },
+          {
+            "value": "music3",
+            "label": {
+              "en": "My folder music3",
+              "pt-BR": "Minha pasta music3"
+            }
+          },
+          {
+            "value": "music4",
+            "label": {
+              "en": "My folder music4",
+              "pt-BR": "Minha pasta music4"
+            }
+          },
+          {
+            "value": "music5",
+            "label": {
+              "en": "My folder music5",
+              "pt-BR": "Minha pasta music5"
+            }
+          },
+          {
+            "value": "music6",
+            "label": {
+              "en": "My folder music6",
+              "pt-BR": "Minha pasta music6"
+            }
+          },
+          {
+            "value": "music7",
+            "label": {
+              "en": "My folder music7",
+              "pt-BR": "Minha pasta music7"
+            }
+          },
+          {
+            "value": "music8",
+            "label": {
+              "en": "My folder music8",
+              "pt-BR": "Minha pasta music8"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dj",
+        "section": "options",
+        "key": "dj",
+        "label": {
+          "en": "DJ and stingers",
+          "pt-BR": "DJ e vinhetas"
+        },
+        "description": {
+          "en": "Keep: the station's DJ lines and stingers play between your songs. Off: your songs play back to back. Applied on the next game launch.",
+          "pt-BR": "Manter: as falas do DJ e as vinhetas da estação tocam entre as suas músicas. Desligado: as suas músicas tocam em sequência. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "enum",
+        "default": "keep",
+        "choices": [
+          {
+            "value": "keep",
+            "label": {
+              "en": "Keep",
+              "pt-BR": "Manter"
+            }
+          },
+          {
+            "value": "off",
+            "label": {
+              "en": "Off",
+              "pt-BR": "Desligado"
+            }
+          }
+        ]
+      },
+      {
+        "id": "skip_key",
+        "section": "options",
+        "key": "skip_key",
+        "label": {
+          "en": "Skip key",
+          "pt-BR": "Tecla para pular"
+        },
+        "description": {
+          "en": "Skips to the next song while the game window has the focus and a station plays one of your songs. ExtraOptions uses F1 to F4; Spotify Radio uses F5 to F7. Applied on the next game launch.",
+          "pt-BR": "Pula para a próxima música enquanto a janela do jogo está em foco e uma estação toca uma das suas músicas. O ExtraOptions usa F1 a F4; o Rádio Spotify usa F5 a F7. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "enum",
+        "default": "F6",
+        "choices": [
+          {
+            "value": "off",
+            "label": {
+              "en": "Off",
+              "pt-BR": "Desligado"
+            }
+          },
+          {
+            "value": "F1",
+            "label": {
+              "en": "F1",
+              "pt-BR": "F1"
+            }
+          },
+          {
+            "value": "F2",
+            "label": {
+              "en": "F2",
+              "pt-BR": "F2"
+            }
+          },
+          {
+            "value": "F3",
+            "label": {
+              "en": "F3",
+              "pt-BR": "F3"
+            }
+          },
+          {
+            "value": "F4",
+            "label": {
+              "en": "F4",
+              "pt-BR": "F4"
+            }
+          },
+          {
+            "value": "F5",
+            "label": {
+              "en": "F5",
+              "pt-BR": "F5"
+            }
+          },
+          {
+            "value": "F6",
+            "label": {
+              "en": "F6",
+              "pt-BR": "F6"
+            }
+          },
+          {
+            "value": "F7",
+            "label": {
+              "en": "F7",
+              "pt-BR": "F7"
+            }
+          },
+          {
+            "value": "F8",
+            "label": {
+              "en": "F8",
+              "pt-BR": "F8"
+            }
+          },
+          {
+            "value": "F9",
+            "label": {
+              "en": "F9",
+              "pt-BR": "F9"
+            }
+          },
+          {
+            "value": "F10",
+            "label": {
+              "en": "F10",
+              "pt-BR": "F10"
+            }
+          },
+          {
+            "value": "F11",
+            "label": {
+              "en": "F11",
+              "pt-BR": "F11"
+            }
+          },
+          {
+            "value": "F12",
+            "label": {
+              "en": "F12",
+              "pt-BR": "F12"
+            }
+          }
+        ]
+      },
+      {
+        "id": "skip_pad",
+        "section": "options",
+        "key": "skip_pad",
+        "label": {
+          "en": "Skip pad button",
+          "pt-BR": "Botão do controle para pular"
+        },
+        "description": {
+          "en": "A quick tap of this button alone (under 0.4 s) skips to the next song. In FH2 a left-stick click is also the horn. Applied on the next game launch.",
+          "pt-BR": "Um toque rápido só neste botão (menos de 0,4 s) pula para a próxima música. No FH2 o clique do analógico esquerdo também é a buzina. Aplicado na próxima inicialização do jogo."
+        },
+        "advanced": false,
+        "apply": "next-launch",
+        "type": "enum",
+        "default": "LS",
+        "choices": [
+          {
+            "value": "off",
+            "label": {
+              "en": "Off",
+              "pt-BR": "Desligado"
+            }
+          },
+          {
+            "value": "A",
+            "label": {
+              "en": "A",
+              "pt-BR": "A"
+            }
+          },
+          {
+            "value": "B",
+            "label": {
+              "en": "B",
+              "pt-BR": "B"
+            }
+          },
+          {
+            "value": "X",
+            "label": {
+              "en": "X",
+              "pt-BR": "X"
+            }
+          },
+          {
+            "value": "Y",
+            "label": {
+              "en": "Y",
+              "pt-BR": "Y"
+            }
+          },
+          {
+            "value": "LB",
+            "label": {
+              "en": "LB",
+              "pt-BR": "LB"
+            }
+          },
+          {
+            "value": "RB",
+            "label": {
+              "en": "RB",
+              "pt-BR": "RB"
+            }
+          },
+          {
+            "value": "LS",
+            "label": {
+              "en": "Left stick click",
+              "pt-BR": "Clique do analógico esquerdo"
+            }
+          },
+          {
+            "value": "RS",
+            "label": {
+              "en": "Right stick click",
+              "pt-BR": "Clique do analógico direito"
+            }
+          },
+          {
+            "value": "View",
+            "label": {
+              "en": "View",
+              "pt-BR": "View"
+            }
+          },
+          {
+            "value": "Menu",
+            "label": {
+              "en": "Menu",
+              "pt-BR": "Menu"
+            }
+          },
+          {
+            "value": "Up",
+            "label": {
+              "en": "D-pad up",
+              "pt-BR": "Direcional para cima"
+            }
+          },
+          {
+            "value": "Down",
+            "label": {
+              "en": "D-pad down",
+              "pt-BR": "Direcional para baixo"
+            }
+          },
+          {
+            "value": "Left",
+            "label": {
+              "en": "D-pad left",
+              "pt-BR": "Direcional para a esquerda"
+            }
+          },
+          {
+            "value": "Right",
+            "label": {
+              "en": "D-pad right",
+              "pt-BR": "Direcional para a direita"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "runtimeOutputs": [],
+  "excludedArchiveEntries": [],
+  "databaseMigrations": [],
+  "source": {
+    "repository": "https://github.com/anarqz/InfinityMods",
+    "commit": ""
+  },
+  "multiplayer": {
+    "schemaVersion": 1,
+    "impact": "cosmetic",
+    "compatibilityId": "easyradio",
+    "revision": 1,
+    "match": "exact",
+    "settings": []
+  },
+  "countsAsModded": false,
+  "incompatibleFiles": []
+}
