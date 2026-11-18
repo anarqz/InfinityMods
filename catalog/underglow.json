@@ -1,11 +1,11 @@
 {
   "schemaVersion": 3,
   "id": "underglow",
-  "version": "1.1.0-infinity.5",
+  "version": "1.1.1-infinity.1",
   "download": {
-    "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.11.17/underglow-1.1.0-infinity.5.zip",
-    "sha256": "d5125924b99fd0572c78c51d3910b22b72a5fd37f949314817d9ab5fd5a17e10",
-    "bytes": 908394
+    "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.11.18/underglow-1.1.1-infinity.1.zip",
+    "sha256": "870b50a736ada896948ebeff3600feb08633c9efb293015da5a7547cf94cea90",
+    "bytes": 1040355
   },
   "install": {
     "schemaVersion": 1,
@@ -28,7 +28,7 @@
       {
         "id": "fh2-anna",
         "versions": [
-          "1.2.0-infinity.2"
+          "1.2.4-infinity.1"
         ]
       }
     ],
@@ -41,8 +41,8 @@
           "destination": "mods/Forza Horizon 2/underglow/fh2-mods/Underglow.dll",
           "role": "binary",
           "mode": "add-or-replace",
-          "sha256": "8268b6f4a5635cfc8a5267acbeb9fbb7ceb4d9bfc6dd53abf4f5e9a97e3c0cbb",
-          "bytes": 1740800
+          "sha256": "88ed5c209385a9fe0d97e8e54fbcd7b279b2692fe299868d8c7fc97db5f50b2c",
+          "bytes": 1849344
         },
         {
           "source": "LICENSE.txt",
@@ -57,15 +57,15 @@
           "destination": "mods/Forza Horizon 2/underglow/plugins/Underglow.Infinity.dll",
           "role": "binary",
           "mode": "add-or-replace",
-          "sha256": "d9dcd7d5f465dbf2b8c23f865a6392582044cef7e288dd6786fa5162f94fedf2",
-          "bytes": 173056
+          "sha256": "588764276a081cd0aa475b26621b9e8756e56409f73b3c8627bac48b3c05af0e",
+          "bytes": 442368
         },
         {
           "source": "mod.json",
           "destination": "mods/Forza Horizon 2/underglow/mod.json",
           "role": "asset",
           "mode": "add-or-replace",
-          "sha256": "157d127164c983a88cc9989709ee06a98c2a8e2aba67d7b3d70038ea30f1855e",
+          "sha256": "d6504ff01b7aa4e72e4d93b8c31a7be63e13274aff1f7d94e1a5f818cae47d84",
           "bytes": 213
         },
         {
@@ -2498,7 +2498,7 @@
     "databaseMigrations": [],
     "source": {
       "repository": "https://github.com/anarqz/InfinityMods",
-      "commit": "b06015fcea4218e0787db039c489c5bb45622198"
+      "commit": "8fe7765d76d82cd8614547855f6e7490c3b9d4eb"
     },
     "multiplayer": {
       "schemaVersion": 1,

@@ -1,17 +1,17 @@
 {
   "schemaVersion": 3,
   "id": "fh2-anna",
-  "version": "1.2.0-infinity.2",
+  "version": "1.2.4-infinity.1",
   "download": {
-    "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.11.12/fh2-anna-1.2.0-infinity.2.zip",
-    "sha256": "8444fba80b9083200f0accd24931d137620a0d12b2c9d22c7b864cff547f07bf",
-    "bytes": 94650
+    "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.11.18/fh2-anna-1.2.4-infinity.1.zip",
+    "sha256": "b2943bb55067551d897400ef05eb3ba3101c577648f0f1383004eb9f3a050ce4",
+    "bytes": 220227
   },
   "additionalDownloads": {
     "upstream-assets": {
-      "url": "https://github.com/qiangqiang101/FH2-ANNA/releases/download/1.2.0/FH2ANNA-1.2.0.zip",
-      "sha256": "b339186683f1b4f7949ec0ffce88e4ed00729c885085419105fa608c979554e8",
-      "bytes": 1341846
+      "url": "https://github.com/qiangqiang101/FH2-ANNA/releases/download/1.2.4/FH2ANNA-1.2.4.zip",
+      "sha256": "959b5caad7185a93a5216a7bdd1aa08e95d925d7c47060d44932f18b60d4a9ad",
+      "bytes": 2209500
     }
   },
   "install": {
@@ -39,8 +39,8 @@
         {
           "source": "fh2-mods/FH2ANNA.dll",
           "destination": "mods/Forza Horizon 2/fh2-anna/fh2-mods/FH2ANNA.dll",
-          "sha256": "da7032e35f3444fc77dc80b744f22418cb6fcffafd02617f7f597ce241cab02d",
-          "bytes": 1189376,
+          "sha256": "7b4d1f2eb38e7bd8aa13df355cdfba0338371e3faf281ae122dc7bc865630a5d",
+          "bytes": 1200640,
           "role": "binary",
           "mode": "add-or-replace",
           "package": "upstream-assets"
@@ -59,15 +59,15 @@
           "destination": "mods/Forza Horizon 2/fh2-anna/plugins/FH2ANNA.Infinity.dll",
           "role": "binary",
           "mode": "add-or-replace",
-          "sha256": "b1db54dd842ff7de8ef5f12e52114401c08dfaeeed1a67ab8fac2a4366c27a92",
-          "bytes": 173056
+          "sha256": "9a08d52759bb410232d72ac6a78fb6531aeecc73fe61f7e1f73205fe7ab23877",
+          "bytes": 442368
         },
         {
           "source": "mod.json",
           "destination": "mods/Forza Horizon 2/fh2-anna/mod.json",
           "role": "asset",
           "mode": "add-or-replace",
-          "sha256": "8c72cd53ef377fecfcf427d09711abdd28106b91474ea77c8ca86a9c7d7d8801",
+          "sha256": "d645bc8942aab1bd2ee2497403cc14c6ba5e817eedaedb742f5316348f054a8c",
           "bytes": 171
         },
         {
@@ -91,8 +91,8 @@
           "destination": "mods/Forza Horizon 2/fh2-anna/NOTICE.md",
           "role": "license",
           "mode": "add-or-replace",
-          "sha256": "4be8c66d3abd2f2c4572fa96ccd7245d36ca752763b19f43f8cdb57c25ca0540",
-          "bytes": 1841
+          "sha256": "bebeae8135f3ea2035794ab63cbd1a34d8b222291709d419d8ef24a5184f6db2",
+          "bytes": 1829
         },
         {
           "source": "LICENSE-Infinity.txt",
@@ -299,7 +299,7 @@
     "databaseMigrations": [],
     "source": {
       "repository": "https://github.com/anarqz/InfinityMods",
-      "commit": "a1a819f7a7607eb09a764fb41924295baef1754a"
+      "commit": "8fe7765d76d82cd8614547855f6e7490c3b9d4eb"
     },
     "multiplayer": {
       "schemaVersion": 1,

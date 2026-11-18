@@ -1,17 +1,17 @@
 {
   "schemaVersion": 3,
   "id": "nitrosystem",
-  "version": "2.0.0-infinity.3",
+  "version": "2.0.1-infinity.1",
   "download": {
-    "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.11.12/nitrosystem-2.0.0-infinity.3.zip",
-    "sha256": "39b99f7be28b689f8bd675d024e47ac0f0bcd29661a4b1b62ac4d1dc1338e6e9",
-    "bytes": 94708
+    "url": "https://github.com/anarqz/InfinityMods/releases/download/v2026.11.18/nitrosystem-2.0.1-infinity.1.zip",
+    "sha256": "19b7714138043855042def2198b03668cd8f4cc3b61295188735487f974ec738",
+    "bytes": 220283
   },
   "additionalDownloads": {
     "upstream-assets": {
-      "url": "https://github.com/qiangqiang101/FH2-NitroSystem/releases/download/2.0.0/FnFNitro-2.0.0.zip",
-      "sha256": "24ad49c4472387b61ec9ad638f8e4f0b5cfd7ceedf2fecb0948aa9e7fb5ea7af",
-      "bytes": 2573107
+      "url": "https://github.com/qiangqiang101/FH2-NitroSystem/releases/download/2.0.1/FnFNitro-2.0.1.zip",
+      "sha256": "37f79a2bf50ca4a76b20496a1ef208ebebd226f1ffee9353f3f090e38e2dcd4b",
+      "bytes": 3445475
     }
   },
   "install": {
@@ -37,16 +37,16 @@
       "game": [],
       "azimuth": [
         {
-          "source": "FnFNitro-2.0.0/azimuth-windows/fh2-mods/FnFNitro.dll",
+          "source": "FnFNitro-2.0.1/azimuth-windows/fh2-mods/FnFNitro.dll",
           "destination": "mods/Forza Horizon 2/nitrosystem/fh2-mods/FnFNitro.dll",
-          "sha256": "a695c4a858e949001fab185db56e5f0365d14061dd3bcb6dfe0a5b3179c37325",
-          "bytes": 2603520,
+          "sha256": "89fd76102054e433a727803a152242cbb3fff9dd0db265a2d2bede7b28f6f93b",
+          "bytes": 2655744,
           "role": "binary",
           "mode": "add-or-replace",
           "package": "upstream-assets"
         },
         {
-          "source": "FnFNitro-2.0.0/licenses/LICENSE-NitroSystem.txt",
+          "source": "FnFNitro-2.0.1/licenses/LICENSE-NitroSystem.txt",
           "destination": "mods/Forza Horizon 2/nitrosystem/LICENSE.txt",
           "sha256": "be4891b23bcb10c0f757f2385d89709057d929a75299aeb2eed296ccee01b33b",
           "bytes": 1092,
@@ -59,15 +59,15 @@
           "destination": "mods/Forza Horizon 2/nitrosystem/plugins/NitroSystem.Infinity.dll",
           "role": "binary",
           "mode": "add-or-replace",
-          "sha256": "72b89dbc8685c19b8413a5d7862e05550bca0476e6afd0bc57980b5d9b0edd7c",
-          "bytes": 173056
+          "sha256": "2dccde22ae5dbfbf13a357fd6ed16497d23abde9edf68898a5c1cd4ca6dcd0b9",
+          "bytes": 442368
         },
         {
           "source": "mod.json",
           "destination": "mods/Forza Horizon 2/nitrosystem/mod.json",
           "role": "asset",
           "mode": "add-or-replace",
-          "sha256": "3f14a17f0396c2d0440a86e011ac1266663720043040de9184fa8a84d7fc8d29",
+          "sha256": "929a949bd87aef5bfb902fd4d53942b1a69da9863dd8ae3764a281297ec45ae0",
           "bytes": 177
         },
         {
@@ -91,8 +91,8 @@
           "destination": "mods/Forza Horizon 2/nitrosystem/NOTICE.md",
           "role": "license",
           "mode": "add-or-replace",
-          "sha256": "c7d3770edba76d46dd62e843734a51b30efb5ec52667ece64fd2ca8e7d9ebc4c",
-          "bytes": 1927
+          "sha256": "4dd07daa2a12c5cc8d4c1bcfe46a88d58c37b94f5558387a0f416b547072ad7e",
+          "bytes": 1915
         },
         {
           "source": "LICENSE-Infinity.txt",
@@ -669,16 +669,16 @@
     },
     "runtimeOutputs": [],
     "excludedArchiveEntries": [
-      "FnFNitro-2.0.0/INSTALL.txt",
-      "FnFNitro-2.0.0/README.md",
-      "FnFNitro-2.0.0/azimuth-windows/DWrite.dll",
-      "FnFNitro-2.0.0/licenses/LICENSE-FH2-Mod-Platform.txt",
-      "FnFNitro-2.0.0/licenses/LICENSE-MinHook.txt"
+      "FnFNitro-2.0.1/INSTALL.txt",
+      "FnFNitro-2.0.1/README.md",
+      "FnFNitro-2.0.1/azimuth-windows/DWrite.dll",
+      "FnFNitro-2.0.1/licenses/LICENSE-FH2-Mod-Platform.txt",
+      "FnFNitro-2.0.1/licenses/LICENSE-MinHook.txt"
     ],
     "databaseMigrations": [],
     "source": {
       "repository": "https://github.com/anarqz/InfinityMods",
-      "commit": "a1a819f7a7607eb09a764fb41924295baef1754a"
+      "commit": "8fe7765d76d82cd8614547855f6e7490c3b9d4eb"
     },
     "multiplayer": {
       "schemaVersion": 1,
