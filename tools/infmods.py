@@ -23,6 +23,10 @@ files, neither built nor packaged here: its catalog download IS the author's rel
 .tag, .asset), pinned by SHA-256, and every installed file, the author's mod.json included, is an entry of that ZIP,
 pinned too. `pin-author` re-pins it after the author replaces the asset; `release` takes its manifest as it is.
 
+A recipe with `source` instead of `upstream` (EasyRadio) is Infinity's own mod: its source is in this repository
+(source.path, e.g. mods/easyradio), not a submodule, and builds with the same fields (sources, includes, extraFlags,
+importDefinitions, linkFlags).
+
 A recipe's `toolchain` is `zig` (Zig 0.15.2, any host; --zig) or `msvc` (Windows with Visual Studio
 C++ x64 tools, for sources that need MSVC, such as `__try`).
 
@@ -146,35 +150,38 @@ def build(name, zig, out):
         return build_msvc(recipe, out)
     if zig is None:
         sys.exit(f"{name}: the zig toolchain needs --zig")
-    upstream = ROOT / recipe["upstream"]["submodule"]
+    # Infinity's own mods (EasyRadio) keep their source here (recipe `source`, its `path` a folder of this repository);
+    # every other mod builds an upstream submodule (recipe `upstream`). Both blocks take the same build fields.
+    code = recipe.get("source") or recipe["upstream"]
+    upstream = ROOT / (code["path"] if "source" in recipe else code["submodule"])
     # An ExtraOptions plugin itself (`adapter` null) exports FH2PluginInitialize from its own source.
     adapter = ROOT / "adapters" / recipe["adapter"] if recipe.get("adapter") else None
     out.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="infmods-") as temporary:
         work = Path(temporary)
-        includes = [*([adapter] if adapter else []), *(upstream / folder for folder in recipe["upstream"]["includes"])]
+        includes = [*([adapter] if adapter else []), *(upstream / folder for folder in code["includes"])]
         # Upstream's own flags (build.py), so its sources compile exactly as they do there; a recipe adds what its build.py adds.
         flags = [str(zig), "clang", "-target", "x86_64-w64-windows-gnu", "-c", "-ffreestanding", "-fno-builtin",
                  "-fno-stack-protector", "-fms-extensions", "-funwind-tables", "-O2", "-Wall", "-Wextra", "-Werror",
-                 *recipe["upstream"].get("extraFlags", []),
+                 *code.get("extraFlags", []),
                  *(a for folder in includes for a in ("-I", str(folder))),
                  "-isystem", str(zig.parent / "lib/include"),
                  "-isystem", str(zig.parent / "lib/libc/include/any-windows-any")]
-        if recipe["upstream"].get("forceInclude"):
-            flags += ["-include", str(upstream / recipe["upstream"]["forceInclude"])]
-        sources = [upstream / s for s in recipe["upstream"]["sources"]] + (sorted(adapter.glob("*.c")) if adapter else [])
+        if code.get("forceInclude"):
+            flags += ["-include", str(upstream / code["forceInclude"])]
+        sources = [upstream / s for s in code["sources"]] + (sorted(adapter.glob("*.c")) if adapter else [])
         objects = []
         for index, source in enumerate(sources):
             obj = f"{index:02d}-{source.stem}.obj"  # relative: the PDB records these names, not the temp folder
             subprocess.run([*flags, str(source), "-o", obj], check=True, cwd=work)
             objects.append(obj)
         libraries = []
-        for definition in recipe["upstream"].get("importDefinitions", []):
+        for definition in code.get("importDefinitions", []):
             library = Path(definition).stem + ".lib"
             subprocess.run([str(zig), "dlltool", "-m", "i386:x86-64", "-d", str(upstream / definition), "-l", library],
                            check=True, cwd=work)
             libraries.append(library)
-        for name in recipe["upstream"].get("systemImports", []):
+        for name in code.get("systemImports", []):
             # Upstream's own way (weather-control/build.py): an import library of the Windows DLL's export table, so no
             # second C runtime is linked into a game plugin. Windows hosts only (WINDOWS builds the releases).
             if os.name != "nt":
@@ -189,7 +196,7 @@ def build(name, zig, out):
                         version_resource(zig, work, recipe).name, "/release", "/debug", "/pdb:" + dll.stem + ".pdb",
                         "/pdbaltpath:%_PDB%", "/pdbsourcepath:C:\\infinity-mods",
                         # what upstream's build.py adds at link time (e.g. /opt:ref with -ffunction-sections)
-                        *recipe["upstream"].get("linkFlags", [])], check=True, cwd=work)
+                        *code.get("linkFlags", [])], check=True, cwd=work)
         shutil.copyfile(work / dll.name, dll)
     return dll
 
