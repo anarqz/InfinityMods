@@ -803,19 +803,19 @@
     },
     {
       "id": "easyradio",
-      "version": "1.1.0-infinity.1",
+      "version": "1.2.0-infinity.1",
       "name": {
         "en": "EasyRadio",
         "pt-BR": "EasyRadio"
       },
       "description": {
-        "en": "Your own music on the game's radio stations. Pick in Settings which station plays which folder (music1 to music8 in the EasyRadio folder next to azimuth.exe) and put your MP3s there: the station shows each song's title and artist on the HUD, your logo.png as its icon, shuffles at every start, and F6 or a left-stick tap skips a song. Your music stays when the mod is updated or removed. By anarqz (Infinity). Only you hear it: it plays in every mode.",
-        "pt-BR": "Suas próprias músicas nas estações de rádio do jogo. Escolha nas Configurações qual estação toca qual pasta (music1 a music8 na pasta EasyRadio, ao lado do azimuth.exe) e coloque seus MP3 nela: a estação mostra o título e o artista de cada música no HUD, o seu logo.png como ícone, embaralha a cada início, e F6 ou um toque no analógico esquerdo pula a música. Suas músicas ficam quando o mod é atualizado ou removido. De anarqz (Infinity). Só você ouve: funciona em todos os modos."
+        "en": "Your own music on the game's radio stations. In Settings, choose for each station any folder with your MP3s (or keep its own songs): the station shows each song's title and artist on the HUD, the folder's logo.png as its icon, shuffles at every start, and F6 or a left-stick tap skips a song. Your music stays when the mod is updated or removed. By anarqz (Infinity). Only you hear it: it plays in every mode.",
+        "pt-BR": "Suas próprias músicas nas estações de rádio do jogo. Nas Configurações, escolha para cada estação qualquer pasta com seus MP3 (ou mantenha as músicas dela): a estação mostra o título e o artista de cada música no HUD, o logo.png da pasta como ícone, embaralha a cada início, e F6 ou um toque no analógico esquerdo pula a música. Suas músicas ficam quando o mod é atualizado ou removido. De anarqz (Infinity). Só você ouve: funciona em todos os modos."
       },
       "author": "anarqz",
       "path": "easyradio.json",
-      "sha256": "0cf180b286c3b6e6179f0b7ffda7915b893ad30773ff6f060697e558c46d590e",
-      "bytes": 31047
+      "sha256": "93faba1c7710048846dd07d5b3c282c063f6c792521959a16341a3a0aa3ae2d4",
+      "bytes": 24637
     }
   ]
 }
