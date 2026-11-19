@@ -3,7 +3,7 @@
   "id": "easyradio",
   "name": "EasyRadio",
   "author": "anarqz",
-  "version": "1.1.0-infinity.1",
+  "version": "1.2.0-infinity.1",
   "description": "Your own MP3 folders on Forza Horizon 2's radio stations, with titles, artists, your logo, shuffle and a skip key.",
   "dependencies": [],
   "database": null,

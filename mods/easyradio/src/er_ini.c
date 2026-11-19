@@ -49,8 +49,9 @@ int er_is_absolute(const char *v, size_t n) {
     return (n >= 3 && v[0] == '\\' && v[1] == '\\') || (n >= 2 && v[0] == '/');
 }
 
-/* A radio folder: one plain name (looked up in the music folder, then in this mod; not a generated or reserved
-   name), or an absolute path. */
+/* A radio folder: one plain name (looked up in the music folder <Azimuth>\\EasyRadio\\, then in this mod; not a generated
+   or reserved name; the launcher's tokens music1 to music8 are such names), or an absolute path (the launcher's folder
+   picker: drive, UNC or Wine Z:\\ paths, UTF-8, unquoted). The launcher's ModFolderOption.PluginUses mirrors this test. */
 static int good_folder(const char *v, size_t n) {
     if (!n || v[n - 1] == '.' || v[n - 1] == ' ') return 0;
     int absolute = er_is_absolute(v, n);
@@ -113,6 +114,8 @@ void er_config_parse(ErConfig *config, const char *text, size_t length) {
         const char *v_end = v;
         while (v_end < e && !((*v_end == ';' || *v_end == '#') && v_end > v && blank(v_end[-1]))) ++v_end;
         while (v_end > v && blank(v_end[-1])) --v_end;
+        /* one pair of double quotes around a value is not part of it (the launcher reads values so too) */
+        if (v_end - v >= 2 && *v == '"' && v_end[-1] == '"') ++v, --v_end;
         size_t kn = (size_t)(key_end - p), vn = (size_t)(v_end - v);
         if (section == RADIOS) {
             int station = er_station_index(p, kn);

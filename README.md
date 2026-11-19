@@ -130,6 +130,11 @@ unchanged (old URL), so players get no update; its ZIP may still be attached to 
 A mod whose ZIP changed needs a new `version` in `mod.json` and `manifest.json`, and its entry
 points at the new release. The tool uploads nothing.
 
+**Launcher floor.** A launcher refuses the whole catalog when one entry uses a settings feature it does not know
+(an option type, `config.openFolders`). Such features are listed in `release.json` `launcherFeatures`; `check`
+refuses every entry that uses one until its `since` names the first launcher release with it. Fill `since` in only
+once the platform's launcher floor is at least that release, then publish the catalog.
+
 ## Adding a mod
 
 1. `git submodule add <original repository> upstream/<name>` and check out the exact release commit.

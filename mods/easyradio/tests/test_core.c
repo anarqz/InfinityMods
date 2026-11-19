@@ -374,6 +374,31 @@ static void test_ini(void) {
     CHECK(!c.folder[0] && c.errors == 5, "a later stock line unmaps; relative paths, C:x, .., x:y and wildcards refused (%d)", c.errors);
     er_config_free(&c);
 
+    /* 1.2 folder option: the launcher writes STOCK/MUSIC3 in any case, unquoted UTF-8 paths (accents, CJK, Wine Z:\\);
+       a hand-quoted value reads as the launcher reads it */
+    const char *picker = "[radios]\nhorizon=STOCK\nbass=MUSIC3\nxs=D:\\M\xc3\xbasica\\A\xc3\xa7\xc3\xa3o\nlevante=Z:\\home\\deck\\Music\\\xe9\x9f\xb3\xe6\xa5\xbd\n"
+                         "hospital=\"E:\\Party Mix\" ; quoted\nninjatune=\"\"\ninnovative=\\\\nas\\share\\m\xc3\xbasica\n";
+    er_config_parse(&c, picker, strlen(picker));
+    CHECK(!c.folder[0] && c.folder[1] && !strcmp(c.folder[1], "MUSIC3"), "STOCK and MUSIC3 in any case");
+    CHECK(c.folder[2] && !strcmp(c.folder[2], "D:\\M\xc3\xbasica\\A\xc3\xa7\xc3\xa3o") && c.folder[3] &&
+              !strcmp(c.folder[3], "Z:\\home\\deck\\Music\\\xe9\x9f\xb3\xe6\xa5\xbd") && c.folder[6] && !strcmp(c.folder[6], "\\\\nas\\share\\m\xc3\xbasica"),
+          "UTF-8 drive, Wine and UNC paths kept byte for byte");
+    CHECK(c.folder[4] && !strcmp(c.folder[4], "E:\\Party Mix") && !c.folder[5] && c.errors == 1, "quotes stripped; an empty quoted value refused (%d)", c.errors);
+    er_config_free(&c);
+
+#ifdef ER_SEED_INI
+    /* the ini the package seeds: every line reads clean, every station stock */
+    {
+        FILE *f = fopen(ER_SEED_INI, "rb");
+        static char seed[16384];
+        size_t n = f ? fread(seed, 1, sizeof(seed), f) : 0;
+        if (f) fclose(f);
+        er_config_parse(&c, seed, n);
+        CHECK(n > 0 && c.errors == 0 && !c.folder[0] && !c.folder[6] && c.skip_vk == 0x75 && c.skip_button == 0x40, "the seeded easyradio.ini (%d errors)",
+              c.errors);
+        er_config_free(&c);
+    }
+#endif
     const char *several = "[radios]\npulse=a\nbass=b\nninjatune=c\nINNOVATIVE=d\nhorizon=e\n";
     er_config_parse(&c, several, strlen(several));
     CHECK(c.folder[0] && !strcmp(c.folder[0], "e") && c.folder[1] && c.folder[5] && c.folder[6], "several stations; a later alias wins");
@@ -627,6 +652,31 @@ static void test_generate(void) {
     CHECK(exists(p), "a missing radio folder is created, empty, in the music folder");
     er_result_free(&r);
 
+    /* the folder picker's absolute path with accents and CJK (UTF-8, as the launcher writes the ini), and an
+       absolute folder that is not there (an unplugged drive): skipped, never created */
+    snprintf(p, sizeof(p), "%s/M\xc3\xbasica \xe9\x9f\xb3\xe6\xa5\xbd/", root);
+    er_make_dirs(p);
+    snprintf(p, sizeof(p), "%s/M\xc3\xbasica \xe9\x9f\xb3\xe6\xa5\xbd/Beyonc\xc3\xa9 - Ca\xc3\xa7\xc3\xa3o.mp3", root);
+    {
+        Bytes b = {0};
+        xing_frame(&b, 13000, "Xing");
+        frames(&b, 5);
+        write_file(p, b.d, b.n);
+        free(b.d);
+    }
+    snprintf(p, sizeof(p), "%s/mod/easyradio.ini", root);
+    snprintf(ini3, sizeof(ini3), "[radios]\nhorizon=%s/M\xc3\xbasica \xe9\x9f\xb3\xe6\xa5\xbd\nbass=%s/unplugged/drive\nxs=music1\n", root, root);
+    write_file(p, ini3, strlen(ini3));
+    ok = er_generate(&o3, &r);
+    CHECK(ok == 1 && r.count == 1 && r.station_songs[0] == 1 && !r.station_songs[1] && !r.station_songs[2], "a non-ASCII absolute folder plays (%u songs)",
+          (unsigned)r.count);
+    if (r.count == 1)
+        CHECK(!strcmp(r.songs[0].artist, "Beyonce") && !strcmp(r.songs[0].title, "Cacao") && strstr(r.songs[0].path, "M\xc3\xbasica \xe9\x9f\xb3\xe6\xa5\xbd/"),
+              "its UTF-8 path and HUD text: %s / %s / %s", r.songs[0].artist, r.songs[0].title, r.songs[0].path);
+    snprintf(p, sizeof(p), "%s/unplugged", root);
+    CHECK(!exists(p), "a missing absolute folder is not created");
+    er_result_free(&r);
+
     /* nothing valid: stock, nothing written */
     snprintf(p, sizeof(p), "%s/mod/easyradio.ini", root);
     const char *ini2 = "[radios]\nbass=empty\n";
@@ -646,7 +696,59 @@ static void test_generate(void) {
     if (system(p)) printf("note: could not remove %s\n", root);
 }
 
+/* ---- sound and stream tracking (the quick-skip pairing) ---- */
+static void test_track(void) {
+    ErSong songs[3] = {{.key = "EASYRADIO_pulse_18", .number = 1, .ms = 238032},
+                       {.key = "EASYRADIO_pulse_19", .number = 1, .ms = 200736},
+                       {.key = "EASYRADIO_bass_1", .number = 2, .ms = 180000}};
+    static ErTracker t;
+    char sound_a, sound_b, stock, stream_1, stream_2;
+    int first = 0;
+    /* pulse_18 plays from sound A on stream 1 */
+    er_track_created(&t, &sound_a, &songs[0]);
+    ErTrack *k = er_track_find(&t, &sound_a);
+    CHECK(k && k->song == &songs[0], "a sound is tied to its createSound's song");
+    CHECK(er_track_seen(&t, &stream_1, &sound_a, 1000, 100, &first) == &songs[0] && first, "first seen: announced once");
+    er_track_seen(&t, &stream_1, &sound_a, 1033, 133, &first);
+    CHECK(!first, "not announced again");
+    /* the skip: pulse_18 ends, FMOD releases sound A and creates pulse_19 AT THE SAME ADDRESS (the live log's bug) */
+    er_track_created(&t, &sound_a, &songs[1]);
+    k = er_track_find(&t, &sound_a);
+    CHECK(k && k->song == &songs[1], "a reused address answers with the new song, never the previous one (%s)", k ? k->song->key : "none");
+    k->length_ms = 200736;
+    CHECK(er_track_seen(&t, &stream_2, &sound_a, 0, 166, &first) == &songs[1] && first, "the new song is announced");
+    ErSeen s;
+    CHECK(er_track_current(&t, 1, 10, 170, 300, &s) && s.stream == &stream_2 && s.song == &songs[1] && s.length_ms == 200736,
+          "the station's stream is the new one");
+    /* the old stream still updates once (it played sound A, now another song's): it plays pulse_19 now, not pulse_18 */
+    CHECK(er_track_seen(&t, &stream_1, &sound_a, 238000, 180, &first) == &songs[1] && !first, "an old stream never brings the old song back");
+    /* two streams side by side: the skip takes the one whose position matches the station clock */
+    er_track_created(&t, &sound_b, &songs[0]);
+    er_track_seen(&t, &stream_1, &sound_b, 230000, 200, &first);
+    er_track_seen(&t, &stream_2, &sound_a, 1200, 210, &first);
+    CHECK(er_track_current(&t, 1, 1300, 220, 300, &s) && s.stream == &stream_2 && s.song == &songs[1], "clock 1300: the new stream");
+    CHECK(er_track_current(&t, 1, 229000, 220, 300, &s) && s.stream == &stream_1 && s.song == &songs[0], "clock 229000: the old stream");
+    CHECK(!er_track_current(&t, 2, 0, 220, 300, &s), "no stream of ours on station 2");
+    CHECK(!er_track_current(&t, 1, 1300, 900, 300, &s), "streams not seen for 300 ms do not count");
+    /* a stock sound created at a tracked address: forgotten, and its stream drops out */
+    er_track_created(&t, &sound_b, NULL);
+    CHECK(!er_track_find(&t, &sound_b), "a stock sound at a reused address is not ours");
+    CHECK(er_track_seen(&t, &stream_1, &sound_b, 5, 230, &first) == NULL, "a stream playing a stock sound is not ours");
+    CHECK(er_track_current(&t, 1, 5, 240, 300, &s) && s.stream == &stream_2, "only the stream of ours remains");
+    const ErSong *last = NULL;
+    CHECK(er_track_last_tick(&t, &last) == 210 && last == &songs[1], "last tick %llu", (unsigned long long)er_track_last_tick(&t, NULL));
+    (void)stock;
+    /* the table never grows: 100 sounds later, the newest are found and the oldest gave way */
+    static char many[100];
+    for (int i = 0; i < 100; ++i) er_track_created(&t, &many[i], &songs[i % 3]);
+    CHECK(er_track_find(&t, &many[99]) && er_track_find(&t, &many[68]) && !er_track_find(&t, &many[67]), "the 32 newest sounds are tracked");
+    /* the skip target: 1.5 s before the earlier of the XML End and FMOD's own length */
+    CHECK(er_skip_target(&songs[0], 0) == 236532 && er_skip_target(&songs[0], 200736) == 199236 && er_skip_target(&songs[1], 230000) == 199236,
+          "skip targets");
+}
+
 int main(void) {
+    test_track();
     test_duration();
     test_tags();
     test_names();

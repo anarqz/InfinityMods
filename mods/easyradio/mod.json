@@ -1,13 +1,13 @@
 {
   "id": "easyradio",
-  "version": "1.1.0-infinity.1",
+  "version": "1.2.0-infinity.1",
   "folder": "easyradio",
   "dll": "EasyRadio.dll",
   "adapter": null,
   "toolchain": "zig",
   "source": {
     "path": "mods/easyradio",
-    "version": "1.1.0: Infinity's own ExtraOptions plugin, source in this folder",
+    "version": "1.2.0: Infinity's own ExtraOptions plugin, source in this folder",
     "sources": [
       "src/easyradio.c",
       "src/er_platform_win32.c",
@@ -17,7 +17,8 @@
       "src/er_ini.c",
       "src/er_xml.c",
       "src/er_logo.c",
-      "src/er_gen.c"
+      "src/er_gen.c",
+      "src/er_track.c"
     ],
     "includes": [
       "src"

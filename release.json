@@ -1,3 +1,9 @@
 {
-  "repository": "https://github.com/anarqz/InfinityMods"
+  "repository": "https://github.com/anarqz/InfinityMods",
+  "launcherFeatures": {
+    "settingsFolders": {
+      "since": null,
+      "what": "Mod settings of type \"folder\" and config.openFolders (EasyRadio 1.2). Launchers without them refuse the whole official catalog. Set since to the first Infinity Horizon launcher release that has them (x.y.z), and only once the platform's launcher floor is at least that release; until then tools/infmods.py check refuses every catalog entry that uses them."
+    }
+  }
 }

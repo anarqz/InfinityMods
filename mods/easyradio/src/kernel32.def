@@ -2,6 +2,8 @@ LIBRARY KERNEL32.dll
 EXPORTS
     AcquireSRWLockExclusive
     ReleaseSRWLockExclusive
+    AcquireSRWLockShared
+    ReleaseSRWLockShared
     GetTickCount64
     WriteFile
     ReadFile

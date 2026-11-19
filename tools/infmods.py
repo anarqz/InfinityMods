@@ -50,7 +50,11 @@ version. Nothing is uploaded or published.
 file against schemas/catalog-v3.schema.json (the subset of JSON Schema it uses), with no BOM, no duplicate JSON keys and
 the launcher's size limits, each pin matching its file, ids unique, no detail file left unlisted, every installed
 file in its game's mods folder. `check --catalog FILE` validates any one catalog file too, a schema-2 custom catalog
-included (schemas/catalog.schema.json). OD-233 retired the parity exemptions
+included (schemas/catalog.schema.json). `check` also applies the launcher's settings rules (option types, folder options,
+config.openFolders) and the launcher floor: an entry that uses a launcher feature listed in release.json
+`launcherFeatures` is refused until that feature's `since` names the first launcher release with it (filled in once
+the platform's launcher floor reaches it), because an older launcher refuses the whole catalog, not one entry.
+OD-233 retired the parity exemptions
 (parity-non-required.json): a mod is either both modes (its multiplayer impact cosmetic) or Noob only.
 """
 import argparse
@@ -779,6 +783,114 @@ def layout_problem(entry):
     return None
 
 
+# Infinity.Core ModManifest / ModFolderOption (InfinityHorizon src/Infinity.Core/Mods, batch 1118): the option types a
+# launcher reads, and the settings rules check mirrors. Launchers older than a type refuse every manifest that uses it,
+# and the official catalog loads all-or-nothing (OfficialModCatalog.MergedManifest: "invalid catalog: <id>: ...", the
+# cached catalog stays shown), so an entry with a newer type must wait for the platform's launcher floor.
+OPTION_TYPES = ("boolean", "integer", "number", "enum", "folder")
+TOKEN = re.compile(r"[A-Za-z0-9_-]{1,64}")
+DEVICE_NAMES = {"CON", "PRN", "AUX", "NUL", *(f"COM{i}" for i in range(1, 10)), *(f"LPT{i}" for i in range(1, 10))}
+
+
+def launcher_features(install):
+    """The release.json launcherFeatures an install body uses (settings folders: folder options, config.openFolders)."""
+    config = install.get("config") or {}
+    uses = set()
+    if any(o.get("type") == "folder" for o in config.get("options", [])) or "openFolders" in config:
+        uses.add("settingsFolders")
+    return uses
+
+
+def floor_problems(entry):
+    """An entry that uses a launcher feature needs release.json launcherFeatures.<feature>.since filled in: the first
+    launcher release with it, once the platform's launcher floor is at least that release. Until then: refused."""
+    problems = []
+    for feature in sorted(launcher_features(entry["install"])):
+        since = RELEASE.get("launcherFeatures", {}).get(feature, {}).get("since")
+        if not (isinstance(since, str) and re.fullmatch(r"\d+\.\d+\.\d+", since)):
+            problems.append(f"uses launcher feature {feature}, whose launcher floor is not filled in (release.json "
+                            f"launcherFeatures.{feature}.since is {since!r}): older launchers refuse the whole catalog; set it to the "
+                            f"first launcher release with the feature once the platform's launcher floor is at least that version")
+    return problems
+
+
+def azimuth_folder_ok(path):
+    """ModManifest.AzimuthFolder: ValidatePath (relative, '/', no 8.3 alias, no device name) and not under mods/."""
+    if not isinstance(path, str) or not path.strip() or "\\" in path or ":" in path or path.startswith("/") \
+            or any(ord(c) < 32 or c in '<>"|?*' for c in path):
+        return False
+    for part in path.split("/"):
+        tilde = part.find("~")
+        if part in ("", ".", "..") or part.endswith((".", " ")) or part.split(".")[0].upper() in DEVICE_NAMES \
+                or 0 <= tilde < len(part) - 1 and part[tilde + 1].isdigit():
+            return False
+    return path.split("/")[0].lower() != "mods"
+
+
+def localized_ok(text):
+    """ModManifest.ValidateLocalized: an object with en, every value a non-empty string of at most 4096 characters."""
+    return isinstance(text, dict) and "en" in text and all(isinstance(v, str) and 0 < len(v) <= 4096 for v in text.values())
+
+
+def settings_problems(entry):
+    """The settings rules of ModManifest (4e4ac2a+): option types, enum choice labels, folder options, openFolders, and the
+    places a folder option may never be named (multiplayer.settings, a catalog's required.settings, a dependency's settings)."""
+    install, problems = entry["install"], []
+    config = install.get("config") or {}
+    options = config.get("options", [])
+    folders = set()
+    for o in options:
+        where, kind = f"option {o.get('id')}", o.get("type")
+        if kind not in OPTION_TYPES:
+            problems.append(f"{where}: type {kind!r} is not one of {OPTION_TYPES}")
+            continue
+        if kind == "enum":
+            if any("label" in c and not localized_ok(c["label"]) for c in o.get("choices", [])):
+                problems.append(f"{where}: a choice label must be localized text with en")
+            continue
+        if kind != "folder":
+            continue
+        folders.add(o.get("id"))
+        empty = o.get("emptyValue")
+        if not (isinstance(empty, str) and TOKEN.fullmatch(empty)) or not localized_ok(o.get("emptyLabel")):
+            problems.append(f"{where}: a folder needs an emptyValue token and a localized emptyLabel with en")
+            continue
+        tokens = o.get("tokens")
+        if tokens is not None:
+            lowered = [t.lower() for t in tokens if isinstance(t, str)]
+            if not isinstance(tokens, list) or not 1 <= len(tokens) <= 64 or len(lowered) != len(tokens) \
+                    or not all(TOKEN.fullmatch(t) for t in tokens) or empty.lower() in lowered or len(set(lowered)) != len(lowered):
+                problems.append(f"{where}: tokens must be 1-64 distinct tokens (any case), none the emptyValue")
+            if not azimuth_folder_ok(o.get("tokenFolder")):
+                problems.append(f"{where}: tokens need a tokenFolder, Azimuth-relative and not under mods/")
+        elif "tokenFolder" in o:
+            problems.append(f"{where}: tokenFolder without tokens")
+        default = o.get("default")
+        if not isinstance(default, str) or default.lower() not in {empty.lower(), *(t.lower() for t in tokens or [] if isinstance(t, str))}:
+            problems.append(f"{where}: a folder's default is its emptyValue or one of its tokens")
+        if "lockedValue" in o or "choices" in o:
+            problems.append(f"{where}: a folder takes no lockedValue and no choices")
+    if "openFolders" in config:
+        items = config["openFolders"]
+        if not isinstance(items, list) or len(items) > 8:
+            problems.append("openFolders: at most 8")
+            items = []
+        seen = set()
+        for item in items:
+            path = item.get("path") if isinstance(item, dict) else None
+            if not isinstance(item, dict) or set(item) - {"root", "path", "label", "create"} or item.get("root") != "azimuth" \
+                    or not azimuth_folder_ok(path) or not localized_ok(item.get("label")) \
+                    or not isinstance(item.get("create", False), bool) or path.lower() in seen:
+                problems.append(f"openFolders: invalid entry {item!r}")
+                continue
+            seen.add(path.lower())
+    multiplayer = install.get("multiplayer") or {}
+    problems += [f"multiplayer.settings names the folder option {i}" for i in multiplayer.get("settings", []) if i in folders]
+    problems += [f"required.settings names the folder option {r.get('optionId')}" for r in (entry.get("required") or {}).get("settings", [])
+                 if isinstance(r, dict) and r.get("optionId") in folders]
+    return problems
+
+
 def check_v2(path, name, problems):
     """A schema-2 catalog file (a custom catalog): its schema, unique ids, layout. Returns it, or None."""
     schema = json.loads((ROOT / "schemas" / "catalog.schema.json").read_text(encoding="utf-8"))
@@ -793,6 +905,7 @@ def check_v2(path, name, problems):
     ids = [m["id"] for m in document["mods"]]
     problems += [f"{name}: id {i} listed more than once" for i in sorted(set(ids)) if ids.count(i) > 1]
     problems += [f"{name}: {m['id']}: {p}" for m in document["mods"] if (p := layout_problem(m))]
+    problems += [f"{name}: {m['id']}: {p}" for m in document["mods"] for p in settings_problems(m) + floor_problems(m)]
     return document
 
 
@@ -835,6 +948,7 @@ def check_v3(index_path, problems):
         entry = entry_of(card, detail)
         if problem := layout_problem(entry):
             problems.append(f"{where}: {problem}")
+        problems += [f"{where}: {p}" for p in settings_problems(entry) + floor_problems(entry)]
         mods.append(entry)
     problems += [f"{folder.name}/{p.name}: not listed in {name}" for p in sorted(folder.glob("*.json"))
                  if p.name != INDEX_NAME and p.name not in listed]

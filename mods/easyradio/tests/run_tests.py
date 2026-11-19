@@ -18,7 +18,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 SRC = HERE.parent / "src"
-CORE = ["er_util.c", "er_text.c", "er_mp3.c", "er_ini.c", "er_xml.c", "er_logo.c", "er_gen.c"]
+CORE = ["er_util.c", "er_text.c", "er_mp3.c", "er_ini.c", "er_xml.c", "er_logo.c", "er_gen.c", "er_track.c"]
 PROLOGUE = re.compile(r"static const unsigned char prologue_(\w+)\[\] = \{([^}]*)\}; // rva (0x[0-9a-fA-F]+)")
 IMAGE_BASE = 0x140000000
 VTABLE_WORDS = (("RadioSystem vtable +0x08 = Load", 0x2e76820, 0x100fd20),
@@ -74,7 +74,7 @@ def main():
     good = check_game(args.exe) if args.exe else True
     with tempfile.TemporaryDirectory(prefix="easyradio-tests-") as temporary:
         exe = Path(temporary) / "test_core"
-        subprocess.run([zig, "cc", "-O2", "-Wall", "-Wextra", "-Werror", "-g", "-o", str(exe), str(HERE / "test_core.c"),
+        subprocess.run([zig, "cc", "-O2", "-Wall", "-Wextra", "-Werror", "-g", f"-DER_SEED_INI=\"{HERE.parent / 'easyradio.ini'}\"", "-o", str(exe), str(HERE / "test_core.c"),
                         *(str(SRC / c) for c in CORE), str(HERE / "er_platform_posix.c")], check=True)
         good &= subprocess.run([str(exe)]).returncode == 0
     return 0 if good else 1

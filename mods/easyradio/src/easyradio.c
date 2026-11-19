@@ -29,7 +29,7 @@
 
 #include "er_gen.h"
 
-#define EASYRADIO_VERSION "1.1.0"
+#define EASYRADIO_VERSION "1.2.0"
 
 /* ---- ExtraOptions plugin ABI 1 (fh2_plugin.h) ---- */
 #define FH2_PLUGIN_API_VERSION 1u
@@ -272,25 +272,10 @@ static int file_seek(void *handle, unsigned position, void *userdata) {
     return SetFilePointerEx(((SongFile *)handle)->handle, to, NULL, FILE_BEGIN) ? 0 : 0xf;
 }
 
-/* ---- tracked sounds ---- */
-#define TRACKED 32
-static void *volatile tracked_sound[TRACKED];
-static const ErSong *volatile tracked_song[TRACKED];
-static int tracked_state[TRACKED], tracked_result[TRACKED];
-static volatile LONG tracked_next;
-
-static int tracked_index(void *sound) {
-    for (int i = 0; i < TRACKED; ++i)
-        if (sound && tracked_sound[i] == sound) return i;
-    return -1;
-}
-
-/* ---- now playing and skip (all written on the radio update thread, except skip_requested) ---- */
-static const ErSong *volatile playing_song;
-static unsigned char *volatile playing_stream; /* the RadioStreamFmod that plays it */
-static volatile int playing_position;          /* its timeline position, ms */
-static volatile ULONGLONG playing_tick;        /* last radio update that saw one of our songs play */
-static volatile ULONGLONG skip_requested;      /* tick of a pending request, 0: none (set by the poll thread) */
+/* ---- tracked sounds and streams (er_track.c), under one lock: createSound may run on FMOD's loader thread ---- */
+static ErTracker tracker;
+static SRWLOCK tracker_lock = SRWLOCK_INIT;
+static volatile ULONGLONG skip_requested; /* tick of a pending request, 0: none (set by the poll thread) */
 
 /* ---- hooks ---- */
 static int hook_get_sound_info(void *studio, const char *key, unsigned char *info) {
@@ -318,37 +303,45 @@ static int hook_get_sound_info(void *studio, const char *key, unsigned char *inf
     return original_get_sound_info(studio, key, info);
 }
 
+/* The song a createSound names: our own exinfo (file callbacks + userdata, set by the lookup above) and our path. */
+static const ErSong *song_of_create(const char *name, const unsigned char *exinfo) {
+    const ErSong *song = song_of_path(name);
+    if (song && exinfo && *(const int *)exinfo >= EXINFO_SIZE && *(void *const *)(exinfo + EXINFO_FILE_OPEN) == (void *)&file_open) {
+        const ErSong *own = *(const ErSong *const *)(exinfo + EXINFO_FILE_USERDATA);
+        if (own && own != song) return NULL; /* cannot happen: the lookup sets both from one song */
+    }
+    return song;
+}
+
 static int hook_create_sound(void *system, const char *name, unsigned mode, void *exinfo, void **out) {
     int result_code = original_create_sound(system, name, mode, exinfo, out);
-    const ErSong *song = song_of_path(name);
-    if (song) {
-        void *sound = out ? *out : NULL;
-        if (result_code) log_format("FAIL: createSound %s mode=0x%x -> result %d", song->key, mode, result_code);
-        if (sound) {
-            int slot = (int)((unsigned)InterlockedIncrement(&tracked_next) % TRACKED);
-            tracked_sound[slot] = NULL;
-            tracked_state[slot] = -1;
-            tracked_result[slot] = -1;
-            tracked_song[slot] = song;
-            tracked_sound[slot] = sound;
-        }
+    const ErSong *song = song_of_create(name, (const unsigned char *)exinfo);
+    void *sound = out && result_code == 0 ? *out : NULL;
+    if (song && result_code) log_format("FAIL: createSound %s mode=0x%x -> result %d", song->key, mode, result_code);
+    if (sound) {
+        /* every new sound, ours or not: its address may be a released sound's, whose song it must never inherit */
+        AcquireSRWLockExclusive(&tracker_lock);
+        er_track_created(&tracker, sound, song);
+        ReleaseSRWLockExclusive(&tracker_lock);
     }
     return result_code;
 }
 
 static int hook_get_open_state(void *sound, int *state, unsigned *percent, unsigned char *starving, unsigned char *busy) {
     int result_code = original_get_open_state(sound, state, percent, starving, busy);
-    int slot = tracked_index(sound);
-    if (slot >= 0) {
-        int now = state ? *state : -2;
-        if (now != tracked_state[slot] || result_code != tracked_result[slot]) {
-            tracked_state[slot] = now;
-            tracked_result[slot] = result_code;
-            if (now == 2 || result_code)
-                log_format("FAIL: getOpenState %s -> result %d state %d (FMOD cannot open or decode it)", tracked_song[slot] ? tracked_song[slot]->key : "?",
-                           result_code, now);
-        }
+    int now = state ? *state : -2, changed = 0;
+    const ErSong *song = NULL;
+    AcquireSRWLockExclusive(&tracker_lock);
+    ErTrack *track = er_track_find(&tracker, sound);
+    if (track && (now != track->state || result_code != track->result)) {
+        track->state = now;
+        track->result = result_code;
+        changed = 1;
+        song = track->song;
     }
+    ReleaseSRWLockExclusive(&tracker_lock);
+    if (changed && (now == 2 || result_code))
+        log_format("FAIL: getOpenState %s -> result %d state %d (FMOD cannot open or decode it)", song ? song->key : "?", result_code, now);
     return result_code;
 }
 
@@ -359,8 +352,11 @@ static int hook_get_sub_sound(void *sound, int index, void **out) {
         unsigned length = 0;
         int lr = get_length(sound, &length, FMOD_TIMEUNIT_MS);
         LONG n = InterlockedIncrement(&substitutions);
-        int slot = tracked_index(sound);
-        const ErSong *song = slot >= 0 ? tracked_song[slot] : NULL;
+        AcquireSRWLockExclusive(&tracker_lock);
+        ErTrack *track = er_track_find(&tracker, sound);
+        const ErSong *song = track ? track->song : NULL;
+        if (track && lr == 0) track->length_ms = length;
+        ReleaseSRWLockExclusive(&tracker_lock);
         if (n <= 400)
             log_format("getSubSound #%d %s: FMOD length %u ms (result %d), XML End %llu ms", (int)n, song ? song->key : "[not ours]", length, lr,
                        (unsigned long long)(song ? song->ms : 0));
@@ -375,16 +371,12 @@ static int hook_get_timeline_position(void *instance, int *position) {
     if ((unsigned char *)__builtin_return_address(0) == game_base + RVA_UPDATE_POSITION_RETURN && position) {
         unsigned char *stream = (unsigned char *)position - STREAM_POSITION_OFFSET;
         void *sound = *(void **)(stream + STREAM_SOUND_OFFSET);
-        int slot = tracked_index(sound);
-        if (slot >= 0 && tracked_song[slot]) {
-            const ErSong *song = tracked_song[slot];
-            if (playing_song != song)
-                log_format("playing %s on station %d: %s - %s (%llu ms)", song->key, song->number, song->artist, song->title, (unsigned long long)song->ms);
-            playing_song = song;
-            playing_stream = stream;
-            playing_position = *position;
-            playing_tick = GetTickCount64();
-        }
+        int first = 0;
+        AcquireSRWLockExclusive(&tracker_lock);
+        const ErSong *song = er_track_seen(&tracker, stream, sound, *position, GetTickCount64(), &first);
+        ReleaseSRWLockExclusive(&tracker_lock);
+        /* once per sound: two streams update side by side around a track change */
+        if (first) log_format("playing %s on station %d: %s - %s (%llu ms)", song->key, song->number, song->artist, song->title, (unsigned long long)song->ms);
     }
     return result_code;
 }
@@ -392,35 +384,44 @@ static int hook_get_timeline_position(void *instance, int *position) {
 /* Runs on the radio update, for every station, before the original. */
 static void hook_station_update(unsigned char *station, void *context) {
     ULONGLONG requested = skip_requested;
-    const ErSong *song = playing_song;
-    if (requested && song && *(const int *)(station + STATION_NUMBER) == song->number) {
-        skip_requested = 0;
+    if (requested) {
         ULONGLONG now = GetTickCount64();
-        unsigned char *stream = playing_stream;
-        int state = *(const int *)(station + STATION_STATE), sub = *(const int *)(station + STATION_SUBSTATE);
-        int active = *(const unsigned char *)(station + STATION_TRACK_ACTIVE);
+        int number = *(const int *)(station + STATION_NUMBER);
         float clock = *(const float *)(station + STATION_TRACK_CLOCK);
-        int position = playing_position, target = (int)song->ms - 1500;
-        int diff = (int)clock - position;
-        const char *why = now - playing_tick > 300                                       ? "the song is not playing now"
-                          : now - requested > 1000                                       ? "the request is stale"
-                          : state != 1 || sub != 4 || !active                             ? "the station is not in its plain track state"
-                          : diff > 3000 || diff < -3000                                   ? "the station clock does not match the stream"
-                          : !stream || *(void **)stream != game_base + RVA_STREAM_VTABLE ? "not a RadioStreamFmod"
-                          : (int)clock >= target - 1000                                   ? "already near End"
-                                                                                          : NULL;
-        if (why) {
-            log_format("skip ignored on station %d (%s): state %d/%d active %d clock %d stream %d End %llu", song->number, why, state, sub, active, (int)clock,
-                       position, (unsigned long long)song->ms);
-        } else {
-            static volatile LONG skips;
-            LONG n = InterlockedIncrement(&skips);
-            log_format("skip #%d %s: clock %d stream %d -> clock and Seek to %d (End %llu)", (int)n, song->key, (int)clock, position, target,
-                       (unsigned long long)song->ms);
-            *(float *)(station + STATION_TRACK_CLOCK) = (float)target;
-            ((StreamSeekFn)(game_base + RVA_STREAM_SEEK))(stream, target);
-            log_format("skip #%d after: clock %d, stream start %d, stream state %d", (int)n, (int)*(const float *)(station + STATION_TRACK_CLOCK),
-                       *(const int *)(stream + 0x28), *(const int *)(stream + 0x20));
+        ErSeen seen;
+        AcquireSRWLockShared(&tracker_lock);
+        int found = er_track_current(&tracker, number, (int)clock, now, 300, &seen);
+        ReleaseSRWLockShared(&tracker_lock);
+        if (found) {
+            skip_requested = 0;
+            const ErSong *song = seen.song;
+            unsigned char *stream = (unsigned char *)seen.stream;
+            int state = *(const int *)(station + STATION_STATE), sub = *(const int *)(station + STATION_SUBSTATE);
+            int active = *(const unsigned char *)(station + STATION_TRACK_ACTIVE);
+            int position = seen.position, target = er_skip_target(song, seen.length_ms);
+            int diff = (int)clock - position;
+            const char *why = now - requested > 1000                                       ? "the request is stale"
+                              : state != 1 || sub != 4 || !active                             ? "the station is not in its plain track state"
+                              : diff > 3000 || diff < -3000                                   ? "the station clock does not match the stream"
+                              : *(void **)stream != game_base + RVA_STREAM_VTABLE             ? "not a RadioStreamFmod"
+                              : (int)clock >= target - 1000 || position >= target - 1000      ? "already near End"
+                                                                                              : NULL;
+            if (why) {
+                log_format("skip ignored on station %d (%s): state %d/%d active %d clock %d stream %d End %llu", song->number, why, state, sub, active,
+                           (int)clock, position, (unsigned long long)song->ms);
+            } else {
+                static volatile LONG skips;
+                LONG n = InterlockedIncrement(&skips);
+                log_format("skip #%d %s: clock %d stream %d -> clock and Seek to %d (End %llu, FMOD %u)", (int)n, song->key, (int)clock, position, target,
+                           (unsigned long long)song->ms, seen.length_ms);
+                *(float *)(station + STATION_TRACK_CLOCK) = (float)target;
+                ((StreamSeekFn)(game_base + RVA_STREAM_SEEK))(stream, target);
+                log_format("skip #%d after: clock %d, stream start %d, stream state %d", (int)n, (int)*(const float *)(station + STATION_TRACK_CLOCK),
+                           *(const int *)(stream + 0x28), *(const int *)(stream + 0x20));
+            }
+        } else if (GetTickCount64() - requested > 1000) {
+            skip_requested = 0;
+            log_format("skip ignored (the request is stale: no EasyRadio song plays now)");
         }
     }
     original_station_update(station, context);
@@ -454,8 +455,11 @@ static int game_focused(void) {
 }
 
 static void request_skip(const char *source) {
-    const ErSong *song = playing_song;
-    if (!song || GetTickCount64() - playing_tick > 1000) {
+    const ErSong *song;
+    AcquireSRWLockShared(&tracker_lock);
+    ULONGLONG tick = er_track_last_tick(&tracker, &song);
+    ReleaseSRWLockShared(&tracker_lock);
+    if (!song || GetTickCount64() - tick > 1000) {
         log_format("skip (%s) ignored: no EasyRadio song plays on the selected station", source);
         return;
     }
